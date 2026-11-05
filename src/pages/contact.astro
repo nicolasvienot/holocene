@@ -1,0 +1,241 @@
+---
+import Base from '../layouts/Base.astro';
+import Accent from '../components/Accent.astro';
+import Button from '../components/Button.astro';
+import Icon from '../components/Icon.astro';
+import Kicker from '../components/Kicker.astro';
+import DemandeForm from '../components/forms/DemandeForm.astro';
+import Field from '../components/forms/Field.astro';
+import data from '../data/contact.json';
+import infos from '../data/infos.json';
+
+const { tuiles, defaut, lignes, champs, sansScript } = data;
+const { adresse, email, telephones, reservation } = infos;
+const choisie = tuiles.find((t) => t.id === defaut)!;
+const table = tuiles.find((t) => t.lienTable)!;
+const ligneDefaut = telephones[choisie.ligne as keyof typeof telephones];
+const config = tuiles.map((t) => ({
+  id: t.id,
+  fond: t.fond,
+  titre: t.formTitre,
+  placeholder: t.placeholder,
+  table: Boolean(t.lienTable),
+  ligne: lignes[t.ligne as keyof typeof lignes],
+  tel: telephones[t.ligne as keyof typeof telephones],
+}));
+---
+<Base
+  capsule="contact"
+  title="Contact et devis - Holocene, Balma et Toulouse"
+  description="Une table, une soirée privée, un mariage, un festival : écrivez à Holocene ou appelez le 05 32 74 08 33 (traiteur et food truck) ou le 05 32 74 08 34 (restaurant)."
+>
+  <noscript slot="head">
+    <style>
+      [data-tuiles], [data-etape-1], [data-avec-js] { display: none !important; }
+      [data-sans-js] { display: inline !important; }
+      [data-demande] { background: var(--flower) !important; }
+    </style>
+  </noscript>
+
+  <section class="wrap hero">
+    <div class="pile hero-titre">
+      <Accent texte="Salut" class="hero-accent" />
+      <h1 class="d">On vous<br />écoute.</h1>
+    </div>
+    <p class="p hero-texte">Une table, une soirée privée, un mariage, un festival ? Dites-nous ce qui vous amène, on vous oriente vers la bonne personne.</p>
+  </section>
+
+  <section class="wrap demande">
+    <span class="etape" data-etape-1><Kicker texte="01 — Votre demande concerne" /></span>
+    <div class="ag tuiles" role="group" aria-label="Type de demande" data-tuiles data-config={JSON.stringify(config)}>
+      {tuiles.map((t) => (
+        <button type="button" class="tuile" aria-pressed={t.id === defaut ? 'true' : 'false'} data-tuile={t.id} style={t.id === defaut ? `background:${t.fond}` : undefined}>
+          <img src={t.icone} alt="" aria-hidden="true" width="32" height="64" />
+          <span class="tuile-texte"><span class="d">{t.titre}</span><span class="tuile-sous">{t.sous}</span></span>
+        </button>
+      ))}
+    </div>
+
+    <div class="ag colonnes">
+      <div class="col-form">
+        <DemandeForm id="contact" destination="contact" champs={champs} bouton="Envoyer" fond={choisie.fond} class="contact-form">
+          <div class="pile form-tete" slot="entete">
+            <Kicker texte="02 — Vos coordonnées" />
+            <h2 class="d"><span data-form-titre data-avec-js>{choisie.formTitre}</span><span data-sans-js hidden>Votre demande</span></h2>
+          </div>
+          <noscript><Field champ={sansScript} prefixe="contact" /></noscript>
+        </DemandeForm>
+
+        <div class="table" data-panneau-table hidden style={`background:${table.fond}`}>
+          <h2 class="d">{table.formTitre}</h2>
+          <p class="p">{table.formTexte}</p>
+          <Button variant="dark" href={reservation.table} label={table.bouton} icon="arrow" />
+        </div>
+      </div>
+
+      <div class="pile infos">
+        <div class="appel sur-noir">
+          <Kicker texte="Plus rapide - appelez" class="appel-k" />
+          <a href={`tel:${ligneDefaut.tel}`} class="d" data-tel>{ligneDefaut.affiche}</a>
+          <span data-ligne>{lignes[choisie.ligne as keyof typeof lignes]}</span>
+        </div>
+        <div class="ag duo">
+          <div class="bloc">
+            <Kicker texte="E-mail" />
+            <a href={`mailto:${email}`} class="mail">{email}</a>
+          </div>
+          <div class="bloc">
+            <Kicker texte="Restaurant" />
+            <span class="horaires">Lun - Ven, 12h - 14h<br />Mai - sept. : jeu. et ven. soir, 19h - 22h30</span>
+            <a href={`tel:${telephones.restaurant.tel}`} class="d tel-resto">{telephones.restaurant.affiche}</a>
+          </div>
+        </div>
+        <div class="plan">
+          <div class="plan-visuel">
+            <Icon name="pin" size={44} />
+            <Kicker texte="Carte interactive" />
+          </div>
+          <div class="plan-pied">
+            <span>{adresse.rue}<br />{adresse.codePostal} {adresse.ville}</span>
+            <Button href={adresse.itineraire} label="Itinéraire" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<script>
+  interface Config {
+    id: string;
+    fond: string;
+    titre: string;
+    placeholder?: string;
+    table: boolean;
+    ligne: string;
+    tel: { affiche: string; tel: string };
+  }
+
+  const groupe = document.querySelector<HTMLElement>('[data-tuiles]');
+  const form = document.querySelector<HTMLFormElement>('form[data-demande]');
+
+  if (groupe && form) {
+    const config = JSON.parse(groupe.dataset.config ?? '[]') as Config[];
+    const tuiles = [...groupe.querySelectorAll<HTMLButtonElement>('[data-tuile]')];
+    const titre = form.querySelector<HTMLElement>('[data-form-titre]');
+    const destination = form.querySelector<HTMLInputElement>('[data-destination]');
+    const message = form.querySelector<HTMLTextAreaElement>('textarea');
+    const panneau = document.querySelector<HTMLElement>('[data-panneau-table]');
+    const lienTel = document.querySelector<HTMLAnchorElement>('[data-tel]');
+    const ligne = document.querySelector<HTMLElement>('[data-ligne]');
+
+    const choisir = (id: string) => {
+      const choix = config.find((c) => c.id === id);
+      if (!choix) return;
+
+      tuiles.forEach((tuile) => {
+        const actif = tuile.dataset.tuile === id;
+        tuile.setAttribute('aria-pressed', String(actif));
+        tuile.style.background = actif ? choix.fond : '';
+      });
+
+      form.hidden = choix.table;
+      if (panneau) panneau.hidden = !choix.table;
+      form.style.background = choix.fond;
+      if (titre) titre.textContent = choix.titre;
+      if (destination) destination.value = choix.id;
+      if (message && choix.placeholder) message.placeholder = choix.placeholder;
+
+      form.querySelectorAll<HTMLElement>('[data-pour]').forEach((bloc) => {
+        const visible = (bloc.dataset.pour ?? '').split(' ').includes(id);
+        bloc.hidden = !visible;
+        bloc.querySelectorAll<HTMLInputElement>('input').forEach((champ) => { champ.disabled = !visible; });
+      });
+
+      if (lienTel) {
+        lienTel.href = `tel:${choix.tel.tel}`;
+        lienTel.textContent = choix.tel.affiche;
+      }
+      if (ligne) ligne.textContent = choix.ligne;
+    };
+
+    groupe.addEventListener('click', (evenement) => {
+      const tuile = evenement.target instanceof Element ? evenement.target.closest<HTMLButtonElement>('[data-tuile]') : null;
+      if (tuile?.dataset.tuile) choisir(tuile.dataset.tuile);
+    });
+
+    const active = tuiles.find((t) => t.getAttribute('aria-pressed') === 'true');
+    if (active?.dataset.tuile) choisir(active.dataset.tuile);
+  }
+</script>
+
+<style>
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding-top: 40px;
+    padding-bottom: 56px;
+  }
+  .hero-titre :global(.hero-accent) { font-size: 30px; }
+  h1 { font-size: clamp(64px, 10vw, 160px); }
+  .hero-texte { max-width: 440px; }
+
+  .demande { padding-bottom: 112px; }
+  .etape { display: block; margin-bottom: 18px; line-height: 1.3; font-size: 12px; }
+  .etape :global(.k) { display: block; }
+
+  .tuiles { --min: 220px; gap: 16px; margin-bottom: 40px; }
+  .tuile {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 18px;
+    min-height: 190px;
+    padding: 22px;
+    border: var(--line);
+    border-radius: 28px;
+    background: var(--paper);
+    cursor: pointer;
+    text-align: left;
+    font-family: inherit;
+    color: var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s;
+  }
+  .tuile:hover { transform: translate(-2px, -2px); box-shadow: var(--shadow-hover); }
+  .tuile[aria-pressed='true'] { box-shadow: var(--shadow-hover); }
+  .tuile img { height: 64px; width: auto; }
+  .tuile-texte { display: flex; flex-direction: column; gap: 6px; }
+  .tuile-texte .d { font-size: 24px; }
+  .tuile-sous { font-size: 14px; }
+
+  .colonnes { --min: 420px; --gap: 32px; align-items: start; }
+
+  .form-tete { grid-column: 1 / -1; --gap: 10px; }
+  .form-tete h2 { font-size: 40px; }
+  .col-form :global(.contact-form[hidden]) { display: none; }
+
+  .table { display: flex; flex-direction: column; align-items: flex-start; gap: 20px; padding: 40px; border: var(--line); border-radius: 36px; box-shadow: var(--shadow-hero); }
+  .table[hidden] { display: none; }
+  .table h2 { font-size: 40px; }
+
+  .infos { --gap: 20px; }
+  .appel { display: flex; flex-direction: column; gap: 12px; padding: 32px; border: var(--line); border-radius: var(--radius-card); }
+  .appel :global(.appel-k) { color: var(--pink); }
+  .appel a { font-size: 44px; color: var(--paper); text-decoration: none; }
+  .appel > span:last-child { font-size: 15px; color: var(--on-dark); }
+
+  .duo { --min: 220px; --gap: 20px; }
+  .bloc { display: flex; flex-direction: column; gap: 10px; padding: 26px; border: var(--line); border-radius: 28px; min-width: 0; }
+  .mail { font-size: 16px; overflow-wrap: anywhere; }
+  .horaires { font-size: 16px; line-height: 1.5; }
+  .tel-resto { font-size: 24px; text-decoration: none; }
+
+  .plan { display: flex; flex-direction: column; border: var(--line); border-radius: var(--radius-card); overflow: hidden; }
+  .plan-visuel { min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: var(--pink); border-bottom: var(--line); }
+  .plan-pied { padding: 26px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .plan-pied > span { font-size: 18px; line-height: 1.4; }
+</style>

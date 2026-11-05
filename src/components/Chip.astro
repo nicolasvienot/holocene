@@ -1,0 +1,30 @@
+---
+interface Props {
+  texte: string;
+  actif?: boolean;
+  valeur: string;
+}
+
+const { texte, actif = false, valeur } = Astro.props;
+---
+<button type="button" class="chip" aria-pressed={actif ? 'true' : 'false'} data-filtre={valeur}>{texte}</button>
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 20px;
+    border: var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .chip[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
+</style>

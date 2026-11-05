@@ -144,8 +144,8 @@ const { id, destination, champs, bouton, colonne = 240, fond = 'var(--light)', c
     gap: 16px;
     flex-wrap: wrap;
   }
-  .mention { font-size: 13px; }
-  .mention a { display: inline-block; }
+  /* La mention passe sur deux lignes plutôt que de repousser le bouton dessous */
+  .mention { flex: 1 1 160px; font-size: 13px; }
 
   .etat,
   .merci { grid-column: 1 / -1; font-size: 18px; line-height: 1.5; }

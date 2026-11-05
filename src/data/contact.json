@@ -1,0 +1,29 @@
+{
+  "_note": "Page /contact (maquette 08-contact.html). 'fond' = couleur de la tuile sélectionnée et du formulaire. 'champs' = champs repris des JSON des pages, en plus des coordonnées et du message.",
+  "defaut": "traiteur",
+  "tuiles": [
+    { "id": "table", "titre": "Une table", "sous": "Déjeuner au restaurant", "icone": "/brand/icon-restaurant.svg", "fond": "var(--yellow)", "ligne": "restaurant", "lienTable": true, "formTitre": "Une table", "formTexte": "Réservez en ligne en quelques clics, ou appelez le restaurant.", "bouton": "Réserver une table" },
+    { "id": "privatisation", "titre": "Privatiser", "sous": "Soirée au restaurant", "icone": "/brand/icon-restaurant.svg", "fond": "var(--lilac)", "ligne": "restaurant", "formTitre": "Une privatisation", "placeholder": "Type d'événement, horaires, ambiance, régimes alimentaires…" },
+    { "id": "traiteur", "titre": "Traiteur", "sous": "Mariage, cocktail, repas", "icone": "/brand/icon-traiteur.svg", "fond": "var(--peach)", "ligne": "traiteurFoodTruck", "formTitre": "Un devis traiteur", "placeholder": "Type d'événement, lieu, nombre d'invités, budget…" },
+    { "id": "food-truck", "titre": "Food truck", "sous": "Festival, fête, brunch", "icone": "/brand/icon-food-truck.svg", "fond": "var(--cyan)", "ligne": "traiteurFoodTruck", "formTitre": "Le food truck", "placeholder": "Type d'événement, horaires, avec ou sans service, budget par personne…" },
+    { "id": "autre", "titre": "Autre chose", "sous": "Presse, partenariat…", "icone": "/brand/icon-holocene.svg", "fond": "var(--pink)", "ligne": "traiteurFoodTruck", "formTitre": "Votre message", "placeholder": "Dites-nous ce qui vous amène…" }
+  ],
+  "lignes": {
+    "restaurant": "Ligne du restaurant",
+    "traiteurFoodTruck": "Ligne traiteur et food truck"
+  },
+  "champs": [
+    { "id": "nom", "label": "Nom complet", "type": "text", "requis": true, "placeholder": "Camille Durand" },
+    { "id": "email", "label": "E-mail", "type": "email", "requis": true, "placeholder": "camille@exemple.fr" },
+    { "id": "telephone", "label": "Téléphone", "type": "tel", "requis": true, "placeholder": "06 00 00 00 00" },
+    { "id": "date", "label": "Date souhaitée", "type": "date" },
+    { "id": "societe", "label": "Société (si pro)", "type": "text", "placeholder": "Optionnel", "pour": ["privatisation"] },
+    { "id": "espace", "label": "Espace souhaité", "type": "choix", "options": ["Salle + terrasse", "La salle", "La terrasse"], "pour": ["privatisation"] },
+    { "id": "invites", "label": "Nombre d'invités", "type": "number", "placeholder": "60", "pour": ["privatisation"] },
+    { "id": "budget", "label": "Budget par personne", "type": "text", "placeholder": "En euros", "pour": ["privatisation"] },
+    { "id": "lieu", "label": "Lieu de la prestation", "type": "text", "placeholder": "Ville ou nom du lieu", "pour": ["food-truck"] },
+    { "id": "convives", "label": "Nombre de convives", "type": "number", "placeholder": "150", "pour": ["food-truck"] },
+    { "id": "message", "label": "Message", "type": "textarea", "pleineLargeur": true, "placeholder": "Dites-nous ce qui vous amène…" }
+  ],
+  "sansScript": { "id": "demande", "label": "Votre demande concerne", "type": "select", "options": ["Privatiser le restaurant", "Traiteur", "Food truck", "Autre chose"] }
+}

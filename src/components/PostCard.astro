@@ -1,0 +1,41 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icon from './Icon.astro';
+import Pill from './Pill.astro';
+import { dateCourte, fondCategorie } from '../lib/journal';
+
+interface Props {
+  article: CollectionEntry<'journal'>;
+}
+
+const { article } = Astro.props;
+const { title, category, date, excerpt } = article.data;
+---
+<a href={`/journal/${article.id}`} class="post" style={`background:${fondCategorie(category)}`} data-categorie={category}>
+  <div class="tete">
+    <Pill texte={category} fond="var(--paper)" />
+    <time class="k" datetime={date.toISOString().slice(0, 10)}>{dateCourte(date)}</time>
+  </div>
+  <h2 class="titre">{title}</h2>
+  <p>{excerpt}</p>
+  <span class="k lire">Lire <Icon name="arrow" size={16} /></span>
+</a>
+
+<style>
+  .post {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 340px;
+    padding: 32px;
+    border: var(--line);
+    border-radius: var(--radius-card);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .post[hidden] { display: none; }
+  .tete { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .titre { font-size: 28px; font-weight: 400; line-height: 1.22; margin-top: auto; }
+  p { font-size: 15px; line-height: 1.6; }
+  .lire { display: inline-flex; gap: 8px; align-items: center; }
+</style>

@@ -13,6 +13,8 @@ const { champ, prefixe } = Astro.props;
 const { id, label, type, requis = false, placeholder, options = [], pleineLargeur = false, pour } = champ;
 const idHtml = `${prefixe}-${id}`;
 const idErreur = `${idHtml}-erreur`;
+// Un champ réservé à un type de demande n'est actif que si ce type est choisi.
+const inactif = Boolean(pour);
 
 const autocompletes: Record<string, string> = {
   nom: 'name',
@@ -29,7 +31,7 @@ const autocomplete = autocompletes[id] ?? 'off';
       <div class="puces">
         {options.map((option, i) => (
           <label class="puce">
-            <input type="radio" name={id} value={option} checked={i === 0} />
+            <input type="radio" name={id} value={option} checked={i === 0} disabled={inactif} />
             <span>{option.replace('+', 'et')}</span>
           </label>
         ))}
@@ -51,6 +53,7 @@ const autocomplete = autocompletes[id] ?? 'off';
           type={type as astroHTML.JSX.InputHTMLAttributes['type']}
           placeholder={placeholder}
           required={requis}
+          disabled={inactif}
           autocomplete={autocomplete}
           inputmode={type === 'number' ? 'numeric' : undefined}
           min={type === 'number' ? 1 : undefined}
