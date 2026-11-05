@@ -1,0 +1,43 @@
+---
+import Kicker from './Kicker.astro';
+
+interface Props {
+  kicker?: string;
+  /** Lignes du titre */
+  titre: string[];
+  /** Classe de taille, ex. t92 */
+  taille?: string;
+  texte?: string;
+  /** Largeur max du texte de droite, en px */
+  largeur?: number;
+  /** Espace sous l'en-tête, en px */
+  marge?: number;
+  /** Écart entre titre et texte, en px */
+  ecart?: number;
+  niveau?: 'h1' | 'h2';
+}
+
+const { kicker, titre, taille = 't92', texte, largeur = 420, marge = 48, ecart = 32, niveau: Niveau = 'h2' } = Astro.props;
+---
+<div class="sh" style={`--sh-marge:${marge}px;--sh-ecart:${ecart}px;--sh-largeur:${largeur}px`}>
+  <div class="sh-titre">
+    {kicker && <Kicker texte={kicker} class="sh-k" />}
+    <Niveau class:list={['d', taille]}><Fragment set:html={titre.map(l => l.replace(/&(?!amp;)/g, '&amp;').replace(/</g, '&lt;')).join('<br />')} /></Niveau>
+  </div>
+  {texte && <p class="p sh-texte">{texte}</p>}
+</div>
+
+<style>
+  .sh {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: var(--sh-ecart);
+    flex-wrap: wrap;
+    margin-bottom: var(--sh-marge);
+  }
+  .sh-titre { display: flex; flex-direction: column; gap: 18px; }
+  .sh-texte { max-width: var(--sh-largeur); }
+  .sh :global(.sh-k) { color: var(--sh-k, inherit); }
+  :global(.sur-noir) .sh-texte { color: var(--on-dark); }
+</style>

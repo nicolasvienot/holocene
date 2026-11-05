@@ -1,0 +1,25 @@
+---
+interface Props {
+  fond?: string;
+}
+
+const { fond } = Astro.props;
+---
+<span class="tag" style={fond ? `background:${fond}` : undefined}><slot /></span>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius-pill);
+    padding: 4px 10px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+    line-height: 1;
+    white-space: nowrap;
+  }
+</style>

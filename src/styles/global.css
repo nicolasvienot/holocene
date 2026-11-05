@@ -86,7 +86,7 @@ summary:focus-visible { outline: 3px solid var(--focus, var(--ink)); outline-off
 }
 
 /* Glyphe absent des polices fournies : même rendu de secours que la maquette, à retirer avec la licence. */
-.secours { font-family: 'Arial Rounded MT Bold', 'Varela Round', sans-serif; }
+.secours { font-family: 'Arial Rounded MT Bold', 'Varela Round', sans-serif; line-height: 0; }
 
 /* Texte courant */
 .p { font-size: 18px; line-height: 1.6; margin: 0; text-wrap: pretty; }
@@ -109,6 +109,10 @@ summary:focus-visible { outline: 3px solid var(--focus, var(--ink)); outline-off
 .t72 { font-size: clamp(40px, 4.8vw, 72px); }
 .t68 { font-size: clamp(40px, 4.6vw, 68px); }
 .t64 { font-size: clamp(40px, 4.4vw, 64px); }
+
+/* Ces réglages ne valent que pour l'élément qui les pose : pas d'héritage vers les grilles imbriquées. */
+@property --gap { syntax: '*'; inherits: false; }
+@property --min { syntax: '*'; inherits: false; }
 
 /* Grille fluide de la maquette : repeat(auto-fit, minmax(min(X, 100%), 1fr)) */
 .ag {

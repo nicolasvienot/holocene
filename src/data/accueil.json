@@ -1,0 +1,15 @@
+{
+  "_note": "Textes propres à l'accueil (maquette 01-accueil.html). Barre mobile : maquette 11-accueil-mobile.html.",
+  "chiffres": [
+    { "valeur": "24", "legende": "passionnés en cuisine, en salle et sur la route" },
+    { "valeur": "150", "legende": "mariages déjà servis, et ça continue" },
+    { "valeur": "1500", "legende": "invités sur un même événement, à partir de 40" },
+    { "valeur": "3", "legende": "univers, une seule maison à Balma" }
+  ],
+  "bandeau": ["Fait maison", "De saison", "Local", "Frais", "Sur mesure"],
+  "univers": [
+    { "num": "01", "id": "food-truck", "pastille": "Le tout premier", "texte": "Pains gourmands sur ciabatta, produits d'Occitanie, cuisinés en live sur vos festivals, mariages et soirées." },
+    { "num": "02", "id": "traiteur", "pastille": "Sur mesure", "texte": "Cocktails, repas assis, mariages, box : une cuisine de chef pour vos événements, de 40 à 1500 invités." },
+    { "num": "03", "id": "restaurant", "pastille": "Lun - Ven midi", "texte": "Notre cantine bistronomique à Balma : carte du mois, vins nature, bières craft et une grande terrasse végétale." }
+  ]
+}

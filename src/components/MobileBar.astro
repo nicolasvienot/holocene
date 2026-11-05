@@ -1,0 +1,31 @@
+---
+import Button from './Button.astro';
+import infos from '../data/infos.json';
+
+const tel = infos.telephones.traiteurFoodTruck.tel;
+---
+<div class="barre" role="group" aria-label="Actions rapides">
+  <Button variant="dark" href="/contact" label="Devis" class="barre-btn" />
+  <Button variant="flower" href={`tel:${tel}`} label="Appeler" class="barre-btn" />
+</div>
+
+<style>
+  .barre { display: none; }
+
+  @media (max-width: 760px) {
+    .barre {
+      position: sticky;
+      bottom: 16px;
+      z-index: 30;
+      display: flex;
+      gap: 10px;
+      margin: -92px 12px 16px; /* posée sur le bas de l'appel final, sans décaler la page */
+      padding: 10px;
+      background: var(--paper);
+      border: var(--line);
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-btn);
+    }
+    .barre :global(.barre-btn) { flex: 1; box-shadow: none; padding-inline: 20px; }
+  }
+</style>

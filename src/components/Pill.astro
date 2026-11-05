@@ -1,0 +1,35 @@
+---
+import { nimbus } from '../lib/texte';
+
+interface Props {
+  texte: string;
+  /** Fond, ex. var(--paper). Une couleur a toujours une raison. */
+  fond?: string;
+  grande?: boolean;
+  class?: string;
+}
+
+const { texte, fond, grande = false, class: className } = Astro.props;
+---
+<span class:list={['pill', { 'pill--grande': grande }, className]} style={fond ? `background:${fond}` : undefined}>{nimbus(texte)}</span>
+
+<style>
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: var(--line);
+    border-color: currentColor;
+    border-radius: var(--radius-pill);
+    padding: 8px 16px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    line-height: 1;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+  .pill--grande { font-size: 14px; padding: 14px 20px; white-space: normal; }
+</style>

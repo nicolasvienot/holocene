@@ -1,0 +1,44 @@
+---
+import { nimbus } from '../lib/texte';
+
+interface Props {
+  label: string;
+  /** Fond, ex. var(--flower) */
+  fond?: string;
+  icone?: string;
+  hauteurIcone?: number;
+  /** Ratio CSS, ex. 5 / 4 */
+  ratio?: string;
+  ombre?: boolean;
+  sombre?: boolean;
+  class?: string;
+}
+
+const { label, fond = 'var(--flower)', icone, hauteurIcone = 150, ratio = '5 / 4', ombre = false, sombre = false, class: className } = Astro.props;
+const icon = icone ?? (sombre ? '/brand/icon-white.svg' : '/brand/icon-holocene.svg');
+---
+<div
+  class:list={['slot', { 'slot--ombre': ombre, 'slot--sombre': sombre }, className]}
+  style={`background:${fond};aspect-ratio:${ratio};--icone:${hauteurIcone}px`}
+>
+  <img src={icon} alt="" aria-hidden="true" loading="lazy" width={hauteurIcone / 2} height={hauteurIcone} />
+  <span class="k">{nimbus(label)}</span>
+</div>
+
+<style>
+  .slot {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    padding: 12px;
+    text-align: center;
+    border: var(--line);
+    border-radius: var(--radius-card);
+    color: var(--ink);
+  }
+  .slot img { height: var(--icone); width: auto; flex: none; }
+  .slot--ombre { box-shadow: var(--shadow-hero); }
+  .slot--sombre { color: var(--paper); border-color: var(--paper); }
+</style>

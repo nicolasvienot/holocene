@@ -1,0 +1,45 @@
+---
+interface Props {
+  mots: string[];
+  /** noir : fond noir + icône blanche (marque). fleur : fond fleur + point noir (univers). */
+  variante?: 'noir' | 'fleur';
+}
+
+const { mots, variante = 'noir' } = Astro.props;
+const gap = variante === 'noir' ? 40 : 36;
+---
+<div class:list={['mq-zone', `mq-zone--${variante}`]} aria-hidden="true" style={`--mq-gap:${gap}px`}>
+  <div class="mq">
+    {[0, 1].map(() => (
+      <div class="mq-serie">
+        {mots.map((mot) => (
+          <>
+            <span class="v mq-mot">{mot}</span>
+            {variante === 'noir' ? <img src="/brand/icon-white.svg" alt="" width="20" height="40" /> : <span class="mq-point"></span>}
+          </>
+        ))}
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .mq-zone {
+    border-block: var(--line);
+    overflow: hidden;
+    padding: 22px 0;
+  }
+  .mq-zone--noir { background: var(--ink); color: var(--paper); }
+  .mq-zone--fleur { background: var(--flower); }
+
+  .mq { display: flex; width: max-content; animation: mq 45s linear infinite; }
+  .mq-serie { display: flex; align-items: center; gap: var(--mq-gap); padding-right: var(--mq-gap); }
+  .mq-mot { font-size: 38px; }
+  .mq-serie img { height: 40px; width: auto; }
+  .mq-point { width: 14px; height: 14px; border-radius: 50%; background: var(--ink); }
+
+  @keyframes mq {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+</style>
