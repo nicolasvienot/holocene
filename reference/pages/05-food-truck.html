@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maquette — 05-food-truck</title>
+<!-- Maquette de référence (HTML statique généré depuis la maquette Claude Design). Ne pas copier tel quel : à reconstruire en composants Astro. -->
+<style>
+@font-face{font-family:'Varela Round';src:url(../../public/fonts/varela-round-400.woff2) format('woff2');font-weight:400}
+
+@font-face{font-family:'Holo Nimbus Round';src:url(../../public/fonts/nimbus-sans-round-bold-subset.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Holo Vividly';src:url(../../public/fonts/vividly-subset.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+body{margin:0}
+html,body{background:#000}
+*{box-sizing:border-box}
+a{color:#000}a:hover{color:#000}
+.d{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.025em;line-height:.9;margin:0}
+.k{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:12px;line-height:1.3}
+.v{font-family:'Holo Vividly','Varela Round',cursive;text-transform:uppercase;letter-spacing:.05em;line-height:1}
+.p{font-size:18px;line-height:1.6;margin:0;text-wrap:pretty}
+.wrap{width:100%;max-width:1360px;margin:0 auto;padding-left:48px;padding-right:48px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px 0 calc(26px + .12em);border:2px solid #000;border-radius:999px;background:#fff;color:#000;text-decoration:none;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px;box-shadow:4px 4px 0 #000;transition:transform .15s,box-shadow .15s;white-space:nowrap;cursor:pointer}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #000;color:#000}
+.btn.dk{background:#000;color:#fff}.btn.dk:hover{color:#fff}
+.pill{display:inline-flex;align-items:center;gap:8px;border:2px solid #000;border-radius:999px;padding:8px 16px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:12px;line-height:1;white-space:nowrap}
+.tag{display:inline-flex;align-items:center;border:1.5px solid #000;border-radius:999px;padding:4px 10px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:10px;line-height:1;white-space:nowrap}
+.nav{display:inline-flex;align-items:center;min-height:44px;padding:0 14px 0 calc(14px + .12em);border-radius:999px;text-decoration:none;color:#000;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px}
+.nav:hover{background:rgba(0,0,0,.08)}
+.tb{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px 0 calc(14px + .2em);border-radius:999px;color:#fff;text-decoration:none}
+.tb:hover{color:#fff;background:rgba(255,255,255,.12)}
+.fl{color:#fff;text-decoration:none}.fl:hover{color:#f7ba94}
+.dn{font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:17px}
+.dish{display:flex;flex-direction:column;gap:5px;padding:14px 0;border-bottom:1.5px dashed #000}
+.fld{display:flex;flex-direction:column;gap:8px}
+.fld label{font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11px}
+.fld input,.fld select,.fld textarea{font-family:'Varela Round',system-ui,sans-serif;font-size:17px;min-height:54px;padding:14px 18px;border:2px solid #000;border-radius:18px;background:#fff;color:#000;width:100%}
+.fld textarea{min-height:130px;resize:vertical}
+details{border-bottom:2px solid #000}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:72px;font-size:22px}
+summary::-webkit-details-marker{display:none}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq{display:flex;width:max-content;animation:mq 40s linear infinite}
+.tbn{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}.tbn::-webkit-scrollbar{display:none}
+.tb{flex-shrink:0;white-space:nowrap}
+.hdr{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:24px}
+.hnav{display:flex;gap:4px;align-items:center;justify-content:center}
+.hend{display:flex;justify-content:flex-end;align-items:center;gap:12px}
+.nav.ondk{color:#fff}.nav.ondk:hover{background:rgba(255,255,255,.14);color:#fff}
+.btn.ondk{border-color:#fff;box-shadow:4px 4px 0 #fff}.btn.ondk:hover{box-shadow:2px 2px 0 #fff}
+.mnav{display:none;position:relative;border:0}
+.mnav summary{list-style:none;width:52px;height:52px;min-height:0;padding:0;gap:0;font-size:0;border:2px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:4px 4px 0 #000;transition:transform .15s,box-shadow .15s}
+.mnav summary::-webkit-details-marker{display:none}
+.mnav summary:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #000}
+.mpanel{position:absolute;right:0;top:calc(100% + 12px);z-index:30;min-width:270px;display:flex;flex-direction:column;gap:2px;padding:10px;background:#fff;border:2px solid #000;border-radius:24px;box-shadow:6px 6px 0 #000}
+.mpanel .nav{justify-content:flex-start;color:#000}
+.mpanel .btn{margin-top:8px;box-shadow:none}
+.nav:focus-visible,.btn:focus-visible,.tb:focus-visible,.mnav summary:focus-visible{outline:3px solid #000;outline-offset:3px}
+.tb:focus-visible,.nav.ondk:focus-visible,.btn.ondk:focus-visible{outline-color:#fff}
+@media (max-width:1180px){.hdr{grid-template-columns:1fr auto}.hnav{display:none}.mnav{display:block}}
+@media (max-width:640px){.hend>.btn{display:none}.tbn{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent);padding-right:28px}}
+@media (max-width:760px){.wrap{padding-left:20px;padding-right:20px}.hide-m{display:none!important}.p{font-size:16px}}
+
+</style>
+</head>
+<body>
+
+<div style="background: #d4ffff; color: #000000; font-family: 'Varela Round', 'Arial Rounded MT Bold', system-ui, sans-serif; overflow-x: hidden">
+
+<!-- TOP BAR -->
+<div style="background: #000000">
+<div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 6px; padding-bottom: 6px">
+<nav aria-label="Univers Holocene" class="tbn" style="display: flex; gap: 4px; min-width: 0">
+<a href="01-accueil.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #ffc7cd"></span>Holocene</a>
+<a href="02-restaurant.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #e0cfe6"></span>Restaurant</a>
+<a href="04-traiteur.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #fffaaf"></span>Traiteur</a>
+<a href="05-food-truck.html" class="tb k" style="background: #d4ffff; color: #000000"><span style="width: 10px; height: 10px; border-radius: 50%; background: #f7ba94; box-shadow: 0 0 0 1.5px #000000"></span>Food truck</a>
+</nav>
+<a href="tel:+33532740833" class="tb k hide-m">05 32 74 08 33</a>
+</div>
+</div>
+
+<!-- HEADER -->
+<header class="wrap hdr" style="padding-top: 20px; padding-bottom: 20px">
+<a href="05-food-truck.html" aria-label="Holocene Food Truck" style="display: flex; justify-self: start"><img src="../../public/brand/logo-holocene-food-truck.svg" alt="Holocene Food Truck" style="height: 52px; width: auto; display: block"></a>
+<nav aria-label="Navigation du food truck" class="hnav">
+<a href="#carte" class="nav">La carte</a>
+<a href="#evenements" class="nav">Événements</a>
+<a href="#invites" class="nav">Ils nous ont invités</a>
+<a href="#reserver" class="nav">Comment réserver</a>
+</nav>
+<div class="hend">
+<a href="#reserver" class="btn dk">Réserver le truck</a>
+<details class="mnav"><summary aria-label="Ouvrir le menu" style="background: #f7ba94"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg></summary>
+<div class="mpanel">
+<a href="#carte" class="nav">La carte</a>
+<a href="#evenements" class="nav">Événements</a>
+<a href="#invites" class="nav">Ils nous ont invités</a>
+<a href="#reserver" class="nav">Comment réserver</a>
+<a href="#reserver" class="btn dk">Réserver le truck</a>
+</div>
+</details>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="wrap" style="padding-top: 40px; padding-bottom: 96px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(560px, 100%), 1fr)); gap: 56px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 30px; align-items: flex-start">
+<span class="v" style="font-size: 30px">Le tout premier</span>
+<h1 class="d" style="font-size: clamp(56px, 7.6vw, 120px)">Du bon pain.<br>Des bons produits.<br>Du monde autour.</h1>
+<p class="p" style="font-size: 20px; max-width: 540px">C'est avec ce camion que l'aventure Holocene a commencé. Des pains gourmands sur ciabatta, garnis de produits d'Occitanie achetés en direct, cuisinés en live sur vos mariages, festivals et soirées.</p>
+<div style="display: flex; gap: 14px; flex-wrap: wrap">
+<a href="#reserver" class="btn dk">Réserver le truck</a>
+<a href="#carte" class="btn" style="background: #f7ba94">Voir la carte</a>
+</div>
+</div>
+<div style="position: relative; padding: 24px 24px 24px 0">
+<div style="aspect-ratio: 4 / 5; border: 2px solid #000000; border-radius: 32px; background: #f7ba94; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; box-shadow: 10px 10px 0 #000000">
+<img src="../../public/brand/icon-food-truck.svg" alt="" aria-hidden="true" style="height: 170px; width: auto">
+<span class="k">Photo — Le Merinjana tenu en main</span>
+</div>
+<span class="pill" style="position: absolute; left: -24px; top: 90px; background: #ffffff; font-size: 15px; padding: 12px 22px; transform: rotate(-8deg)">Zéro intermédiaire</span>
+<span class="pill" style="position: absolute; right: 0; bottom: 40px; background: #d4ffff; font-size: 15px; padding: 12px 22px; transform: rotate(6deg)">Cuisiné en live</span>
+</div>
+</div>
+</section>
+
+<!-- BANDEAU -->
+<div aria-hidden="true" style="background: #f7ba94; border-top: 2px solid #000000; border-bottom: 2px solid #000000; overflow: hidden; padding: 22px 0">
+<div class="mq">
+<div style="display: flex; align-items: center; gap: 36px; padding-right: 36px">
+<span class="v" style="font-size: 38px">Pain ciabatta</span><span style="width: 14px; height: 14px; border-radius: 50%; background: #000000"></span>
+<span class="v" style="font-size: 38px">Produits locaux</span><span style="width: 14px; height: 14px; border-radius: 50%; background: #000000"></span>
+<span class="v" style="font-size: 38px">Carte de saison</span><span style="width: 14px; height: 14px; border-radius: 50%; background: #000000"></span>
+<span class="v" style="font-size: 38px">En direct</span><span style="width: 14px; height: 14px; border-radius: 50%; background: #000000"></span>
+</div>
+<div style="display: flex; align-items: center; gap: 36px; padding-right: 36px">
+<span class="v" style="font-size: 38px">Pain ciabatta</span><span style="width: 14px; height: 14px; border-radius: 50%; background: #000000"></span>
+<span class="v" style="font-size: 38px">Produits locaux</span><span style="width: 14px; height: 14px; border-radius: 50%; background: #000000"></span>
+<span class="v" style="font-size: 38px">Carte de saison</span><span style="width: 14px; height: 14px; border-radius: 50%; background: #000000"></span>
+<span class="v" style="font-size: 38px">En direct</span><span style="width: 14px; height: 14px; border-radius: 50%; background: #000000"></span>
+</div>
+</div>
+</div>
+
+<!-- LA CARTE -->
+<section id="carte" class="wrap" style="padding-top: 112px; padding-bottom: 112px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 48px">
+<h2 class="d" style="font-size: clamp(48px, 6vw, 92px)">Nos pains<br>gourmands</h2>
+<p class="p" style="max-width: 420px">Pain ciabatta, garnitures maison, viandes cuites à basse température. Pas de burger, pas de pizza : notre truc, c'est le pain.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(340px, 100%), 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 22px; padding: 34px; min-height: 420px; border: 2px solid #000000; border-radius: 36px; background: #ffffff">
+<span class="k">01</span>
+<span class="d" style="font-size: 56px">Le Rustico</span>
+<p style="margin: 0; font-size: 17px; line-height: 1.6">Pain ciabatta, mortadelle IGP, stracciatella, amandes torréfiées, tomates confites, oignons rouges pickles et roquette.</p>
+<span class="pill" style="align-self: flex-start; margin-top: auto; background: #fcdbbf">Le classique</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 22px; padding: 34px; min-height: 420px; border: 2px solid #000000; border-radius: 36px; background: #f7ba94; box-shadow: 10px 10px 0 #000000">
+<span class="k">02</span>
+<span class="d" style="font-size: 56px">Le Prima</span>
+<p style="margin: 0; font-size: 17px; line-height: 1.6">Pain ciabatta, jambon cru affiné de la Maison Garcia, stracciatella, sauce tomate ancienne maison, huile de basilic, oignons rouges pickles et roquette.</p>
+<span class="pill" style="align-self: flex-start; margin-top: auto; background: #ffffff">Maison Garcia</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 22px; padding: 34px; min-height: 420px; border: 2px solid #000000; border-radius: 36px; background: #ffffff">
+<span class="k">03</span>
+<span class="d" style="font-size: 56px">Le Merinjana</span>
+<p style="margin: 0; font-size: 17px; line-height: 1.6">Pain ciabatta maison, aubergines marinées, stracciatella, sauce tomates anciennes maison, roquette, amandes torréfiées, oignons pickles.</p>
+<span class="pill" style="align-self: flex-start; margin-top: auto; background: #d4ffff">Végétarien</span>
+</div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px 56px; margin-top: 56px; padding: 40px; border: 2px solid #000000; border-radius: 36px; background: #e4ffff">
+<div>
+<h3 class="d" style="font-size: 32px; margin-bottom: 6px">Desserts</h3>
+<div class="dish"><span class="dn">Marbré au chocolat</span><span style="font-size: 15px">glaçage rocher amande</span></div>
+<div class="dish" style="border-bottom: 0"><span class="dn">Comme un banoffee</span><span style="font-size: 15px">aux fruits de saison</span></div>
+</div>
+<div>
+<h3 class="d" style="font-size: 32px; margin-bottom: 6px">Boissons</h3>
+<div class="dish"><span class="dn">Citronnade maison — 25 cl</span><span style="font-size: 15px">au sirop de menthe fraîche</span></div>
+<div class="dish"><span class="dn">Thé glacé maison — 25 cl</span><span style="font-size: 15px">pêche-abricot</span></div>
+<div class="dish" style="border-bottom: 0"><span class="dn">Ô9 — 50 cl</span><span style="font-size: 15px">eau minérale occitane responsable</span></div>
+</div>
+<div>
+<h3 class="d" style="font-size: 32px; margin-bottom: 6px">Accompagnement</h3>
+<div class="dish" style="border-bottom: 0"><span class="dn">Chips de l'Aveyron — 60 g</span><span style="font-size: 15px">pour croquer entre deux bouchées</span></div>
+<div style="display: flex; flex-direction: column; gap: 14px; margin-top: 18px; align-items: flex-start">
+<p style="margin: 0; font-size: 13px; line-height: 1.5">Une allergie, un régime ? Dites-le à l'équipe avant de commander, on adapte.</p>
+<a href="#carte" class="btn">La carte — PDF</a>
+</div>
+</div>
+</div>
+</section>
+
+<!-- EVENEMENTS -->
+<section id="evenements" style="background: #ffffff; border-top: 2px solid #000000; border-bottom: 2px solid #000000">
+<div class="wrap" style="padding-top: 112px; padding-bottom: 112px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 56px; align-items: start">
+<div style="display: flex; flex-direction: column; gap: 26px">
+<span class="k">Pour quels événements</span>
+<h2 class="d" style="font-size: clamp(44px, 5.2vw, 80px)">Pas de cuisine sur place ? Le truck en est une.</h2>
+<p class="p">Une vraie cuisine embarquée, un comptoir pour servir, et un camion qu'on habille selon votre thème : rustique, chic, vintage ou complètement fou.</p>
+<img src="../../public/brand/icon-food-truck.svg" alt="" aria-hidden="true" style="height: 140px; width: auto; align-self: flex-start">
+</div>
+<div style="display: flex; flex-direction: column; border-top: 2px solid #000000">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 26px 0; border-bottom: 2px solid #000000; flex-wrap: wrap"><span class="d" style="font-size: 36px">Mariages</span><span class="pill" style="background: #fcdbbf">Brunch du lendemain</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 26px 0; border-bottom: 2px solid #000000; flex-wrap: wrap"><span class="d" style="font-size: 36px">Entreprises</span><span class="pill" style="background: #d4ffff">Séminaires, afterworks</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 26px 0; border-bottom: 2px solid #000000; flex-wrap: wrap"><span class="d" style="font-size: 36px">Festivals</span><span class="pill" style="background: #fcdbbf">Concerts, sport</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 26px 0; border-bottom: 2px solid #000000; flex-wrap: wrap"><span class="d" style="font-size: 36px">Anniversaires</span><span class="pill" style="background: #d4ffff">Baptêmes, fêtes</span></div>
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 26px 0; border-bottom: 2px solid #000000; flex-wrap: wrap"><span class="d" style="font-size: 36px">Familles</span><span class="pill" style="background: #fcdbbf">Grandes tablées</span></div>
+</div>
+</div>
+</section>
+
+<!-- INVITES -->
+<section id="invites" class="wrap" style="padding-top: 112px; padding-bottom: 112px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 44px">
+<h2 class="d" style="font-size: clamp(44px, 5.2vw, 80px)">Ils nous ont invités</h2>
+<p class="p" style="max-width: 400px">Des concerts aux matchs, en passant par les festivals.</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 12px">
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #f7ba94">Food Truck Festival</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #ffffff">Le Bikini</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #ffffff">Big Flo &amp; Oli</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #ffffff">Toulouse FC</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #f7ba94">Red Bull</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #ffffff">Mairie de Toulouse</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #ffffff">Département</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #ffffff">ISAE</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #ffffff">MEETT</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #f7ba94">Diagora</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #ffffff">Mas Tolosa</span>
+<span class="pill" style="font-size: 18px; padding: 16px 26px; background: #ffffff">Water Rugby</span>
+</div>
+</section>
+
+<!-- RESERVER -->
+<section id="reserver" style="background: #000000; color: #ffffff">
+<div class="wrap" style="padding-top: 112px; padding-bottom: 112px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 56px">
+<div style="display: flex; flex-direction: column; gap: 18px"><span class="k" style="color: #f7ba94">Comment réserver</span><h2 class="d" style="font-size: clamp(48px, 6vw, 92px)">Trois étapes,<br>zéro prise de tête.</h2></div>
+<p class="p" style="max-width: 420px; color: #e6e6e6">Le tarif dépend du nombre de convives, du lieu et du menu : on vous fait un devis précis, sans surprise.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 36px; border: 2px solid #ffffff; border-radius: 32px"><span class="d" style="font-size: 96px; color: #f7ba94">01</span><span class="d" style="font-size: 30px">Vous nous écrivez</span><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #e6e6e6">Date, lieu, nombre de convives, type d'événement.</p></div>
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 36px; border: 2px solid #ffffff; border-radius: 32px; background: #f7ba94; color: #000000"><span class="d" style="font-size: 96px">02</span><span class="d" style="font-size: 30px">On compose le menu</span><p style="margin: 0; font-size: 16px; line-height: 1.6">Pains, desserts, boissons, régimes : on ajuste et on vous envoie le devis.</p></div>
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 36px; border: 2px solid #ffffff; border-radius: 32px"><span class="d" style="font-size: 96px; color: #f7ba94">03</span><span class="d" style="font-size: 30px">On arrive, on régale</span><p style="margin: 0; font-size: 16px; line-height: 1.6; color: #e6e6e6">Le truck s'installe, on cuisine en live, vous profitez de vos invités.</p></div>
+</div>
+</div>
+</section>
+
+<!-- FORM + FAQ -->
+<section style="background: #ffffff">
+<div class="wrap" style="padding-top: 112px; padding-bottom: 112px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 64px; align-items: start">
+<form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 20px; padding: 40px; border: 2px solid #000000; border-radius: 36px; background: #d4ffff; box-shadow: 10px 10px 0 #000000">
+<div style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 10px"><span class="k">Réserver le food truck</span><span class="d" style="font-size: 40px">Votre date</span></div>
+<div class="fld"><label for="fnom">Nom complet</label><input id="fnom" type="text" placeholder="Camille Durand"></div>
+<div class="fld"><label for="fmail">E-mail</label><input id="fmail" type="email" placeholder="camille@exemple.fr"></div>
+<div class="fld"><label for="fdate">Date</label><input id="fdate" type="date"></div>
+<div class="fld"><label for="finv">Nombre de convives</label><input id="finv" type="number" placeholder="150"></div>
+<div class="fld" style="grid-column: 1 / -1"><label for="fmsg">Votre événement</label><textarea id="fmsg" placeholder="Lieu, horaires, ambiance…"></textarea></div>
+<div style="grid-column: 1 / -1; display: flex; justify-content: flex-end"><button type="button" class="btn dk">Envoyer</button></div>
+</form>
+<div style="display: flex; flex-direction: column; gap: 28px">
+<h2 class="d" style="font-size: clamp(40px, 4.4vw, 64px)">Questions fréquentes</h2>
+<div style="border-top: 2px solid #000000">
+<details open><summary>Combien coûte la location ? <span class="d" aria-hidden="true" style="font-size: 28px">-</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">C'est sur devis : le prix dépend du nombre de convives, du lieu et du menu choisi. Souvent moins cher qu'un traiteur classique.</p></details>
+<details><summary>Où intervenez-vous ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">À Toulouse, en Haute-Garonne et dans toute la région.</p></details>
+<details><summary>Avez-vous des options végé et sans gluten ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Oui — le Merinjana est végétarien, et on adapte les menus aux régimes de vos invités.</p></details>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SKYLINE + FOOTER -->
+<img src="../../public/brand/illustration-toulouse.svg" alt="Illustration de Toulouse : le dôme de la Grave, le Pont-Neuf, l'aérospatiale et Saint-Sernin" style="display: block; width: 100%; height: auto; margin-bottom: -2px; background: #ffffff">
+<footer style="background: #000000; color: #ffffff">
+<div class="wrap" style="padding-top: 72px; padding-bottom: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<img src="../../public/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" style="height: 58px; width: auto; align-self: flex-start">
+<p style="margin: 0; color: #cfcfcf; font-size: 15px; line-height: 1.6">Restaurant, traiteur et food truck à Balma, Toulouse et partout en Occitanie.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.5">
+<span class="k" style="color: #fbf4b1">Restaurant</span>
+<span>14 rue Louis Renault<br>31130 Balma</span>
+<span>Lundi - vendredi, 12h - 14h</span>
+<a href="tel:+33532740834" class="fl">05 32 74 08 34</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.5">
+<span class="k" style="color: #f7ba94">Traiteur &amp; food truck</span>
+<a href="tel:+33532740833" class="fl">05 32 74 08 33</a>
+<a href="mailto:contact@holocene-traiteur.fr" class="fl">contact@holocene-traiteur.fr</a>
+<span>Toulouse, Haute-Garonne et toute l'Occitanie</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+<span class="k" style="color: #ffc7cd">Explorer</span>
+<a href="03-privatiser.html" class="fl">Privatiser le restaurant</a>
+<a href="06-equipe.html" class="fl">L'équipe</a>
+<a href="07-journal.html" class="fl">Journal</a>
+<a href="08-contact.html" class="fl">Contact &amp; devis</a>
+</div>
+</div>
+<div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid #333333; font-size: 13px; color: #cfcfcf">
+<span>© 2026 Holocene Food Event — Mentions légales</span>
+<div style="display: flex; gap: 20px"><a href="https://www.instagram.com" class="fl">Instagram</a><a href="https://www.facebook.com" class="fl">Facebook</a><a href="https://www.linkedin.com" class="fl">LinkedIn</a></div>
+</div>
+</footer>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+---
+interface Props {
+  tone?: 'outline' | 'white' | 'flower';
+}
+
+const { tone = 'outline' } = Astro.props;
+---
+
+<!-- Toujours un mot, jamais une couleur seule : SG, Végé, +1 €… -->
+<span class:list={['tag', `tag--${tone}`]}><slot /></span>
+
+<style>
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px 4px calc(10px + 0.1em);
+    border: 1.5px solid var(--ink);
+    border-radius: var(--radius-pill);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .tag--white {
+    background: var(--paper);
+  }
+
+  .tag--flower {
+    background: var(--flower);
+  }
+</style>

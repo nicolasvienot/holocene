@@ -1,0 +1,414 @@
+---
+import Button from './Button.astro';
+import { univers, universOrder, type NavLink, type UniversId } from '../data/univers';
+
+interface Props {
+  univers: UniversId;
+  /** Remplace le bouton principal de l'univers pour cette page. */
+  cta?: NavLink;
+  /** Chemin servant à calculer le lien actif (défaut : URL courante). */
+  currentPath?: string;
+  /** Carte menu ouverte d'emblée, pour le design system. */
+  menuOpen?: boolean;
+}
+
+const { univers: id, cta: ctaProp, currentPath = Astro.url.pathname, menuOpen = false } = Astro.props;
+const config = univers[id];
+const cta = ctaProp ?? config.cta;
+const allUnivers = universOrder.map((universId) => univers[universId]);
+
+const normalize = (path: string) => path.replace(/\/+$/, '') || '/';
+const isActive = (href: string) => !href.includes('#') && normalize(href) === normalize(currentPath);
+---
+
+<header class="header">
+  <div class="capsule">
+    <a href={config.home} class="logo" aria-label={`${config.fullName} - accueil`}>
+      <img src={config.logo} alt="" width="156" height="40" />
+    </a>
+
+    <nav class="links" aria-label={`Navigation ${config.fullName}`}>
+      {
+        config.nav.map((item) => (
+          <a href={item.href} class="link" aria-current={isActive(item.href) ? 'page' : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="end">
+      <nav class="dots" aria-label={`Les univers Holocene, depuis ${config.fullName}`}>
+        {
+          allUnivers.map((item) => (
+            <a
+              href={item.home}
+              class="dot"
+              data-univers={item.id}
+              aria-label={item.fullName}
+              aria-current={item.id === id ? 'true' : undefined}
+            >
+              <span class="dot__bubble" aria-hidden="true">{item.name}</span>
+            </a>
+          ))
+        }
+      </nav>
+      <Button href={cta.href} external={cta.external} variant="primary">{cta.label}</Button>
+    </div>
+
+    <details class="menu" open={menuOpen}>
+      <summary class="toggle" aria-label="Menu">
+        <svg class="toggle__open" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M4 8h16M4 16h16" />
+        </svg>
+        <svg class="toggle__close" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <path d="M6 6l12 12M18 6L6 18" />
+        </svg>
+      </summary>
+      <div class="panel">
+        <nav aria-label={`Menu ${config.fullName}`}>
+          <ul class="panel__links">
+            {
+              config.nav.map((item) => (
+                <li>
+                  <a href={item.href} class="panel__link" aria-current={isActive(item.href) ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+
+        <div class="panel__univers">
+          <span class="label">Nos univers</span>
+          <ul class="panel__dots">
+            {
+              allUnivers.map((item) => (
+                <li>
+                  <a
+                    href={item.home}
+                    class="named"
+                    data-univers={item.id}
+                    aria-current={item.id === id ? 'true' : undefined}
+                  >
+                    <span class="named__dot" />
+                    {item.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <Button href={cta.href} external={cta.external} variant="primary" class="panel__cta">{cta.label}</Button>
+        <a href={`tel:${config.phone.tel}`} class="panel__phone">{config.phone.display}</a>
+      </div>
+    </details>
+  </div>
+</header>
+
+<style>
+  /*
+    La bascule se fait sur la largeur de la capsule, pas sur celle de l'écran :
+    1224 px de capsule correspondent à 1320 px d'écran (marges de 48 px déduites).
+    Le design system peut ainsi montrer le menu compact dans une colonne étroite.
+  */
+  .header {
+    position: relative;
+    z-index: 20;
+    container-type: inline-size;
+    margin-block: 18px;
+  }
+
+  .capsule {
+    position: relative;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 24px;
+    min-height: 72px;
+    padding: 8px 10px 8px 28px;
+    border: var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: var(--shadow-btn);
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+  }
+
+  .logo img {
+    width: auto;
+    height: 40px;
+  }
+
+  .links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+  }
+
+  .link {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: inherit;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+  }
+
+  /* Soulignement noir qui se déploie depuis le centre. */
+  .link::after {
+    content: '';
+    position: absolute;
+    inset: auto 0 6px;
+    height: 3px;
+    background: var(--ink);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+  }
+
+  .link:hover::after,
+  .link[aria-current]::after {
+    transform: scaleX(1);
+  }
+
+  .end {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .dots {
+    display: flex;
+    padding-right: 10px;
+    border-right: var(--line);
+  }
+
+  /* Rond de 28 px dans une cible de 36 x 44 px. */
+  .dot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 44px;
+    border-radius: var(--radius-pill);
+  }
+
+  .dot::before {
+    content: '';
+    width: 28px;
+    height: 28px;
+    border: var(--line);
+    border-radius: 50%;
+    background: var(--bg);
+  }
+
+  .dot[aria-current]::before {
+    box-shadow:
+      0 0 0 2px var(--paper),
+      0 0 0 4px var(--ink);
+  }
+
+  .dot__bubble {
+    position: absolute;
+    top: calc(100% + 16px);
+    left: 50%;
+    padding: 6px 12px 6px calc(12px + 0.12em);
+    border-radius: var(--radius-pill);
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    line-height: 1.2;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%);
+    transition: opacity 0.15s;
+  }
+
+  .dot:hover .dot__bubble,
+  .dot:focus-visible .dot__bubble {
+    opacity: 1;
+  }
+
+  .menu {
+    display: none;
+    grid-column: 3;
+  }
+
+  .toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: var(--line);
+    border-radius: 50%;
+    background: var(--flower);
+    color: var(--ink);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .toggle::-webkit-details-marker {
+    display: none;
+  }
+
+  .toggle__close {
+    display: none;
+  }
+
+  .menu[open] .toggle {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .menu[open] .toggle__open {
+    display: none;
+  }
+
+  .menu[open] .toggle__close {
+    display: block;
+  }
+
+  .panel {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 24px;
+    border: var(--line);
+    border-radius: var(--radius-card);
+    background: var(--paper);
+    box-shadow: var(--shadow-hover);
+  }
+
+  .panel__links li {
+    border-bottom: var(--line-dashed);
+  }
+
+  .panel__link {
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+    padding-block: 8px;
+    color: inherit;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 26px;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  .panel__link:hover,
+  .panel__link[aria-current] {
+    text-decoration: underline;
+    text-decoration-thickness: 3px;
+    text-underline-offset: 6px;
+  }
+
+  .panel__univers {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .panel__dots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .named {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 14px 0 8px;
+    border: var(--line);
+    border-radius: var(--radius-pill);
+    color: inherit;
+    font-size: 15px;
+    text-decoration: none;
+  }
+
+  .named:hover,
+  .named[aria-current] {
+    background: var(--bg);
+  }
+
+  .named__dot {
+    width: 28px;
+    height: 28px;
+    border: var(--line);
+    border-radius: 50%;
+    background: var(--bg);
+  }
+
+  .panel :global(.panel__cta) {
+    width: 100%;
+  }
+
+  .panel__phone {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    color: inherit;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    text-decoration: none;
+  }
+
+  .panel__phone:hover {
+    text-decoration: underline;
+  }
+
+  @container (width < 1224px) {
+    .capsule {
+      grid-template-columns: 1fr auto;
+      min-height: 66px;
+      padding-left: 22px;
+    }
+
+    .links,
+    .end {
+      display: none;
+    }
+
+    .menu {
+      display: block;
+      grid-column: 2;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .link::after,
+    .dot__bubble {
+      transition: none;
+    }
+  }
+</style>

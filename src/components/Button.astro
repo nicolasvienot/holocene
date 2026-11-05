@@ -1,0 +1,154 @@
+---
+interface Props {
+  /** Rendu en <a> si présent, sinon en <button>. Ignoré si `disabled`. */
+  href?: string;
+  /** Lien vers un autre site : nouvel onglet, annoncé aux lecteurs d'écran. */
+  external?: boolean;
+  variant?: 'primary' | 'secondary' | 'flower' | 'onDark';
+  size?: 'md' | 'sm';
+  icon?: 'arrow';
+  disabled?: boolean;
+  type?: 'button' | 'submit' | 'reset';
+  /** Force l'apparence d'un état, pour le design system. */
+  state?: 'hover' | 'focus' | 'active';
+  /** Rendu en <span> : apparence de bouton dans un élément déjà cliquable (carte-lien). */
+  decorative?: boolean;
+  class?: string;
+}
+
+const {
+  href,
+  external = false,
+  variant = 'secondary',
+  size = 'md',
+  icon,
+  disabled = false,
+  type = 'button',
+  state,
+  decorative = false,
+  class: className,
+} = Astro.props;
+
+const isLink = Boolean(href) && !disabled;
+const Tag = decorative ? 'span' : isLink ? 'a' : 'button';
+const attrs = decorative
+  ? {}
+  : isLink
+    ? { href, ...(external ? { target: '_blank', rel: 'noopener' } : {}) }
+    : { type, disabled };
+---
+
+<Tag {...attrs} class:list={['btn', `btn--${variant}`, `btn--${size}`, state && `is-${state}`, className]}>
+  <slot />
+  {external && isLink && <span class="sr-only">(nouvel onglet)</span>}
+  {
+    icon === 'arrow' && (
+      <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M13 6l6 6-6 6" />
+      </svg>
+    )
+  }
+</Tag>
+
+<style>
+  .btn {
+    --pad: 26px;
+    --shadow-color: var(--ink);
+    --shadow-size: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 52px;
+    /* Compense l'espacement final des lettres pour un texte centré. */
+    padding: 0 var(--pad) 0 calc(var(--pad) + 0.12em);
+    border: var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    box-shadow: var(--shadow-size) var(--shadow-size) 0 var(--shadow-color);
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s,
+      background-color 0.15s,
+      color 0.15s;
+  }
+
+  .btn--sm {
+    --pad: 18px;
+    --shadow-size: 3px;
+    min-height: 44px;
+    font-size: 12px;
+  }
+
+  .btn--flower {
+    background: var(--flower);
+  }
+
+  .btn--onDark {
+    --shadow-color: var(--paper);
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--paper);
+  }
+
+  /* Sur fond noir, le contour et l'ombre passent en blanc. */
+  :global([data-on-dark]) .btn--flower {
+    --shadow-color: var(--paper);
+    border-color: var(--paper);
+  }
+
+  .btn:hover,
+  .btn.is-hover {
+    --shadow-size: 2px;
+    transform: translate(2px, 2px);
+  }
+
+  /* Principal : aplat noir sans ombre. Survol inversé, clic qui rétrécit. */
+  .btn--primary {
+    --shadow-size: 0px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn--primary:hover,
+  .btn--primary.is-hover {
+    --shadow-size: 0px;
+    transform: none;
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .btn--primary:active,
+  .btn--primary.is-active {
+    transform: scale(0.96);
+  }
+
+  .btn.is-focus {
+    outline: 3px solid var(--focus-color, var(--ink));
+    outline-offset: 3px;
+  }
+
+  .btn:disabled {
+    background: var(--disabled-bg);
+    color: var(--disabled-text);
+    border-color: var(--disabled-line);
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: none;
+    }
+  }
+</style>

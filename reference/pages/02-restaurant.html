@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maquette — 02-restaurant</title>
+<!-- Maquette de référence (HTML statique généré depuis la maquette Claude Design). Ne pas copier tel quel : à reconstruire en composants Astro. -->
+<style>
+@font-face{font-family:'Varela Round';src:url(../../public/fonts/varela-round-400.woff2) format('woff2');font-weight:400}
+
+@font-face{font-family:'Holo Nimbus Round';src:url(../../public/fonts/nimbus-sans-round-bold-subset.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Holo Vividly';src:url(../../public/fonts/vividly-subset.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+body{margin:0}
+html,body{background:#000}
+*{box-sizing:border-box}
+a{color:#000}a:hover{color:#000}
+.d{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.025em;line-height:.9;margin:0}
+.k{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:12px;line-height:1.3}
+.v{font-family:'Holo Vividly','Varela Round',cursive;text-transform:uppercase;letter-spacing:.05em;line-height:1}
+.p{font-size:18px;line-height:1.6;margin:0;text-wrap:pretty}
+.wrap{width:100%;max-width:1360px;margin:0 auto;padding-left:48px;padding-right:48px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px 0 calc(26px + .12em);border:2px solid #000;border-radius:999px;background:#fff;color:#000;text-decoration:none;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px;box-shadow:4px 4px 0 #000;transition:transform .15s,box-shadow .15s;white-space:nowrap}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #000;color:#000}
+.btn.dk{background:#000;color:#fff}.btn.dk:hover{color:#fff}
+.pill{display:inline-flex;align-items:center;gap:8px;border:2px solid #000;border-radius:999px;padding:8px 16px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:12px;line-height:1;white-space:nowrap}
+.tag{display:inline-flex;align-items:center;border:1.5px solid #000;border-radius:999px;padding:4px 10px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:10px;line-height:1;white-space:nowrap}
+.nav{display:inline-flex;align-items:center;min-height:44px;padding:0 14px 0 calc(14px + .12em);border-radius:999px;text-decoration:none;color:#000;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px}
+.nav:hover{background:rgba(0,0,0,.08)}
+.tb{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px 0 calc(14px + .2em);border-radius:999px;color:#fff;text-decoration:none}
+.tb:hover{color:#fff;background:rgba(255,255,255,.12)}
+.fl{color:#fff;text-decoration:none}.fl:hover{color:#e0cfe6}
+.dish{display:flex;flex-direction:column;gap:6px;padding:16px 0;border-bottom:1.5px dashed #000}
+.dn{font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.02em;font-size:18px}
+details{border-bottom:2px solid #000}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:72px;font-size:22px}
+summary::-webkit-details-marker{display:none}
+.tbn{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}.tbn::-webkit-scrollbar{display:none}
+.tb{flex-shrink:0;white-space:nowrap}
+.hdr{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:24px}
+.hnav{display:flex;gap:4px;align-items:center;justify-content:center}
+.hend{display:flex;justify-content:flex-end;align-items:center;gap:12px}
+.nav.ondk{color:#fff}.nav.ondk:hover{background:rgba(255,255,255,.14);color:#fff}
+.btn.ondk{border-color:#fff;box-shadow:4px 4px 0 #fff}.btn.ondk:hover{box-shadow:2px 2px 0 #fff}
+.mnav{display:none;position:relative;border:0}
+.mnav summary{list-style:none;width:52px;height:52px;min-height:0;padding:0;gap:0;font-size:0;border:2px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:4px 4px 0 #000;transition:transform .15s,box-shadow .15s}
+.mnav summary::-webkit-details-marker{display:none}
+.mnav summary:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #000}
+.mpanel{position:absolute;right:0;top:calc(100% + 12px);z-index:30;min-width:270px;display:flex;flex-direction:column;gap:2px;padding:10px;background:#fff;border:2px solid #000;border-radius:24px;box-shadow:6px 6px 0 #000}
+.mpanel .nav{justify-content:flex-start;color:#000}
+.mpanel .btn{margin-top:8px;box-shadow:none}
+.nav:focus-visible,.btn:focus-visible,.tb:focus-visible,.mnav summary:focus-visible{outline:3px solid #000;outline-offset:3px}
+.tb:focus-visible,.nav.ondk:focus-visible,.btn.ondk:focus-visible{outline-color:#fff}
+@media (max-width:1180px){.hdr{grid-template-columns:1fr auto}.hnav{display:none}.mnav{display:block}}
+@media (max-width:640px){.hend>.btn{display:none}.tbn{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent);padding-right:28px}}
+@media (max-width:760px){.wrap{padding-left:20px;padding-right:20px}.hide-m{display:none!important}.p{font-size:16px}}
+
+</style>
+</head>
+<body>
+
+<div style="background: #fbf4b1; color: #000000; font-family: 'Varela Round', 'Arial Rounded MT Bold', system-ui, sans-serif; overflow-x: hidden">
+
+<!-- TOP BAR -->
+<div style="background: #000000">
+<div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 6px; padding-bottom: 6px">
+<nav aria-label="Univers Holocene" class="tbn" style="display: flex; gap: 4px; min-width: 0">
+<a href="01-accueil.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #ffc7cd"></span>Holocene</a>
+<a href="02-restaurant.html" class="tb k" style="background: #fbf4b1; color: #000000"><span style="width: 10px; height: 10px; border-radius: 50%; background: #e0cfe6; box-shadow: 0 0 0 1.5px #000000"></span>Restaurant</a>
+<a href="04-traiteur.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #fffaaf"></span>Traiteur</a>
+<a href="05-food-truck.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #f7ba94"></span>Food truck</a>
+</nav>
+<a href="tel:+33532740834" class="tb k hide-m">05 32 74 08 34</a>
+</div>
+</div>
+
+<!-- HEADER -->
+<header class="wrap hdr" style="padding-top: 20px; padding-bottom: 20px">
+<a href="02-restaurant.html" aria-label="Holocene Restaurant" style="display: flex; justify-self: start"><img src="../../public/brand/logo-holocene-restaurant.svg" alt="Holocene Restaurant" style="height: 52px; width: auto; display: block"></a>
+<nav aria-label="Navigation du restaurant" class="hnav">
+<a href="#carte" class="nav">La carte</a>
+<a href="#bar" class="nav">Le bar</a>
+<a href="#lieu" class="nav">Le lieu</a>
+<a href="03-privatiser.html" class="nav">Privatiser</a>
+<a href="#infos" class="nav">Infos pratiques</a>
+</nav>
+<div class="hend">
+<a href="#infos" class="btn dk">Réserver une table</a>
+<details class="mnav"><summary aria-label="Ouvrir le menu" style="background: #e0cfe6"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg></summary>
+<div class="mpanel">
+<a href="#carte" class="nav">La carte</a>
+<a href="#bar" class="nav">Le bar</a>
+<a href="#lieu" class="nav">Le lieu</a>
+<a href="03-privatiser.html" class="nav">Privatiser</a>
+<a href="#infos" class="nav">Infos pratiques</a>
+<a href="#infos" class="btn dk">Réserver une table</a>
+</div>
+</details>
+</div>
+</header>
+
+<!-- HERO -->
+<section class="wrap" style="padding-top: 40px; padding-bottom: 96px">
+<span class="v" style="font-size: 30px; display: block; margin-bottom: 24px">Le midi en semaine</span>
+<h1 class="d" style="font-size: clamp(54px, 8.4vw, 132px)">La cantine<br>bistronomique<br>de Balma.</h1>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(480px, 100%), 1fr)); gap: 56px; align-items: start; margin-top: 56px">
+<div style="display: flex; flex-direction: column; gap: 28px; align-items: flex-start">
+<p class="p" style="font-size: 20px; max-width: 540px">Une carte qui change chaque mois, des suggestions chaque semaine, des produits qui arrivent en direct des fermes d'Occitanie. Le tout cuisiné sous vos yeux par le chef Julien Sanchez et sa brigade.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 10px">
+<span class="pill" style="background: #ffffff">Lun - Ven, 12h - 14h</span>
+<span class="pill" style="background: #ffffff">Métro A — Balma-Gramont</span>
+<span class="pill" style="background: #ffffff">Parking gratuit</span>
+<span class="pill" style="background: #e0cfe6">Terrasse végétale</span>
+</div>
+<div style="display: flex; gap: 14px; flex-wrap: wrap">
+<a href="#infos" class="btn dk">Réserver une table</a>
+<a href="#carte" class="btn">Voir la carte</a>
+</div>
+</div>
+<div style="position: relative">
+<div style="aspect-ratio: 4 / 3; border: 2px solid #000000; border-radius: 32px; background: #e0cfe6; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; box-shadow: 10px 10px 0 #000000">
+<img src="../../public/brand/icon-restaurant.svg" alt="" aria-hidden="true" style="height: 150px; width: auto">
+<span class="k">Photo — Gnocchi aux champignons</span>
+</div>
+<span class="pill" style="position: absolute; right: -14px; top: -18px; background: #ffffff; font-size: 15px; padding: 12px 22px; transform: rotate(6deg)">Carte du mois</span>
+</div>
+</div>
+</section>
+
+<!-- FORMULES -->
+<section id="carte" style="background: #ffffff; border-top: 2px solid #000000">
+<div class="wrap" style="padding-top: 112px; padding-bottom: 56px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 48px">
+<h2 class="d" style="font-size: clamp(48px, 6vw, 92px)">Les formules</h2>
+<p class="p" style="max-width: 420px">Prix TTC, service compris. Suggestion du jour à l'ardoise pour l'entrée, le plat et le dessert.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 32px; min-height: 280px; border: 2px solid #000000; border-radius: 32px; background: #ffffdb">
+<span class="k">Plat</span>
+<span class="d" style="font-size: 96px">17€</span>
+</div>
+<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 32px; min-height: 280px; border: 2px solid #000000; border-radius: 32px; background: #f2e8f4">
+<span class="k">Entrée - plat ou plat - dessert</span>
+<span class="d" style="font-size: 96px">20,50€</span>
+</div>
+<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 40px; padding: 32px; min-height: 280px; border: 2px solid #000000; border-radius: 32px; background: #e0cfe6; box-shadow: 8px 8px 0 #000000">
+<div style="display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap"><span class="k">Entrée - plat - dessert</span><span class="tag" style="background: #ffffff">Le plus pris</span></div>
+<span class="d" style="font-size: 96px">24€</span>
+</div>
+</div>
+</div>
+
+<!-- CARTE DU MOMENT -->
+<div class="wrap" style="padding-bottom: 112px">
+<div style="border: 2px solid #000000; border-radius: 36px; background: #fbf4b1; padding: 48px">
+<div style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 32px">
+<div style="display: flex; flex-direction: column; gap: 12px">
+<span class="v" style="font-size: 28px">La carte du moment</span>
+<span class="p" style="font-size: 15px">Elle change chaque mois — celle-ci est la carte en cours.</span>
+</div>
+<div style="display: flex; gap: 10px; flex-wrap: wrap"><span class="tag" style="background: #ffffff">SG — sans gluten</span><span class="tag" style="background: #e0cfe6">Végé — végétarien</span></div>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr)); gap: 24px 64px">
+<div>
+<h3 class="d" style="font-size: 40px; margin-bottom: 8px">Entrées</h3>
+<div class="dish"><span class="dn">Paella stick</span><span style="font-size: 15px">gambas et jus iodé</span></div>
+<div class="dish"><div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span class="dn">Porchetta au romarin</span><span class="tag">+1 €</span></div><span style="font-size: 15px">condiment au citron confit, toast brioché</span></div>
+<div class="dish"><div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span class="dn">Mille-feuille de taquitos</span><span class="tag" style="background: #ffffff">SG</span><span class="tag" style="background: #e0cfe6">Végé</span></div><span style="font-size: 15px">mousse d'avocat, gel de tomate cajun et maïs grillé</span></div>
+<div class="dish" style="border-bottom: 0"><span class="dn">Suggestion du jour</span><span style="font-size: 15px">à découvrir sur l'ardoise</span></div>
+</div>
+<div>
+<h3 class="d" style="font-size: 40px; margin-bottom: 8px">Plats</h3>
+<div class="dish"><div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span class="dn">Tartare de poisson</span><span class="tag" style="background: #ffffff">SG</span><span class="tag">+1 €</span></div><span style="font-size: 15px">pomme Granny, aneth, concombre, jus vert et moutarde nori</span></div>
+<div class="dish"><div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span class="dn">Cromesquis de poulet</span><span class="tag" style="background: #ffffff">SG</span></div><span style="font-size: 15px">sauce spicy et salade fraîcheur</span></div>
+<div class="dish"><div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span class="dn">Salade de patates douces</span><span class="tag" style="background: #ffffff">SG</span><span class="tag" style="background: #e0cfe6">Végé</span></div><span style="font-size: 15px">rôties au miel, nectarine fraîche et fromage frais</span></div>
+<div class="dish" style="border-bottom: 0"><span class="dn">Suggestion du jour</span><span style="font-size: 15px">à découvrir sur l'ardoise</span></div>
+</div>
+<div>
+<h3 class="d" style="font-size: 40px; margin-bottom: 8px">Desserts</h3>
+<div class="dish"><span class="dn">Entremets coco-fraise</span><span style="font-size: 15px">glaçage rocher coco, chocolat blanc</span></div>
+<div class="dish"><span class="dn">Financier au thym</span><span style="font-size: 15px">panna cotta au miel et gel au citron vert</span></div>
+<div class="dish" style="border-bottom: 0"><span class="dn">Suggestion du jour</span><span style="font-size: 15px">à découvrir sur l'ardoise</span></div>
+</div>
+<div>
+<div style="display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 8px"><h3 class="d" style="font-size: 40px">Garniture</h3><span class="v" style="font-size: 20px">A partager</span></div>
+<div class="dish"><div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap"><span class="dn">Yaourt petit pois et herbes fraîches</span><span class="tag" style="background: #ffffff">SG</span><span class="tag" style="background: #e0cfe6">Végé</span></div><span style="font-size: 15px">Elle accompagne automatiquement les plats de la carte.</span></div>
+<div style="display: flex; flex-direction: column; gap: 16px; margin-top: 28px; align-items: flex-start">
+<p style="margin: 0; font-size: 14px; line-height: 1.5">Une carte des allergènes est disponible sur demande auprès de l'équipe.</p>
+<a href="#carte" class="btn">Télécharger la carte — PDF</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- LE BAR -->
+<section id="bar" style="background: #000000; color: #ffffff">
+<div class="wrap" style="padding-top: 112px; padding-bottom: 112px">
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 56px">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<span class="k" style="color: #e0cfe6">Le bar</span>
+<h2 class="d" style="font-size: clamp(48px, 6vw, 92px)">Nature, craft<br>et très local.</h2>
+</div>
+<p class="p" style="max-width: 440px; color: #e6e6e6">Vins en biodynamie, bières de brasseurs toulousains, spiritueux d'Occitanie. Et une citronnade maison pour ceux qui retournent bosser.</p>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 32px; border: 2px solid #ffffff; border-radius: 32px">
+<span class="v" style="font-size: 30px; color: #e0cfe6">Nature</span>
+<span class="d" style="font-size: 54px">Dès 4,5€</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #e6e6e6">Au verre ou en bouteille. Pic-Saint-Loup, Madiran, Saint-Chinian, Gaillac — la plupart en biodynamie.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 32px; border: 2px solid #ffffff; border-radius: 32px; background: #e0cfe6; color: #000000">
+<span class="v" style="font-size: 30px">La biere</span>
+<span class="d" style="font-size: 54px">Dès 5€</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.6">Brasserie du Midi, Brasserie Aviateur — et notre bière collab Holocene x Aviateur, à goûter nulle part ailleurs.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 32px; border: 2px solid #ffffff; border-radius: 32px">
+<span class="v" style="font-size: 30px; color: #e0cfe6">Apero et digeo</span>
+<span class="d" style="font-size: 54px">Dès 5€</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.6; color: #e6e6e6">Cocktails du moment à 9 €, gin Hexagone, ratafia Castan, armagnac Séailles. Le gin, en tonic, c'est cool.</p>
+</div>
+</div>
+</div>
+</section>
+
+<!-- LE LIEU -->
+<section id="lieu" class="wrap" style="padding-top: 112px; padding-bottom: 112px">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 24px; align-items: stretch">
+<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 32px; padding: 8px 24px 8px 0">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span class="k">Le lieu</span>
+<h2 class="d" style="font-size: clamp(44px, 5vw, 76px)">Béton, bois, plantes et cuisine ouverte.</h2>
+<p class="p">Une grande salle lumineuse, un comptoir où l'on voit tout ce qui se passe en cuisine, et une terrasse végétale qui ajoute 70 couverts dès que le soleil est là.</p>
+</div>
+<div style="display: flex; gap: 12px; flex-wrap: wrap">
+<span class="pill" style="background: #ffffff">Salle — 75 assis</span>
+<span class="pill" style="background: #ffffff">Terrasse — 90 assis</span>
+<span class="pill" style="background: #ffffff">Accessible PMR</span>
+</div>
+</div>
+<div style="aspect-ratio: 4 / 5; border: 2px solid #000000; border-radius: 32px; background: #f2e8f4; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px">
+<img src="../../public/brand/icon-restaurant.svg" alt="" aria-hidden="true" style="height: 120px; width: auto">
+<span class="k">Photo — La salle en journée</span>
+</div>
+<div style="aspect-ratio: 4 / 5; border: 2px solid #000000; border-radius: 32px; background: #000000; color: #ffffff; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px">
+<img src="../../public/brand/icon-white.svg" alt="" aria-hidden="true" style="height: 120px; width: auto">
+<span class="k">Photo — Le bar en soirée</span>
+</div>
+</div>
+</section>
+
+<!-- PRIVATISER TEASER -->
+<section class="wrap" style="padding-bottom: 112px">
+<a href="03-privatiser.html" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 40px; align-items: center; padding: 56px; border: 2px solid #000000; border-radius: 40px; background: #e0cfe6; text-decoration: none; color: #000000; box-shadow: 10px 10px 0 #000000">
+<div style="display: flex; flex-direction: column; gap: 22px">
+<span class="v" style="font-size: 28px">Soirs et fins de semaine</span>
+<h2 class="d" style="font-size: clamp(44px, 5.4vw, 84px)">Privatisez Holocene.</h2>
+<p class="p">Anniversaire, afterwork, soirée d'entreprise, séminaire : la salle, la terrasse ou les deux, avec la cuisine du chef et une équipe dédiée.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start">
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; width: 100%">
+<div style="background: #ffffff; border: 2px solid #000000; border-radius: 24px; padding: 22px; display: flex; flex-direction: column; gap: 8px"><span class="d" style="font-size: 52px">110</span><span class="k">Cocktail en salle</span></div>
+<div style="background: #ffffff; border: 2px solid #000000; border-radius: 24px; padding: 22px; display: flex; flex-direction: column; gap: 8px"><span class="d" style="font-size: 52px">130</span><span class="k">Cocktail en terrasse</span></div>
+</div>
+<span class="btn dk">Découvrir la privatisation</span>
+</div>
+</a>
+</section>
+
+<!-- INFOS PRATIQUES -->
+<section id="infos" style="background: #ffffff; border-top: 2px solid #000000">
+<div class="wrap" style="padding-top: 112px; padding-bottom: 112px">
+<h2 class="d" style="font-size: clamp(48px, 6vw, 92px); margin-bottom: 48px">Infos pratiques</h2>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr)); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 20px; padding: 32px; border: 2px solid #000000; border-radius: 32px; background: #fbf4b1">
+<span class="k">Horaires &amp; réservation</span>
+<span class="d" style="font-size: 40px">Lun - Ven<br>12h - 14h</span>
+<p style="margin: 0; font-size: 15px; line-height: 1.6">Réservation conseillée. En ligne, par téléphone ou directement sur place. Les soirs et week-ends sont dédiés aux privatisations.</p>
+<div style="display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto">
+<a href="#infos" class="btn dk">Réserver en ligne</a>
+<a href="tel:+33532740834" class="btn">05 32 74 08 34</a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 0; border: 2px solid #000000; border-radius: 32px; overflow: hidden; background: #f2e8f4">
+<div style="flex: 1; min-height: 220px; display: flex; align-items: center; justify-content: center; gap: 12px; flex-direction: column; border-bottom: 2px solid #000000; background: #e0cfe6">
+<svg aria-hidden="true" width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.3-7-11.5A7 7 0 0 1 19 9.5C19 14.7 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>
+<span class="k">Carte interactive</span>
+</div>
+<div style="padding: 28px; display: flex; flex-direction: column; gap: 10px">
+<span class="k">Adresse</span>
+<span style="font-size: 20px; line-height: 1.4">14 rue Louis Renault<br>31130 Balma</span>
+<a href="https://maps.google.com/?q=14+rue+Louis+Renault+31130+Balma" style="font-size: 15px">Ouvrir l'itinéraire</a>
+</div>
+</div>
+<div style="display: flex; flex-direction: column; gap: 18px; padding: 32px; border: 2px solid #000000; border-radius: 32px">
+<span class="k">Venir</span>
+<div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 16px; border-bottom: 1.5px dashed #000000"><span class="dn" style="font-family: 'Holo Nimbus Round', 'Arial Rounded MT Bold', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px">Métro A</span><span style="font-size: 15px">Station Balma-Gramont, 7 min à pied</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding-bottom: 16px; border-bottom: 1.5px dashed #000000"><span style="font-family: 'Holo Nimbus Round', 'Arial Rounded MT Bold', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px">En voiture</span><span style="font-size: 15px">Périphérique sortie 15 Roseraie, à 3 min. Parking gratuit à côté.</span></div>
+<div style="display: flex; flex-direction: column; gap: 4px"><span style="font-family: 'Holo Nimbus Round', 'Arial Rounded MT Bold', sans-serif; font-weight: 700; text-transform: uppercase; font-size: 18px">Depuis le centre</span><span style="font-size: 15px">15 min du Capitole, 16 min de Matabiau</span></div>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 48px; margin-top: 112px">
+<h2 class="d" style="font-size: clamp(40px, 4.4vw, 64px)">Questions fréquentes</h2>
+<div style="border-top: 2px solid #000000">
+<details open><summary>Faut-il réserver ? <span class="d" aria-hidden="true" style="font-size: 28px">-</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">C'est conseillé, surtout en fin de semaine. Réservez en ligne, au 05 32 74 08 34 ou en passant au restaurant.</p></details>
+<details><summary>Ouvrez-vous le soir et le week-end ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Le service régulier a lieu en semaine, le midi. Les soirs et week-ends, le lieu se privatise pour vos événements.</p></details>
+<details><summary>Avez-vous des plats végétariens et sans gluten ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Oui, ils sont signalés sur la carte, et une carte des allergènes est disponible sur demande.</p></details>
+<details><summary>D'où viennent vos produits ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">En grande majorité d'Occitanie, en circuit court et sans intermédiaire, au rythme des saisons.</p></details>
+</div>
+</div>
+</div>
+</section>
+
+<!-- SKYLINE + FOOTER -->
+<img src="../../public/brand/illustration-toulouse.svg" alt="Illustration de Toulouse : le dôme de la Grave, le Pont-Neuf, l'aérospatiale et Saint-Sernin" style="display: block; width: 100%; height: auto; margin-bottom: -2px; background: #ffffff">
+<footer style="background: #000000; color: #ffffff">
+<div class="wrap" style="padding-top: 72px; padding-bottom: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: 40px">
+<div style="display: flex; flex-direction: column; gap: 20px">
+<img src="../../public/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" style="height: 58px; width: auto; align-self: flex-start">
+<p style="margin: 0; color: #cfcfcf; font-size: 15px; line-height: 1.6">Restaurant, traiteur et food truck à Balma, Toulouse et partout en Occitanie.</p>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.5">
+<span class="k" style="color: #fbf4b1">Restaurant</span>
+<span>14 rue Louis Renault<br>31130 Balma</span>
+<span>Lundi - vendredi, 12h - 14h</span>
+<a href="tel:+33532740834" class="fl">05 32 74 08 34</a>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.5">
+<span class="k" style="color: #f7ba94">Traiteur &amp; food truck</span>
+<a href="tel:+33532740833" class="fl">05 32 74 08 33</a>
+<a href="mailto:contact@holocene-traiteur.fr" class="fl">contact@holocene-traiteur.fr</a>
+<span>Toulouse, Haute-Garonne et toute l'Occitanie</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
+<span class="k" style="color: #ffc7cd">Explorer</span>
+<a href="03-privatiser.html" class="fl">Privatiser le restaurant</a>
+<a href="06-equipe.html" class="fl">L'équipe</a>
+<a href="07-journal.html" class="fl">Journal</a>
+<a href="08-contact.html" class="fl">Contact &amp; devis</a>
+</div>
+</div>
+<div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid #333333; font-size: 13px; color: #cfcfcf">
+<span>© 2026 Holocene Food Event — Mentions légales</span>
+<div style="display: flex; gap: 20px"><a href="https://www.instagram.com" class="fl">Instagram</a><a href="https://www.facebook.com" class="fl">Facebook</a><a href="https://www.linkedin.com" class="fl">LinkedIn</a></div>
+</div>
+</footer>
+
+</div>
+
+</body>
+</html>

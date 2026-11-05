@@ -1,0 +1,121 @@
+---
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import Hero from '../components/Hero.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import Pill from '../components/Pill.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import SectionStub from '../components/SectionStub.astro';
+import Base from '../layouts/Base.astro';
+
+const audiences = [
+  {
+    name: 'Entreprises',
+    area: 'Toulouse & métropole',
+    items: [
+      "Déjeuners d'affaires et plateaux-repas",
+      'Cocktails déjeunatoires et dînatoires',
+      'Séminaires, conventions, lancements de produit',
+      'Soirées clients et réceptions privées',
+    ],
+    places: "Toulouse, Balma, Blagnac, Colomiers, Cornebarrieu, Cugnaux, L'Union…",
+  },
+  {
+    name: 'Particuliers',
+    area: "Toute l'Occitanie",
+    items: [
+      'Mariages : plus de 150 déjà servis',
+      'Anniversaires et baptêmes',
+      'Brunch du lendemain, avec le food truck',
+      'Fêtes de famille et grandes tablées',
+    ],
+    places: 'Haute-Garonne, Tarn, Tarn-et-Garonne, Aude, Ariège, Gers…',
+  },
+];
+---
+
+<Base
+  title="Traiteur à Toulouse et en Occitanie"
+  description="Traiteur à Toulouse et partout en Occitanie : des produits frais achetés en direct, des menus de saison et une équipe qui s'occupe de tout, de 40 à 1500 invités."
+  univers="traiteur"
+>
+  <Hero
+    accent="Sur mesure"
+    size="md"
+    title={['Votre', 'événement.', 'Notre', 'cuisine.']}
+    text="Traiteur à Toulouse et partout en Occitanie. Des produits frais achetés en direct aux producteurs, des menus qui suivent les saisons, et une équipe qui s'occupe de tout, de 40 à 1500 invités."
+  >
+    <Fragment slot="actions">
+      <Button href="/contact" variant="primary">Demander un devis</Button>
+      <Button href="#formats" variant="flower">Voir les menus</Button>
+    </Fragment>
+    <PhotoSlot
+      slot="visual"
+      src="/images/verrines-peas.jpg"
+      alt="Bouchées petits pois, tuiles croustillantes et foie gras sur pain de campagne, en buffet cocktail"
+      ratio="1/1"
+      highlight
+    >
+      <Pill tone="flower" sticker={-8}>40 - 1500 invités</Pill>
+      <Pill tone="white" sticker={6}>Végé - halal - sans gluten</Pill>
+    </PhotoSlot>
+  </Hero>
+
+  <section id="pourqui" class="audiences">
+    <div class="wrap section">
+      <SectionHeader title="Pour qui on cuisine" />
+      <div class="cards" style="--min: 460px">
+        {
+          audiences.map((audience, index) => (
+            <Card tone={index === 1 ? 'flower' : 'light'} highlight={index === 1}>
+              <div class="audience__top">
+                <h3 class="display audience__name">{audience.name}</h3>
+                <Pill tone="white">{audience.area}</Pill>
+              </div>
+              <ul class="audience__list">
+                {audience.items.map((item) => <li>{item}</li>)}
+              </ul>
+              <p class="audience__places">{audience.places}</p>
+            </Card>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <SectionStub id="formats" name="Formats et menus" />
+  <SectionStub id="etapes" name="Les étapes" />
+  <SectionStub id="references" name="Références" />
+</Base>
+
+<style>
+  .audiences {
+    background: var(--paper);
+    border-block: var(--line);
+  }
+
+  .audience__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .audience__name {
+    font-size: clamp(38px, 3.8vw, 52px);
+  }
+
+  .audience__list li {
+    padding-block: 12px;
+    border-bottom: var(--line-dashed);
+  }
+
+  .audience__list li:last-child {
+    border-bottom: 0;
+  }
+
+  .audience__places {
+    font-size: 14px;
+  }
+</style>

@@ -1,0 +1,92 @@
+---
+interface Props {
+  tone?: 'paper' | 'bg' | 'flower' | 'light' | 'dark';
+  /** Ombre 10 px : une seule carte par groupe. */
+  highlight?: boolean;
+  /** Rendu en <a> si présent : toute la carte est un lien. */
+  href?: string;
+  /** Sans padding, pour une photo à bord perdu. */
+  flush?: boolean;
+  class?: string;
+}
+
+const { tone = 'paper', highlight = false, href, flush = false, class: className, ...rest } = Astro.props;
+const Tag = href ? 'a' : 'div';
+---
+
+<Tag
+  {...rest}
+  href={href}
+  data-on-dark={tone === 'dark' ? '' : undefined}
+  class:list={['card', `card--${tone}`, { 'card--highlight': highlight, 'card--flush': flush, 'card--link': href }, className]}
+>
+  <slot />
+</Tag>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-width: 0;
+    padding: 32px;
+    border: var(--line);
+    border-radius: var(--radius-card);
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .card--paper {
+    background: var(--paper);
+  }
+
+  .card--bg {
+    background: var(--bg);
+  }
+
+  .card--flower {
+    background: var(--flower);
+  }
+
+  .card--light {
+    background: var(--light);
+  }
+
+  .card--dark {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .card--highlight {
+    box-shadow: var(--shadow-hero);
+  }
+
+  .card--link {
+    transition:
+      transform 0.15s,
+      box-shadow 0.15s;
+  }
+
+  .card--link:hover {
+    box-shadow: var(--shadow-hover);
+    transform: translate(-2px, -2px);
+  }
+
+  .card--flush {
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  @media (max-width: 760px) {
+    .card:not(.card--flush) {
+      padding: 24px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card--link {
+      transition: none;
+    }
+  }
+</style>

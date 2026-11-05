@@ -1,0 +1,88 @@
+---
+import Button from '../components/Button.astro';
+import Card from '../components/Card.astro';
+import Hero from '../components/Hero.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import Pill from '../components/Pill.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import SectionStub from '../components/SectionStub.astro';
+import Base from '../layouts/Base.astro';
+
+const breads = [
+  {
+    number: '01',
+    name: 'Le Rustico',
+    pill: 'Le classique',
+    text: 'Pain ciabatta, mortadelle IGP, stracciatella, amandes torréfiées, tomates confites, oignons rouges pickles et roquette.',
+  },
+  {
+    number: '02',
+    name: 'Le Prima',
+    pill: 'Maison Garcia',
+    text: 'Pain ciabatta, jambon cru affiné de la Maison Garcia, stracciatella, sauce tomate ancienne maison, huile de basilic, oignons rouges pickles et roquette.',
+  },
+  {
+    number: '03',
+    name: 'Le Merinjana',
+    pill: 'Végétarien',
+    text: 'Pain ciabatta maison, aubergines marinées, stracciatella, sauce tomates anciennes maison, roquette, amandes torréfiées, oignons pickles.',
+  },
+];
+---
+
+<Base
+  title="Food truck pour vos événements"
+  description="Des pains gourmands sur ciabatta, garnis de produits d'Occitanie achetés en direct, cuisinés en live sur vos mariages, festivals et soirées."
+  univers="food-truck"
+>
+  <Hero
+    accent="Le tout premier"
+    size="md"
+    layout="stacked"
+    title={['Du bon pain.', 'Des bons produits.', 'Du monde autour.']}
+    text="C'est avec ce camion que l'aventure Holocene a commencé. Des pains gourmands sur ciabatta, garnis de produits d'Occitanie achetés en direct, cuisinés en live sur vos mariages, festivals et soirées."
+  >
+    <Fragment slot="actions">
+      <Button href="/contact" variant="primary">Réserver le truck</Button>
+      <Button href="#carte" variant="flower">Voir la carte</Button>
+    </Fragment>
+    <PhotoSlot slot="visual" label="Le Merinjana tenu en main" univers="food-truck" highlight>
+      <Pill tone="white" sticker={-8}>Zéro intermédiaire</Pill>
+      <Pill tone="white" sticker={6}>Cuisiné en live</Pill>
+    </PhotoSlot>
+  </Hero>
+
+  <section id="carte" class="wrap section">
+    <SectionHeader title={['Nos pains', 'gourmands']}>
+      Pain ciabatta, garnitures maison, viandes cuites à basse température. Pas de burger, pas de pizza : notre truc,
+      c'est le pain.
+    </SectionHeader>
+    <div class="cards">
+      {
+        breads.map((bread, index) => (
+          <Card tone={index === 1 ? 'flower' : 'paper'} highlight={index === 1}>
+            <span class="label">{bread.number}</span>
+            <h3 class="display bread__name">{bread.name}</h3>
+            <p class="bread__text">{bread.text}</p>
+            <Pill tone={index === 1 ? 'white' : 'flower'}>{bread.pill}</Pill>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+
+  <SectionStub id="evenements" name="Événements" />
+  <SectionStub id="invites" name="Ils nous ont invités" />
+  <SectionStub id="reserver" name="Comment réserver" />
+</Base>
+
+<style>
+  .bread__name {
+    font-size: clamp(42px, 3.9vw, 56px);
+  }
+
+  .bread__text {
+    flex: 1;
+    font-size: 17px;
+  }
+</style>

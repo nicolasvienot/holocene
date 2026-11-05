@@ -1,0 +1,141 @@
+---
+import SocialLinks from './SocialLinks.astro';
+import { phones, site } from '../data/site';
+
+const links = [
+  { label: 'Privatiser le restaurant', href: '/restaurant/privatiser' },
+  { label: "L'équipe", href: '/equipe' },
+  { label: 'Journal', href: '/journal' },
+  { label: 'Contact et devis', href: '/contact' },
+  { label: 'Mentions légales', href: '/mentions-legales' },
+];
+---
+
+<img
+  class="skyline"
+  src="/brand/illustration-toulouse.svg"
+  alt="Illustration de Toulouse : le dôme de la Grave, le Pont-Neuf, l'aérospatiale et Saint-Sernin"
+  width="607"
+  height="222"
+  loading="lazy"
+  decoding="async"
+/>
+
+<footer class="footer" data-on-dark>
+  <div class="wrap footer__grid">
+    <div class="footer__col footer__brand">
+      <img src="/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" width="226" height="58" loading="lazy" />
+      <p class="footer__muted">Restaurant, traiteur et food truck à Balma, Toulouse et partout en Occitanie.</p>
+      <SocialLinks onDark />
+    </div>
+
+    <div class="footer__col">
+      <h2 class="label footer__title--restaurant">Restaurant</h2>
+      <p>{site.address.street}<br />{site.address.city}</p>
+      <p>{site.hours.long}</p>
+      <a href={`tel:${phones.restaurant.tel}`}>{phones.restaurant.display}</a>
+    </div>
+
+    <div class="footer__col">
+      <h2 class="label footer__title--traiteur">Traiteur &amp; food truck</h2>
+      <a href={`tel:${phones.traiteur.tel}`}>{phones.traiteur.display}</a>
+      <a href={`mailto:${site.email}`}>{site.email}</a>
+      <p>{site.area}</p>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="footer__bottom">
+      <p>© 2026 {site.name}</p>
+      <nav aria-label="Pied de page">
+        <ul class="footer__links">
+          {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
+        </ul>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<style>
+  /* Jamais recadrée : pleine largeur, hauteur proportionnelle. */
+  .skyline {
+    width: 100%;
+    max-width: none;
+    height: auto;
+    background: var(--paper);
+  }
+
+  .footer {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .footer__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: 40px;
+    padding-block: 72px 40px;
+  }
+
+  .footer__col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .footer__brand {
+    gap: 20px;
+  }
+
+  .footer__brand > img {
+    width: auto;
+    height: 58px;
+  }
+
+  .footer__muted {
+    color: var(--text-on-dark-muted);
+  }
+
+  .footer__title--restaurant {
+    color: var(--yellow);
+  }
+
+  .footer__title--traiteur {
+    color: var(--peach);
+  }
+
+  .footer__col > a,
+  .footer__links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--paper);
+    text-decoration: none;
+  }
+
+  .footer__col > a:hover,
+  .footer__links a:hover {
+    color: var(--pink);
+  }
+
+  .footer__bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px 32px;
+    padding-block: 16px 20px;
+    border-top: 1px solid var(--line-on-dark);
+    color: var(--text-on-dark-muted);
+    font-size: 13px;
+  }
+
+  .footer__links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+  }
+</style>

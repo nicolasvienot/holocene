@@ -1,0 +1,102 @@
+---
+import Button from '../../components/Button.astro';
+import Card from '../../components/Card.astro';
+import Hero from '../../components/Hero.astro';
+import PhotoSlot from '../../components/PhotoSlot.astro';
+import Pill from '../../components/Pill.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import { site } from '../../data/site';
+import Base from '../../layouts/Base.astro';
+
+const spaces = [
+  { name: 'La salle', pill: 'Béton, bois, plantes', cocktail: 110, seated: 75 },
+  { name: 'La terrasse', pill: null, cocktail: 130, seated: 90 },
+];
+---
+
+<Base
+  title="Privatiser le restaurant"
+  description="Anniversaire, afterwork, soirée d'entreprise, séminaire : privatisez la salle, la terrasse ou les deux à Balma, les soirs et fins de semaine."
+  univers="restaurant"
+  background="light"
+  cta={{ label: 'Faire une demande', href: site.zenchef.privatisation, external: true }}
+>
+  <Hero
+    dark
+    accent="Soirs et fins de semaine"
+    title={['Privatisez', 'Holocene.']}
+    text="Anniversaire, afterwork, soirée d'entreprise, séminaire : on vous ouvre la salle, la terrasse ou les deux, avec la cuisine du chef et une équipe aux petits soins."
+  >
+    <Fragment slot="actions">
+      <Button href={site.zenchef.privatisation} external variant="flower">Faire une demande</Button>
+      <Button variant="onDark" disabled>Plaquette 2026 - PDF</Button>
+    </Fragment>
+    <PhotoSlot slot="visual" label="La salle dressée en soirée" univers="restaurant" tone="dark" highlight />
+  </Hero>
+
+  <section class="wrap section">
+    <SectionHeader title={['Deux espaces.', 'Une seule soirée.']}>
+      La salle, la terrasse ou les deux : on adapte l'espace à votre format, debout ou assis.
+    </SectionHeader>
+    <div class="cards" style="--min: 420px">
+      {
+        spaces.map((space, index) => (
+          <Card tone={index === 1 ? 'flower' : 'paper'} highlight={index === 1}>
+            <div class="space__top">
+              <h3 class="display space__name">{space.name}</h3>
+              {space.pill && <Pill>{space.pill}</Pill>}
+            </div>
+            <dl class="space__figures">
+              <div>
+                <dt class="label">Cocktail</dt>
+                <dd class="display space__figure">{space.cocktail}</dd>
+              </div>
+              <div>
+                <dt class="label">Assis</dt>
+                <dd class="display space__figure">{space.seated}</dd>
+              </div>
+            </dl>
+          </Card>
+        ))
+      }
+    </div>
+  </section>
+</Base>
+
+<style>
+  .space__top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .space__name {
+    font-size: clamp(38px, 3.6vw, 48px);
+  }
+
+  .space__figures {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    border-top: var(--line);
+  }
+
+  /* Le chiffre s'affiche au-dessus, mais <dt> doit précéder <dd> dans le HTML. */
+  .space__figures > div {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: 24px 16px 0 0;
+  }
+
+  .space__figures > div + div {
+    padding: 24px 0 0 16px;
+    border-left: var(--line);
+  }
+
+  .space__figure {
+    font-size: clamp(64px, 6.4vw, 88px);
+  }
+</style>

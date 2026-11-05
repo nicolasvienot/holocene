@@ -1,0 +1,87 @@
+/* Holocene — design tokens (point de départ, issu de la maquette).
+   Chaque page pose data-univers="holocene|food-truck|traiteur|restaurant" sur <body>
+   et les composants lisent --bg / --flower / --light. */
+
+@font-face {
+  font-family: 'Holo Nimbus Round';
+  src: url('/fonts/nimbus-sans-round-bold-subset.woff2') format('woff2');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Holo Vividly';
+  src: url('/fonts/vividly-subset.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Varela Round';
+  src: url('/fonts/varela-round-400.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  /* Encre */
+  --ink: #000000;
+  --paper: #ffffff;
+
+  /* Palette de la charte (ne rien ajouter) */
+  --pink: #ffc7cd;          /* fleur Holocene */
+  --cyan: #d4ffff;          /* fond food truck */
+  --cyan-light: #e4ffff;
+  --peach: #f7ba94;         /* fleur food truck = fond traiteur */
+  --peach-light: #fcdbbf;
+  --yellow-traiteur: #fffaaf; /* fleur traiteur */
+  --yellow-light: #ffffdb;
+  --yellow: #fbf4b1;        /* fond restaurant */
+  --lilac: #e0cfe6;         /* fleur restaurant */
+  --lilac-light: #f2e8f4;
+
+  /* Rôles par défaut (univers Holocene) */
+  --bg: var(--paper);
+  --flower: var(--pink);
+  --light: #fafafa;
+
+  /* Neutres fonctionnels, repris du design system (texte sur noir, états désactivés) */
+  --line-on-dark: #333333;
+  --text-on-dark-muted: #cfcfcf;
+  --disabled-bg: #f2f2f2;
+  --disabled-text: #5c5c5c;
+  --disabled-line: #8a8a8a;
+
+  /* Typo */
+  --font-display: 'Holo Nimbus Round', 'Arial Rounded MT Bold', 'Varela Round', sans-serif;
+  --font-accent: 'Holo Vividly', 'Varela Round', cursive;
+  --font-body: 'Varela Round', 'Arial Rounded MT Bold', system-ui, sans-serif;
+
+  /* Formes */
+  --line: 2px solid var(--ink);
+  --line-dashed: 1.5px dashed var(--ink);
+  --radius-field: 18px;
+  --radius-sm: 24px;
+  --radius-card: 32px;
+  --radius-block: 40px;
+  --radius-pill: 999px;
+  --shadow-btn: 4px 4px 0 var(--ink);
+  --shadow-hover: 6px 6px 0 var(--ink);
+  --shadow-hero: 10px 10px 0 var(--ink);
+
+  /* Layout */
+  --content-max: 1264px;
+  --gutter: 48px;
+  --section-y: 112px;
+}
+
+@media (max-width: 760px) {
+  :root { --gutter: 20px; --section-y: 56px; }
+}
+
+/* Rend Holocene affichable à l'intérieur d'un autre univers (design system, cartes de l'accueil). */
+[data-univers='holocene']   { --bg: var(--paper); --flower: var(--pink);           --light: #fafafa; }
+[data-univers='food-truck'] { --bg: var(--cyan);  --flower: var(--peach);          --light: var(--cyan-light); }
+[data-univers='traiteur']   { --bg: var(--peach); --flower: var(--yellow-traiteur); --light: var(--peach-light); }
+[data-univers='restaurant'] { --bg: var(--yellow); --flower: var(--lilac);         --light: var(--lilac-light); }

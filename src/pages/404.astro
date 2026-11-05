@@ -1,0 +1,24 @@
+---
+import Button from '../components/Button.astro';
+import Hero from '../components/Hero.astro';
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Page introuvable" description="Cette page n'existe pas ou a changé d'adresse." noindex>
+  <Hero accent="Perdu" size="sm" layout="stacked" title={['Page', 'introuvable.']} text="Cette page n'existe pas ou a changé d'adresse.">
+    <Fragment slot="actions">
+      <Button href="/" variant="primary">Page d'accueil</Button>
+      <Button href="/contact">Nous contacter</Button>
+    </Fragment>
+    <img slot="visual" class="icon" src="/brand/icon-holocene.svg" alt="" width="139" height="278" />
+  </Hero>
+</Base>
+
+<style>
+  .icon {
+    width: auto;
+    height: clamp(180px, 30vw, 360px);
+    margin-inline: auto;
+    transform: rotate(8deg);
+  }
+</style>

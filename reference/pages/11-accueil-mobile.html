@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maquette — 11-accueil-mobile</title>
+<!-- Maquette de référence (HTML statique généré depuis la maquette Claude Design). Ne pas copier tel quel : à reconstruire en composants Astro. -->
+<style>
+@font-face{font-family:'Varela Round';src:url(../../public/fonts/varela-round-400.woff2) format('woff2');font-weight:400}
+
+@font-face{font-family:'Holo Nimbus Round';src:url(../../public/fonts/nimbus-sans-round-bold-subset.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Holo Vividly';src:url(../../public/fonts/vividly-subset.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+body{margin:0}
+*{box-sizing:border-box}
+a{color:#000}
+.d{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.025em;line-height:.9;margin:0}
+.k{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.18em;font-size:11px;line-height:1.3}
+.v{font-family:'Holo Vividly','Varela Round',cursive;text-transform:uppercase;letter-spacing:.05em;line-height:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 20px 0 calc(20px + .1em);border:2px solid #000;border-radius:999px;background:#fff;color:#000;text-decoration:none;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.1em;font-size:12px;box-shadow:3px 3px 0 #000;white-space:nowrap}
+.btn.dk{background:#000;color:#fff}
+.pill{display:inline-flex;align-items:center;border:2px solid #000;border-radius:999px;padding:8px 14px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:11px;line-height:1;white-space:nowrap}
+.tb{display:inline-flex;align-items:center;gap:7px;min-height:40px;padding:0 12px 0 calc(12px + .18em);border-radius:999px;color:#fff;text-decoration:none;white-space:nowrap}
+
+</style>
+</head>
+<body>
+
+<div style="width: 390px; height: 3964px; position: relative; overflow: hidden; background: #ffffff; color: #000000; font-family: 'Varela Round', 'Arial Rounded MT Bold', system-ui, sans-serif">
+
+<div style="background: #000000; padding: 6px 8px; display: flex; gap: 4px; overflow: hidden">
+<a href="01-accueil.html" class="tb k" style="background: #ffc7cd; color: #000000">Holocene</a>
+<a href="02-restaurant.html" class="tb k"><span style="width: 9px; height: 9px; border-radius: 50%; background: #e0cfe6"></span>Resto</a>
+<a href="04-traiteur.html" class="tb k"><span style="width: 9px; height: 9px; border-radius: 50%; background: #fffaaf"></span>Traiteur</a>
+<a href="05-food-truck.html" class="tb k"><span style="width: 9px; height: 9px; border-radius: 50%; background: #f7ba94"></span>Truck</a>
+</div>
+
+<header style="display: flex; justify-content: space-between; align-items: center; padding: 16px 20px">
+<img src="../../public/brand/logo-holocene-food-event.svg" alt="Holocene Food.Event" style="height: 40px; width: auto">
+<button type="button" aria-label="Ouvrir le menu" style="width: 48px; height: 48px; border: 2px solid #000000; border-radius: 50%; background: #ffc7cd; display: flex; align-items: center; justify-content: center; cursor: pointer"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg></button>
+</header>
+
+<section style="padding: 20px 20px 40px; display: flex; flex-direction: column; gap: 22px">
+<span class="v" style="font-size: 22px">Des produits frais</span>
+<h1 class="d" style="font-size: 60px">On cuisine le vivant.</h1>
+<p style="margin: 0; font-size: 16px; line-height: 1.6">Un restaurant, un traiteur, un food truck. Trois façons de manger local, de saison et 100&nbsp;% fait maison.</p>
+<div style="position: relative; margin-top: 8px">
+<img src="../../public/images/verrines-full.jpg" alt="Verrines et bouchées dressées par Holocene Traiteur" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border: 2px solid #000000; border-radius: 26px; box-shadow: 6px 6px 0 #000000">
+<img src="../../public/brand/icon-holocene.svg" alt="" aria-hidden="true" style="position: absolute; top: -26px; right: -6px; height: 100px; transform: rotate(8deg)">
+<span class="pill" style="position: absolute; left: -6px; bottom: 22px; background: #ffffff; transform: rotate(-7deg)">Frais</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border-top: 2px solid #000000; margin-top: 16px">
+<div style="padding: 18px 10px 18px 0; border-bottom: 2px solid #000000; display: flex; flex-direction: column; gap: 6px"><span class="d" style="font-size: 44px">24</span><span style="font-size: 13px">passionnés</span></div>
+<div style="padding: 18px 0 18px 14px; border-bottom: 2px solid #000000; border-left: 2px solid #000000; display: flex; flex-direction: column; gap: 6px"><span class="d" style="font-size: 44px">150</span><span style="font-size: 13px">mariages servis</span></div>
+<div style="padding: 18px 10px 0 0; display: flex; flex-direction: column; gap: 6px"><span class="d" style="font-size: 44px">1500</span><span style="font-size: 13px">invités max</span></div>
+<div style="padding: 18px 0 0 14px; border-left: 2px solid #000000; display: flex; flex-direction: column; gap: 6px"><span class="d" style="font-size: 44px">3</span><span style="font-size: 13px">univers</span></div>
+</div>
+</section>
+
+<div aria-hidden="true" style="background: #000000; color: #ffffff; padding: 16px 0; display: flex; gap: 22px; align-items: center; white-space: nowrap; overflow: hidden">
+<span class="v" style="font-size: 26px; padding-left: 20px">Fait maison</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 28px"><span class="v" style="font-size: 26px">De saison</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 28px"><span class="v" style="font-size: 26px">Local</span>
+</div>
+
+<section style="padding: 56px 20px; display: flex; flex-direction: column; gap: 18px">
+<span class="k">Food truck — Traiteur — Restaurant</span>
+<h2 class="d" style="font-size: 46px; margin-bottom: 10px">Une maison. Trois univers.</h2>
+<a href="05-food-truck.html" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 22px; border: 2px solid #000000; border-radius: 26px; background: #d4ffff; text-decoration: none; color: #000000">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="k">01</span><span class="d" style="font-size: 30px">Food truck</span><span style="font-size: 14px; line-height: 1.45">Pains gourmands en live sur vos événements.</span></div>
+<img src="../../public/brand/icon-food-truck.svg" alt="" aria-hidden="true" style="height: 96px; flex-shrink: 0">
+</a>
+<a href="04-traiteur.html" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 22px; border: 2px solid #000000; border-radius: 26px; background: #f7ba94; text-decoration: none; color: #000000">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="k">02</span><span class="d" style="font-size: 30px">Traiteur</span><span style="font-size: 14px; line-height: 1.45">Cocktails, repas, mariages, de 40 à 1500 invités.</span></div>
+<img src="../../public/brand/icon-traiteur.svg" alt="" aria-hidden="true" style="height: 96px; flex-shrink: 0">
+</a>
+<a href="02-restaurant.html" style="display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 22px; border: 2px solid #000000; border-radius: 26px; background: #fbf4b1; text-decoration: none; color: #000000">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="k">03</span><span class="d" style="font-size: 30px">Restaurant</span><span style="font-size: 14px; line-height: 1.45">Notre cantine bistronomique à Balma, le midi.</span></div>
+<img src="../../public/brand/icon-restaurant.svg" alt="" aria-hidden="true" style="height: 96px; flex-shrink: 0">
+</a>
+</section>
+
+<section style="background: #ffc7cd; border-top: 2px solid #000000; border-bottom: 2px solid #000000; padding: 56px 20px; display: flex; flex-direction: column; gap: 22px">
+<img src="../../public/brand/logo-holocene-stack.svg" alt="Logo Holocene empilé" style="width: 230px; height: auto">
+<span class="k">Pourquoi Holocene</span>
+<h2 class="d" style="font-size: 38px">Une pierre pour l'ancrage. Une fleur pour la suite.</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6">L'Holocène, c'est l'époque dans laquelle on vit : celle de l'essor du vivant et des premières tables partagées.</p>
+</section>
+
+<section style="padding: 56px 20px; display: flex; flex-direction: column; gap: 14px">
+<h2 class="d" style="font-size: 40px; margin-bottom: 12px">Ce qu'on ne lâche jamais</h2>
+<div style="padding: 22px; border: 2px solid #000000; border-radius: 24px; display: flex; flex-direction: column; gap: 10px"><span class="v" style="font-size: 28px">Local</span><span style="font-size: 14px; line-height: 1.5">En direct avec les producteurs d'Occitanie.</span></div>
+<div style="padding: 22px; border: 2px solid #000000; border-radius: 24px; display: flex; flex-direction: column; gap: 10px"><span class="v" style="font-size: 28px">De saison</span><span style="font-size: 14px; line-height: 1.5">Une nouvelle carte chaque mois.</span></div>
+<div style="padding: 22px; border: 2px solid #000000; border-radius: 24px; display: flex; flex-direction: column; gap: 10px"><span class="v" style="font-size: 28px">Fait maison</span><span style="font-size: 14px; line-height: 1.5">Des sauces aux desserts, tout sort de nos cuisines.</span></div>
+<div style="padding: 22px; border: 2px solid #000000; border-radius: 24px; background: #000000; color: #ffffff; display: flex; flex-direction: column; gap: 10px"><span class="v" style="font-size: 28px">Sur mesure</span><span style="font-size: 14px; line-height: 1.5">Végé, halal, sans gluten : on s'adapte.</span></div>
+</section>
+
+<section style="padding: 0 20px 56px; display: flex; flex-direction: column; gap: 20px; align-items: flex-start">
+<span class="v" style="font-size: 24px">Great food inside</span>
+<h2 class="d" style="font-size: 44px">Parlons de votre prochain événement.</h2>
+<a href="08-contact.html" class="btn dk">Demander un devis</a>
+</section>
+
+<img src="../../public/brand/illustration-toulouse.svg" alt="Illustration de Toulouse" style="display: block; width: 100%; height: auto; margin-bottom: -2px">
+<footer style="background: #000000; color: #ffffff; padding: 40px 20px 120px; display: flex; flex-direction: column; gap: 24px">
+<img src="../../public/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" style="height: 44px; width: auto; align-self: flex-start">
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5"><span class="k" style="color: #fbf4b1">Restaurant</span><span>14 rue Louis Renault, 31130 Balma</span><span>05 32 74 08 34</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.5"><span class="k" style="color: #f7ba94">Traiteur &amp; food truck</span><span>05 32 74 08 33</span><span>contact@holocene-traiteur.fr</span></div>
+<span style="font-size: 12px; color: #cfcfcf">© 2026 Holocene Food Event</span>
+</footer>
+
+<!-- Barre d'action collante -->
+<div style="position: absolute; left: 12px; right: 12px; bottom: 16px; display: flex; gap: 10px; padding: 10px; border: 2px solid #000000; border-radius: 999px; background: #ffffff; box-shadow: 4px 4px 0 #000000">
+<a href="08-contact.html" class="btn dk" style="flex: 1; box-shadow: none">Devis</a>
+<a href="tel:+33532740833" class="btn" style="flex: 1; box-shadow: none; background: #ffc7cd">Appeler</a>
+</div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,45 @@
+---
+import '../styles/tokens.css';
+import '../styles/global.css';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import type { NavLink, UniversId } from '../data/univers';
+
+interface Props {
+  title: string;
+  description: string;
+  univers?: UniversId;
+  /** Exclut la page des moteurs de recherche. */
+  noindex?: boolean;
+  /** Fond --light au lieu de --bg (page Privatiser). */
+  background?: 'light';
+  /** Remplace le bouton principal de la capsule pour cette page. */
+  cta?: NavLink;
+}
+
+const { title, description, univers = 'holocene', noindex = false, background, cta } = Astro.props;
+---
+
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} - Holocene</title>
+    <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="icon" type="image/svg+xml" href="/brand/icon-holocene.svg" />
+    <link rel="preload" href="/fonts/nimbus-sans-round-bold-subset.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="preload" href="/fonts/varela-round-400.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body data-univers={univers} data-background={background}>
+    <a href="#contenu" class="skip-link">Aller au contenu</a>
+    <div class="wrap">
+      <Header univers={univers} cta={cta} />
+    </div>
+    <main id="contenu">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,127 @@
+---
+interface Props {
+  label: string;
+  name: string;
+  /** Par défaut : `name`. À préciser si un même nom revient sur la page. */
+  id?: string;
+  type?: 'text' | 'email' | 'tel' | 'date' | 'textarea' | 'select';
+  options?: string[];
+  placeholder?: string;
+  autocomplete?: string;
+  /** Message d'erreur, affiché en pastille rose avec icône. */
+  error?: string;
+  disabled?: boolean;
+  /** Force l'apparence du focus, pour la recette du design system. */
+  state?: 'focus';
+}
+
+const { label, name, id = name, type = 'text', options = [], placeholder, autocomplete, error, disabled = false, state } = Astro.props;
+const errorId = `${id}-erreur`;
+const controlAttrs = {
+  id,
+  name,
+  disabled,
+  autocomplete,
+  'aria-invalid': error ? ('true' as const) : undefined,
+  'aria-describedby': error ? errorId : undefined,
+};
+const classes = ['field__control', { 'is-error': error, 'is-focus': state === 'focus' }];
+---
+
+<div class="field">
+  <label for={id} class="field__label">{label}</label>
+  {
+    type === 'textarea' ? (
+      <textarea {...controlAttrs} placeholder={placeholder} class:list={classes} />
+    ) : type === 'select' ? (
+      <select {...controlAttrs} class:list={classes}>
+        {options.map((option) => <option>{option}</option>)}
+      </select>
+    ) : (
+      <input {...controlAttrs} type={type} placeholder={placeholder} class:list={classes} />
+    )
+  }
+  {
+    error && (
+      <p id={errorId} class="field__error">
+        <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+          <circle cx="12" cy="12" r="9" />
+          <path d="M12 7.5v5.5M12 16.5v.01" />
+        </svg>
+        {error}
+      </p>
+    )
+  }
+</div>
+
+<style>
+  .field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .field__label {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .field__control {
+    width: 100%;
+    min-height: 54px;
+    padding: 14px 18px;
+    border: var(--line);
+    border-radius: var(--radius-field);
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 17px;
+  }
+
+  textarea.field__control {
+    display: block;
+    min-height: 120px;
+    resize: vertical;
+  }
+
+  .field__control::placeholder {
+    color: var(--disabled-text);
+  }
+
+  .field__control:focus,
+  .field__control.is-focus {
+    outline: none;
+    box-shadow: var(--shadow-btn);
+  }
+
+  .field__control.is-error {
+    border-width: 3px;
+  }
+
+  .field__control:disabled {
+    background: var(--disabled-bg);
+    border-color: var(--disabled-line);
+    color: var(--disabled-text);
+  }
+
+  .field__error {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 8px;
+    padding: 6px 14px;
+    border: var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--pink);
+    font-size: 13px;
+    line-height: 1.3;
+  }
+
+  .field__error svg {
+    flex-shrink: 0;
+  }
+</style>

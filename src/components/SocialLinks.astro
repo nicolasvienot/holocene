@@ -1,0 +1,81 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  onDark?: boolean;
+}
+
+const { onDark = false } = Astro.props;
+---
+
+<ul class:list={['social', { 'social--dark': onDark }]} aria-label="Réseaux sociaux">
+  {
+    site.socials.map((social) => (
+      <li>
+        <a href={social.url} target="_blank" rel="noopener" aria-label={`${social.name} (nouvel onglet)`}>
+          <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            {social.id === 'instagram' && (
+              <>
+                <rect x="3" y="3" width="18" height="18" rx="5" />
+                <circle cx="12" cy="12" r="4" />
+                <path d="M17.5 6.5h.01" />
+              </>
+            )}
+            {social.id === 'facebook' && <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />}
+            {social.id === 'linkedin' && (
+              <>
+                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z" />
+                <rect x="2" y="9" width="4" height="12" />
+                <circle cx="4" cy="4" r="2" />
+              </>
+            )}
+          </svg>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .social {
+    display: flex;
+    gap: 10px;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border: var(--line);
+    border-radius: 50%;
+    background: var(--paper);
+    color: var(--ink);
+    transition:
+      background-color 0.15s,
+      color 0.15s;
+  }
+
+  a:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .social--dark a {
+    border-color: var(--paper);
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .social--dark a:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a {
+      transition: none;
+    }
+  }
+</style>
