@@ -1,0 +1,11 @@
+---
+import { nimbus } from '../lib/texte';
+
+interface Props {
+  texte: string;
+  class?: string;
+}
+
+const { texte, class: className } = Astro.props;
+---
+<span class:list={['k', className]}>{nimbus(texte)}</span>

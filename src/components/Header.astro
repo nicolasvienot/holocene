@@ -1,414 +1,283 @@
 ---
 import Button from './Button.astro';
-import { univers, universOrder, type NavLink, type UniversId } from '../data/univers';
+import Icon from './Icon.astro';
+import infos from '../data/infos.json';
+import { capsules, univers as tousLesUnivers, universParId, type CapsuleId } from '../data/navigation';
+import { attrsExterne } from '../lib/texte';
 
 interface Props {
-  univers: UniversId;
-  /** Remplace le bouton principal de l'univers pour cette page. */
-  cta?: NavLink;
-  /** Chemin servant à calculer le lien actif (défaut : URL courante). */
-  currentPath?: string;
-  /** Carte menu ouverte d'emblée, pour le design system. */
-  menuOpen?: boolean;
+  capsule: CapsuleId;
+  /** Lien de la capsule marqué comme page active */
+  actif?: string;
 }
 
-const { univers: id, cta: ctaProp, currentPath = Astro.url.pathname, menuOpen = false } = Astro.props;
-const config = univers[id];
-const cta = ctaProp ?? config.cta;
-const allUnivers = universOrder.map((universId) => univers[universId]);
-
-const normalize = (path: string) => path.replace(/\/+$/, '') || '/';
-const isActive = (href: string) => !href.includes('#') && normalize(href) === normalize(currentPath);
+const { capsule, actif } = Astro.props;
+const { univers, aria, liens, cta } = capsules[capsule];
+const courant = universParId(univers);
+const tel = univers === 'restaurant' ? infos.telephones.restaurant : infos.telephones.traiteurFoodTruck;
 ---
+<header class="wrap capw">
+  <div class="cap">
+    <a href={courant.href} class="clogo"><img src={courant.logo} alt={courant.logoAlt} width="156" height="40" /></a>
 
-<header class="header">
-  <div class="capsule">
-    <a href={config.home} class="logo" aria-label={`${config.fullName} - accueil`}>
-      <img src={config.logo} alt="" width="156" height="40" />
-    </a>
-
-    <nav class="links" aria-label={`Navigation ${config.fullName}`}>
-      {
-        config.nav.map((item) => (
-          <a href={item.href} class="link" aria-current={isActive(item.href) ? 'page' : undefined}>
-            {item.label}
-          </a>
-        ))
-      }
+    <nav aria-label={aria} class="cnav">
+      {liens.map((lien) => (
+        <a href={lien.href} class:list={['cn', { on: lien.label === actif }]} aria-current={lien.label === actif ? 'page' : undefined}>{lien.label}</a>
+      ))}
     </nav>
 
-    <div class="end">
-      <nav class="dots" aria-label={`Les univers Holocene, depuis ${config.fullName}`}>
-        {
-          allUnivers.map((item) => (
-            <a
-              href={item.home}
-              class="dot"
-              data-univers={item.id}
-              aria-label={item.fullName}
-              aria-current={item.id === id ? 'true' : undefined}
-            >
-              <span class="dot__bubble" aria-hidden="true">{item.name}</span>
-            </a>
-          ))
-        }
-      </nav>
-      <Button href={cta.href} external={cta.external} variant="primary">{cta.label}</Button>
+    <div class="cend">
+      <div class="unis" role="group" aria-label="Changer d'univers">
+        {tousLesUnivers.map((u) => (
+          <a
+            href={u.href}
+            class:list={['ud', { on: u.id === univers }]}
+            style={`background:${u.fond}`}
+            aria-label={u.id === univers ? `${u.label}, univers actuel` : u.label}
+            aria-current={u.id === univers ? 'true' : undefined}
+          ><span class="tip" aria-hidden="true">{u.label}</span></a>
+        ))}
+      </div>
+      <Button variant="dark" href={cta.href} label={cta.label} />
     </div>
 
-    <details class="menu" open={menuOpen}>
-      <summary class="toggle" aria-label="Menu">
-        <svg class="toggle__open" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <path d="M4 8h16M4 16h16" />
-        </svg>
-        <svg class="toggle__close" aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
-          <path d="M6 6l12 12M18 6L6 18" />
-        </svg>
+    <details class="cmenu" data-menu>
+      <summary aria-label="Menu">
+        <Icon name="burger" size={20} class="ico-b" />
+        <Icon name="close" size={20} class="ico-x" />
       </summary>
-      <div class="panel">
-        <nav aria-label={`Menu ${config.fullName}`}>
-          <ul class="panel__links">
-            {
-              config.nav.map((item) => (
-                <li>
-                  <a href={item.href} class="panel__link" aria-current={isActive(item.href) ? 'page' : undefined}>
-                    {item.label}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
-        </nav>
-
-        <div class="panel__univers">
-          <span class="label">Nos univers</span>
-          <ul class="panel__dots">
-            {
-              allUnivers.map((item) => (
-                <li>
-                  <a
-                    href={item.home}
-                    class="named"
-                    data-univers={item.id}
-                    aria-current={item.id === id ? 'true' : undefined}
-                  >
-                    <span class="named__dot" />
-                    {item.name}
-                  </a>
-                </li>
-              ))
-            }
-          </ul>
+      <div class="cpanel">
+        {liens.map((lien) => (
+          <a href={lien.href} class:list={['cbig', { on: lien.label === actif }]} aria-current={lien.label === actif ? 'page' : undefined} {...attrsExterne(lien.href)}>{lien.label}</a>
+        ))}
+        <span class="clab">Nos univers</span>
+        <div class="cunis">
+          {tousLesUnivers.map((u) => (
+            <a href={u.href} class:list={['cuni', { on: u.id === univers }]} style={`background:${u.fond}`} aria-current={u.id === univers ? 'true' : undefined}>{u.label}</a>
+          ))}
         </div>
-
-        <Button href={cta.href} external={cta.external} variant="primary" class="panel__cta">{cta.label}</Button>
-        <a href={`tel:${config.phone.tel}`} class="panel__phone">{config.phone.display}</a>
+        <Button variant="dark" href={cta.href} label={cta.label} class="cbtn" />
+        <a href={`tel:${tel.tel}`} class="ctel">{tel.affiche}</a>
       </div>
     </details>
   </div>
 </header>
 
-<style>
-  /*
-    La bascule se fait sur la largeur de la capsule, pas sur celle de l'écran :
-    1224 px de capsule correspondent à 1320 px d'écran (marges de 48 px déduites).
-    Le design system peut ainsi montrer le menu compact dans une colonne étroite.
-  */
-  .header {
-    position: relative;
-    z-index: 20;
-    container-type: inline-size;
-    margin-block: 18px;
-  }
+<script>
+  // Le menu fonctionne sans script ; ceci le referme après un clic sur une ancre ou avec Échap.
+  document.querySelectorAll<HTMLDetailsElement>('[data-menu]').forEach((menu) => {
+    menu.addEventListener('click', (evenement) => {
+      if (evenement.target instanceof Element && evenement.target.closest('a')) menu.open = false;
+    });
+    menu.addEventListener('keydown', (evenement) => {
+      if (evenement.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  });
+</script>
 
-  .capsule {
+<style>
+  .capw { position: relative; z-index: 40; padding-block: 18px; }
+
+  .cap {
     position: relative;
     display: grid;
     grid-template-columns: auto 1fr auto;
     align-items: center;
     column-gap: 24px;
-    min-height: 72px;
-    padding: 8px 10px 8px 28px;
+    min-height: 68px;
+    padding: 8px 8px 8px 24px;
+    background: var(--paper);
     border: var(--line);
     border-radius: var(--radius-pill);
-    background: var(--paper);
-    color: var(--ink);
     box-shadow: var(--shadow-btn);
+    color: var(--ink);
+    --focus: var(--ink);
   }
 
-  .logo {
-    display: flex;
-    align-items: center;
-    min-height: 44px;
-  }
+  .clogo { display: flex; }
+  .clogo img { height: 40px; width: auto; display: block; }
 
-  .logo img {
-    width: auto;
-    height: 40px;
-  }
+  .cnav { display: flex; justify-content: center; gap: 24px; }
 
-  .links {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-  }
-
-  .link {
+  .cn {
     position: relative;
     display: inline-flex;
     align-items: center;
     min-height: 44px;
-    color: inherit;
+    padding: 0 0 0 0.12em;
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.12em;
     text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 12px;
+    color: var(--ink);
     text-decoration: none;
     white-space: nowrap;
   }
-
-  /* Soulignement noir qui se déploie depuis le centre. */
-  .link::after {
+  .cn::after {
     content: '';
     position: absolute;
-    inset: auto 0 6px;
+    left: 0;
+    right: 0;
+    bottom: 8px;
     height: 3px;
+    border-radius: 3px;
     background: var(--ink);
     transform: scaleX(0);
-    transition: transform 0.2s;
+    transition: transform 0.25s cubic-bezier(0.3, 0.7, 0.4, 1);
   }
+  .cn:hover::after,
+  .cn.on::after { transform: scaleX(1); }
 
-  .link:hover::after,
-  .link[aria-current]::after {
-    transform: scaleX(1);
-  }
+  .cend { display: flex; align-items: center; gap: 16px; }
+  .unis { display: flex; align-items: center; gap: 8px; padding-right: 16px; border-right: var(--line); }
 
-  .end {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-
-  .dots {
-    display: flex;
-    padding-right: 10px;
-    border-right: var(--line);
-  }
-
-  /* Rond de 28 px dans une cible de 36 x 44 px. */
-  .dot {
+  .ud {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 44px;
-    border-radius: var(--radius-pill);
-  }
-
-  .dot::before {
-    content: '';
+    display: block;
     width: 28px;
     height: 28px;
-    border: var(--line);
     border-radius: 50%;
-    background: var(--bg);
+    border: var(--line);
+    transition: transform 0.15s;
   }
+  /* Cible tactile de 44 px autour de la pastille de 28 px */
+  .ud::before { content: ''; position: absolute; inset: -10px -6px; }
+  .ud:hover { transform: translateY(-2px); }
+  .ud.on { box-shadow: 0 0 0 3px var(--paper), 0 0 0 5px var(--ink); }
 
-  .dot[aria-current]::before {
-    box-shadow:
-      0 0 0 2px var(--paper),
-      0 0 0 4px var(--ink);
-  }
-
-  .dot__bubble {
+  .tip {
     position: absolute;
-    top: calc(100% + 16px);
+    top: calc(100% + 12px);
     left: 50%;
-    padding: 6px 12px 6px calc(12px + 0.12em);
+    transform: translateX(-50%);
+    padding: 6px 10px 6px calc(10px + 0.12em);
     border-radius: var(--radius-pill);
     background: var(--ink);
     color: var(--paper);
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    line-height: 1.2;
     text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 10px;
     white-space: nowrap;
     opacity: 0;
     pointer-events: none;
-    transform: translateX(-50%);
     transition: opacity 0.15s;
   }
+  .ud:hover .tip,
+  .ud:focus-visible .tip { opacity: 1; }
 
-  .dot:hover .dot__bubble,
-  .dot:focus-visible .dot__bubble {
-    opacity: 1;
-  }
-
-  .menu {
-    display: none;
-    grid-column: 3;
-  }
-
-  .toggle {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  .cmenu { display: none; border: 0; }
+  .cmenu summary {
+    list-style: none;
     width: 50px;
     height: 50px;
     border: var(--line);
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
     background: var(--flower);
     color: var(--ink);
-    cursor: pointer;
-    list-style: none;
+    transition: transform 0.15s;
   }
+  .cmenu summary::-webkit-details-marker { display: none; }
+  .cmenu summary:hover { transform: scale(1.06); }
+  .cmenu :global(.ico-x) { display: none; }
+  .cmenu[open] summary { background: var(--ink); color: var(--paper); }
+  .cmenu[open] :global(.ico-b) { display: none; }
+  .cmenu[open] :global(.ico-x) { display: block; }
 
-  .toggle::-webkit-details-marker {
-    display: none;
-  }
-
-  .toggle__close {
-    display: none;
-  }
-
-  .menu[open] .toggle {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .menu[open] .toggle__open {
-    display: none;
-  }
-
-  .menu[open] .toggle__close {
-    display: block;
-  }
-
-  .panel {
+  .cpanel {
     position: absolute;
-    top: calc(100% + 12px);
     left: 0;
     right: 0;
+    top: calc(100% + 12px);
     display: flex;
     flex-direction: column;
-    gap: 24px;
-    padding: 24px;
-    border: var(--line);
-    border-radius: var(--radius-card);
+    padding: 8px 22px 22px;
     background: var(--paper);
-    box-shadow: var(--shadow-hover);
+    border: var(--line);
+    border-radius: 28px;
+    box-shadow: var(--shadow-btn);
   }
 
-  .panel__links li {
-    border-bottom: var(--line-dashed);
-  }
-
-  .panel__link {
+  .cbig {
     display: flex;
     align-items: center;
-    min-height: 60px;
-    padding-block: 8px;
-    color: inherit;
+    min-height: 56px;
+    padding: 6px 0;
+    border-bottom: var(--line-dashed);
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 26px;
-    letter-spacing: -0.01em;
-    line-height: 1;
     text-transform: uppercase;
+    letter-spacing: -0.02em;
+    font-size: 26px;
+    line-height: 1;
+    color: var(--ink);
     text-decoration: none;
   }
+  .cbig:last-of-type { border-bottom: 0; }
+  .cbig.on { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 6px; }
 
-  .panel__link:hover,
-  .panel__link[aria-current] {
-    text-decoration: underline;
-    text-decoration-thickness: 3px;
-    text-underline-offset: 6px;
+  .clab {
+    margin-top: 14px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 10px;
+    color: var(--muted);
   }
 
-  .panel__univers {
+  .cunis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
+
+  .cuni {
     display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .panel__dots {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .named {
-    display: inline-flex;
     align-items: center;
-    gap: 8px;
     min-height: 44px;
-    padding: 0 14px 0 8px;
+    padding: 0 12px 0 calc(12px + 0.12em);
     border: var(--line);
     border-radius: var(--radius-pill);
-    color: inherit;
-    font-size: 15px;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    color: var(--ink);
     text-decoration: none;
+    white-space: nowrap;
   }
+  .cuni.on { background: var(--ink) !important; color: var(--paper); }
 
-  .named:hover,
-  .named[aria-current] {
-    background: var(--bg);
-  }
+  .cbtn { margin-top: 18px; width: 100%; }
 
-  .named__dot {
-    width: 28px;
-    height: 28px;
-    border: var(--line);
-    border-radius: 50%;
-    background: var(--bg);
-  }
-
-  .panel :global(.panel__cta) {
-    width: 100%;
-  }
-
-  .panel__phone {
+  .ctel {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 44px;
-    color: inherit;
-    font-family: var(--font-display);
-    font-weight: 700;
-    font-size: 18px;
-    text-decoration: none;
+    margin-top: 6px;
+    font-size: 14px;
+    color: var(--ink);
+    text-align: center;
   }
 
-  .panel__phone:hover {
-    text-decoration: underline;
+  @media (max-width: 1320px) {
+    .cap { grid-template-columns: 1fr auto; padding: 6px 6px 6px 22px; }
+    .cnav,
+    .cend { display: none; }
+    .cmenu { display: block; }
   }
 
-  @container (width < 1224px) {
-    .capsule {
-      grid-template-columns: 1fr auto;
-      min-height: 66px;
-      padding-left: 22px;
-    }
-
-    .links,
-    .end {
-      display: none;
-    }
-
-    .menu {
-      display: block;
-      grid-column: 2;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .link::after,
-    .dot__bubble {
-      transition: none;
-    }
+  @media (max-width: 760px) {
+    .capw { padding-block: 12px; }
+    .clogo img { height: 34px; }
+    .cap { min-height: 60px; }
   }
 </style>

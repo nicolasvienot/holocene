@@ -1,45 +1,87 @@
 ---
-import '../styles/tokens.css';
 import '../styles/global.css';
-import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
-import type { NavLink, UniversId } from '../data/univers';
+import Footer from '../components/Footer.astro';
+import { capsules, type CapsuleId, type UniversId } from '../data/navigation';
 
 interface Props {
+  capsule: CapsuleId;
   title: string;
   description: string;
-  univers?: UniversId;
-  /** Exclut la page des moteurs de recherche. */
+  /** Lien de la capsule marqué comme page active */
+  actif?: string;
+  /** Page d'univers différent de celui de sa capsule, ex. la recette visuelle */
   noindex?: boolean;
-  /** Fond --light au lieu de --bg (page Privatiser). */
-  background?: 'light';
-  /** Remplace le bouton principal de la capsule pour cette page. */
-  cta?: NavLink;
+  /** Capsule posée sur un héros noir, fond de page clair (page Privatiser) */
+  heroNoir?: boolean;
+  /** Blocs JSON-LD de la page */
+  jsonLd?: object[];
+  /** Image Open Graph, par défaut celle de l'univers */
+  image?: string;
+  type?: 'website' | 'article';
 }
 
-const { title, description, univers = 'holocene', noindex = false, background, cta } = Astro.props;
+const { capsule, title, description, actif, noindex = false, heroNoir = false, jsonLd = [], image, type = 'website' } = Astro.props;
+const univers: UniversId = capsules[capsule].univers;
+const canonical = new URL(Astro.url.pathname.replace(/\/$/, '') || '/', Astro.site);
+const imageOg = new URL(image ?? `/og/${univers}.png`, Astro.site);
 ---
-
 <!doctype html>
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} - Holocene</title>
+    <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
-    <link rel="icon" type="image/svg+xml" href="/brand/icon-holocene.svg" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preload" href="/fonts/nimbus-sans-round-bold-subset.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/varela-round-400.woff2" as="font" type="font/woff2" crossorigin />
+    <meta property="og:site_name" content="Holocene Food Event" />
+    <meta property="og:locale" content="fr_FR" />
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={imageOg} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    {jsonLd.map((bloc) => <script is:inline type="application/ld+json" set:html={JSON.stringify(bloc)} />)}
+    <slot name="head" />
   </head>
-  <body data-univers={univers} data-background={background}>
-    <a href="#contenu" class="skip-link">Aller au contenu</a>
-    <div class="wrap">
-      <Header univers={univers} cta={cta} />
+  <body data-univers={univers} class:list={{ 'page-hero-noir': heroNoir }}>
+    <a href="#contenu" class="evitement">Aller au contenu</a>
+    <div class:list={{ 'sur-noir': heroNoir }}>
+      <Header capsule={capsule} actif={actif} />
     </div>
-    <main id="contenu">
+    <main id="contenu" tabindex="-1">
       <slot />
     </main>
     <Footer />
   </body>
 </html>
+
+<style is:global>
+  .page-hero-noir { background: var(--lilac-light); }
+  main:focus { outline: none; }
+</style>
+
+<style>
+  .evitement {
+    position: absolute;
+    left: 12px;
+    top: -80px;
+    z-index: 60;
+    padding: 12px 18px;
+    background: var(--ink);
+    color: var(--paper);
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    font-size: 15px;
+  }
+  .evitement:focus { top: 12px; outline: 3px solid var(--paper); outline-offset: -6px; }
+</style>
