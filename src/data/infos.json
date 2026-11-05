@@ -1,0 +1,61 @@
+{
+  "_note": "Infos pratiques. Source : site actuel (voir reference/site-actuel.md). Les champs 'aConfirmer' sont à faire valider par Holocene avant la mise en ligne.",
+  "marque": "Holocene Food Event",
+  "adresse": {
+    "rue": "14 rue Louis Renault",
+    "codePostal": "31130",
+    "ville": "Balma",
+    "quartier": "Balma-Gramont",
+    "itineraire": "https://maps.app.goo.gl/sXg3HusJHgYLQ3fx8"
+  },
+  "telephones": {
+    "restaurant": { "affiche": "05 32 74 08 34", "tel": "+33532740834" },
+    "traiteurFoodTruck": { "affiche": "05 32 74 08 33", "tel": "+33532740833" }
+  },
+  "email": "contact@holocene-traiteur.fr",
+  "horairesRestaurant": {
+    "toutelannee": "Lundi - vendredi, 12h - 14h",
+    "ete": "De mai à septembre, aussi jeudi et vendredi soir, 19h - 22h30",
+    "privatisation": "Les autres soirs et le week-end, le lieu se privatise",
+    "aConfirmer": "Le service du soir d'été (jeu. et ven., 19h - 22h30, mai à septembre) figure sur les sous-pages du site actuel mais pas sur la page Restaurant : à confirmer."
+  },
+  "reservation": {
+    "table": "https://bookings.zenchef.com/results?rid=368665&pid=1001",
+    "privatisation": "https://bookings.zenchef.com/privatisation?rid=368665&pid=1001"
+  },
+  "acces": [
+    { "titre": "Métro A", "texte": "Station Balma-Gramont, 7 min à pied" },
+    { "titre": "En voiture", "texte": "Périphérique sortie 15 Roseraie, à 3 min. Parking gratuit à côté." },
+    { "titre": "Depuis le centre", "texte": "15 min du Capitole, 16 min de Matabiau, 16 min de l'aéroport de Blagnac" }
+  ],
+  "accessiblePMR": true,
+  "zonesTraiteur": {
+    "entreprises": "Toulouse, Balma, Blagnac, Colomiers, Cornebarrieu, Cugnaux, L'Union…",
+    "particuliers": "Haute-Garonne, Tarn, Tarn-et-Garonne, Aude, Ariège, Gers…",
+    "foodTruck": "Toute la région toulousaine et ses environs"
+  },
+  "reseaux": [
+    { "nom": "Instagram", "url": "https://www.instagram.com/holocene.tlse/" },
+    { "nom": "Facebook", "url": "https://fr-fr.facebook.com/holocene.tlse/" },
+    { "nom": "LinkedIn", "url": "https://www.linkedin.com/company/holocenetlse/" }
+  ],
+  "chiffres": {
+    "collaborateurs": 24,
+    "mariages": "plus de 150",
+    "invitesMin": 40,
+    "invitesMax": 1500,
+    "univers": 3,
+    "experience": "plus de 15 ans d'expérience cumulée"
+  },
+  "regimes": ["végétarien", "halal", "sans gluten", "sans lactose"],
+  "mentionsLegales": {
+    "editeur": "Holocène",
+    "siegeSocial": "30 avenue Maurice Bourges-Maunoury, 31200 Toulouse",
+    "siret": "89988614700029",
+    "responsablePublication": "Stéphane Suarez",
+    "contactPublication": "stephane.suarez@holocene-traiteur.fr",
+    "hebergeur": "[À compléter selon l'hébergement choisi, ex. Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA]",
+    "aCompleter": "Forme juridique, capital social, RCS et n° de TVA absents du site actuel : à demander à Holocene."
+  },
+  "videoEquipe": "https://player.vimeo.com/video/1041034041"
+}

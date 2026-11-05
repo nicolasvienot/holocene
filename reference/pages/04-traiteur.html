@@ -13,7 +13,8 @@
 body{margin:0}
 html,body{background:#000}
 *{box-sizing:border-box}
-a{color:#000}a:hover{color:#000}
+a{color:#000}
+a:hover{color:#000}
 .d{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.025em;line-height:.9;margin:0}
 .k{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:12px;line-height:1.3}
 .v{font-family:'Holo Vividly','Varela Round',cursive;text-transform:uppercase;letter-spacing:.05em;line-height:1}
@@ -21,78 +22,152 @@ a{color:#000}a:hover{color:#000}
 .wrap{width:100%;max-width:1360px;margin:0 auto;padding-left:48px;padding-right:48px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px 0 calc(26px + .12em);border:2px solid #000;border-radius:999px;background:#fff;color:#000;text-decoration:none;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px;box-shadow:4px 4px 0 #000;transition:transform .15s,box-shadow .15s;white-space:nowrap;cursor:pointer}
 .btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #000;color:#000}
-.btn.dk{background:#000;color:#fff}.btn.dk:hover{color:#fff}
+.btn.dk{background:#000;color:#fff}
+.btn.dk:hover{color:#fff}
 .pill{display:inline-flex;align-items:center;gap:8px;border:2px solid #000;border-radius:999px;padding:8px 16px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:12px;line-height:1;white-space:nowrap}
-.nav{display:inline-flex;align-items:center;min-height:44px;padding:0 14px 0 calc(14px + .12em);border-radius:999px;text-decoration:none;color:#000;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px}
-.nav:hover{background:rgba(0,0,0,.08)}
-.tb{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px 0 calc(14px + .2em);border-radius:999px;color:#fff;text-decoration:none}
-.tb:hover{color:#fff;background:rgba(255,255,255,.12)}
-.fl{color:#fff;text-decoration:none}.fl:hover{color:#fffaaf}
+.refs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0;padding:0;list-style:none}
+.refs.r3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.ref{display:flex;flex-direction:column;justify-content:space-between;gap:24px;min-height:128px;padding:20px 22px 22px;background:#fff;border:2px solid #000;border-radius:18px;min-width:0}
+.ref .k{font-size:10px;letter-spacing:.18em;margin:0;opacity:.55}
+.ref b{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;font-size:20px;line-height:1.05;letter-spacing:-.01em;overflow-wrap:anywhere}
+@media (max-width:1100px){.refs{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:700px){.refs,.refs.r3{grid-template-columns:repeat(2,minmax(0,1fr))}
+.ref{min-height:108px;padding:16px 16px 18px}
+.ref b{font-size:17px}}
 .li{padding:12px 0;border-bottom:1.5px dashed #000;font-size:16px;line-height:1.45}
 .fld{display:flex;flex-direction:column;gap:8px}
 .fld label{font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11px}
 .fld input,.fld select,.fld textarea{font-family:'Varela Round',system-ui,sans-serif;font-size:17px;min-height:54px;padding:14px 18px;border:2px solid #000;border-radius:18px;background:#fff;color:#000;width:100%}
 .fld textarea{min-height:150px;resize:vertical}
 details{border-bottom:2px solid #000}
-summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:72px;font-size:22px}
+summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:68px;font-size:20px}
 summary::-webkit-details-marker{display:none}
-.tbn{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}.tbn::-webkit-scrollbar{display:none}
-.tb{flex-shrink:0;white-space:nowrap}
-.hdr{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:24px}
-.hnav{display:flex;gap:4px;align-items:center;justify-content:center}
-.hend{display:flex;justify-content:flex-end;align-items:center;gap:12px}
-.nav.ondk{color:#fff}.nav.ondk:hover{background:rgba(255,255,255,.14);color:#fff}
-.btn.ondk{border-color:#fff;box-shadow:4px 4px 0 #fff}.btn.ondk:hover{box-shadow:2px 2px 0 #fff}
-.mnav{display:none;position:relative;border:0}
-.mnav summary{list-style:none;width:52px;height:52px;min-height:0;padding:0;gap:0;font-size:0;border:2px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:4px 4px 0 #000;transition:transform .15s,box-shadow .15s}
-.mnav summary::-webkit-details-marker{display:none}
-.mnav summary:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #000}
-.mpanel{position:absolute;right:0;top:calc(100% + 12px);z-index:30;min-width:270px;display:flex;flex-direction:column;gap:2px;padding:10px;background:#fff;border:2px solid #000;border-radius:24px;box-shadow:6px 6px 0 #000}
-.mpanel .nav{justify-content:flex-start;color:#000}
-.mpanel .btn{margin-top:8px;box-shadow:none}
-.nav:focus-visible,.btn:focus-visible,.tb:focus-visible,.mnav summary:focus-visible{outline:3px solid #000;outline-offset:3px}
-.tb:focus-visible,.nav.ondk:focus-visible,.btn.ondk:focus-visible{outline-color:#fff}
-@media (max-width:1180px){.hdr{grid-template-columns:1fr auto}.hnav{display:none}.mnav{display:block}}
-@media (max-width:640px){.hend>.btn{display:none}.tbn{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent);padding-right:28px}}
-@media (max-width:760px){.wrap{padding-left:20px;padding-right:20px}.hide-m{display:none!important}.p{font-size:16px}}
+.btn:focus-visible{outline:3px solid #000;outline-offset:3px}
+/* ---- Capsule ---- */
+.capw{position:relative;z-index:40;padding-top:18px;padding-bottom:18px}
+.cap{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:24px;min-height:68px;padding:8px 8px 8px 24px;background:#fff;border:2px solid #000;border-radius:999px;box-shadow:4px 4px 0 #000;color:#000}
+.cap .clogo{display:flex}
+.cap .clogo img{height:40px;width:auto;display:block}
+.cnav{display:flex;justify-content:center;gap:24px}
+.cn{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 0 0 .12em;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#000;text-decoration:none;white-space:nowrap}
+.cn::after{content:'';position:absolute;left:0;right:0;bottom:8px;height:3px;border-radius:3px;background:#000;transform:scaleX(0);transition:transform .25s cubic-bezier(.3,.7,.4,1)}
+.cn:hover,.cn:focus-visible{color:#000}
+.cn:hover::after,.cn.on::after{transform:scaleX(1)}
+.cend{display:flex;align-items:center;gap:16px}
+.unis{display:flex;align-items:center;gap:8px;padding-right:16px;border-right:2px solid #000}
+.ud{position:relative;display:block;width:28px;height:28px;border-radius:50%;border:2px solid #000;transition:transform .15s}
+.ud:hover{transform:translateY(-2px)}
+.ud.on{box-shadow:0 0 0 3px #fff,0 0 0 5px #000}
+.ud .tip{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);padding:6px 10px 6px calc(10px + .12em);border-radius:999px;background:#000;color:#fff;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:10px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.ud:hover .tip,.ud:focus-visible .tip{opacity:1}
+.cmenu{display:none;border:0}
+.cmenu summary{list-style:none;width:50px;height:50px;min-height:0;padding:0;font-size:0;border:2px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s}
+.cmenu summary::-webkit-details-marker{display:none}
+.cmenu summary:hover{transform:scale(1.06)}
+.cmenu .ico-x{display:none}
+.cmenu[open] summary{background:#000!important}
+.cmenu[open] .ico-b{display:none}
+.cmenu[open] .ico-x{display:block}
+.cpanel{position:absolute;left:0;right:0;top:calc(100% + 12px);display:flex;flex-direction:column;padding:8px 22px 22px;background:#fff;border:2px solid #000;border-radius:28px;box-shadow:4px 4px 0 #000}
+.cbig{display:flex;align-items:center;min-height:56px;padding:6px 0;border-bottom:1.5px dashed #000;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;font-size:26px;line-height:1;color:#000;text-decoration:none}
+.cbig:last-of-type{border-bottom:0}
+.cbig.on{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.cunis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.cuni{display:flex;align-items:center;min-height:44px;padding:0 12px 0 calc(12px + .12em);border:2px solid #000;border-radius:999px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:#000;text-decoration:none;white-space:nowrap}
+.cuni.on{background:#000!important;color:#fff}
+.clab{margin-top:14px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:#4a4a4a}
+.cpanel .btn{margin-top:18px;width:100%}
+.ctel{margin-top:14px;font-size:14px;color:#000;text-align:center}
+.cn:focus-visible,.ud:focus-visible,.cuni:focus-visible,.cbig:focus-visible,.cmenu summary:focus-visible{outline:3px solid #000;outline-offset:3px}
+@media (max-width:1320px){.cap{grid-template-columns:1fr auto;padding:6px 6px 6px 22px}
+.cnav,.cend{display:none}
+.cmenu{display:block}}
+@media (max-width:760px){.capw{padding-top:12px;padding-bottom:12px}
+.cap .clogo img{height:34px}
+.cap{min-height:60px}}
+/* ---- Bouton principal plein ---- */
+.btn.dk{background:#000;color:#fff;box-shadow:none}
+.btn.dk:hover{background:#fff;color:#000;box-shadow:none;transform:none}
+.btn.dk:active{transform:scale(.96)}
+/* ---- Pied de page ---- */
+.ft .fcol{display:flex;flex-direction:column;align-items:flex-start;gap:12px;font-size:15px;line-height:1.5;min-width:0}
+.ft .fcol .k{margin-bottom:4px}
+.ftl{color:#fff;text-decoration:none;overflow-wrap:anywhere;transition:color .15s}
+.ftl:hover{color:#ffc7cd;text-decoration:underline;text-underline-offset:4px}
+.fsoc{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 calc(16px + .12em);border:2px solid #fff;border-radius:999px;color:#fff;text-decoration:none;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:11px;white-space:nowrap;transition:background-color .15s,color .15s}
+.fsoc:hover{background:#fff;color:#000}
+.ftl:focus-visible,.fsoc:focus-visible{outline:3px solid #fff;outline-offset:3px}
+/* ---- Traiteur pro ---- */
+.devg{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);grid-template-rows:auto 1fr;grid-template-areas:"intro form" "faq form";gap:48px 64px;align-items:start}
+.devg>.dintro{grid-area:intro}
+.devg>form{grid-area:form}
+.devg>.dfaq{grid-area:faq}
+@media (max-width:980px){.devg{grid-template-columns:minmax(0,1fr);grid-template-rows:auto;grid-template-areas:"intro" "form" "faq"}}
+.fmts{list-style:none;margin:0;padding:0 32px;background:#fff;border:2px solid #000;border-radius:32px}
+.fmt{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1.25fr) 190px;align-items:center;gap:20px 28px;padding:28px 0;border-bottom:2px solid #000}
+.fmt:last-child{border-bottom:0}
+.fmt .btn{justify-self:stretch;min-height:48px;font-size:12px}
+.fmt p{margin:0;font-size:16px;line-height:1.55}
+.incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:2px solid #fff}
+.inc{display:flex;flex-direction:column;gap:12px;padding:26px 26px 28px 0;border-bottom:2px solid #fff}
+.inc:nth-child(2n){padding-left:26px;padding-right:0;border-left:2px solid #fff}
+.inc p{margin:0;font-size:15px;line-height:1.55;color:#e6e6e6}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:2px solid #fff;border-radius:28px}
+.step{display:flex;flex-direction:column;gap:12px;padding:28px 30px}
+.step+.step{border-left:2px solid #fff}
+.step p{margin:0;font-size:15px;line-height:1.55;color:#e6e6e6}
+@media (max-width:980px){.fmt{grid-template-columns:44px minmax(0,1fr)}
+.fmt p,.fmt .btn{grid-column:2}
+.fmt .btn{justify-self:start;width:auto}}
+@media (max-width:760px){.fmts{padding:0 20px}
+.incl{grid-template-columns:1fr}
+.inc,.inc:nth-child(2n){padding:22px 0;border-left:0}
+.steps{grid-template-columns:1fr}
+.step+.step{border-left:0;border-top:2px solid #fff}}
+@media (max-width:760px){.wrap{padding-left:20px;padding-right:20px}
+.p{font-size:16px}}
+@media (max-width:420px){h1.d{font-size:clamp(40px,14.5vw,60px)!important}}
 
 </style>
 </head>
 <body>
 
-<div style="background: #f7ba94; color: #000000; font-family: 'Varela Round', 'Arial Rounded MT Bold', system-ui, sans-serif; overflow-x: hidden">
+<div style="background: #f7ba94; color: #000000; font-family: 'Varela Round', 'Arial Rounded MT Bold', system-ui, sans-serif; overflow-x: clip">
 
-<!-- TOP BAR -->
-<div style="background: #000000">
-<div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 6px; padding-bottom: 6px">
-<nav aria-label="Univers Holocene" class="tbn" style="display: flex; gap: 4px; min-width: 0">
-<a href="01-accueil.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #ffc7cd"></span>Holocene</a>
-<a href="02-restaurant.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #e0cfe6"></span>Restaurant</a>
-<a href="04-traiteur.html" class="tb k" style="background: #f7ba94; color: #000000"><span style="width: 10px; height: 10px; border-radius: 50%; background: #fffaaf; box-shadow: 0 0 0 1.5px #000000"></span>Traiteur</a>
-<a href="05-food-truck.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #f7ba94"></span>Food truck</a>
+<!-- CAPSULE -->
+<header class="wrap capw">
+<div class="cap">
+<a href="04-traiteur.html" class="clogo" aria-label="Holocene Traiteur"><img src="../../public/brand/logo-holocene-traiteur.svg" alt="Holocene Traiteur"></a>
+<nav aria-label="Navigation du traiteur" class="cnav">
+<a href="#pourqui" class="cn">Pour qui</a>
+<a href="#formats" class="cn">Formats &amp; menus</a>
+<a href="#service" class="cn">Clé en main</a>
+<a href="#references" class="cn">Références</a>
 </nav>
-<a href="tel:+33532740833" class="tb k hide-m">05 32 74 08 33</a>
+<div class="cend">
+<div class="unis" role="group" aria-label="Changer d'univers">
+<a href="01-accueil.html" class="ud" style="background: #ffc7cd" aria-label="Holocene"><span class="tip">Holocene</span></a>
+<a href="05-food-truck.html" class="ud" style="background: #d4ffff" aria-label="Food truck"><span class="tip">Food truck</span></a>
+<a href="04-traiteur.html" class="ud on" style="background: #f7ba94" aria-label="Traiteur, univers actuel" aria-current="true"><span class="tip">Traiteur</span></a>
+<a href="02-restaurant.html" class="ud" style="background: #fbf4b1" aria-label="Restaurant"><span class="tip">Restaurant</span></a>
 </div>
+<a href="#devis" class="btn dk">Demander un devis</a>
 </div>
-
-<!-- HEADER -->
-<header class="wrap hdr" style="padding-top: 20px; padding-bottom: 20px">
-<a href="04-traiteur.html" aria-label="Holocene Traiteur" style="display: flex; justify-self: start"><img src="../../public/brand/logo-holocene-traiteur.svg" alt="Holocene Traiteur" style="height: 52px; width: auto; display: block"></a>
-<nav aria-label="Navigation du traiteur" class="hnav">
-<a href="#pourqui" class="nav">Pour qui</a>
-<a href="#formats" class="nav">Formats &amp; menus</a>
-<a href="#etapes" class="nav">Comment ça marche</a>
-<a href="#references" class="nav">Références</a>
-</nav>
-<div class="hend">
+<details class="cmenu"><summary aria-label="Menu" style="background: #fffaaf"><svg class="ico-b" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg><svg class="ico-x" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></summary>
+<div class="cpanel">
+<a href="#pourqui" class="cbig">Pour qui</a>
+<a href="#formats" class="cbig">Formats &amp; menus</a>
+<a href="#service" class="cbig">Clé en main</a>
+<a href="#references" class="cbig">Références</a>
+<span class="clab">Nos univers</span>
+<div class="cunis">
+<a href="01-accueil.html" class="cuni" style="background: #ffc7cd">Holocene</a>
+<a href="05-food-truck.html" class="cuni" style="background: #d4ffff">Food truck</a>
+<a href="04-traiteur.html" class="cuni on" style="background: #f7ba94">Traiteur</a>
+<a href="02-restaurant.html" class="cuni" style="background: #fbf4b1">Restaurant</a>
+</div>
 <a href="#devis" class="btn dk">Demander un devis</a>
-<details class="mnav"><summary aria-label="Ouvrir le menu" style="background: #fffaaf"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg></summary>
-<div class="mpanel">
-<a href="#pourqui" class="nav">Pour qui</a>
-<a href="#formats" class="nav">Formats &amp; menus</a>
-<a href="#etapes" class="nav">Comment ça marche</a>
-<a href="#references" class="nav">Références</a>
-<a href="#devis" class="btn dk">Demander un devis</a>
+<a href="tel:+33532740833" class="ctel">05 32 74 08 33</a>
 </div>
 </details>
 </div>
@@ -103,18 +178,19 @@ summary::-webkit-details-marker{display:none}
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(540px, 100%), 1fr)); gap: 56px; align-items: center">
 <div style="display: flex; flex-direction: column; gap: 30px; align-items: flex-start">
 <span class="v" style="font-size: 30px">Sur mesure</span>
-<h1 class="d" style="font-size: clamp(60px, 8.6vw, 136px)">Votre<br>événement.<br>Notre<br>cuisine.</h1>
+<h1 class="d" style="font-size: clamp(52px, 5.8vw, 84px)">Votre<br>événement.<br>Notre<br>cuisine.</h1>
 <p class="p" style="font-size: 20px; max-width: 540px">Traiteur à Toulouse et partout en Occitanie. Des produits frais achetés en direct aux producteurs, des menus qui suivent les saisons, et une équipe qui s'occupe de tout — de 40 à 1500 invités.</p>
 <div style="display: flex; gap: 14px; flex-wrap: wrap">
 <a href="#devis" class="btn dk">Demander un devis</a>
 <a href="#formats" class="btn" style="background: #fffaaf">Voir les menus</a>
 </div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px 0; width: 100%; max-width: 540px; margin-top: 6px; padding-top: 20px; border-top: 2px solid #000000">
+<div style="display: flex; flex-direction: column; gap: 8px; padding-right: 28px"><span class="k" style="font-size: 10px">Invités</span><span class="d" style="font-size: 24px; line-height: 1">40 - 1500</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; padding-left: 28px; border-left: 2px solid #000000"><span class="k" style="font-size: 10px">Régimes</span><span style="font-size: 17px; line-height: 1.3">Végé, halal, sans gluten</span></div>
 </div>
-<div style="position: relative; padding: 24px 24px 24px 0">
-<img src="../../public/images/verrines-peas.jpg" alt="Bouchées petits pois, tuiles croustillantes et foie gras sur pain de campagne, en buffet cocktail" style="width: 100%; aspect-ratio: 1 / 1; object-fit: cover; display: block; border: 2px solid #000000; border-radius: 32px; box-shadow: 10px 10px 0 #000000">
-<img src="../../public/brand/icon-traiteur.svg" alt="" aria-hidden="true" style="position: absolute; top: -40px; right: -10px; height: 170px; width: auto; transform: rotate(10deg)">
-<span class="pill" style="position: absolute; left: -22px; bottom: 120px; background: #fffaaf; font-size: 15px; padding: 12px 22px; transform: rotate(-7deg)">40 - 1500 invités</span>
-<span class="pill" style="position: absolute; left: 60px; bottom: 6px; background: #ffffff; font-size: 13px; padding: 11px 20px; transform: rotate(4deg)">Végé - halal - sans gluten</span>
+</div>
+<div style="padding: 0 10px 10px 0">
+<img src="../../public/images/verrines-peas.jpg" alt="Bouchées petits pois, tuiles croustillantes et foie gras sur pain de campagne, en buffet cocktail" style="width: 100%; aspect-ratio: 5 / 4; object-fit: cover; display: block; border: 2px solid #000000; border-radius: 32px; box-shadow: 10px 10px 0 #000000;">
 </div>
 </div>
 </section>
@@ -122,25 +198,27 @@ summary::-webkit-details-marker{display:none}
 <!-- POUR QUI -->
 <section id="pourqui" style="background: #ffffff; border-top: 2px solid #000000; border-bottom: 2px solid #000000">
 <div class="wrap" style="padding-top: 112px; padding-bottom: 112px">
-<h2 class="d" style="font-size: clamp(48px, 6vw, 92px); margin-bottom: 48px">Pour qui on cuisine</h2>
+<div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 48px"><h2 class="d" style="font-size: clamp(48px, 6vw, 92px)">Pour qui on cuisine</h2><p class="p" style="max-width: 420px">Deux savoir-faire, une même exigence : la cuisine d'un chef formé en maison étoilée, servie à l'échelle de votre événement.</p></div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 24px">
 <div style="display: flex; flex-direction: column; gap: 24px; padding: 40px; border: 2px solid #000000; border-radius: 36px; background: #ffffdb">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap"><span class="d" style="font-size: 52px">Entreprises</span><span class="pill" style="background: #ffffff">Toulouse &amp; métropole</span></div>
 <div>
-<div class="li">Déjeuners d'affaires et plateaux-repas</div>
+<div class="li">Petits-déjeuners et pauses café</div>
+<div class="li">Déjeuners d'affaires et plateaux-repas livrés</div>
 <div class="li">Cocktails déjeunatoires et dînatoires</div>
 <div class="li">Séminaires, conventions, lancements de produit</div>
-<div class="li" style="border-bottom: 0">Soirées clients et réceptions privées</div>
+<div class="li" style="border-bottom: 0">Soirées clients, inaugurations, fêtes de fin d'année</div>
 </div>
 <p style="margin: 0; font-size: 14px; line-height: 1.6">Toulouse, Balma, Blagnac, Colomiers, Cornebarrieu, Cugnaux, L'Union…</p>
 </div>
 <div style="display: flex; flex-direction: column; gap: 24px; padding: 40px; border: 2px solid #000000; border-radius: 36px; background: #fffaaf; box-shadow: 10px 10px 0 #000000">
 <div style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap"><span class="d" style="font-size: 52px">Particuliers</span><span class="pill" style="background: #ffffff">Toute l'Occitanie</span></div>
 <div>
-<div class="li">Mariages — plus de 150 déjà servis</div>
-<div class="li">Anniversaires et baptêmes</div>
+<div class="li">Mariages : vin d'honneur, dîner, bar de nuit — plus de 150 déjà servis</div>
 <div class="li">Brunch du lendemain, avec le food truck</div>
-<div class="li" style="border-bottom: 0">Fêtes de famille et grandes tablées</div>
+<div class="li">Anniversaires et baptêmes</div>
+<div class="li">Cousinades et fêtes de famille</div>
+<div class="li" style="border-bottom: 0">Buffets froids ou chauds, cocktails, repas à l'assiette</div>
 </div>
 <p style="margin: 0; font-size: 14px; line-height: 1.6">Haute-Garonne, Tarn, Tarn-et-Garonne, Aude, Ariège, Gers…</p>
 </div>
@@ -152,68 +230,39 @@ summary::-webkit-details-marker{display:none}
 <section id="formats" class="wrap" style="padding-top: 112px; padding-bottom: 112px">
 <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 48px">
 <h2 class="d" style="font-size: clamp(48px, 6vw, 92px)">Formats<br>&amp; menus</h2>
-<p class="p" style="max-width: 440px">Chaque menu change avec les saisons. Téléchargez celui qui vous parle, on l'adapte ensuite à votre thème, votre budget et vos invités.</p>
+<p class="p" style="max-width: 440px">Nos menus changent avec les saisons. Téléchargez celui qui correspond à votre format : on l'adapte ensuite à votre thème, votre budget et vos invités.</p>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr)); gap: 20px">
-<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 28px; min-height: 380px; padding: 30px; border: 2px solid #000000; border-radius: 32px; background: #ffffff">
-<div style="display: flex; flex-direction: column; gap: 14px"><span class="k">01</span><span class="d" style="font-size: 34px">Cocktail déjeunatoire &amp; dînatoire</span><p style="margin: 0; font-size: 15px; line-height: 1.55">Pièces salées et sucrées, ateliers, bar. Debout, convivial, rythmé.</p></div>
-<a href="#formats" class="btn" style="align-self: flex-start">Menu — PDF</a>
-</div>
-<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 28px; min-height: 380px; padding: 30px; border: 2px solid #000000; border-radius: 32px; background: #ffffff">
-<div style="display: flex; flex-direction: column; gap: 14px"><span class="k">02</span><span class="d" style="font-size: 34px">Repas assis</span><p style="margin: 0; font-size: 15px; line-height: 1.55">Entrée, plat, dessert servis à l'assiette, comme au restaurant, mais chez vous.</p></div>
-<a href="#formats" class="btn" style="align-self: flex-start">Menu — PDF</a>
-</div>
-<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 28px; min-height: 380px; padding: 30px; border: 2px solid #000000; border-radius: 32px; background: #fffaaf">
-<div style="display: flex; flex-direction: column; gap: 14px"><span class="k">03</span><span class="d" style="font-size: 34px">Mariages &amp; brunch</span><p style="margin: 0; font-size: 15px; line-height: 1.55">Vin d'honneur, dîner, bar de nuit et brunch du lendemain. On orchestre toute la journée.</p></div>
-<a href="#formats" class="btn" style="align-self: flex-start">Menu — PDF</a>
-</div>
-<div style="display: flex; flex-direction: column; justify-content: space-between; gap: 20px; min-height: 380px; padding: 30px; border: 2px solid #000000; border-radius: 32px; background: #000000; color: #ffffff">
-<div style="display: flex; flex-direction: column; gap: 14px"><span class="k" style="color: #fffaaf">04</span><span class="d" style="font-size: 34px">La box</span><p style="margin: 0; font-size: 15px; line-height: 1.55; color: #e6e6e6">Le plateau-repas version Holocene, livré au bureau. Frais, local, de saison.</p></div>
-<span class="v" style="font-size: 26px; color: #fffaaf">Great food inside</span>
-<a href="#devis" class="btn" style="align-self: flex-start; box-shadow: 4px 4px 0 #fffaaf">Commander</a>
-</div>
-</div>
+<ul class="fmts">
+<li class="fmt"><span class="k">01</span><span class="d" style="font-size: 30px; line-height: .95">Cocktail déjeunatoire &amp; dînatoire</span><p>Pièces salées et sucrées, chaudes et froides, ateliers en live et bar. De 14 à 18 pièces par personne pour un dînatoire.</p><a href="https://cdn.prod.website-files.com/675844824e0b7ff1b98c298d/67f3946367a711c244469c99_Menu%20Cocktail%20-%20Holocene%20Traiteur.pdf" target="_blank" rel="noopener" class="btn" style="background: #fffaaf">Menu PDF<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a></li>
+<li class="fmt"><span class="k">02</span><span class="d" style="font-size: 30px; line-height: .95">Repas assis</span><p>Entrée, plat, fromage, dessert servis à l'assiette par nos maîtres d'hôtel. Ou en buffet, froid ou chaud.</p><a href="https://cdn.prod.website-files.com/675844824e0b7ff1b98c298d/67f3946390b7e9bf4ac293ec_Menu%20Repas%20Assis%20-%20Holocene%20Traiteur.pdf" target="_blank" rel="noopener" class="btn" style="background: #fffaaf">Menu PDF<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a></li>
+<li class="fmt"><span class="k">03</span><span class="d" style="font-size: 30px; line-height: .95">Mariages &amp; brunch</span><p>Vin d'honneur, cocktail, dîner, bar de nuit et brunch du lendemain : toute la journée, un seul traiteur.</p><a href="https://cdn.prod.website-files.com/675844824e0b7ff1b98c298d/68c412e6714f1b5974cd8705_b408cadb132aa856998e403ae30110ae_Catalogue%20Mariage%20-%20Holocene%20Traiteur.pdf" target="_blank" rel="noopener" class="btn" style="background: #fffaaf">Catalogue PDF<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a></li>
+<li class="fmt"><span class="k">04</span><span class="d" style="font-size: 30px; line-height: .95">La box</span><p>Le plateau-repas Holocene livré au bureau, pour vos réunions et formations. Frais, local, de saison.</p><a href="#devis" class="btn" style="background: #fffaaf">Commander</a></li>
+</ul>
+<p style="margin: 24px 0 0; font-size: 15px; line-height: 1.6"><span class="k" style="font-size: 10px; margin-right: 12px">Un avant-goût</span>Tartelette de cabillaud gravlax, gyoza toulousain, ceviche de dorade sauvage, magret IGP du Gers rôti, tarte citron meringuée…</p>
 </section>
 
-<!-- EXEMPLE MENU -->
-<section style="background: #fcdbbf; border-top: 2px solid #000000; border-bottom: 2px solid #000000">
-<div class="wrap" style="padding-top: 112px; padding-bottom: 112px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 56px; align-items: center">
-<img src="../../public/images/verrines-jars.jpg" alt="Verrines de gaspacho surmontées de stracciatella, en buffet" style="width: 100%; aspect-ratio: 3 / 4; object-fit: cover; display: block; border: 2px solid #000000; border-radius: 32px">
-<div style="display: flex; flex-direction: column; gap: 32px">
-<div style="display: flex; flex-direction: column; gap: 16px"><span class="v" style="font-size: 28px">Exemple de menu</span><h2 class="d" style="font-size: clamp(44px, 5vw, 76px)">Cocktail dînatoire</h2></div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 28px 40px">
-<div><span class="k">Pièces salées</span><div class="li">Tartelette de cabillaud gravlax</div><div class="li">Panna cotta de carotte</div><div class="li" style="border-bottom: 0">Gyoza toulousain</div></div>
-<div><span class="k">Entrées</span><div class="li">Ceviche de dorade sauvage</div><div class="li">Poitrine de porc fumée</div><div class="li" style="border-bottom: 0">Tataki de bœuf</div></div>
-<div><span class="k">Plats</span><div class="li">Magret IGP du Gers rôti</div><div class="li">Filet de veau basse température</div><div class="li" style="border-bottom: 0">Filet de dorade</div></div>
-<div><span class="k">Desserts</span><div class="li">Royal chocolat</div><div class="li">Entremets pistache-framboise</div><div class="li" style="border-bottom: 0">Tarte citron meringuée</div></div>
-</div>
-</div>
-</div>
-</section>
-
-<!-- ETAPES -->
-<section id="etapes" style="background: #000000; color: #ffffff">
+<!-- CLE EN MAIN -->
+<section id="service" style="background: #000000; color: #ffffff">
 <div class="wrap" style="padding-top: 112px; padding-bottom: 112px">
 <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; flex-wrap: wrap; margin-bottom: 56px">
-<div style="display: flex; flex-direction: column; gap: 18px"><span class="k" style="color: #fffaaf">Comment ça marche</span><h2 class="d" style="font-size: clamp(48px, 6vw, 92px)">On s'occupe<br>de tout.</h2></div>
-<p class="p" style="max-width: 420px; color: #e6e6e6">Un seul interlocuteur du premier appel au dernier verre.</p>
+<div style="display: flex; flex-direction: column; gap: 18px"><span class="k" style="color: #fffaaf">Clé en main</span><h2 class="d" style="font-size: clamp(48px, 6vw, 92px)">On s'occupe<br>de tout.</h2></div>
+<p class="p" style="max-width: 420px; color: #e6e6e6">Un seul interlocuteur, du premier appel au dernier verre. Tout ce qui suit est compris dans nos prestations, ajusté à votre format.</p>
 </div>
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr)); gap: 24px">
-<div style="display: flex; flex-direction: column; gap: 22px; padding: 36px; border: 2px solid #ffffff; border-radius: 32px">
-<span class="d" style="font-size: 96px; color: #fffaaf">01</span>
-<span class="d" style="font-size: 32px">Avant</span>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #e6e6e6">Un appel pour comprendre votre projet, un cahier des charges précis, et une dégustation si vous le souhaitez.</p>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 48px; align-items: start; margin-bottom: 56px">
+<img src="../../public/images/verrines-jars.jpg" alt="Verrines de gaspacho surmontées de stracciatella, en buffet" style="width: 100%; aspect-ratio: 4 / 3; object-fit: cover; display: block; border: 2px solid #ffffff; border-radius: 32px">
+<div class="incl">
+<div class="inc"><span class="d" style="font-size: 24px">Un chef de projet</span><p>Votre contact unique : il cadre le projet, chiffre le devis et coordonne le jour J.</p></div>
+<div class="inc"><span class="d" style="font-size: 24px">La cuisine sur place</span><p>Nos chefs cuisinent et dressent sur votre lieu. Animations plancha, découpe ou fumaison à la demande.</p></div>
+<div class="inc"><span class="d" style="font-size: 24px">Le service</span><p>Maîtres d'hôtel et serveurs en tenue : en cocktail, un serveur pour 25 invités.</p></div>
+<div class="inc"><span class="d" style="font-size: 24px">Le bar</span><p>Vins de la région, bières de brasseurs toulousains, cocktails. Bar de nuit sur demande.</p></div>
+<div class="inc"><span class="d" style="font-size: 24px">Le matériel</span><p>Vaisselle, verrerie réutilisable, nappage. Mobilier et décoration via nos partenaires locaux.</p></div>
+<div class="inc"><span class="d" style="font-size: 24px">Zéro gaspi</span><p>On range, on nettoie, on repart. Les surplus sont redistribués via une association partenaire.</p></div>
 </div>
-<div style="display: flex; flex-direction: column; gap: 22px; padding: 36px; border: 2px solid #ffffff; border-radius: 32px; background: #fffaaf; color: #000000">
-<span class="d" style="font-size: 96px">02</span>
-<span class="d" style="font-size: 32px">Le jour J</span>
-<p style="margin: 0; font-size: 16px; line-height: 1.6">Installation, cuisine sur place, service tout au long de l'événement. Bar de nuit sur demande.</p>
 </div>
-<div style="display: flex; flex-direction: column; gap: 22px; padding: 36px; border: 2px solid #ffffff; border-radius: 32px">
-<span class="d" style="font-size: 96px; color: #fffaaf">03</span>
-<span class="d" style="font-size: 32px">Après</span>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #e6e6e6">On range, on nettoie, et on vous demande votre avis pour faire encore mieux la prochaine fois.</p>
-</div>
+<div class="steps">
+<div class="step"><span class="k" style="color: #fffaaf">01 — Avant</span><p>Un appel pour comprendre votre projet, un devis détaillé, une dégustation si vous le souhaitez.</p></div>
+<div class="step"><span class="k" style="color: #fffaaf">02 — Le jour J</span><p>Installation, cuisine, service et bar, orchestrés par votre chef de projet du début à la fin.</p></div>
+<div class="step"><span class="k" style="color: #fffaaf">03 — Après</span><p>Remise en état du lieu, puis un court questionnaire pour faire encore mieux la prochaine fois.</p></div>
 </div>
 </div>
 </section>
@@ -223,24 +272,24 @@ summary::-webkit-details-marker{display:none}
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(460px, 100%), 1fr)); gap: 56px; align-items: start">
 <div style="display: flex; flex-direction: column; gap: 28px">
 <h2 class="d" style="font-size: clamp(44px, 5vw, 76px)">Ils nous ont fait confiance</h2>
-<div style="display: flex; flex-wrap: wrap; gap: 12px">
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">Airbus</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">Safran</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">ATR</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #fffaaf">Aeroscopia</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">Pathé</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">Tisséo</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">Région Occitanie</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">Boehringer Ingelheim</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #fffaaf">E.Leclerc</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">Ferrari</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">CPME 31</span>
-<span class="pill" style="font-size: 16px; padding: 14px 22px; background: #ffffff">Onet</span>
-</div>
+<ul class="refs r3">
+<li class="ref"><span class="k">Aéronautique</span><b>Airbus</b></li>
+<li class="ref"><span class="k">Aéronautique</span><b>Safran</b></li>
+<li class="ref"><span class="k">Aéronautique</span><b>ATR</b></li>
+<li class="ref"><span class="k">Musée</span><b>Aeroscopia</b></li>
+<li class="ref"><span class="k">Cinéma</span><b>Pathé</b></li>
+<li class="ref"><span class="k">Transports</span><b>Tisséo</b></li>
+<li class="ref"><span class="k">Institution</span><b>Région Occitanie</b></li>
+<li class="ref"><span class="k">Laboratoire</span><b>Boehringer Ingelheim</b></li>
+<li class="ref"><span class="k">Distribution</span><b>E.Leclerc</b></li>
+<li class="ref"><span class="k">Automobile</span><b>Ferrari</b></li>
+<li class="ref"><span class="k">Entreprises</span><b>CPME 31</b></li>
+<li class="ref"><span class="k">Services</span><b>Onet</b></li>
+</ul>
 </div>
 <figure style="margin: 0; display: flex; flex-direction: column; gap: 28px; padding: 44px; border: 2px solid #000000; border-radius: 36px; background: #ffffff; box-shadow: 10px 10px 0 #000000">
 <img src="../../public/brand/icon-traiteur.svg" alt="" aria-hidden="true" style="height: 80px; width: auto; align-self: flex-start">
-<blockquote style="margin: 0; font-size: 28px; line-height: 1.35">« [Avis client à intégrer — idéalement un mariage ou un séminaire, avec prénom et événement.] »</blockquote>
+<blockquote style="margin: 0; font-size: clamp(22px, 2.2vw, 28px); line-height: 1.35">« [Avis client à intégrer — idéalement un mariage ou un séminaire, avec prénom et événement.] »</blockquote>
 <figcaption class="k">[Prénom — type d'événement — date]</figcaption>
 </figure>
 </div>
@@ -248,17 +297,28 @@ summary::-webkit-details-marker{display:none}
 
 <!-- DEVIS -->
 <section id="devis" style="background: #ffffff; border-top: 2px solid #000000">
-<div class="wrap" style="padding-top: 112px; padding-bottom: 112px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(400px, 100%), 1fr)); gap: 64px; align-items: start">
-<div style="display: flex; flex-direction: column; gap: 26px">
+<div class="wrap devg" style="padding-top: 112px; padding-bottom: 112px">
+<div class="dintro" style="display: flex; flex-direction: column; gap: 26px">
 <span class="k">Demande de devis</span>
 <h2 class="d" style="font-size: clamp(44px, 5vw, 76px)">Parlons de votre événement.</h2>
-<p class="p">Date, lieu, nombre d'invités, envies : on revient vers vous avec une proposition sur mesure.</p>
+<p class="p">Date, lieu, nombre d'invités, envies : on vous répond avec une proposition chiffrée et un menu sur mesure.</p>
 <div style="display: flex; flex-direction: column; gap: 10px; padding: 24px; border: 2px dashed #000000; border-radius: 24px">
 <span class="k">Ligne traiteur &amp; food truck</span>
 <a href="tel:+33532740833" class="d" style="font-size: 32px; text-decoration: none">05 32 74 08 33</a>
 </div>
 </div>
-<form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr)); gap: 20px; padding: 40px; border: 2px solid #000000; border-radius: 36px; background: #fcdbbf; box-shadow: 10px 10px 0 #000000">
+<div class="dfaq" style="display: flex; flex-direction: column; gap: 20px">
+<h3 class="d" style="font-size: 32px">Questions fréquentes</h3>
+<div style="border-top: 2px solid #000000">
+<details open><summary>À partir de combien d'invités ? <span class="d" aria-hidden="true" style="font-size: 28px">-</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">On intervient à partir de 40 invités, et jusqu'à 1500 sur un même événement.</p></details>
+<details><summary>Jusqu'où vous déplacez-vous ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Toulouse et sa métropole, et toute l'Occitanie : Tarn, Tarn-et-Garonne, Aude, Ariège, Gers.</p></details>
+<details><summary>Le service est-il compris ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Oui. Nos maîtres d'hôtel et serveurs assurent la mise en place, le service et la remise en état. Leur nombre est adapté à votre format et figure sur le devis.</p></details>
+<details><summary>Gérez-vous les régimes alimentaires ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Oui : végétarien, halal, sans gluten, sans lactose. Indiquez-les dans votre demande, on les intègre au menu.</p></details>
+<details><summary>Proposez-vous une dégustation ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Oui, elle peut être organisée en amont, notamment pour les mariages.</p></details>
+<details><summary>Peut-on combiner traiteur et food truck ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Bien sûr — le combo préféré pour un mariage : dîner au traiteur, brunch du lendemain au food truck.</p></details>
+</div>
+</div>
+<form style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px; padding: 40px; border: 2px solid #000000; border-radius: 36px; background: #fcdbbf; box-shadow: 10px 10px 0 #000000">
 <div class="fld"><label for="tnom">Nom complet</label><input id="tnom" type="text" placeholder="Camille Durand"></div>
 <div class="fld"><label for="tsoc">Société (si pro)</label><input id="tsoc" type="text" placeholder="Optionnel"></div>
 <div class="fld"><label for="tmail">E-mail</label><input id="tmail" type="email" placeholder="camille@exemple.fr"></div>
@@ -267,55 +327,42 @@ summary::-webkit-details-marker{display:none}
 <div class="fld"><label for="tdate">Date</label><input id="tdate" type="date"></div>
 <div class="fld"><label for="tlieu">Lieu</label><input id="tlieu" type="text" placeholder="Ville ou nom du lieu"></div>
 <div class="fld"><label for="tinv">Nombre d'invités</label><input id="tinv" type="number" placeholder="120"></div>
-<div class="fld" style="grid-column: 1 / -1"><label for="tmsg">Votre projet</label><textarea id="tmsg" placeholder="Ambiance, horaires, budget par personne, régimes alimentaires…"></textarea></div>
+<div class="fld"><label for="tfmt">Format souhaité</label><select id="tfmt"><option>Cocktail</option><option>Repas assis</option><option>Buffet</option><option>Food truck</option><option>Box et plateaux-repas</option><option>Je ne sais pas encore</option></select></div>
+<div class="fld"><label for="tbud">Budget par personne</label><input id="tbud" type="text" placeholder="Ex. 45 € TTC"></div>
+<div class="fld" style="grid-column: 1 / -1"><label for="tmsg">Votre projet</label><textarea id="tmsg" placeholder="Ambiance, horaires, service, régimes alimentaires…"></textarea></div>
 <div style="grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap">
 <span style="font-size: 13px">Vos données servent uniquement à vous répondre.</span>
 <button type="button" class="btn dk">Envoyer ma demande</button>
 </div>
 </form>
 </div>
-<div class="wrap" style="padding-bottom: 112px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(420px, 100%), 1fr)); gap: 48px">
-<h2 class="d" style="font-size: clamp(40px, 4.4vw, 64px)">Questions fréquentes</h2>
-<div style="border-top: 2px solid #000000">
-<details open><summary>À partir de combien d'invités ? <span class="d" aria-hidden="true" style="font-size: 28px">-</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">On intervient à partir de 40 invités, et jusqu'à 1500 sur un même événement.</p></details>
-<details><summary>Jusqu'où vous déplacez-vous ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Toulouse et sa métropole, et toute l'Occitanie : Tarn, Tarn-et-Garonne, Aude, Ariège, Gers.</p></details>
-<details><summary>Proposez-vous une dégustation ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Oui, elle peut être organisée en amont, notamment pour les mariages.</p></details>
-<details><summary>Peut-on combiner traiteur et food truck ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Bien sûr — le combo préféré pour un mariage : dîner au traiteur, brunch du lendemain au food truck.</p></details>
-</div>
-</div>
 </section>
 
 <!-- SKYLINE + FOOTER -->
-<img src="../../public/brand/illustration-toulouse.svg" alt="Illustration de Toulouse : le dôme de la Grave, le Pont-Neuf, l'aérospatiale et Saint-Sernin" style="display: block; width: 100%; height: auto; margin-bottom: -2px; background: #ffffff">
-<footer style="background: #000000; color: #ffffff">
-<div class="wrap" style="padding-top: 72px; padding-bottom: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: 40px">
-<div style="display: flex; flex-direction: column; gap: 20px">
-<img src="../../public/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" style="height: 58px; width: auto; align-self: flex-start">
+<div style="background: #ffffff; border-top: 2px solid #000000; padding-top: 40px">
+<img src="../../public/brand/illustration-toulouse.svg" alt="Illustration de Toulouse : le dôme de la Grave, le Pont-Neuf, l'aéronautique et Saint-Sernin" style="display: block; width: 100%; height: auto">
+</div>
+<footer class="ft" style="background: #000000; color: #ffffff">
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 28px 40px; flex-wrap: wrap; padding-top: 64px; padding-bottom: 48px">
+<div style="display: flex; flex-direction: column; gap: 18px; max-width: 440px">
+<img src="../../public/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" style="height: 56px; width: auto; align-self: flex-start">
 <p style="margin: 0; color: #cfcfcf; font-size: 15px; line-height: 1.6">Restaurant, traiteur et food truck à Balma, Toulouse et partout en Occitanie.</p>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.5">
-<span class="k" style="color: #fbf4b1">Restaurant</span>
-<span>14 rue Louis Renault<br>31130 Balma</span>
-<span>Lundi - vendredi, 12h - 14h</span>
-<a href="tel:+33532740834" class="fl">05 32 74 08 34</a>
+<nav aria-label="Réseaux sociaux" style="display: flex; gap: 10px; flex-wrap: wrap">
+<a href="https://www.instagram.com/holocene.tlse/" class="fsoc" target="_blank" rel="noopener">Instagram <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a href="https://fr-fr.facebook.com/holocene.tlse/" class="fsoc" target="_blank" rel="noopener">Facebook <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a href="https://www.linkedin.com/company/holocenetlse/" class="fsoc" target="_blank" rel="noopener">LinkedIn <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+</nav>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.5">
-<span class="k" style="color: #f7ba94">Traiteur &amp; food truck</span>
-<a href="tel:+33532740833" class="fl">05 32 74 08 33</a>
-<a href="mailto:contact@holocene-traiteur.fr" class="fl">contact@holocene-traiteur.fr</a>
-<span>Toulouse, Haute-Garonne et toute l'Occitanie</span>
+<div class="wrap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 40px 32px; padding-top: 48px; padding-bottom: 56px; border-top: 1px solid #333333">
+<div class="fcol"><span class="k" style="color: #fbf4b1">Restaurant</span><span>14 rue Louis Renault<br>31130 Balma</span><span>Lundi - vendredi, 12h - 14h<br>De mai à septembre, aussi jeudi et vendredi soir, 19h - 22h30</span><a href="tel:+33532740834" class="ftl">05 32 74 08 34</a><a href="https://bookings.zenchef.com/results?rid=368665&amp;pid=1001" class="ftl" target="_blank" rel="noopener">Réserver une table</a></div>
+<div class="fcol"><span class="k" style="color: #f7ba94">Traiteur &amp; food truck</span><a href="tel:+33532740833" class="ftl">05 32 74 08 33</a><a href="mailto:contact@holocene-traiteur.fr" class="ftl">contact@holocene-traiteur.fr</a><span>Toulouse et toute l'Occitanie</span></div>
+<nav class="fcol" aria-label="Nos univers"><span class="k" style="color: #d4ffff">Nos univers</span><a href="02-restaurant.html" class="ftl">Restaurant</a><a href="03-privatiser.html" class="ftl">Privatiser le restaurant</a><a href="04-traiteur.html" class="ftl">Traiteur</a><a href="05-food-truck.html" class="ftl">Food truck</a></nav>
+<nav class="fcol" aria-label="La maison"><span class="k" style="color: #ffc7cd">La maison</span><a href="01-accueil.html" class="ftl">Accueil</a><a href="06-equipe.html" class="ftl">L'équipe</a><a href="07-journal.html" class="ftl">Journal</a><a href="08-contact.html" class="ftl">Contact &amp; devis</a></nav>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
-<span class="k" style="color: #ffc7cd">Explorer</span>
-<a href="03-privatiser.html" class="fl">Privatiser le restaurant</a>
-<a href="06-equipe.html" class="fl">L'équipe</a>
-<a href="07-journal.html" class="fl">Journal</a>
-<a href="08-contact.html" class="fl">Contact &amp; devis</a>
-</div>
-</div>
-<div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid #333333; font-size: 13px; color: #cfcfcf">
-<span>© 2026 Holocene Food Event — Mentions légales</span>
-<div style="display: flex; gap: 20px"><a href="https://www.instagram.com" class="fl">Instagram</a><a href="https://www.facebook.com" class="fl">Facebook</a><a href="https://www.linkedin.com" class="fl">LinkedIn</a></div>
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid #333333; font-size: 13px; color: #cfcfcf">
+<span>© 2026 Holocene Food Event</span>
+<div style="display: flex; gap: 20px; flex-wrap: wrap"><a href="#" class="ftl">Mentions légales</a><a href="#" class="ftl">Confidentialité</a></div>
 </div>
 </footer>
 

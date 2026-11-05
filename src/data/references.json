@@ -1,0 +1,35 @@
+{
+  "_note": "Mur de références : 12 tuiles par page, toutes identiques. 'pages' = où la tuile apparaît, dans l'ordre de la liste. Catégories proposées dans la maquette : à faire valider par Holocene. 'autres' = noms trouvés sur le site actuel (logos) mais pas affichés dans la maquette ; utilisables plus tard (logos à récupérer sur le site actuel).",
+  "references": [
+    { "nom": "Airbus", "categorie": "Aéronautique", "pages": ["accueil", "traiteur"] },
+    { "nom": "Safran", "categorie": "Aéronautique", "pages": ["accueil", "traiteur"] },
+    { "nom": "ATR", "categorie": "Aéronautique", "pages": ["accueil", "traiteur"] },
+    { "nom": "Aeroscopia", "categorie": "Musée", "pages": ["accueil", "traiteur"] },
+    { "nom": "Toulouse FC", "categorie": "Sport", "pages": ["accueil", "food-truck"] },
+    { "nom": "Le Bikini", "categorie": "Salle de concert", "pages": ["accueil", "food-truck"] },
+    { "nom": "Big Flo & Oli", "categorie": "Concert", "pages": ["accueil", "food-truck"] },
+    { "nom": "Red Bull", "categorie": "Marque", "pages": ["accueil", "food-truck"] },
+    { "nom": "Pathé", "categorie": "Cinéma", "pages": ["accueil", "traiteur"] },
+    { "nom": "MEETT", "categorie": "Parc des expos", "pages": ["accueil", "food-truck"] },
+    { "nom": "Mairie de Toulouse", "categorie": "Institution", "pages": ["accueil", "food-truck"] },
+    { "nom": "E.Leclerc", "categorie": "Distribution", "pages": ["accueil", "traiteur"] },
+    { "nom": "Tisséo", "categorie": "Transports", "pages": ["traiteur"] },
+    { "nom": "Région Occitanie", "categorie": "Institution", "pages": ["traiteur"] },
+    { "nom": "Boehringer Ingelheim", "categorie": "Laboratoire", "pages": ["traiteur"] },
+    { "nom": "Ferrari", "categorie": "Automobile", "pages": ["traiteur"] },
+    { "nom": "CPME 31", "categorie": "Entreprises", "pages": ["traiteur"] },
+    { "nom": "Onet", "categorie": "Services", "pages": ["traiteur"] },
+    { "nom": "Food Truck Festival", "categorie": "Festival", "pages": ["food-truck"] },
+    { "nom": "Water Rugby", "categorie": "Sport", "pages": ["food-truck"] },
+    { "nom": "Diagora", "categorie": "Congrès", "pages": ["food-truck"] },
+    { "nom": "ISAE", "categorie": "Campus", "pages": ["food-truck"] },
+    { "nom": "Haute-Garonne", "categorie": "Département", "pages": ["food-truck"], "aConfirmer": "Le site dit seulement « Département » : supposé Haute-Garonne." },
+    { "nom": "Mas Tolosa", "categorie": "Événement", "pages": ["food-truck"], "aConfirmer": "Catégorie à confirmer." }
+  ],
+  "ordre": {
+    "accueil": ["Airbus", "Safran", "ATR", "Aeroscopia", "Toulouse FC", "Le Bikini", "Big Flo & Oli", "Red Bull", "Pathé", "MEETT", "Mairie de Toulouse", "E.Leclerc"],
+    "traiteur": ["Airbus", "Safran", "ATR", "Aeroscopia", "Pathé", "Tisséo", "Région Occitanie", "Boehringer Ingelheim", "E.Leclerc", "Ferrari", "CPME 31", "Onet"],
+    "food-truck": ["Food Truck Festival", "Le Bikini", "Big Flo & Oli", "Toulouse FC", "Red Bull", "Water Rugby", "MEETT", "Diagora", "ISAE", "Mairie de Toulouse", "Haute-Garonne", "Mas Tolosa"]
+  },
+  "autres": ["Miharu", "TMB", "Le Manoir du Princer", "Table Ovale", "Lions Club", "Adagio", "Château de la Garrigue", "Limayrac", "ISCOM", "Amplitude", "Médiane Group", "Interférence Club Toulouse", "Pause Guitare", "Pernille Christiansen PR", "Baronnie", "SAS Cargo", "Pure Event", "Crédit Agricole", "Fenix", "Bel Air", "Sipa Automobiles", "Les Spacers"]
+}

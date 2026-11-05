@@ -13,7 +13,8 @@
 body{margin:0}
 html,body{background:#000}
 *{box-sizing:border-box}
-a{color:#000}a:hover{color:#000}
+a{color:#000}
+a:hover{color:#000}
 .d{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.025em;line-height:.9;margin:0}
 .k{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:12px;line-height:1.3}
 .v{font-family:'Holo Vividly','Varela Round',cursive;text-transform:uppercase;letter-spacing:.05em;line-height:1}
@@ -21,78 +22,114 @@ a{color:#000}a:hover{color:#000}
 .wrap{width:100%;max-width:1360px;margin:0 auto;padding-left:48px;padding-right:48px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px 0 calc(26px + .12em);border:2px solid #000;border-radius:999px;background:#fff;color:#000;text-decoration:none;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px;box-shadow:4px 4px 0 #000;transition:transform .15s,box-shadow .15s;white-space:nowrap;cursor:pointer}
 .btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #000;color:#000}
-.btn.dk{background:#000;color:#fff}.btn.dk:hover{color:#fff}
-.pill{display:inline-flex;align-items:center;gap:8px;border:2px solid #000;border-radius:999px;padding:8px 16px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:12px;line-height:1;white-space:nowrap}
+.btn.dk{background:#000;color:#fff}
+.btn.dk:hover{color:#fff}
 .tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:18px;min-height:190px;padding:22px;border:2px solid #000;border-radius:28px;cursor:pointer;text-align:left;font-family:inherit;transition:transform .15s,box-shadow .15s}
 .tile:hover{transform:translate(-2px,-2px);box-shadow:6px 6px 0 #000}
-.nav{display:inline-flex;align-items:center;min-height:44px;padding:0 14px 0 calc(14px + .12em);border-radius:999px;text-decoration:none;color:#000;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px}
-.nav:hover{background:rgba(0,0,0,.08)}
-.tb{display:inline-flex;align-items:center;gap:8px;min-height:40px;padding:0 14px 0 calc(14px + .2em);border-radius:999px;color:#fff;text-decoration:none}
-.tb:hover{color:#fff;background:rgba(255,255,255,.12)}
-.fl{color:#fff;text-decoration:none}.fl:hover{color:#ffc7cd}
 .fld{display:flex;flex-direction:column;gap:8px}
 .fld label{font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11px}
 .fld input,.fld select,.fld textarea{font-family:'Varela Round',system-ui,sans-serif;font-size:17px;min-height:54px;padding:14px 18px;border:2px solid #000;border-radius:18px;background:#fff;color:#000;width:100%}
 .fld textarea{min-height:150px;resize:vertical}
-.tbn{overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}.tbn::-webkit-scrollbar{display:none}
-.tb{flex-shrink:0;white-space:nowrap}
-.hdr{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:24px}
-.hnav{display:flex;gap:4px;align-items:center;justify-content:center}
-.hend{display:flex;justify-content:flex-end;align-items:center;gap:12px}
-.nav.ondk{color:#fff}.nav.ondk:hover{background:rgba(255,255,255,.14);color:#fff}
-.btn.ondk{border-color:#fff;box-shadow:4px 4px 0 #fff}.btn.ondk:hover{box-shadow:2px 2px 0 #fff}
-.mnav{display:none;position:relative;border:0}
-.mnav summary{list-style:none;width:52px;height:52px;min-height:0;padding:0;gap:0;font-size:0;border:2px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;box-shadow:4px 4px 0 #000;transition:transform .15s,box-shadow .15s}
-.mnav summary::-webkit-details-marker{display:none}
-.mnav summary:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #000}
-.mpanel{position:absolute;right:0;top:calc(100% + 12px);z-index:30;min-width:270px;display:flex;flex-direction:column;gap:2px;padding:10px;background:#fff;border:2px solid #000;border-radius:24px;box-shadow:6px 6px 0 #000}
-.mpanel .nav{justify-content:flex-start;color:#000}
-.mpanel .btn{margin-top:8px;box-shadow:none}
-.nav:focus-visible,.btn:focus-visible,.tb:focus-visible,.mnav summary:focus-visible{outline:3px solid #000;outline-offset:3px}
-.tb:focus-visible,.nav.ondk:focus-visible,.btn.ondk:focus-visible{outline-color:#fff}
-@media (max-width:1180px){.hdr{grid-template-columns:1fr auto}.hnav{display:none}.mnav{display:block}}
-@media (max-width:640px){.hend>.btn{display:none}.tbn{-webkit-mask-image:linear-gradient(90deg,#000 78%,transparent);mask-image:linear-gradient(90deg,#000 78%,transparent);padding-right:28px}}
-@media (max-width:760px){.wrap{padding-left:20px;padding-right:20px}.hide-m{display:none!important}.p{font-size:16px}}
+.btn:focus-visible{outline:3px solid #000;outline-offset:3px}
+/* ---- Capsule ---- */
+.capw{position:relative;z-index:40;padding-top:18px;padding-bottom:18px}
+.cap{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;column-gap:24px;min-height:68px;padding:8px 8px 8px 24px;background:#fff;border:2px solid #000;border-radius:999px;box-shadow:4px 4px 0 #000;color:#000}
+.cap .clogo{display:flex}
+.cap .clogo img{height:40px;width:auto;display:block}
+.cnav{display:flex;justify-content:center;gap:24px}
+.cn{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 0 0 .12em;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:12px;color:#000;text-decoration:none;white-space:nowrap}
+.cn::after{content:'';position:absolute;left:0;right:0;bottom:8px;height:3px;border-radius:3px;background:#000;transform:scaleX(0);transition:transform .25s cubic-bezier(.3,.7,.4,1)}
+.cn:hover,.cn:focus-visible{color:#000}
+.cn:hover::after,.cn.on::after{transform:scaleX(1)}
+.cend{display:flex;align-items:center;gap:16px}
+.unis{display:flex;align-items:center;gap:8px;padding-right:16px;border-right:2px solid #000}
+.ud{position:relative;display:block;width:28px;height:28px;border-radius:50%;border:2px solid #000;transition:transform .15s}
+.ud:hover{transform:translateY(-2px)}
+.ud.on{box-shadow:0 0 0 3px #fff,0 0 0 5px #000}
+.ud .tip{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%);padding:6px 10px 6px calc(10px + .12em);border-radius:999px;background:#000;color:#fff;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:10px;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+.ud:hover .tip,.ud:focus-visible .tip{opacity:1}
+.cmenu{display:none;border:0}
+.cmenu summary{list-style:none;width:50px;height:50px;min-height:0;padding:0;font-size:0;border:2px solid #000;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:transform .15s}
+.cmenu summary::-webkit-details-marker{display:none}
+.cmenu summary:hover{transform:scale(1.06)}
+.cmenu .ico-x{display:none}
+.cmenu[open] summary{background:#000!important}
+.cmenu[open] .ico-b{display:none}
+.cmenu[open] .ico-x{display:block}
+.cpanel{position:absolute;left:0;right:0;top:calc(100% + 12px);display:flex;flex-direction:column;padding:8px 22px 22px;background:#fff;border:2px solid #000;border-radius:28px;box-shadow:4px 4px 0 #000}
+.cbig{display:flex;align-items:center;min-height:56px;padding:6px 0;border-bottom:1.5px dashed #000;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.02em;font-size:26px;line-height:1;color:#000;text-decoration:none}
+.cbig:last-of-type{border-bottom:0}
+.cbig.on{text-decoration:underline;text-decoration-thickness:3px;text-underline-offset:6px}
+.cunis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:10px}
+.cuni{display:flex;align-items:center;min-height:44px;padding:0 12px 0 calc(12px + .12em);border:2px solid #000;border-radius:999px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:#000;text-decoration:none;white-space:nowrap}
+.cuni.on{background:#000!important;color:#fff}
+.clab{margin-top:14px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:#4a4a4a}
+.cpanel .btn{margin-top:18px;width:100%}
+.ctel{margin-top:14px;font-size:14px;color:#000;text-align:center}
+.cn:focus-visible,.ud:focus-visible,.cuni:focus-visible,.cbig:focus-visible,.cmenu summary:focus-visible{outline:3px solid #000;outline-offset:3px}
+@media (max-width:1320px){.cap{grid-template-columns:1fr auto;padding:6px 6px 6px 22px}
+.cnav,.cend{display:none}
+.cmenu{display:block}}
+@media (max-width:760px){.capw{padding-top:12px;padding-bottom:12px}
+.cap .clogo img{height:34px}
+.cap{min-height:60px}}
+/* ---- Bouton principal plein ---- */
+.btn.dk{background:#000;color:#fff;box-shadow:none}
+.btn.dk:hover{background:#fff;color:#000;box-shadow:none;transform:none}
+.btn.dk:active{transform:scale(.96)}
+/* ---- Pied de page ---- */
+.ft .fcol{display:flex;flex-direction:column;align-items:flex-start;gap:12px;font-size:15px;line-height:1.5;min-width:0}
+.ft .fcol .k{margin-bottom:4px}
+.ftl{color:#fff;text-decoration:none;overflow-wrap:anywhere;transition:color .15s}
+.ftl:hover{color:#ffc7cd;text-decoration:underline;text-underline-offset:4px}
+.fsoc{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px 0 calc(16px + .12em);border:2px solid #fff;border-radius:999px;color:#fff;text-decoration:none;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:11px;white-space:nowrap;transition:background-color .15s,color .15s}
+.fsoc:hover{background:#fff;color:#000}
+.ftl:focus-visible,.fsoc:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media (max-width:760px){.wrap{padding-left:20px;padding-right:20px}
+.p{font-size:16px}}
 
 </style>
 </head>
 <body>
 
-<div style="background: #ffffff; color: #000000; font-family: 'Varela Round', 'Arial Rounded MT Bold', system-ui, sans-serif; overflow-x: hidden">
+<div style="background: #ffffff; color: #000000; font-family: 'Varela Round', 'Arial Rounded MT Bold', system-ui, sans-serif; overflow-x: clip">
 
-<!-- TOP BAR -->
-<div style="background: #000000">
-<div class="wrap" style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-top: 6px; padding-bottom: 6px">
-<nav aria-label="Univers Holocene" class="tbn" style="display: flex; gap: 4px; min-width: 0">
-<a href="01-accueil.html" class="tb k" style="background: #ffc7cd; color: #000000"><span style="width: 10px; height: 10px; border-radius: 50%; background: #000000"></span>Holocene</a>
-<a href="02-restaurant.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #e0cfe6"></span>Restaurant</a>
-<a href="04-traiteur.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #fffaaf"></span>Traiteur</a>
-<a href="05-food-truck.html" class="tb k"><span style="width: 10px; height: 10px; border-radius: 50%; background: #f7ba94"></span>Food truck</a>
+<!-- CAPSULE -->
+<header class="wrap capw">
+<div class="cap">
+<a href="01-accueil.html" class="clogo" aria-label="Holocene Food.Event"><img src="../../public/brand/logo-holocene-food-event.svg" alt="Holocene Food.Event"></a>
+<nav aria-label="Navigation principale" class="cnav">
+<a href="02-restaurant.html" class="cn">Restaurant</a>
+<a href="04-traiteur.html" class="cn">Traiteur</a>
+<a href="05-food-truck.html" class="cn">Food truck</a>
+<a href="06-equipe.html" class="cn">L'équipe</a>
+<a href="07-journal.html" class="cn">Journal</a>
 </nav>
-<span class="k hide-m" style="color: #ffffff">Balma — Toulouse — Occitanie</span>
+<div class="cend">
+<div class="unis" role="group" aria-label="Changer d'univers">
+<a href="01-accueil.html" class="ud on" style="background: #ffc7cd" aria-label="Holocene, univers actuel" aria-current="true"><span class="tip">Holocene</span></a>
+<a href="05-food-truck.html" class="ud" style="background: #d4ffff" aria-label="Food truck"><span class="tip">Food truck</span></a>
+<a href="04-traiteur.html" class="ud" style="background: #f7ba94" aria-label="Traiteur"><span class="tip">Traiteur</span></a>
+<a href="02-restaurant.html" class="ud" style="background: #fbf4b1" aria-label="Restaurant"><span class="tip">Restaurant</span></a>
 </div>
+<a href="08-contact.html" class="btn dk">Demander un devis</a>
 </div>
-
-<!-- HEADER -->
-<header class="wrap hdr" style="padding-top: 20px; padding-bottom: 20px">
-<a href="01-accueil.html" aria-label="Holocene Food.Event — accueil" style="display: flex; justify-self: start"><img src="../../public/brand/logo-holocene-food-event.svg" alt="Holocene Food.Event" style="height: 52px; width: auto; display: block"></a>
-<nav aria-label="Navigation principale" class="hnav">
-<a href="02-restaurant.html" class="nav">Restaurant</a>
-<a href="04-traiteur.html" class="nav">Traiteur</a>
-<a href="05-food-truck.html" class="nav">Food truck</a>
-<a href="06-equipe.html" class="nav">L'équipe</a>
-<a href="07-journal.html" class="nav">Journal</a>
-</nav>
-<div class="hend">
+<details class="cmenu"><summary aria-label="Menu" style="background: #ffc7cd"><svg class="ico-b" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg><svg class="ico-x" aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></summary>
+<div class="cpanel">
+<a href="02-restaurant.html" class="cbig">Restaurant</a>
+<a href="04-traiteur.html" class="cbig">Traiteur</a>
+<a href="05-food-truck.html" class="cbig">Food truck</a>
+<a href="06-equipe.html" class="cbig">L'équipe</a>
+<a href="07-journal.html" class="cbig">Journal</a>
+<span class="clab">Nos univers</span>
+<div class="cunis">
+<a href="01-accueil.html" class="cuni on" style="background: #ffc7cd">Holocene</a>
+<a href="05-food-truck.html" class="cuni" style="background: #d4ffff">Food truck</a>
+<a href="04-traiteur.html" class="cuni" style="background: #f7ba94">Traiteur</a>
+<a href="02-restaurant.html" class="cuni" style="background: #fbf4b1">Restaurant</a>
+</div>
 <a href="08-contact.html" class="btn dk">Demander un devis</a>
-<details class="mnav"><summary aria-label="Ouvrir le menu" style="background: #ffc7cd"><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"><path d="M4 8h16M4 16h16"></path></svg></summary>
-<div class="mpanel">
-<a href="02-restaurant.html" class="nav">Restaurant</a>
-<a href="04-traiteur.html" class="nav">Traiteur</a>
-<a href="05-food-truck.html" class="nav">Food truck</a>
-<a href="06-equipe.html" class="nav">L'équipe</a>
-<a href="07-journal.html" class="nav">Journal</a>
-<a href="08-contact.html" class="btn dk">Demander un devis</a>
+<a href="tel:+33532740833" class="ctel">05 32 74 08 33</a>
 </div>
 </details>
 </div>
@@ -161,7 +198,7 @@ a{color:#000}a:hover{color:#000}
 </div>
 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px">
 <div style="display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 2px solid #000000; border-radius: 28px"><span class="k">E-mail</span><a href="mailto:contact@holocene-traiteur.fr" style="font-size: 16px">contact@holocene-traiteur.fr</a></div>
-<div style="display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 2px solid #000000; border-radius: 28px"><span class="k">Restaurant</span><span style="font-size: 16px; line-height: 1.5">Lun - Ven, 12h - 14h</span></div>
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 26px; border: 2px solid #000000; border-radius: 28px"><span class="k">Restaurant</span><span style="font-size: 16px; line-height: 1.5">Lun - Ven, 12h - 14h<br>Mai - sept. : jeu. et ven. soir, 19h - 22h30</span><a href="tel:+33532740834" class="d" style="font-size: 24px; text-decoration: none">05 32 74 08 34</a></div>
 </div>
 <div style="display: flex; flex-direction: column; border: 2px solid #000000; border-radius: 32px; overflow: hidden">
 <div style="min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; background: #ffc7cd; border-bottom: 2px solid #000000">
@@ -178,36 +215,30 @@ a{color:#000}a:hover{color:#000}
 </section>
 
 <!-- SKYLINE + FOOTER -->
-<img src="../../public/brand/illustration-toulouse.svg" alt="Illustration de Toulouse : le dôme de la Grave, le Pont-Neuf, l'aérospatiale et Saint-Sernin" style="display: block; width: 100%; height: auto; margin-bottom: -2px; background: #ffffff">
-<footer style="background: #000000; color: #ffffff">
-<div class="wrap" style="padding-top: 72px; padding-bottom: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: 40px">
-<div style="display: flex; flex-direction: column; gap: 20px">
-<img src="../../public/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" style="height: 58px; width: auto; align-self: flex-start">
+<div style="background: #ffffff; border-top: 2px solid #000000; padding-top: 40px">
+<img src="../../public/brand/illustration-toulouse.svg" alt="Illustration de Toulouse : le dôme de la Grave, le Pont-Neuf, l'aéronautique et Saint-Sernin" style="display: block; width: 100%; height: auto">
+</div>
+<footer class="ft" style="background: #000000; color: #ffffff">
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: flex-end; gap: 28px 40px; flex-wrap: wrap; padding-top: 64px; padding-bottom: 48px">
+<div style="display: flex; flex-direction: column; gap: 18px; max-width: 440px">
+<img src="../../public/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" style="height: 56px; width: auto; align-self: flex-start">
 <p style="margin: 0; color: #cfcfcf; font-size: 15px; line-height: 1.6">Restaurant, traiteur et food truck à Balma, Toulouse et partout en Occitanie.</p>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.5">
-<span class="k" style="color: #fbf4b1">Restaurant</span>
-<span>14 rue Louis Renault<br>31130 Balma</span>
-<span>Lundi - vendredi, 12h - 14h</span>
-<a href="tel:+33532740834" class="fl">05 32 74 08 34</a>
+<nav aria-label="Réseaux sociaux" style="display: flex; gap: 10px; flex-wrap: wrap">
+<a href="https://www.instagram.com/holocene.tlse/" class="fsoc" target="_blank" rel="noopener">Instagram <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a href="https://fr-fr.facebook.com/holocene.tlse/" class="fsoc" target="_blank" rel="noopener">Facebook <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+<a href="https://www.linkedin.com/company/holocenetlse/" class="fsoc" target="_blank" rel="noopener">LinkedIn <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"></path></svg></a>
+</nav>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px; line-height: 1.5">
-<span class="k" style="color: #f7ba94">Traiteur &amp; food truck</span>
-<a href="tel:+33532740833" class="fl">05 32 74 08 33</a>
-<a href="mailto:contact@holocene-traiteur.fr" class="fl">contact@holocene-traiteur.fr</a>
-<span>Toulouse, Haute-Garonne et toute l'Occitanie</span>
+<div class="wrap" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 40px 32px; padding-top: 48px; padding-bottom: 56px; border-top: 1px solid #333333">
+<div class="fcol"><span class="k" style="color: #fbf4b1">Restaurant</span><span>14 rue Louis Renault<br>31130 Balma</span><span>Lundi - vendredi, 12h - 14h<br>De mai à septembre, aussi jeudi et vendredi soir, 19h - 22h30</span><a href="tel:+33532740834" class="ftl">05 32 74 08 34</a><a href="https://bookings.zenchef.com/results?rid=368665&amp;pid=1001" class="ftl" target="_blank" rel="noopener">Réserver une table</a></div>
+<div class="fcol"><span class="k" style="color: #f7ba94">Traiteur &amp; food truck</span><a href="tel:+33532740833" class="ftl">05 32 74 08 33</a><a href="mailto:contact@holocene-traiteur.fr" class="ftl">contact@holocene-traiteur.fr</a><span>Toulouse et toute l'Occitanie</span></div>
+<nav class="fcol" aria-label="Nos univers"><span class="k" style="color: #d4ffff">Nos univers</span><a href="02-restaurant.html" class="ftl">Restaurant</a><a href="03-privatiser.html" class="ftl">Privatiser le restaurant</a><a href="04-traiteur.html" class="ftl">Traiteur</a><a href="05-food-truck.html" class="ftl">Food truck</a></nav>
+<nav class="fcol" aria-label="La maison"><span class="k" style="color: #ffc7cd">La maison</span><a href="01-accueil.html" class="ftl">Accueil</a><a href="06-equipe.html" class="ftl">L'équipe</a><a href="07-journal.html" class="ftl">Journal</a><a href="08-contact.html" class="ftl">Contact &amp; devis</a></nav>
 </div>
-<div style="display: flex; flex-direction: column; gap: 12px; font-size: 15px">
-<span class="k" style="color: #ffc7cd">Explorer</span>
-<a href="03-privatiser.html" class="fl">Privatiser le restaurant</a>
-<a href="06-equipe.html" class="fl">L'équipe</a>
-<a href="07-journal.html" class="fl">Journal</a>
-<a href="08-contact.html" class="fl">Contact &amp; devis</a>
-</div>
-</div>
-<div class="wrap" style="display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid #333333; font-size: 13px; color: #cfcfcf">
-<span>© 2026 Holocene Food Event — Mentions légales</span>
-<div style="display: flex; gap: 20px"><a href="https://www.instagram.com" class="fl">Instagram</a><a href="https://www.facebook.com" class="fl">Facebook</a><a href="https://www.linkedin.com" class="fl">LinkedIn</a></div>
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 12px 24px; flex-wrap: wrap; padding-top: 22px; padding-bottom: 28px; border-top: 1px solid #333333; font-size: 13px; color: #cfcfcf">
+<span>© 2026 Holocene Food Event</span>
+<div style="display: flex; gap: 20px; flex-wrap: wrap"><a href="#" class="ftl">Mentions légales</a><a href="#" class="ftl">Confidentialité</a></div>
 </div>
 </footer>
 

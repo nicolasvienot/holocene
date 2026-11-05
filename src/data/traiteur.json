@@ -1,0 +1,115 @@
+{
+  "_note": "Contenu de la page /traiteur (maquette 04-traiteur.html). Les PDF sont aujourd'hui sur le CDN Webflow : les télécharger et les servir depuis /public/menus/ (le CDN disparaîtra avec l'abonnement Webflow).",
+  "heroFacts": [
+    { "label": "Invités", "valeur": "40 - 1500", "grand": true },
+    { "label": "Régimes", "valeur": "Végé, halal, sans gluten" }
+  ],
+  "pourQui": [
+    {
+      "titre": "Entreprises",
+      "zonePill": "Toulouse & métropole",
+      "fond": "--yellow-light",
+      "items": [
+        "Petits-déjeuners et pauses café",
+        "Déjeuners d'affaires et plateaux-repas livrés",
+        "Cocktails déjeunatoires et dînatoires",
+        "Séminaires, conventions, lancements de produit",
+        "Soirées clients, inaugurations, fêtes de fin d'année"
+      ],
+      "zone": "Toulouse, Balma, Blagnac, Colomiers, Cornebarrieu, Cugnaux, L'Union…"
+    },
+    {
+      "titre": "Particuliers",
+      "zonePill": "Toute l'Occitanie",
+      "fond": "--flower",
+      "miseEnAvant": true,
+      "items": [
+        "Mariages : vin d'honneur, dîner, bar de nuit — plus de 150 déjà servis",
+        "Brunch du lendemain, avec le food truck",
+        "Anniversaires et baptêmes",
+        "Cousinades et fêtes de famille",
+        "Buffets froids ou chauds, cocktails, repas à l'assiette"
+      ],
+      "zone": "Haute-Garonne, Tarn, Tarn-et-Garonne, Aude, Ariège, Gers…"
+    }
+  ],
+  "formats": [
+    {
+      "num": "01",
+      "nom": "Cocktail déjeunatoire & dînatoire",
+      "texte": "Pièces salées et sucrées, chaudes et froides, ateliers en live et bar. De 14 à 18 pièces par personne pour un dînatoire.",
+      "bouton": "Menu PDF",
+      "pdfSource": "https://cdn.prod.website-files.com/675844824e0b7ff1b98c298d/67f3946367a711c244469c99_Menu%20Cocktail%20-%20Holocene%20Traiteur.pdf",
+      "pdf": "/menus/menu-cocktail.pdf"
+    },
+    {
+      "num": "02",
+      "nom": "Repas assis",
+      "texte": "Entrée, plat, fromage, dessert servis à l'assiette par nos maîtres d'hôtel. Ou en buffet, froid ou chaud.",
+      "bouton": "Menu PDF",
+      "pdfSource": "https://cdn.prod.website-files.com/675844824e0b7ff1b98c298d/67f3946390b7e9bf4ac293ec_Menu%20Repas%20Assis%20-%20Holocene%20Traiteur.pdf",
+      "pdf": "/menus/menu-repas-assis.pdf"
+    },
+    {
+      "num": "03",
+      "nom": "Mariages & brunch",
+      "texte": "Vin d'honneur, cocktail, dîner, bar de nuit et brunch du lendemain : toute la journée, un seul traiteur.",
+      "bouton": "Catalogue PDF",
+      "pdfSource": "https://cdn.prod.website-files.com/675844824e0b7ff1b98c298d/68c412e6714f1b5974cd8705_b408cadb132aa856998e403ae30110ae_Catalogue%20Mariage%20-%20Holocene%20Traiteur.pdf",
+      "pdf": "/menus/catalogue-mariage.pdf"
+    },
+    {
+      "num": "04",
+      "nom": "La box",
+      "texte": "Le plateau-repas Holocene livré au bureau, pour vos réunions et formations. Frais, local, de saison.",
+      "bouton": "Commander",
+      "lien": "#devis"
+    }
+  ],
+  "avantGout": "Tartelette de cabillaud gravlax, gyoza toulousain, ceviche de dorade sauvage, magret IGP du Gers rôti, tarte citron meringuée…",
+  "exempleMenuCocktail": {
+    "piecesSalees": ["Tartelette de cabillaud gravlax", "Panna cotta de carotte", "Gyoza toulousain"],
+    "entrees": ["Ceviche de dorade sauvage", "Poitrine de porc fumée", "Tataki de bœuf"],
+    "plats": ["Magret IGP du Gers rôti", "Filet de veau basse température", "Filet de dorade"],
+    "desserts": ["Royal chocolat", "Entremets pistache-framboise", "Tarte citron meringuée"]
+  },
+  "cleEnMain": [
+    { "titre": "Un chef de projet", "texte": "Votre contact unique : il cadre le projet, chiffre le devis et coordonne le jour J." },
+    { "titre": "La cuisine sur place", "texte": "Nos chefs cuisinent et dressent sur votre lieu. Animations plancha, découpe ou fumaison à la demande." },
+    { "titre": "Le service", "texte": "Maîtres d'hôtel et serveurs en tenue : en cocktail, un serveur pour 25 invités." },
+    { "titre": "Le bar", "texte": "Vins de la région, bières de brasseurs toulousains, cocktails. Bar de nuit sur demande." },
+    { "titre": "Le matériel", "texte": "Vaisselle, verrerie réutilisable, nappage. Mobilier et décoration via nos partenaires locaux." },
+    { "titre": "Zéro gaspi", "texte": "On range, on nettoie, on repart. Les surplus sont redistribués via une association partenaire." }
+  ],
+  "etapes": [
+    { "label": "01 - Avant", "texte": "Un appel pour comprendre votre projet, un devis détaillé, une dégustation si vous le souhaitez." },
+    { "label": "02 - Le jour J", "texte": "Installation, cuisine, service et bar, orchestrés par votre chef de projet du début à la fin." },
+    { "label": "03 - Après", "texte": "Remise en état du lieu, puis un court questionnaire pour faire encore mieux la prochaine fois." }
+  ],
+  "temoignage": { "texte": "[Avis client à intégrer — idéalement un mariage ou un séminaire, avec prénom et événement.]", "auteur": "[Prénom — type d'événement — date]" },
+  "formulaireDevis": {
+    "champs": [
+      { "id": "nom", "label": "Nom complet", "type": "text", "requis": true, "placeholder": "Camille Durand" },
+      { "id": "societe", "label": "Société (si pro)", "type": "text", "placeholder": "Optionnel" },
+      { "id": "email", "label": "E-mail", "type": "email", "requis": true, "placeholder": "camille@exemple.fr" },
+      { "id": "telephone", "label": "Téléphone", "type": "tel", "requis": true, "placeholder": "06 00 00 00 00" },
+      { "id": "type", "label": "Type d'événement", "type": "select", "options": ["Mariage", "Cocktail professionnel", "Repas assis", "Séminaire", "Anniversaire, baptême", "Box et plateaux-repas", "Autre"] },
+      { "id": "date", "label": "Date", "type": "date" },
+      { "id": "lieu", "label": "Lieu", "type": "text", "placeholder": "Ville ou nom du lieu" },
+      { "id": "invites", "label": "Nombre d'invités", "type": "number", "placeholder": "120" },
+      { "id": "format", "label": "Format souhaité", "type": "select", "options": ["Cocktail", "Repas assis", "Buffet", "Food truck", "Box et plateaux-repas", "Je ne sais pas encore"] },
+      { "id": "budget", "label": "Budget par personne", "type": "text", "placeholder": "Ex. 45 € TTC" },
+      { "id": "message", "label": "Votre projet", "type": "textarea", "pleineLargeur": true, "placeholder": "Ambiance, horaires, service, régimes alimentaires…" }
+    ],
+    "mention": "Vos données servent uniquement à vous répondre.",
+    "bouton": "Envoyer ma demande"
+  },
+  "faq": [
+    { "q": "À partir de combien d'invités ?", "r": "On intervient à partir de 40 invités, et jusqu'à 1500 sur un même événement.", "ouvert": true },
+    { "q": "Jusqu'où vous déplacez-vous ?", "r": "Toulouse et sa métropole, et toute l'Occitanie : Tarn, Tarn-et-Garonne, Aude, Ariège, Gers." },
+    { "q": "Le service est-il compris ?", "r": "Oui. Nos maîtres d'hôtel et serveurs assurent la mise en place, le service et la remise en état. Leur nombre est adapté à votre format et figure sur le devis." },
+    { "q": "Gérez-vous les régimes alimentaires ?", "r": "Oui : végétarien, halal, sans gluten, sans lactose. Indiquez-les dans votre demande, on les intègre au menu." },
+    { "q": "Proposez-vous une dégustation ?", "r": "Oui, elle peut être organisée en amont, notamment pour les mariages." },
+    { "q": "Peut-on combiner traiteur et food truck ?", "r": "Bien sûr — le combo préféré pour un mariage : dîner au traiteur, brunch du lendemain au food truck." }
+  ]
+}

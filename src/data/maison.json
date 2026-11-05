@@ -1,0 +1,33 @@
+{
+  "_note": "Contenu partagé : producteurs (accueil), équipe (accueil + /equipe), valeurs (accueil).",
+  "producteurs": [
+    { "nom": "Maison Garcia", "produit": "Jambon cru affiné", "pastille": "Charcuterie" },
+    { "nom": "Brasserie Aviateur", "produit": "Bières craft — et notre bière collab", "pastille": "Bière" },
+    { "nom": "Brasserie du Midi", "produit": "Blonde ale & sour", "pastille": "Bière" },
+    { "nom": "Distillerie Castan", "produit": "Ratafia, whisky Vilanova, eau-de-vie de poire", "pastille": "Tarn - 81" },
+    { "nom": "Maison Gagnières", "produit": "Gin Hexagone", "pastille": "Haute-Garonne - 31" },
+    { "nom": "Domaine Séailles", "produit": "Armagnac Ténarèze, vins des Côtes de Gascogne", "pastille": "Gers - 32" },
+    { "nom": "Potions d'Oc", "produit": "Liqueurs artisanales menthe & citron", "pastille": "Aveyron - 12" }
+  ],
+  "producteursAutres": {
+    "_note": "Cités ailleurs (site actuel, cartes) mais pas affichés dans la maquette.",
+    "noms": ["La Thériaque (34)", "Garonne Fruits", "La table de Solange", "Produits sur son 31", "Guivarc'h"]
+  },
+  "valeurs": [
+    { "titre": "Local", "texte": "En direct avec les producteurs d'Occitanie, sans intermédiaire. On connaît le nom de celui qui a fait le jambon." },
+    { "titre": "De saison", "texte": "Des cartes qui bougent avec le marché : nouvelle carte chaque mois au restaurant, suggestions chaque semaine." },
+    { "titre": "Fait maison", "texte": "Tout sort de nos cuisines, des sauces aux desserts. Même le thé glacé et la citronnade." },
+    { "titre": "Sur mesure", "texte": "Thème, budget, régimes — végétarien, halal, sans gluten. On s'adapte à votre événement, pas l'inverse." }
+  ],
+  "fondateurs": [
+    { "nom": "Julien Sanchez", "pole": "Pôle cuisine", "role": "Chef", "bio": "Le chef. Passé par L'Allée des Vignes à Cajarc, maison étoilée, il signe toutes les cartes et met les saveurs régionales au centre de l'assiette.", "photo": "[Photo — Julien]" },
+    { "nom": "Théo Constant", "pole": "Pôle organisation", "bio": "L'homme du jour J. Après avoir dirigé des restaurants à Toulouse, il orchestre la salle, le service et la logistique de chaque événement.", "photo": "[Photo — Théo]" },
+    { "nom": "Stéphane Suarez", "pole": "Pôle commercial", "bio": "Votre premier contact. Il a roulé sa bosse sur six continents et suit chaque projet du premier appel jusqu'au jour J.", "photo": "[Photo — Stéphane]" }
+  ],
+  "poles": [
+    { "nom": "Cuisine", "texte": "Une brigade qui travaille le produit frais et de saison, du food truck aux repas de mariage.", "pastilles": ["Chefs", "Apprentis"] },
+    { "nom": "Organisation", "texte": "Salle, service et événementiel : séminaires, anniversaires, soirées privées, mariages.", "pastilles": ["Maîtres d'hôtel", "Serveurs"] },
+    { "nom": "Commercial", "texte": "Un interlocuteur unique qui comprend votre projet, chiffre et coordonne jusqu'au dernier détail.", "pastilles": ["Devis", "Coordination"] }
+  ],
+  "histoire": "Trois amis d'école hôtelière. Pendant le confinement, une dark kitchen dans leur appartement aux Minimes ; puis le food truck, puis le traiteur ; reprise d'un fonds de commerce à Balma en mai 2023 et ouverture du restaurant le 1er novembre 2023 (source : article « Holocene ouvre les portes de son restaurant »)."
+}

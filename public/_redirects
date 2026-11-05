@@ -1,0 +1,27 @@
+# Redirections 301 des anciennes URL (site Webflow) vers les nouvelles routes.
+# Format Cloudflare Pages. Ne pas supprimer : le référencement Google repose sur ces URL.
+
+/restaurant-balma                                        /restaurant                     301
+/restaurant-balma/restaurant-terrasse-balma              /restaurant                     301
+/restaurant-balma/restaurant-seminaire-toulouse          /restaurant/privatiser          301
+/restaurant-balma/privatisation-restaurant-toulouse      /restaurant/privatiser          301
+/restaurant/restaurant-terrasse-balma                    /restaurant                     301
+/restaurant/restaurant-seminaire-toulouse                /restaurant/privatiser          301
+/restaurant/privatisation-restaurant-toulouse            /restaurant/privatiser          301
+/privatiser                                              /restaurant/privatiser          301
+
+/traiteur/traiteur-mariage-toulouse                      /traiteur                       301
+/traiteur/traiteur-evenementiel-toulouse                 /traiteur                       301
+/traiteur/traiteur-entreprise                            /traiteur                       301
+/traiteur-entreprise                                     /traiteur                       301
+/traiteur/traiteur-anniversaire-toulouse                 /traiteur                       301
+/traiteur/traiteur-bapteme-toulouse                      /traiteur                       301
+/traiteur/traiteur-balma                                 /traiteur                       301
+
+/blog                                                    /journal                        301
+/blog/comment-organiser-un-cocktail-dinatoire-professionnel-avec-un-traiteur   /journal/cocktail-dinatoire-professionnel   301
+/blog/comment-choisir-le-meilleur-traiteur-pour-son-evenement-professionnel-a-toulouse   /journal/choisir-traiteur-evenement-professionnel-toulouse   301
+/blog/traiteur-mariage-a-toulouse-une-experience-culinaire-unique-avec-holocene   /journal/traiteur-mariage-toulouse   301
+/blog/holocene-ouvres-les-portes-de-son-restaurant       /journal/holocene-ouvre-son-restaurant   301
+/blog/manger-local                                       /journal/10-bonnes-raisons-de-manger-local   301
+/blog/*                                                  /journal                        301
