@@ -31,4 +31,8 @@ const { nom, sous, cocktail, assis, miseEnAvant = false } = Astro.props;
   .cell { display: flex; flex-direction: column; gap: 8px; padding: 24px 16px 0 0; }
   .cell--droite { padding: 24px 0 0 16px; border-left: var(--line); }
   dd { margin: 0; font-size: 88px; }
+  @media (max-width: 360px) {
+    .cap { padding: 28px 22px; }
+    dd { font-size: 64px; }
+  }
 </style>

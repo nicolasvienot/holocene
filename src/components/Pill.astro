@@ -1,5 +1,5 @@
 ---
-import { nimbus } from '../lib/texte';
+import { enNimbus } from '../lib/texte';
 
 interface Props {
   texte: string;
@@ -11,7 +11,7 @@ interface Props {
 
 const { texte, fond, grande = false, class: className } = Astro.props;
 ---
-<span class:list={['pill', { 'pill--grande': grande }, className]} style={fond ? `background:${fond}` : undefined}>{nimbus(texte)}</span>
+<span class:list={['pill', { 'pill--grande': grande }, className]} style={fond ? `background:${fond}` : undefined} set:html={enNimbus(texte)} />
 
 <style>
   .pill {
@@ -30,6 +30,9 @@ const { texte, fond, grande = false, class: className } = Astro.props;
     line-height: 1;
     white-space: nowrap;
     max-width: 100%;
+  }
+  @media (max-width: 360px) {
+    .pill { white-space: normal; }
   }
   .pill--grande { font-size: 14px; padding: 14px 20px; white-space: normal; }
 </style>

@@ -1,15 +1,224 @@
 ---
 import Base from '../layouts/Base.astro';
+import Accent from '../components/Accent.astro';
 import Button from '../components/Button.astro';
+import CapacityCard from '../components/CapacityCard.astro';
+import Chip from '../components/Chip.astro';
+import Dish from '../components/Dish.astro';
+import Faq from '../components/Faq.astro';
+import FormatList from '../components/FormatList.astro';
+import HeroFacts from '../components/HeroFacts.astro';
+import IncludedGrid from '../components/IncludedGrid.astro';
+import Kicker from '../components/Kicker.astro';
+import Marquee from '../components/Marquee.astro';
+import PersonCard from '../components/PersonCard.astro';
+import PhoneCard from '../components/PhoneCard.astro';
+import PhotoSlot from '../components/PhotoSlot.astro';
+import Pill from '../components/Pill.astro';
+import PriceCard from '../components/PriceCard.astro';
+import References from '../components/References.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Steps from '../components/Steps.astro';
+import Tag from '../components/Tag.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import UniversCard from '../components/UniversCard.astro';
+import ValueCard from '../components/ValueCard.astro';
+import DemandeForm from '../components/forms/DemandeForm.astro';
+import accueil from '../data/accueil.json';
+import foodTruck from '../data/food-truck.json';
+import infos from '../data/infos.json';
+import maison from '../data/maison.json';
+import privatisation from '../data/privatisation.json';
+import restaurant from '../data/restaurant.json';
+import traiteur from '../data/traiteur.json';
+import { univers, type UniversId } from '../data/navigation';
+
+const palette = [
+  { nom: 'Holocene', couleurs: ['#ffffff', '#ffc7cd', '#fafafa'] },
+  { nom: 'Food truck', couleurs: ['#d4ffff', '#f7ba94', '#e4ffff'] },
+  { nom: 'Traiteur', couleurs: ['#f7ba94', '#fffaaf', '#fcdbbf'] },
+  { nom: 'Restaurant', couleurs: ['#fbf4b1', '#e0cfe6', '#f2e8f4'] },
+];
+const sommaire = ['Couleurs', 'Typographie', 'Logos', 'Boutons', 'Pastilles', 'Cartes', 'Listes', 'Formulaires', 'Sections'];
+const lancre = (titre: string) => titre.toLowerCase();
+const fondateur = maison.fondateurs[0]!;
+const espace = privatisation.espaces[0]!;
+const formuleAvant = restaurant.formules[2]!;
+const formule = restaurant.formules[0]!;
 ---
 <Base capsule="accueil" title="Design system - Holocene" description="Recette visuelle des composants du site Holocene." noindex>
-  <section class="wrap section-112">
-    <h1 class="d t112">Design system</h1>
-    <div class="rang" style="margin-top:40px">
-      <Button variant="dark" href="/contact" label="Principal" icon="arrow" />
-      <Button href="/contact" label="Secondaire" />
-      <Button variant="flower" href="/contact" label="Univers" />
-      <Button disabled label="Désactivé" />
-    </div>
-  </section>
+  <div class="ds" data-ds data-univers="traiteur">
+    <section class="wrap bloc">
+      <Kicker texte="Page interne - recette visuelle" />
+      <h1 class="d t112">Design system</h1>
+      <p class="p ds-intro">Les vrais composants du site, branchés sur les vrais contenus. Le sélecteur change les variables de l'univers pour vérifier chaque composant dans ses quatre couleurs. Règles complètes : reference/pages/10-design-system-1, 2 et 3.</p>
+      <div class="rang" role="group" aria-label="Choisir l'univers des exemples" data-ds-univers>
+        {univers.map((u) => <Chip texte={u.label} valeur={u.id} actif={u.id === 'traiteur'} />)}
+      </div>
+      <nav aria-label="Sommaire" class="sommaire">
+        {sommaire.map((s) => <a href={`#${lancre(s)}`}>{s}</a>)}
+      </nav>
+    </section>
+
+    <section id="couleurs" class="wrap bloc">
+      <h2 class="d t64">Couleurs</h2>
+      <div class="ag palette">
+        {palette.map((p) => (
+          <div>
+            <p class="nom">{p.nom}</p>
+            <div class="teintes">
+              {p.couleurs.map((c, i) => <div class="teinte" style={`background:${c}`}><span>{['Fond', 'Fleur', 'Clair'][i]}<br />{c}</span></div>)}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section id="typographie" class="wrap bloc">
+      <h2 class="d t64">Typographie</h2>
+      <p class="d t112">Holocene</p>
+      <p class="d t92">La carte</p>
+      <p class="d titre-h3">Entrées</p>
+      <span class="dn">Mille-feuille de taquitos</span>
+      <Kicker texte="Pourquoi Holocene" />
+      <Accent texte="Des produits frais" class="accent-ds" />
+      <p class="p t20">Texte d'introduction, 20 px. Trois façons de manger local, de saison et fait maison.</p>
+      <p class="p">Texte courant, 18 px. Une carte qui change chaque mois, des suggestions chaque semaine.</p>
+      <p class="p t15">Petit texte, 15 px. Une carte des allergènes est disponible sur demande.</p>
+    </section>
+
+    <section id="logos" class="wrap bloc">
+      <h2 class="d t64">Logos</h2>
+      <div class="ag logos">
+        {univers.map((u) => <img src={u.logo} alt={u.logoAlt} width="300" height="77" loading="lazy" />)}
+      </div>
+      <div class="sur-noir logo-noir"><img src="/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event, version blanche" width="218" height="56" loading="lazy" /></div>
+      <div class="icones">
+        {univers.map((u) => <img src={u.icone} alt={`Icône ${u.label}`} width="40" height="80" loading="lazy" />)}
+      </div>
+    </section>
+
+    <section id="boutons" class="wrap bloc">
+      <h2 class="d t64">Boutons</h2>
+      <div class="rang">
+        <Button variant="dark" href="#boutons" label="Principal" icon="arrow" />
+        <Button href="#boutons" label="Secondaire" />
+        <Button variant="flower" href="#boutons" label="Univers" />
+        <Button variant="flower" href="#boutons" label="Menu PDF" icon="download" />
+        <Button size="sm" href="#boutons" label="Compact" />
+        <Button disabled label="Désactivé" />
+      </div>
+      <div class="rang sur-noir boutons-noir">
+        <Button variant="onDarkFlower" href="#boutons" label="Fleur sur noir" />
+        <Button variant="onDark" href="#boutons" label="Blanc sur noir" />
+      </div>
+    </section>
+
+    <section id="pastilles" class="wrap bloc">
+      <h2 class="d t64">Pastilles</h2>
+      <div class="rang">
+        <Pill texte="Contour" />
+        <Pill texte="Blanche" fond="var(--paper)" />
+        <Pill texte="Fleur" fond="var(--flower)" />
+        <Pill texte="Grande" grande fond="var(--light)" />
+      </div>
+      <div class="rang">
+        <Tag fond="var(--paper)">SG</Tag>
+        <Tag fond="var(--lilac)">Végé</Tag>
+        <Tag><span><span class="secours">+</span>1 €</span></Tag>
+        <Tag fond="var(--paper)">Le plus pris</Tag>
+      </div>
+      <div class="rang"><Chip texte="Actif" valeur="" actif /><Chip texte="Repos" valeur="" /></div>
+      <HeroFacts faits={traiteur.heroFacts} />
+    </section>
+
+    <section id="cartes" class="wrap bloc">
+      <h2 class="d t64">Cartes</h2>
+      <div class="ag grille-cartes">
+        <UniversCard id={accueil.univers[1]!.id as UniversId} num={accueil.univers[1]!.num} pastille={accueil.univers[1]!.pastille} texte={accueil.univers[1]!.texte} />
+        <div class="pile">
+          <PriceCard nom={formule.nom} valeur={formule.prix} fond="var(--light)" />
+          <PriceCard nom={formuleAvant.nom} valeur={formuleAvant.prix} fond="var(--flower)" badge={formuleAvant.badge} miseEnAvant />
+          <ValueCard titre={maison.valeurs[0]!.titre} texte={maison.valeurs[0]!.texte} />
+          <ValueCard titre={maison.valeurs[3]!.titre} texte={maison.valeurs[3]!.texte} noire />
+        </div>
+        <PersonCard nom={fondateur.nom} pole={fondateur.pole} bio={fondateur.bio} photo={fondateur.photo} icone="/brand/icon-restaurant.svg" fondPhoto="var(--yellow)" fondPastille="var(--yellow)" />
+        <CapacityCard nom={espace.nom} sous={espace.sous} cocktail={espace.cocktail} assis={espace.assis} />
+        <TestimonialCard texte={traiteur.temoignage.texte} auteur={traiteur.temoignage.auteur} icone="/brand/icon-traiteur.svg" />
+        <div class="pile">
+          <PhoneCard label="Plutôt par téléphone" telephone={infos.telephones.traiteurFoodTruck} />
+          <PhotoSlot label="Photo — À remplacer" />
+        </div>
+      </div>
+      <References page="accueil" />
+    </section>
+
+    <section id="listes" class="wrap bloc">
+      <h2 class="d t64">Listes</h2>
+      <div class="plats">
+        {restaurant.carte.plats.map((plat, i) => <Dish plat={plat} dernier={i === restaurant.carte.plats.length - 1} />)}
+      </div>
+      <FormatList formats={traiteur.formats.map((f) => (f.lien ? { ...f, lien: '#listes' } : f))} />
+    </section>
+
+    <section id="formulaires" class="wrap bloc">
+      <h2 class="d t64">Formulaires</h2>
+      <DemandeForm id="ds" destination="contact" champs={privatisation.formulaire.champs} bouton={privatisation.formulaire.bouton} />
+    </section>
+
+    <section id="sections" class="bloc bloc--plein">
+      <div class="wrap"><h2 class="d t64">Sections</h2></div>
+      <Marquee mots={accueil.bandeau} />
+      <Marquee mots={foodTruck.bandeau} variante="fleur" />
+      <div class="wrap pile">
+        <SectionHeader kicker="Label" titre={['Titre de section']} texte="Un paragraphe court, aligné en bas à droite." />
+        <Faq questions={restaurant.faq} />
+      </div>
+      <div class="sur-noir">
+        <div class="wrap section-112">
+          <IncludedGrid elements={traiteur.cleEnMain} photo="/images/verrines-jars.jpg" alt="Verrines de gaspacho, en buffet" />
+          <Steps etapes={traiteur.etapes} />
+          <div class="etapes-cartes"><Steps etapes={foodTruck.etapes} variante="cartes" /></div>
+        </div>
+      </div>
+    </section>
+  </div>
 </Base>
+
+<script>
+  const racine = document.querySelector<HTMLElement>('[data-ds]');
+  const choix = document.querySelector('[data-ds-univers]');
+  choix?.addEventListener('click', (evenement) => {
+    const bouton = evenement.target instanceof Element ? evenement.target.closest<HTMLButtonElement>('[data-filtre]') : null;
+    if (!bouton || !racine) return;
+    racine.dataset.univers = bouton.dataset.filtre ?? 'holocene';
+    choix.querySelectorAll('[data-filtre]').forEach((b) => b.setAttribute('aria-pressed', String(b === bouton)));
+  });
+</script>
+
+<style>
+  .ds { background: var(--bg); }
+  .bloc { display: flex; flex-direction: column; align-items: flex-start; gap: 32px; padding-block: 64px; border-top: var(--line); }
+  .bloc > :global(*) { max-width: 100%; }
+  .bloc--plein { align-items: stretch; padding-bottom: 0; }
+  .ds-intro { max-width: 640px; }
+  .sommaire { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+  .sommaire a { display: inline-flex; align-items: center; min-height: 44px; }
+  .palette { --min: 240px; width: 100%; }
+  .nom { margin-bottom: 8px; }
+  .teintes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: var(--line); border-radius: var(--radius-sm); overflow: hidden; }
+  .teinte { min-height: 110px; padding: 10px; font-size: 13px; color: var(--ink); }
+  .titre-h3 { font-size: 44px; }
+  .bloc :global(.accent-ds) { font-size: 30px; }
+  .logos { --min: 240px; width: 100%; align-items: center; }
+  .logos img { width: 100%; max-width: 280px; height: auto; }
+  .logo-noir { padding: 24px; border-radius: var(--radius-sm); }
+  .logo-noir img { height: 56px; width: auto; }
+  .icones { display: flex; gap: 24px; }
+  .icones img { height: 80px; width: auto; }
+  .boutons-noir { padding: 24px; border-radius: var(--radius-sm); }
+  .grille-cartes { --min: 340px; width: 100%; align-items: start; }
+  .plats { width: 100%; max-width: 640px; }
+  .bloc :global(.refs), .bloc :global(.fmts), .bloc :global(.form) { width: 100%; }
+  .etapes-cartes { margin-top: 56px; }
+</style>

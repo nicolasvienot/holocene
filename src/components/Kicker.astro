@@ -1,5 +1,5 @@
 ---
-import { nimbus } from '../lib/texte';
+import { enNimbus } from '../lib/texte';
 
 interface Props {
   texte: string;
@@ -8,4 +8,4 @@ interface Props {
 
 const { texte, class: className } = Astro.props;
 ---
-<span class:list={['k', className]}>{nimbus(texte)}</span>
+<span class:list={['k', className]} set:html={enNimbus(texte)} />

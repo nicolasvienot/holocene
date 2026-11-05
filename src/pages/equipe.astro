@@ -93,6 +93,10 @@ const habillages = [
   .poles { display: flex; flex-direction: column; border-top: var(--line); }
   .pole { --min: 300px; padding: 36px 0; border-bottom: var(--line); align-items: center; }
   .pole h3 { font-size: 52px; }
+  @media (max-width: 420px) {
+    .pole h3 { font-size: clamp(36px, 12vw, 52px); }
+    .titre-fondateurs { font-size: clamp(40px, 13vw, 48px); }
+  }
   .pole p { font-size: 17px; line-height: 1.6; }
   .pole-pastilles { display: flex; gap: 10px; flex-wrap: wrap; }
 

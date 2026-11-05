@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import Button from '../components/Button.astro';
+---
+<Base capsule="contact" title="Page introuvable - Holocene" description="Cette page n'existe pas ou plus." noindex>
+  <section class="wrap introuvable">
+    <h1 class="d">Page introuvable.</h1>
+    <p class="p t20">Cette page n'existe pas, ou plus. Le mieux, c'est de repartir de l'accueil.</p>
+    <Button variant="dark" href="/" label="Page d'accueil" />
+  </section>
+</Base>
+
+<style>
+  .introuvable { display: flex; flex-direction: column; align-items: flex-start; gap: 30px; padding-top: 64px; padding-bottom: 112px; }
+  h1 { font-size: clamp(38px, 11vw, 120px); }
+</style>

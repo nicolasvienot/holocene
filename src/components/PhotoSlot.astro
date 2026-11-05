@@ -1,5 +1,5 @@
 ---
-import { nimbus } from '../lib/texte';
+import { enNimbus } from '../lib/texte';
 
 interface Props {
   label: string;
@@ -22,7 +22,7 @@ const icon = icone ?? (sombre ? '/brand/icon-white.svg' : '/brand/icon-holocene.
   style={`background:${fond};aspect-ratio:${ratio};--icone:${hauteurIcone}px`}
 >
   <img src={icon} alt="" aria-hidden="true" loading="lazy" width={hauteurIcone / 2} height={hauteurIcone} />
-  <span class="k">{nimbus(label)}</span>
+  <span class="k" set:html={enNimbus(label)} />
 </div>
 
 <style>

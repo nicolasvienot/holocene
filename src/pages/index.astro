@@ -16,6 +16,7 @@ import accueil from '../data/accueil.json';
 import infos from '../data/infos.json';
 import maison from '../data/maison.json';
 import { capsules, type UniversId } from '../data/navigation';
+import { enNimbus } from '../lib/texte';
 
 const telTraiteur = infos.telephones.traiteurFoodTruck;
 const jalon = (f: (typeof maison.fondateurs)[number]) =>
@@ -87,8 +88,8 @@ const dernier = maison.valeurs.length - 1;
   </section>
 
   <section class="wrap engagements">
-    <h2 class="d t84">Ce qu'on ne l<span class="secours">â</span>che jamais</h2>
-    <div class="ag engagements-grille">
+    <h2 class="d t84" set:html={enNimbus("Ce qu'on ne lâche jamais")} />
+        <div class="ag engagements-grille">
       {maison.valeurs.map((v, i) => <ValueCard titre={v.titre} texte={v.texte} noire={i === dernier} />)}
     </div>
   </section>

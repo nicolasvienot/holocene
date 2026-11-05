@@ -1,0 +1,41 @@
+---
+import Base from '../layouts/Base.astro';
+import Prose from '../components/Prose.astro';
+import infos from '../data/infos.json';
+
+const m = infos.mentionsLegales;
+---
+<Base
+  capsule="contact"
+  title="Mentions légales - Holocene"
+  description="Éditeur, hébergeur et propriété intellectuelle du site Holocene Food Event."
+>
+  <article class="wrap page">
+    <h1 class="d t92">Mentions légales</h1>
+    <Prose>
+      <h2>Éditeur du site</h2>
+      <p>
+        {m.editeur}<br />
+        Siège social : {m.siegeSocial}<br />
+        SIRET : {m.siret}<br />
+        Responsable de la publication : {m.responsablePublication}<br />
+        Contact : <a href={`mailto:${m.contactPublication}`}>{m.contactPublication}</a>
+      </p>
+      <p>[{m.aCompleter}]</p>
+
+      <h2>Hébergement</h2>
+      <p>{m.hebergeur}</p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>Les textes, photos, logos et illustrations de ce site sont la propriété exclusive de Holocene. Toute reproduction demande son accord préalable.</p>
+
+      <h2>Données personnelles et cookies</h2>
+      <p>Tout est expliqué sur la page <a href="/confidentialite">Confidentialité</a>.</p>
+    </Prose>
+  </article>
+</Base>
+
+<style>
+  .page { padding-top: 40px; padding-bottom: 112px; }
+  h1 { margin-bottom: 56px; }
+</style>

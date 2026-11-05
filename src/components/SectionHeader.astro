@@ -1,5 +1,6 @@
 ---
 import Kicker from './Kicker.astro';
+import { enNimbus } from '../lib/texte';
 
 interface Props {
   kicker?: string;
@@ -22,7 +23,7 @@ const { kicker, titre, taille = 't92', texte, largeur = 420, marge = 48, ecart =
 <div class="sh" style={`--sh-marge:${marge}px;--sh-ecart:${ecart}px;--sh-largeur:${largeur}px`}>
   <div class="sh-titre">
     {kicker && <Kicker texte={kicker} class="sh-k" />}
-    <Niveau class:list={['d', taille]}><Fragment set:html={titre.map(l => l.replace(/&(?!amp;)/g, '&amp;').replace(/</g, '&lt;')).join('<br />')} /></Niveau>
+    <Niveau class:list={['d', taille]} set:html={titre.map(enNimbus).join('<br />')} />
   </div>
   {texte && <p class="p sh-texte">{texte}</p>}
 </div>

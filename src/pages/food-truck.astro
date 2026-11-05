@@ -15,6 +15,7 @@ import Steps from '../components/Steps.astro';
 import DemandeForm from '../components/forms/DemandeForm.astro';
 import data from '../data/food-truck.json';
 import { faqJsonLd, traiteurJsonLd } from '../lib/seo';
+import { enNimbus } from '../lib/texte';
 import type { Plat } from '../types';
 
 const { heroFacts, bandeau, pains, desserts, boissons, accompagnement, allergies, pdf, evenements, etapes, formulaire, faq } = data;
@@ -85,7 +86,7 @@ const rubriques: { titre: string; plats: Plat[] }[] = [
     <div class="wrap section-112 ag evenements">
       <div class="pile evenements-intro">
         <Kicker texte="Pour quels événements" />
-        <h2 class="d t80">Pas de cuisine sur place ? Le truck en est une.</h2>
+        <h2 class="d t80" set:html={enNimbus('Pas de cuisine sur place ? Le truck en est une.')} />
         <p class="p">Une vraie cuisine embarquée, un comptoir pour servir, et un camion qu'on habille selon votre thème : rustique, chic, vintage ou complètement fou.</p>
         <img src="/brand/icon-food-truck.svg" alt="" aria-hidden="true" width="70" height="140" loading="lazy" />
       </div>
@@ -141,11 +142,18 @@ const rubriques: { titre: string; plats: Plat[] }[] = [
   .pain { display: flex; flex-direction: column; gap: 22px; padding: 34px; min-height: 420px; border: var(--line); border-radius: 36px; background: var(--paper); }
   .pain--avant { background: var(--flower); box-shadow: var(--shadow-hero); }
   .pain h3 { font-size: 56px; }
+  @media (max-width: 480px) {
+    .pain h3 { font-size: clamp(36px, calc(17vw - 18px), 56px); }
+  }
   .pain p { font-size: 17px; line-height: 1.6; }
   .pain :global(.pain-pastille) { align-self: flex-start; margin-top: auto; }
 
   .carte-suite { --min: 300px; gap: 24px 56px; margin-top: 56px; padding: 40px; border: var(--line); border-radius: 36px; background: var(--light); }
   .rubrique { font-size: 32px; margin-bottom: 6px; }
+  @media (max-width: 380px) {
+    .carte-suite { padding: 24px 20px; }
+    .rubrique { font-size: clamp(24px, 7.4vw, 28px); }
+  }
   .carte-pied { --gap: 14px; margin-top: 18px; }
   .allergies { font-size: 13px; line-height: 1.5; }
 
