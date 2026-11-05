@@ -1,57 +1,177 @@
 {
   "_note": "Contenu de la page /food-truck (maquette 05-food-truck.html). Carte issue de la carte food truck fournie par Holocene ; la carte évolue selon les produits disponibles.",
   "heroFacts": [
-    { "label": "Producteurs", "valeur": "En direct" },
-    { "label": "Cuisine", "valeur": "En live" }
+    {
+      "label": "Producteurs",
+      "valeur": "En direct"
+    },
+    {
+      "label": "Cuisine",
+      "valeur": "En live"
+    }
   ],
-  "bandeau": ["Pain ciabatta", "Produits locaux", "Carte de saison", "En direct"],
+  "bandeau": [
+    "Pain ciabatta",
+    "Produits locaux",
+    "Carte de saison",
+    "En direct"
+  ],
   "pains": [
-    { "num": "01", "nom": "Le Rustico", "description": "Pain ciabatta, mortadelle IGP, stracciatella, amandes torréfiées, tomates confites, oignons rouges pickles et roquette.", "pastille": "Le classique" },
-    { "num": "02", "nom": "Le Prima", "description": "Pain ciabatta, jambon cru affiné de la Maison Garcia, stracciatella, sauce tomate ancienne maison, huile de basilic, oignons rouges pickles et roquette.", "pastille": "Maison Garcia" },
-    { "num": "03", "nom": "Le Merinjana", "description": "Pain ciabatta maison, aubergines marinées, stracciatella, sauce tomates anciennes maison, roquette, amandes torréfiées, oignons pickles.", "pastille": "Végétarien" }
+    {
+      "num": "01",
+      "nom": "Le Rustico",
+      "description": "Pain ciabatta, mortadelle IGP, stracciatella, amandes torréfiées, tomates confites, oignons rouges pickles et roquette.",
+      "pastille": "Le classique"
+    },
+    {
+      "num": "02",
+      "nom": "Le Prima",
+      "description": "Pain ciabatta, jambon cru affiné de la Maison Garcia, stracciatella, sauce tomate ancienne maison, huile de basilic, oignons rouges pickles et roquette.",
+      "pastille": "Maison Garcia"
+    },
+    {
+      "num": "03",
+      "nom": "Le Merinjana",
+      "description": "Pain ciabatta maison, aubergines marinées, stracciatella, sauce tomates anciennes maison, roquette, amandes torréfiées, oignons pickles.",
+      "pastille": "Végétarien"
+    }
   ],
   "desserts": [
-    { "nom": "Marbré au chocolat", "description": "glaçage rocher amande" },
-    { "nom": "Comme un banoffee", "description": "aux fruits de saison" }
+    {
+      "nom": "Marbré au chocolat",
+      "description": "glaçage rocher amande"
+    },
+    {
+      "nom": "Comme un banoffee",
+      "description": "aux fruits de saison"
+    }
   ],
   "boissons": [
-    { "nom": "Citronnade maison — 25 cl", "description": "au sirop de menthe fraîche" },
-    { "nom": "Thé glacé maison — 25 cl", "description": "pêche-abricot" },
-    { "nom": "Ô9 — 50 cl", "description": "eau minérale occitane responsable" }
+    {
+      "nom": "Citronnade maison — 25 cl",
+      "description": "au sirop de menthe fraîche"
+    },
+    {
+      "nom": "Thé glacé maison — 25 cl",
+      "description": "pêche-abricot"
+    },
+    {
+      "nom": "Ô9 — 50 cl",
+      "description": "eau minérale occitane responsable"
+    }
   ],
   "accompagnement": [
-    { "nom": "Chips de l'Aveyron — 60 g", "description": "pour croquer entre deux bouchées" }
+    {
+      "nom": "Chips de l'Aveyron — 60 g",
+      "description": "pour croquer entre deux bouchées"
+    }
   ],
   "allergies": "Une allergie, un régime ? Dites-le à l'équipe avant de commander, on adapte.",
   "pdfSource": "https://cdn.prod.website-files.com/675844824e0b7ff1b98c298d/681b6fc9fd2e092c36dde50e_Carte%20Holocene%20Food%20Truck.pdf",
   "pdf": "/menus/carte-food-truck.pdf",
   "evenements": [
-    { "titre": "Mariages", "sous": "Brunch du lendemain" },
-    { "titre": "Entreprises", "sous": "Séminaires, afterworks" },
-    { "titre": "Festivals", "sous": "Concerts, sport" },
-    { "titre": "Anniversaires", "sous": "Baptêmes, fêtes" },
-    { "titre": "Familles", "sous": "Grandes tablées" }
+    {
+      "titre": "Mariages",
+      "sous": "Brunch du lendemain"
+    },
+    {
+      "titre": "Entreprises",
+      "sous": "Séminaires, afterworks"
+    },
+    {
+      "titre": "Festivals",
+      "sous": "Concerts, sport"
+    },
+    {
+      "titre": "Anniversaires",
+      "sous": "Baptêmes, fêtes"
+    },
+    {
+      "titre": "Familles",
+      "sous": "Grandes tablées"
+    }
   ],
   "etapes": [
-    { "num": "01", "titre": "Vous nous écrivez", "texte": "Date, lieu, nombre de convives, type d'événement." },
-    { "num": "02", "titre": "On compose le menu", "texte": "Pains, desserts, boissons, régimes : on ajuste et on vous envoie le devis." },
-    { "num": "03", "titre": "On arrive, on régale", "texte": "Le truck s'installe, on cuisine en live, vous profitez de vos invités." }
+    {
+      "num": "01",
+      "titre": "Vous nous écrivez",
+      "texte": "Date, lieu, nombre de convives, type d'événement."
+    },
+    {
+      "num": "02",
+      "titre": "On compose le menu",
+      "texte": "Pains, desserts, boissons, régimes : on ajuste et on vous envoie le devis."
+    },
+    {
+      "num": "03",
+      "titre": "On arrive, on régale",
+      "texte": "Le truck s'installe, on cuisine en live, vous profitez de vos invités."
+    }
   ],
   "formulaire": {
     "champs": [
-      { "id": "nom", "label": "Nom complet", "type": "text", "requis": true },
-      { "id": "email", "label": "E-mail", "type": "email", "requis": true },
-      { "id": "telephone", "label": "Téléphone", "type": "tel", "requis": true },
-      { "id": "lieu", "label": "Lieu de la prestation", "type": "text" },
-      { "id": "date", "label": "Date", "type": "date" },
-      { "id": "convives", "label": "Nombre de convives", "type": "number" },
-      { "id": "message", "label": "Votre événement", "type": "textarea", "pleineLargeur": true, "placeholder": "Type d'événement, horaires, avec ou sans service, budget par personne…" }
+      {
+        "id": "nom",
+        "label": "Nom complet",
+        "type": "text",
+        "requis": true,
+        "placeholder": "Camille Durand"
+      },
+      {
+        "id": "email",
+        "label": "E-mail",
+        "type": "email",
+        "requis": true,
+        "placeholder": "camille@exemple.fr"
+      },
+      {
+        "id": "telephone",
+        "label": "Téléphone",
+        "type": "tel",
+        "requis": true,
+        "placeholder": "06 00 00 00 00"
+      },
+      {
+        "id": "lieu",
+        "label": "Lieu de la prestation",
+        "type": "text",
+        "placeholder": "Ville ou nom du lieu"
+      },
+      {
+        "id": "date",
+        "label": "Date",
+        "type": "date"
+      },
+      {
+        "id": "convives",
+        "label": "Nombre de convives",
+        "type": "number",
+        "placeholder": "150"
+      },
+      {
+        "id": "message",
+        "label": "Votre événement",
+        "type": "textarea",
+        "pleineLargeur": true,
+        "placeholder": "Type d'événement, horaires, avec ou sans service, budget par personne…"
+      }
     ],
-    "bouton": "Envoyer"
+    "bouton": "Envoyer",
+    "mention": "Vos données servent uniquement à vous répondre."
   },
   "faq": [
-    { "q": "Combien coûte la location ?", "r": "C'est sur devis : le prix dépend du nombre de convives, du lieu et du menu choisi. Souvent moins cher qu'un traiteur classique.", "ouvert": true },
-    { "q": "Où intervenez-vous ?", "r": "À Toulouse, en Haute-Garonne et dans toute la région." },
-    { "q": "Avez-vous des options végé et sans gluten ?", "r": "Oui — le Merinjana est végétarien, et on adapte les menus aux régimes de vos invités." }
+    {
+      "q": "Combien coûte la location ?",
+      "r": "C'est sur devis : le prix dépend du nombre de convives, du lieu et du menu choisi. Souvent moins cher qu'un traiteur classique.",
+      "ouvert": true
+    },
+    {
+      "q": "Où intervenez-vous ?",
+      "r": "À Toulouse, en Haute-Garonne et dans toute la région."
+    },
+    {
+      "q": "Avez-vous des options végé et sans gluten ?",
+      "r": "Oui — le Merinjana est végétarien, et on adapte les menus aux régimes de vos invités."
+    }
   ]
 }

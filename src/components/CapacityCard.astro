@@ -1,0 +1,34 @@
+---
+import Pill from './Pill.astro';
+
+interface Props {
+  nom: string;
+  sous: string;
+  cocktail: number;
+  assis: number;
+  miseEnAvant?: boolean;
+}
+
+const { nom, sous, cocktail, assis, miseEnAvant = false } = Astro.props;
+---
+<div class:list={['cap', { 'cap--avant': miseEnAvant }]}>
+  <div class="tete">
+    <h3 class="d nom">{nom}</h3>
+    <Pill texte={sous} fond={miseEnAvant ? 'var(--paper)' : undefined} />
+  </div>
+  <dl class="chiffres">
+    <div class="cell"><dd class="d">{cocktail}</dd><dt class="k">Cocktail</dt></div>
+    <div class="cell cell--droite"><dd class="d">{assis}</dd><dt class="k">Assis</dt></div>
+  </dl>
+</div>
+
+<style>
+  .cap { display: flex; flex-direction: column; gap: 28px; padding: 40px; border: var(--line); border-radius: 36px; background: var(--paper); }
+  .cap--avant { background: var(--flower); box-shadow: var(--shadow-hero); }
+  .tete { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; align-items: center; }
+  .nom { font-size: 48px; }
+  .chiffres { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; margin: 0; border-top: var(--line); }
+  .cell { display: flex; flex-direction: column; gap: 8px; padding: 24px 16px 0 0; }
+  .cell--droite { padding: 24px 0 0 16px; border-left: var(--line); }
+  dd { margin: 0; font-size: 88px; }
+</style>

@@ -1,0 +1,152 @@
+---
+import Base from '../../layouts/Base.astro';
+import Accent from '../../components/Accent.astro';
+import Button from '../../components/Button.astro';
+import CapacityCard from '../../components/CapacityCard.astro';
+import HeroFacts from '../../components/HeroFacts.astro';
+import Kicker from '../../components/Kicker.astro';
+import PhoneCard from '../../components/PhoneCard.astro';
+import PhotoSlot from '../../components/PhotoSlot.astro';
+import Pill from '../../components/Pill.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import DemandeForm from '../../components/forms/DemandeForm.astro';
+import infos from '../../data/infos.json';
+import data from '../../data/privatisation.json';
+
+const { plaquette, heroFacts, espaces, formats, inclus, options, optionsNote, formulaire } = data;
+const fondsOptions = ['var(--lilac-light)', 'var(--yellow)', 'var(--lilac-light)', 'var(--yellow)', 'var(--lilac)'];
+---
+<Base
+  capsule="privatiser"
+  actif="Privatiser"
+  heroNoir
+  title="Privatiser le restaurant à Balma (Toulouse) - Holocene"
+  description="Privatisez Holocene à Balma pour vos événements : salle jusqu'à 110 invités en cocktail, terrasse jusqu'à 130, formules cocktail, repas assis ou tapas."
+>
+  <section class="sur-noir">
+    <div class="wrap ag hero">
+      <div class="pile pile-start hero-texte">
+        <Accent texte="Soirs et fins de semaine" class="hero-accent" />
+        <h1 class="d hero-titre">Privatisez<br />Holocene.</h1>
+        <p class="p t20 hero-phrase">Anniversaire, afterwork, soirée d'entreprise, séminaire : on vous ouvre la salle, la terrasse ou les deux, avec la cuisine du chef et une équipe aux petits soins.</p>
+        <div class="rang">
+          <Button variant="onDarkFlower" href="#demande" label="Faire une demande" />
+          <Button variant="onDark" href={plaquette.pdf} target="_blank" rel="noopener" label={plaquette.bouton} />
+        </div>
+        <HeroFacts faits={heroFacts} />
+      </div>
+      <PhotoSlot label="Photo — La salle dressée en soirée" fond="var(--slot-dark)" sombre />
+    </div>
+  </section>
+
+  <section class="wrap section-112">
+    <SectionHeader titre={['Deux espaces.', 'Une seule soirée.']} texte="La salle, la terrasse ou les deux : on adapte l'espace à votre format, debout ou assis." />
+    <div class="ag espaces">
+      {espaces.map((e, i) => <CapacityCard nom={e.nom} sous={e.sous} cocktail={e.cocktail} assis={e.assis} miseEnAvant={i === 1} />)}
+    </div>
+  </section>
+
+  <section class="formats trait-haut trait-bas">
+    <div class="wrap section-112">
+      <SectionHeader kicker="L'expérience culinaire signée Holocene" titre={['Trois façons', 'de recevoir.']} />
+      <div class="ag formats-grille">
+        {formats.map((f, i) => (
+          <div class:list={['format', { 'format--fleur': i === formats.length - 1 }]}>
+            <h3 class="d">{f.nom}</h3>
+            <p>{f.intro}</p>
+            <ul>
+              {f.menu.map((plat) => (
+                <li><img src="/brand/icon-restaurant.svg" alt="" aria-hidden="true" width="11" height="22" loading="lazy" />{plat}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section-112">
+    <div class="ag services">
+      <div class="service sur-noir">
+        <Accent texte="Inclus" class="service-accent fleur" />
+        <ul class="inclus">
+          {inclus.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+      <div class="service service--blanc">
+        <Accent texte="En option" class="service-accent" />
+        <div class="options">
+          {options.map((o, i) => <Pill texte={o} grande fond={fondsOptions[i]} />)}
+        </div>
+        <p class="note">{optionsNote}</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="demande" class="fond-blanc trait-haut">
+    <div class="wrap section-112 ag demande">
+      <div class="pile demande-intro">
+        <Kicker texte="Demande de privatisation" />
+        <h2 class="d t76">Racontez-nous votre soirée.</h2>
+        <p class="p">Quelques infos suffisent. On revient vers vous avec une proposition sur mesure : espace, formule, options et budget.</p>
+        <PhoneCard label="Plutôt par téléphone" telephone={infos.telephones.restaurant} />
+      </div>
+      <DemandeForm id="privatisation" destination="privatisation" champs={formulaire.champs} bouton={formulaire.bouton} colonne={260} />
+    </div>
+  </section>
+
+  <section class="fond-blanc autres">
+    <div class="wrap ag autres-grille">
+      <a href="/traiteur" class="autre autre--traiteur">
+        <div class="pile"><Kicker texte="Ailleurs qu'au restaurant" /><h2 class="d">Le traiteur</h2></div>
+        <img src="/brand/icon-traiteur.svg" alt="" aria-hidden="true" width="55" height="110" loading="lazy" />
+      </a>
+      <a href="/food-truck" class="autre autre--truck">
+        <div class="pile"><Kicker texte="En plein air" /><h2 class="d">Le food truck</h2></div>
+        <img src="/brand/icon-food-truck.svg" alt="" aria-hidden="true" width="55" height="110" loading="lazy" />
+      </a>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { --min: 520px; --gap: 56px; align-items: center; padding-top: 48px; padding-bottom: 112px; }
+  .hero-texte { --gap: 30px; }
+  .hero-texte :global(.hero-accent) { font-size: 30px; color: var(--flower); }
+  .hero-titre { font-size: clamp(48px, 6vw, 88px); }
+  .hero-phrase { color: var(--on-dark); max-width: 520px; }
+
+  .espaces { --min: 420px; }
+
+  .formats { background: var(--yellow); }
+  .formats-grille { --min: 340px; }
+  .format { display: flex; flex-direction: column; gap: 18px; padding: 32px; border: var(--line); border-radius: var(--radius-card); background: var(--paper); }
+  .format--fleur { background: var(--flower); }
+  .format h3 { font-size: 36px; }
+  .format > p { font-size: 15px; }
+  .format li { display: flex; gap: 12px; align-items: flex-start; padding: 14px 0; border-bottom: var(--line-dashed); font-size: 16px; line-height: 1.45; }
+  .format li:last-child { border-bottom: 0; }
+  .format img { height: 22px; width: auto; flex: none; }
+
+  .services { --min: 420px; }
+  .service { display: flex; flex-direction: column; gap: 22px; padding: 40px; border: var(--line); border-radius: 36px; }
+  .service--blanc { background: var(--paper); }
+  .service :global(.service-accent) { font-size: 32px; }
+  .service :global(.fleur) { color: var(--flower); }
+  .inclus li { font-size: 20px; padding: 16px 0; border-bottom: 1px solid var(--rule-dark-soft); }
+  .inclus li:last-child { border-bottom: 0; }
+  .options { display: flex; flex-wrap: wrap; gap: 12px; }
+  .note { font-size: 15px; line-height: 1.6; margin-top: auto; }
+
+  .demande { --min: 400px; --gap: 64px; align-items: start; }
+  .demande-intro { --gap: 26px; }
+
+  .autres { padding-bottom: 112px; }
+  .autres-grille { --min: 400px; }
+  .autre { display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 36px; border: var(--line); border-radius: var(--radius-card); text-decoration: none; color: var(--ink); }
+  .autre--traiteur { background: var(--peach); }
+  .autre--truck { background: var(--cyan); }
+  .autre .pile { --gap: 12px; }
+  .autre h2 { font-size: 44px; }
+  .autre img { height: 110px; width: auto; flex: none; }
+</style>

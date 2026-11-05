@@ -1,0 +1,291 @@
+---
+import Base from '../../layouts/Base.astro';
+import Accent from '../../components/Accent.astro';
+import Button from '../../components/Button.astro';
+import Dish from '../../components/Dish.astro';
+import Faq from '../../components/Faq.astro';
+import HeroFacts from '../../components/HeroFacts.astro';
+import Icon from '../../components/Icon.astro';
+import Kicker from '../../components/Kicker.astro';
+import PhotoSlot from '../../components/PhotoSlot.astro';
+import Pill from '../../components/Pill.astro';
+import PriceCard from '../../components/PriceCard.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import Tag from '../../components/Tag.astro';
+import infos from '../../data/infos.json';
+import privatisation from '../../data/privatisation.json';
+import restaurant from '../../data/restaurant.json';
+import { estPlaceholder, prix } from '../../lib/texte';
+import { faqJsonLd, restaurantJsonLd } from '../../lib/seo';
+import type { Plat } from '../../types';
+
+const { formules, formulesNote, carte, bar, lieu, faq } = restaurant;
+const fondsFormules = ['var(--yellow-light)', 'var(--lilac-light)', 'var(--lilac)'];
+const rubriques: { titre: string; plats: Plat[] }[] = [
+  { titre: 'Entrées', plats: carte.entrees },
+  { titre: 'Plats', plats: carte.plats },
+  { titre: 'Desserts', plats: carte.desserts },
+];
+const prixMin = Math.min(...formules.map((f) => f.prix));
+const [salle, terrasse] = privatisation.espaces;
+const acces = infos.acces;
+const tel = infos.telephones.restaurant;
+const zenchef = infos.reservation.table;
+---
+<Base
+  capsule="restaurant"
+  title="Restaurant bistronomique à Balma (Toulouse) - Holocene"
+  description="Une carte qui change chaque mois, des produits d'Occitanie en direct et une terrasse végétale à Balma-Gramont. Ouvert du lundi au vendredi midi, formules dès 17 €."
+  jsonLd={[restaurantJsonLd(), faqJsonLd(faq)]}
+>
+  <section class="wrap hero">
+    <Accent texte="Le midi en semaine" class="hero-accent" />
+    <h1 class="d hero-titre">La cantine<br />bistronomique<br />de Balma.</h1>
+    <div class="ag hero-grille">
+      <div class="pile pile-start hero-texte">
+        <p class="p t20">Une carte qui change chaque mois, des suggestions chaque semaine, des produits qui arrivent en direct des fermes d'Occitanie. Le tout cuisiné sous vos yeux par le chef Julien Sanchez et sa brigade.</p>
+        <div class="pastilles">
+          <Pill texte="Lun - Ven, 12h - 14h" fond="var(--paper)" />
+          <Pill texte="Métro A — Balma-Gramont" fond="var(--paper)" />
+          <Pill texte="Parking gratuit" fond="var(--paper)" />
+          <Pill texte="Terrasse végétale" fond="var(--flower)" />
+        </div>
+        <div class="rang">
+          <Button variant="dark" href={zenchef} label="Réserver une table" />
+          <Button href="#carte" label="Voir la carte" />
+        </div>
+        <HeroFacts faits={[{ label: 'Carte', valeur: 'Change chaque mois' }, { label: 'Formules', valeur: `Dès ${prix(prixMin)}` }]} />
+      </div>
+      <div class="hero-visuel">
+        <PhotoSlot label="Photo — Gnocchi aux champignons" ratio="4 / 3" ombre icone="/brand/icon-restaurant.svg" />
+      </div>
+    </div>
+  </section>
+
+  <section id="carte" class="fond-blanc trait-haut">
+    <div class="wrap formules">
+      <SectionHeader titre={['Les formules']} texte={formulesNote} />
+      <div class="ag formules-grille">
+        {formules.map((f, i) => <PriceCard nom={f.nom} valeur={f.prix} fond={fondsFormules[i] ?? 'var(--paper)'} badge={f.badge} miseEnAvant={f.miseEnAvant} />)}
+      </div>
+    </div>
+
+    <div class="wrap carte-zone">
+      <div class="carte-bloc">
+        <div class="carte-tete">
+          <div class="pile carte-intro">
+            <Accent texte="La carte du moment" class="carte-accent" />
+            <span class="p t15">Elle change chaque mois — celle-ci est la carte en cours.</span>
+          </div>
+          <div class="legende">
+            <Tag fond="var(--paper)">SG - sans gluten</Tag>
+            <Tag fond="var(--lilac)">Végé - végétarien</Tag>
+          </div>
+        </div>
+        <div class="ag carte-grille">
+          {rubriques.map((r) => (
+            <div>
+              <h3 class="d rubrique">{r.titre}</h3>
+              {r.plats.map((plat, i) => <Dish plat={plat} dernier={i === r.plats.length - 1} />)}
+            </div>
+          ))}
+          <div>
+            <div class="garniture-tete">
+              <h3 class="d rubrique">Garniture</h3>
+              <Accent texte="A partager" class="garniture-accent" />
+            </div>
+            <Dish plat={carte.garniture} />
+            <div class="pile pile-start carte-pied">
+              <p class="allergenes">{carte.allergenes}</p>
+              {estPlaceholder(carte.pdf) ? (
+                <Button disabled class="btn-pdf"><span class="secours">[PDF de la carte à fournir]</span></Button>
+              ) : (
+                <Button href={carte.pdf} target="_blank" rel="noopener" label="Télécharger la carte — PDF" icon="download" />
+              )}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bar" class="sur-noir">
+    <div class="wrap section-112">
+      <div class="bar-tete">
+        <SectionHeader kicker="Le bar" titre={['Nature, craft', 'et très local.']} texte="Vins en biodynamie, bières de brasseurs toulousains, spiritueux d'Occitanie. Et une citronnade maison pour ceux qui retournent bosser." largeur={440} marge={56} />
+      </div>
+      <div class="ag bar-grille">
+        {bar.map((b, i) => (
+          <div class:list={['boisson', { 'boisson--fleur': i === 1 }]}>
+            <h3 class="v">{b.titre}</h3>
+            <span class="d">{b.prix}</span>
+            <p>{b.texte}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="lieu" class="wrap section-112">
+    <div class="ag lieu-grille">
+      <div class="lieu-texte">
+        <div class="pile">
+          <Kicker texte="Le lieu" />
+          <h2 class="d t76">Béton, bois, plantes et cuisine ouverte.</h2>
+          <p class="p">Une grande salle lumineuse, un comptoir où l'on voit tout ce qui se passe en cuisine, et une terrasse végétale qui ajoute {lieu.terrasseCouverts} couverts dès que le soleil est là.</p>
+        </div>
+        <div class="lieu-pastilles">
+          <Pill texte={`Salle — ${lieu.salleAssis} assis`} fond="var(--paper)" />
+          <Pill texte={`Terrasse — ${lieu.terrasseAssis} assis`} fond="var(--paper)" />
+          {lieu.accessiblePMR && <Pill texte="Accessible PMR" fond="var(--paper)" />}
+        </div>
+      </div>
+      <PhotoSlot label="Photo — La salle en journée" ratio="4 / 5" fond="var(--light)" icone="/brand/icon-restaurant.svg" hauteurIcone={120} />
+      <PhotoSlot label="Photo — Le bar en soirée" ratio="4 / 5" fond="var(--ink)" sombre hauteurIcone={120} class="slot-noir" />
+    </div>
+  </section>
+
+  <section class="wrap teaser-zone">
+    <a href="/restaurant/privatiser" class="ag teaser">
+      <div class="pile teaser-texte">
+        <Accent texte="Soirs et fins de semaine" class="teaser-accent" />
+        <h2 class="d t84-teaser">Privatisez Holocene.</h2>
+        <p class="p">Anniversaire, afterwork, soirée d'entreprise, séminaire : la salle, la terrasse ou les deux, avec la cuisine du chef et une équipe dédiée.</p>
+      </div>
+      <div class="pile pile-start teaser-droite">
+        <div class="teaser-chiffres">
+          <div class="teaser-chiffre"><span class="d">{salle?.cocktail}</span><span class="k">Cocktail en salle</span></div>
+          <div class="teaser-chiffre"><span class="d">{terrasse?.cocktail}</span><span class="k">Cocktail en terrasse</span></div>
+        </div>
+        <Button variant="dark" label="Découvrir la privatisation" />
+      </div>
+    </a>
+  </section>
+
+  <section id="infos" class="fond-blanc trait-haut">
+    <div class="wrap section-112">
+      <h2 class="d t92 infos-titre">Infos pratiques</h2>
+      <div class="ag infos-grille">
+        <div class="info info--horaires">
+          <Kicker texte="Horaires & réservation" />
+          <span class="d info-grand">Lun - Ven<br />12h - 14h</span>
+          <p><strong>De mai à septembre</strong>, on ouvre aussi le jeudi et le vendredi soir, de 19h à 22h30. Réservation conseillée : en ligne, par téléphone ou sur place. Les autres soirs et le week-end, le lieu se privatise.</p>
+          <div class="info-boutons">
+            <Button variant="dark" href={zenchef} label="Réserver en ligne" />
+            <Button href={`tel:${tel.tel}`} label={tel.affiche} />
+          </div>
+        </div>
+        <div class="info-carte">
+          <div class="info-plan">
+            <Icon name="pin" size={44} />
+            <Kicker texte="Carte interactive" />
+          </div>
+          <div class="info-adresse">
+            <Kicker texte="Adresse" />
+            <span class="adresse">{infos.adresse.rue}<br />{infos.adresse.codePostal} {infos.adresse.ville}</span>
+            <a href={infos.adresse.itineraire} target="_blank" rel="noopener">Ouvrir l'itinéraire</a>
+          </div>
+        </div>
+        <div class="info info--venir">
+          <Kicker texte="Venir" />
+          {acces.map((a, i) => (
+            <div class:list={['acces', { 'acces--trait': i < acces.length - 1 }]}>
+              <span class="dn">{a.titre}</span>
+              <span class="acces-texte">{a.texte}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div class="ag faq-grille">
+        <h2 class="d t64">Questions fréquentes</h2>
+        <Faq questions={faq} />
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero { padding-top: 40px; padding-bottom: 96px; }
+  .hero :global(.hero-accent) { display: block; font-size: 30px; margin-bottom: 24px; }
+  .hero-titre { font-size: clamp(34px, 8.4vw, 132px); }
+  .hero-grille { --min: 480px; --gap: 56px; align-items: start; margin-top: 56px; }
+  .hero-texte { --gap: 28px; }
+  .hero-texte .p { max-width: 540px; }
+  .pastilles { display: flex; flex-wrap: wrap; gap: 10px; }
+  .hero-visuel { padding: 0 10px 10px 0; }
+
+  .formules { padding-top: 112px; padding-bottom: 56px; }
+  .formules-grille { --min: 320px; }
+
+  .carte-zone { padding-bottom: 112px; }
+  .carte-bloc { border: var(--line); border-radius: 36px; background: var(--yellow); padding: 48px; }
+  .carte-tete { display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; margin-bottom: 32px; }
+  .carte-intro { --gap: 12px; }
+  .carte-intro :global(.carte-accent) { font-size: 28px; }
+  .legende { display: flex; gap: 10px; flex-wrap: wrap; }
+  .carte-grille { --min: 380px; gap: 24px 64px; }
+  .rubrique { font-size: 40px; margin-bottom: 8px; }
+  .garniture-tete { display: flex; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: 8px; }
+  .garniture-tete .rubrique { margin-bottom: 0; }
+  .garniture-tete :global(.garniture-accent) { font-size: 20px; }
+  .carte-pied { --gap: 16px; margin-top: 28px; }
+  .allergenes { font-size: 14px; line-height: 1.5; }
+
+  .bar-tete { --sh-k: var(--flower); }
+  .bar-grille { --min: 300px; }
+  .boisson { display: flex; flex-direction: column; gap: 20px; padding: 32px; border: 2px solid var(--paper); border-radius: var(--radius-card); }
+  .boisson .v { font-size: 30px; color: var(--flower); }
+  .boisson .d { font-size: 40px; }
+  .boisson p { font-size: 15px; line-height: 1.6; color: var(--on-dark); }
+  .boisson--fleur { background: var(--flower); color: var(--ink); }
+  .boisson--fleur .v { color: var(--ink); }
+  .boisson--fleur p { color: var(--ink); }
+
+  .lieu-grille { --min: 400px; align-items: stretch; }
+  .lieu-texte { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; padding: 8px 24px 8px 0; }
+  .lieu-pastilles { display: flex; gap: 12px; flex-wrap: wrap; }
+  .lieu-grille :global(.slot) { width: 100%; align-self: start; gap: 16px; }
+  .lieu-grille :global(.slot-noir) { border-color: var(--ink); }
+
+  .teaser-zone { padding-bottom: 112px; }
+  .teaser {
+    --min: 420px;
+    --gap: 40px;
+    align-items: center;
+    padding: 56px;
+    border: var(--line);
+    border-radius: var(--radius-block);
+    background: var(--flower);
+    text-decoration: none;
+    color: var(--ink);
+    box-shadow: var(--shadow-hero);
+  }
+  .teaser-texte { --gap: 22px; }
+  .teaser-texte :global(.teaser-accent) { font-size: 28px; }
+  .t84-teaser { font-size: clamp(44px, 5.4vw, 84px); }
+  .teaser-droite { --gap: 14px; }
+  .teaser-chiffres { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; width: 100%; }
+  .teaser-chiffre { display: flex; flex-direction: column; gap: 8px; padding: 22px; background: var(--paper); border: var(--line); border-radius: var(--radius-sm); }
+  .teaser-chiffre .d { font-size: 52px; }
+
+  .infos-titre { margin-bottom: 48px; }
+  .infos-grille { --min: 360px; }
+  .info { display: flex; flex-direction: column; gap: 20px; padding: 32px; border: var(--line); border-radius: var(--radius-card); }
+  .info--horaires { background: var(--yellow); }
+  .info--venir { gap: 18px; }
+  .info-grand { font-size: 40px; }
+  .info p { font-size: 15px; line-height: 1.6; }
+  .info-boutons { display: flex; gap: 12px; flex-wrap: wrap; margin-top: auto; }
+  .info-carte { display: flex; flex-direction: column; border: var(--line); border-radius: var(--radius-card); overflow: hidden; background: var(--lilac-light); }
+  .info-plan { flex: 1; min-height: 220px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; border-bottom: var(--line); background: var(--lilac); }
+  .info-adresse { padding: 28px; display: flex; flex-direction: column; gap: 10px; }
+  .adresse { font-size: 20px; line-height: 1.4; }
+  .info-adresse a { font-size: 15px; }
+  .acces { display: flex; flex-direction: column; gap: 4px; }
+  .acces--trait { padding-bottom: 16px; border-bottom: var(--line-dashed); }
+  .acces .dn { letter-spacing: normal; }
+  .acces-texte { font-size: 15px; }
+
+  .faq-grille { --min: 420px; --gap: 48px; margin-top: 112px; }
+</style>

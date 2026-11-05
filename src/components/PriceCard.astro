@@ -1,0 +1,39 @@
+---
+import Kicker from './Kicker.astro';
+import Tag from './Tag.astro';
+import { prix } from '../lib/texte';
+
+interface Props {
+  nom: string;
+  valeur: number;
+  fond: string;
+  badge?: string;
+  miseEnAvant?: boolean;
+}
+
+const { nom, valeur, fond, badge, miseEnAvant = false } = Astro.props;
+---
+<div class:list={['prix', { 'prix--avant': miseEnAvant }]} style={`background:${fond}`}>
+  {badge ? (
+    <div class="tete"><Kicker texte={nom} /><Tag fond="var(--paper)">{badge}</Tag></div>
+  ) : (
+    <Kicker texte={nom} />
+  )}
+  <span class="d montant">{prix(valeur)}</span>
+</div>
+
+<style>
+  .prix {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 32px;
+    min-height: 220px;
+    border: var(--line);
+    border-radius: var(--radius-card);
+  }
+  .prix--avant { box-shadow: 8px 8px 0 var(--ink); }
+  .tete { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .montant { font-size: 60px; }
+</style>

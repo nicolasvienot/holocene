@@ -1,0 +1,11 @@
+{
+  "_note": "Messages communs aux formulaires.",
+  "mention": "Vos données servent uniquement à vous répondre.",
+  "succes": "Merci, votre demande est bien partie. On revient vers vous au plus vite.",
+  "echec": "L'envoi n'a pas abouti. Réessayez, ou appelez-nous : le numéro est juste à côté.",
+  "erreurs": {
+    "requis": "Ce champ est obligatoire",
+    "email": "Adresse e-mail incomplète",
+    "tel": "Numéro de téléphone incomplet"
+  }
+}

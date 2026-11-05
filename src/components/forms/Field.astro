@@ -1,0 +1,137 @@
+---
+import Icon from '../Icon.astro';
+import { nimbus } from '../../lib/texte';
+import type { Champ } from '../../types';
+
+interface Props {
+  champ: Champ;
+  /** Préfixe des id, pour plusieurs formulaires dans une page */
+  prefixe: string;
+}
+
+const { champ, prefixe } = Astro.props;
+const { id, label, type, requis = false, placeholder, options = [], pleineLargeur = false, pour } = champ;
+const idHtml = `${prefixe}-${id}`;
+const idErreur = `${idHtml}-erreur`;
+
+const autocompletes: Record<string, string> = {
+  nom: 'name',
+  societe: 'organization',
+  email: 'email',
+  telephone: 'tel',
+};
+const autocomplete = autocompletes[id] ?? 'off';
+---
+<div class:list={['fld', { 'fld--large': pleineLargeur }]} data-champ={id} data-pour={pour?.join(' ')} hidden={Boolean(pour)}>
+  {type === 'choix' ? (
+    <fieldset class="choix">
+      <legend class="lab">{nimbus(label)}</legend>
+      <div class="puces">
+        {options.map((option, i) => (
+          <label class="puce">
+            <input type="radio" name={id} value={option} checked={i === 0} />
+            <span>{option.replace('+', 'et')}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  ) : (
+    <>
+      <label class="lab" for={idHtml}>{nimbus(label)}</label>
+      {type === 'textarea' ? (
+        <textarea id={idHtml} name={id} placeholder={placeholder} required={requis} autocomplete={autocomplete} aria-describedby={idErreur}></textarea>
+      ) : type === 'select' ? (
+        <select id={idHtml} name={id} required={requis}>
+          {options.map((option) => <option>{option}</option>)}
+        </select>
+      ) : (
+        <input
+          id={idHtml}
+          name={id}
+          type={type as astroHTML.JSX.InputHTMLAttributes['type']}
+          placeholder={placeholder}
+          required={requis}
+          autocomplete={autocomplete}
+          inputmode={type === 'number' ? 'numeric' : undefined}
+          min={type === 'number' ? 1 : undefined}
+          aria-describedby={idErreur}
+        />
+      )}
+      <span class="erreur" id={idErreur} hidden><Icon name="alert" size={16} /><span data-message></span></span>
+    </>
+  )}
+</div>
+
+<style>
+  .fld { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .fld[hidden] { display: none; }
+  .fld--large { grid-column: 1 / -1; }
+
+  .lab {
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 11px;
+  }
+
+  input:not([type='radio']),
+  select,
+  textarea {
+    font-family: var(--font-body);
+    font-size: 17px;
+    min-height: 54px;
+    padding: 14px 18px;
+    border: var(--line);
+    border-radius: var(--radius-field);
+    background: var(--paper);
+    color: var(--ink);
+    width: 100%;
+    min-width: 0;
+    appearance: auto;
+  }
+  textarea { min-height: var(--zone, 150px); resize: vertical; }
+
+  input:not([type='radio']):focus,
+  select:focus,
+  textarea:focus { outline: none; box-shadow: var(--shadow-btn); }
+
+  [aria-invalid='true'] { border-width: 3px; }
+
+  .erreur {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 8px;
+    padding: 6px 12px;
+    background: var(--pink);
+    border: var(--line);
+    border-radius: var(--radius-pill);
+    font-size: 13px;
+    line-height: 1.3;
+  }
+  .erreur[hidden] { display: none; }
+
+  .choix { display: flex; flex-direction: column; gap: 8px; margin: 0; padding: 0; border: 0; min-width: 0; }
+  .choix legend { padding: 0; margin-bottom: 8px; }
+  .puces { display: flex; flex-wrap: wrap; gap: 8px; }
+  .puce { position: relative; cursor: pointer; }
+  .puce input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+  .puce span {
+    display: inline-flex;
+    align-items: center;
+    min-height: 46px;
+    padding: 0 16px 0 calc(16px + 0.14em);
+    border: var(--line);
+    border-radius: var(--radius-pill);
+    background: var(--paper);
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+  .puce input:checked + span { background: var(--ink); color: var(--paper); }
+  .puce input:focus-visible + span { outline: 3px solid var(--ink); outline-offset: 3px; }
+</style>

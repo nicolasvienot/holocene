@@ -10,6 +10,8 @@ export interface Champ {
   placeholder?: string;
   options?: string[];
   pleineLargeur?: boolean;
+  /** Sur Contact : types de demande pour lesquels ce champ apparaît */
+  pour?: string[];
 }
 
 export interface QuestionFaq {

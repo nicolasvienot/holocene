@@ -1,0 +1,155 @@
+---
+import Button from '../Button.astro';
+import Field from './Field.astro';
+import formulaires from '../../data/formulaires.json';
+import type { Champ } from '../../types';
+
+interface Props {
+  /** Préfixe des id du formulaire */
+  id: string;
+  /** Destination de la demande : privatisation, traiteur, food-truck, contact */
+  destination: string;
+  champs: Champ[];
+  bouton: string;
+  /** Largeur mini d'une colonne de champs, en px */
+  colonne?: number;
+  /** Fond de la carte */
+  fond?: string;
+  class?: string;
+}
+
+const { id, destination, champs, bouton, colonne = 240, fond = 'var(--light)', class: className } = Astro.props;
+---
+<form
+  class:list={['form', className]}
+  action="/api/demande"
+  method="post"
+  style={`--col:${colonne}px;background:${fond}`}
+  data-demande
+  data-messages={JSON.stringify({ ...formulaires.erreurs, echec: formulaires.echec })}
+>
+  <slot name="entete" />
+  <input type="hidden" name="destination" value={destination} data-destination />
+  <!-- Champ piège : invisible pour les personnes, rempli par les robots -->
+  <div class="piege" aria-hidden="true">
+    <label for={`${id}-site`}>Ne pas remplir</label>
+    <input id={`${id}-site`} type="text" name="site_web" tabindex="-1" autocomplete="off" />
+  </div>
+  {champs.map((champ) => <Field champ={champ} prefixe={id} />)}
+  <slot />
+  <div class="actions">
+    <span class="mention">{formulaires.mention} <a href="/confidentialite">Confidentialité</a></span>
+    <Button variant="dark" type="submit" label={bouton} />
+  </div>
+  <p class="etat" data-etat role="status" hidden></p>
+  <p class="merci" data-merci role="status" tabindex="-1" hidden>{formulaires.succes}</p>
+</form>
+
+<script>
+  const estTelephone = (valeur: string) => valeur.replace(/\D/g, '').length >= 10;
+
+  document.querySelectorAll<HTMLFormElement>('form[data-demande]').forEach((form) => {
+    const messages = JSON.parse(form.dataset.messages ?? '{}') as Record<string, string>;
+    // Avec JS, nos messages en français remplacent ceux du navigateur.
+    form.noValidate = true;
+
+    const champs = () =>
+      [...form.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('input:not([type=hidden]):not([type=radio]):not([name=site_web]), textarea')]
+        .filter((c) => !c.closest('[hidden]'));
+
+    const verifier = (champ: HTMLInputElement | HTMLTextAreaElement): boolean => {
+      const valeur = champ.value.trim();
+      let message = '';
+      if (champ.required && !valeur) message = messages.requis ?? '';
+      else if (champ.type === 'email' && valeur && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(valeur)) message = messages.email ?? '';
+      else if (champ.type === 'tel' && valeur && !estTelephone(valeur)) message = messages.tel ?? '';
+
+      const erreur = form.querySelector<HTMLElement>(`#${CSS.escape(champ.id)}-erreur`);
+      const texte = erreur?.querySelector<HTMLElement>('[data-message]');
+      if (erreur && texte) {
+        texte.textContent = message;
+        erreur.hidden = !message;
+      }
+      if (message) champ.setAttribute('aria-invalid', 'true');
+      else champ.removeAttribute('aria-invalid');
+      return !message;
+    };
+
+    form.addEventListener('input', (evenement) => {
+      const cible = evenement.target;
+      if ((cible instanceof HTMLInputElement || cible instanceof HTMLTextAreaElement) && cible.hasAttribute('aria-invalid')) verifier(cible);
+    });
+
+    form.addEventListener('submit', async (evenement) => {
+      evenement.preventDefault();
+      const invalides = champs().filter((champ) => !verifier(champ));
+      if (invalides.length) {
+        invalides[0]?.focus();
+        return;
+      }
+
+      const etat = form.querySelector<HTMLElement>('[data-etat]');
+      const merci = form.querySelector<HTMLElement>('[data-merci]');
+      const bouton = form.querySelector<HTMLButtonElement>('button[type=submit]');
+      if (bouton) bouton.disabled = true;
+      if (etat) etat.hidden = true;
+
+      const donnees = new FormData(form);
+      // Un champ masqué par le type de demande n'est pas envoyé.
+      form.querySelectorAll<HTMLElement>('[data-champ][hidden]').forEach((bloc) => {
+        if (bloc.dataset.champ) donnees.delete(bloc.dataset.champ);
+      });
+
+      try {
+        const reponse = await fetch(form.action, { method: 'POST', body: donnees, headers: { Accept: 'application/json' } });
+        if (!reponse.ok) throw new Error(String(reponse.status));
+        [...form.children].forEach((enfant) => {
+          if (enfant !== merci && enfant instanceof HTMLElement) enfant.hidden = true;
+        });
+        if (merci) {
+          merci.hidden = false;
+          merci.focus();
+        }
+      } catch {
+        if (etat) {
+          etat.textContent = messages.echec ?? '';
+          etat.hidden = false;
+        }
+        if (bouton) bouton.disabled = false;
+      }
+    });
+  });
+</script>
+
+<style>
+  .form {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--col), 100%), 1fr));
+    gap: 20px;
+    padding: 40px;
+    border: var(--line);
+    border-radius: 36px;
+    box-shadow: var(--shadow-hero);
+    min-width: 0;
+  }
+  .form > [hidden] { display: none; }
+
+  .piege { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .actions {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .mention { font-size: 13px; }
+  .mention a { display: inline-block; }
+
+  .etat,
+  .merci { grid-column: 1 / -1; font-size: 18px; line-height: 1.5; }
+  .etat { padding: 12px 18px; background: var(--pink); border: var(--line); border-radius: var(--radius-field); font-size: 15px; }
+  .merci { font-size: 22px; line-height: 1.4; }
+  .merci:focus { outline: none; }
+</style>

@@ -1,0 +1,35 @@
+---
+import Tag from './Tag.astro';
+import type { Plat } from '../types';
+
+interface Props {
+  plat: Plat;
+  dernier?: boolean;
+  /** Variante food truck : nom 17 px, lignes resserrées */
+  compact?: boolean;
+}
+
+const { plat, dernier = false, compact = false } = Astro.props;
+const { nom, description, note, tags = [], supplement } = plat;
+const sansGluten = tags.includes('sg');
+const vegetarien = tags.includes('vege');
+const aEtiquettes = sansGluten || vegetarien || supplement !== undefined;
+---
+<div class:list={['dish', { 'dish--dernier': dernier, 'dish--compact': compact }]}>
+  <div class:list={{ ligne: aEtiquettes }}>
+    <span class="dn">{nom.replace(/\s*[—–]\s*/g, ' - ')}</span>
+    {sansGluten && <Tag fond="var(--paper)">SG</Tag>}
+    {vegetarien && <Tag fond="var(--lilac)">Végé</Tag>}
+    {supplement !== undefined && <Tag><span><span class="secours">+</span>{supplement} €</span></Tag>}
+  </div>
+  <span class="desc">{description ?? note}</span>
+</div>
+
+<style>
+  .dish { display: flex; flex-direction: column; gap: 6px; padding: 16px 0; border-bottom: var(--line-dashed); }
+  .dish--dernier { border-bottom: 0; }
+  .dish--compact { gap: 5px; padding: 14px 0; }
+  .dish--compact .dn { font-size: 17px; }
+  .ligne { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .desc { font-size: 15px; }
+</style>

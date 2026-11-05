@@ -9,8 +9,14 @@
     "itineraire": "https://maps.app.goo.gl/sXg3HusJHgYLQ3fx8"
   },
   "telephones": {
-    "restaurant": { "affiche": "05 32 74 08 34", "tel": "+33532740834" },
-    "traiteurFoodTruck": { "affiche": "05 32 74 08 33", "tel": "+33532740833" }
+    "restaurant": {
+      "affiche": "05 32 74 08 34",
+      "tel": "+33532740834"
+    },
+    "traiteurFoodTruck": {
+      "affiche": "05 32 74 08 33",
+      "tel": "+33532740833"
+    }
   },
   "email": "contact@holocene-traiteur.fr",
   "horairesRestaurant": {
@@ -24,9 +30,18 @@
     "privatisation": "https://bookings.zenchef.com/privatisation?rid=368665&pid=1001"
   },
   "acces": [
-    { "titre": "Métro A", "texte": "Station Balma-Gramont, 7 min à pied" },
-    { "titre": "En voiture", "texte": "Périphérique sortie 15 Roseraie, à 3 min. Parking gratuit à côté." },
-    { "titre": "Depuis le centre", "texte": "15 min du Capitole, 16 min de Matabiau, 16 min de l'aéroport de Blagnac" }
+    {
+      "titre": "Métro A",
+      "texte": "Station Balma-Gramont, 7 min à pied"
+    },
+    {
+      "titre": "En voiture",
+      "texte": "Périphérique sortie 15 Roseraie, à 3 min. Parking gratuit à côté."
+    },
+    {
+      "titre": "Depuis le centre",
+      "texte": "15 min du Capitole, 16 min de Matabiau"
+    }
   ],
   "accessiblePMR": true,
   "zonesTraiteur": {
@@ -35,9 +50,18 @@
     "foodTruck": "Toute la région toulousaine et ses environs"
   },
   "reseaux": [
-    { "nom": "Instagram", "url": "https://www.instagram.com/holocene.tlse/" },
-    { "nom": "Facebook", "url": "https://fr-fr.facebook.com/holocene.tlse/" },
-    { "nom": "LinkedIn", "url": "https://www.linkedin.com/company/holocenetlse/" }
+    {
+      "nom": "Instagram",
+      "url": "https://www.instagram.com/holocene.tlse/"
+    },
+    {
+      "nom": "Facebook",
+      "url": "https://fr-fr.facebook.com/holocene.tlse/"
+    },
+    {
+      "nom": "LinkedIn",
+      "url": "https://www.linkedin.com/company/holocenetlse/"
+    }
   ],
   "chiffres": {
     "collaborateurs": 24,
@@ -47,7 +71,12 @@
     "univers": 3,
     "experience": "plus de 15 ans d'expérience cumulée"
   },
-  "regimes": ["végétarien", "halal", "sans gluten", "sans lactose"],
+  "regimes": [
+    "végétarien",
+    "halal",
+    "sans gluten",
+    "sans lactose"
+  ],
   "mentionsLegales": {
     "editeur": "Holocène",
     "siegeSocial": "30 avenue Maurice Bourges-Maunoury, 31200 Toulouse",
@@ -57,5 +86,6 @@
     "hebergeur": "[À compléter selon l'hébergement choisi, ex. Cloudflare, Inc., 101 Townsend St, San Francisco, CA 94107, USA]",
     "aCompleter": "Forme juridique, capital social, RCS et n° de TVA absents du site actuel : à demander à Holocene."
   },
-  "videoEquipe": "https://player.vimeo.com/video/1041034041"
+  "videoEquipe": "https://player.vimeo.com/video/1041034041",
+  "accesAussi": "16 min de l'aéroport de Blagnac (site actuel, pas affiché dans la maquette)."
 }

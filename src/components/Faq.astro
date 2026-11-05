@@ -1,0 +1,46 @@
+---
+import Icon from './Icon.astro';
+import type { QuestionFaq } from '../types';
+
+interface Props {
+  questions: QuestionFaq[];
+  /** Questions en 20 px au lieu de 22 px (colonne étroite) */
+  compact?: boolean;
+}
+
+const { questions, compact = false } = Astro.props;
+---
+<div class:list={['faq', { 'faq--compact': compact }]}>
+  {questions.map((q, i) => (
+    <details open={i === 0}>
+      <summary>
+        <span>{q.q}</span>
+        <Icon name="plus" size={22} class="ico-plus" />
+        <Icon name="minus" size={22} class="ico-moins" />
+      </summary>
+      <p class="p t16">{q.r}</p>
+    </details>
+  ))}
+</div>
+
+<style>
+  .faq { border-top: var(--line); }
+  details { border-bottom: var(--line); }
+  summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+    min-height: 72px;
+    font-size: 22px;
+  }
+  summary::-webkit-details-marker { display: none; }
+  .faq--compact summary { min-height: 68px; font-size: 20px; }
+  summary :global(svg) { flex: none; }
+  .faq :global(.ico-moins) { display: none; }
+  details[open] :global(.ico-plus) { display: none; }
+  details[open] :global(.ico-moins) { display: block; }
+  .p { padding-bottom: 24px; }
+</style>
