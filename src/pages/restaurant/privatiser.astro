@@ -148,5 +148,12 @@ const fondsOptions = ['var(--lilac-light)', 'var(--yellow)', 'var(--lilac-light)
   .autre--truck { background: var(--cyan); }
   .autre .pile { --gap: 12px; }
   .autre h2 { font-size: 44px; }
+  .autre .pile { min-width: 0; }
   .autre img { height: 110px; width: auto; flex: none; }
+
+  @media (max-width: 420px) {
+    .autre { padding: 24px; gap: 12px; }
+    .autre h2 { font-size: 36px; }
+    .autre img { height: 80px; }
+  }
 </style>

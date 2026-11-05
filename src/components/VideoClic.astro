@@ -1,0 +1,52 @@
+---
+import Button from './Button.astro';
+import Kicker from './Kicker.astro';
+
+interface Props {
+  url: string;
+  titre: string;
+}
+
+const { url, titre } = Astro.props;
+---
+<div class="video" data-video={`${url}?autoplay=1`} data-titre={titre}>
+  <img src="/brand/icon-holocene.svg" alt="" aria-hidden="true" width="40" height="80" loading="lazy" />
+  <Kicker texte={titre} />
+  <!-- Sans JS : le lien ouvre la vidéo sur Vimeo. Avec JS : lecture sur place, rien n'est chargé avant le clic. -->
+  <Button variant="flower" href={url} label="Lire la vidéo" icon="arrow" data-lire />
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-video]').forEach((bloc) => {
+    bloc.querySelector('[data-lire]')?.addEventListener('click', (evenement) => {
+      evenement.preventDefault();
+      const cadre = document.createElement('iframe');
+      cadre.src = bloc.dataset.video ?? '';
+      cadre.title = bloc.dataset.titre ?? '';
+      cadre.allow = 'autoplay; fullscreen; picture-in-picture';
+      bloc.classList.add('video--lecture');
+      bloc.replaceChildren(cadre);
+      cadre.focus();
+    });
+  });
+</script>
+
+<style>
+  .video {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 18px 32px;
+    margin-top: 24px;
+    padding: 28px 32px;
+    text-align: center;
+    border: var(--line);
+    border-radius: var(--radius-card);
+    background: var(--light);
+    overflow: hidden;
+  }
+  img { height: 80px; width: auto; }
+  .video--lecture { aspect-ratio: 16 / 9; padding: 0; }
+  .video :global(iframe) { width: 100%; height: 100%; border: 0; display: block; }
+</style>

@@ -83,6 +83,7 @@ summary:focus-visible { outline: 3px solid var(--focus, var(--ink)); outline-off
   text-transform: uppercase;
   letter-spacing: 0.02em;
   font-size: 18px;
+  display: block;
 }
 
 /* Glyphe absent des polices fournies : même rendu de secours que la maquette, à retirer avec la licence. */
