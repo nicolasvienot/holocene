@@ -1,0 +1,146 @@
+{
+  "_note": "Contenu de la page /restaurant/privatiser (maquette 03-privatiser.html).",
+  "plaquette": {
+    "pdfSource": "https://cdn.prod.website-files.com/675844824e0b7ff1b98c298d/6a4e30ea915b90e886a76885_e89fac7eab7ce28349632f2f38b02328_Dossier%20de%20privatisation%20-%202026.pdf",
+    "pdf": "/menus/dossier-privatisation-2026.pdf",
+    "bouton": "Plaquette 2026 — PDF"
+  },
+  "heroFacts": [
+    {
+      "label": "La salle",
+      "valeur": "110 cocktail"
+    },
+    {
+      "label": "La terrasse",
+      "valeur": "130 cocktail"
+    }
+  ],
+  "espaces": [
+    {
+      "nom": "La salle",
+      "sous": "Béton, bois, plantes",
+      "cocktail": 110,
+      "assis": 75
+    },
+    {
+      "nom": "La terrasse",
+      "sous": "Végétale",
+      "cocktail": 130,
+      "assis": 90
+    }
+  ],
+  "formats": [
+    {
+      "nom": "Cocktail",
+      "intro": "Debout, ça circule, ça trinque. Exemple de menu :",
+      "menu": [
+        "Focaccia à l'ail noir",
+        "Gyoza toulousain",
+        "Ceviche de dorade, guacamole de patate douce",
+        "Marbré au chocolat"
+      ]
+    },
+    {
+      "nom": "Repas assis",
+      "intro": "Une vraie table, servie à l'assiette. Exemple de menu :",
+      "menu": [
+        "Tataki de canard",
+        "Risotto d'épeautre au pesto de pistache",
+        "Baba à l'armagnac et clémentine"
+      ]
+    },
+    {
+      "nom": "Tapas en terrasse",
+      "intro": "Au soleil, à partager. Exemple de menu :",
+      "menu": [
+        "Cromesquis d'agneau",
+        "Seiches flambées au gin",
+        "Gua bao",
+        "Patatas bravas, sauce piquillo",
+        "Snickers revisité"
+      ]
+    }
+  ],
+  "inclus": [
+    "La formule traiteur de votre choix",
+    "L'aménagement du lieu sur mesure",
+    "Une équipe de service dédiée",
+    "Le rangement et le nettoyage"
+  ],
+  "options": [
+    "Photobooth personnalisé",
+    "Atelier dégustation bière ou vin",
+    "DJ toute la soirée",
+    "Barbecue Kokko",
+    "Animation cocktail"
+  ],
+  "optionsNote": "Les options se combinent librement. On vous fait une proposition chiffrée avec votre devis.",
+  "formulaire": {
+    "champs": [
+      {
+        "id": "nom",
+        "label": "Nom complet",
+        "type": "text",
+        "requis": true,
+        "placeholder": "Camille Durand"
+      },
+      {
+        "id": "societe",
+        "label": "Société (si pro)",
+        "type": "text",
+        "placeholder": "Optionnel"
+      },
+      {
+        "id": "email",
+        "label": "E-mail",
+        "type": "email",
+        "requis": true,
+        "placeholder": "camille@exemple.fr"
+      },
+      {
+        "id": "telephone",
+        "label": "Téléphone",
+        "type": "tel",
+        "requis": true,
+        "placeholder": "06 00 00 00 00"
+      },
+      {
+        "id": "date",
+        "label": "Date de l'événement",
+        "type": "date"
+      },
+      {
+        "id": "espace",
+        "label": "Espace souhaité",
+        "type": "choix",
+        "options": [
+          "Salle + terrasse",
+          "La salle",
+          "La terrasse"
+        ]
+      },
+      {
+        "id": "invites",
+        "label": "Nombre d'invités",
+        "type": "number",
+        "placeholder": "60"
+      },
+      {
+        "id": "budget",
+        "label": "Budget par personne",
+        "type": "text",
+        "placeholder": "En euros"
+      },
+      {
+        "id": "message",
+        "label": "Votre projet",
+        "type": "textarea",
+        "pleineLargeur": true,
+        "placeholder": "Type d'événement, horaires, ambiance, régimes alimentaires…"
+      }
+    ],
+    "bouton": "Envoyer ma demande",
+    "alternative": "Ou en ligne via Zenchef : https://bookings.zenchef.com/privatisation?rid=368665&pid=1001",
+    "mention": "Vos données servent uniquement à vous répondre."
+  }
+}

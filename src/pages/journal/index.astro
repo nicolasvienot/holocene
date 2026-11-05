@@ -1,0 +1,135 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Accent from '../../components/Accent.astro';
+import Button from '../../components/Button.astro';
+import Chip from '../../components/Chip.astro';
+import Kicker from '../../components/Kicker.astro';
+import Pill from '../../components/Pill.astro';
+import PostCard from '../../components/PostCard.astro';
+import infos from '../../data/infos.json';
+import { dateCourte } from '../../lib/journal';
+
+const articles = (await getCollection('journal')).sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+const une = articles.find((a) => a.data.featured) ?? articles[0]!;
+const ordreMaquette = ['Traiteur', 'Mariage', 'Restaurant', 'Manger local'];
+const autres = articles
+  .filter((a) => a.id !== une.id)
+  .sort((a, b) => ordreMaquette.indexOf(a.data.category) - ordreMaquette.indexOf(b.data.category));
+const instagram = infos.reseaux.find((r) => r.nom === 'Instagram')!;
+---
+<Base
+  capsule="journal"
+  actif="Journal"
+  title="Le journal - Holocene, restaurant, traiteur et food truck à Toulouse"
+  description="Les actus de la maison Holocene, nos conseils pour réussir vos événements et quelques bonnes raisons de manger local."
+>
+  <noscript slot="head"><style>[data-filtres] { display: none !important; }</style></noscript>
+
+  <section class="wrap hero">
+    <div class="pile hero-titre">
+      <Accent texte="Recettes et coulisses" class="hero-accent" />
+      <h1 class="d">Le journal</h1>
+    </div>
+    <p class="p hero-texte">Les actus de la maison, nos conseils pour réussir vos événements et quelques bonnes raisons de manger local.</p>
+  </section>
+
+  <section class="wrap une-zone">
+    <a href={`/journal/${une.id}`} class="ag une">
+      <img src="/images/verrines-close.jpg" alt="Bouchées petits pois et foie gras sur pain de campagne" width="720" height="833" loading="lazy" />
+      <div class="une-texte">
+        <div class="une-meta">
+          <Pill texte="Dernier article" fond="var(--paper)" />
+          <Pill texte={une.data.category} fond="var(--yellow-traiteur)" />
+          <span class="k">{dateCourte(une.data.date)}</span>
+        </div>
+        <h2 class="une-titre">{une.data.title}</h2>
+        <p>{une.data.excerpt}</p>
+        <Button variant="dark" label="Lire l'article" class="une-btn" />
+      </div>
+    </a>
+  </section>
+
+  <section class="wrap liste">
+    <div class="filtres" role="group" aria-label="Filtrer par thème" data-filtres>
+      <Chip texte="Tous" valeur="" actif />
+      {ordreMaquette.map((c) => <Chip texte={c} valeur={c} />)}
+    </div>
+    <p class="sr-only" role="status" data-compte></p>
+    <div class="ag grille" data-articles>
+      {autres.map((a) => <PostCard article={a} />)}
+    </div>
+  </section>
+
+  <section class="insta trait-haut">
+    <div class="wrap insta-zone">
+      <div class="pile insta-texte">
+        <Kicker texte="Au quotidien" />
+        <h2 class="d">Les coulisses sont sur Instagram.</h2>
+      </div>
+      <Button variant="dark" href={instagram.url} label="Suivre Holocene" />
+    </div>
+  </section>
+</Base>
+
+<script>
+  const filtres = document.querySelector('[data-filtres]');
+  const compte = document.querySelector('[data-compte]');
+  const cartes = [...document.querySelectorAll<HTMLElement>('[data-articles] [data-categorie]')];
+
+  filtres?.addEventListener('click', (evenement) => {
+    const bouton = evenement.target instanceof Element ? evenement.target.closest<HTMLButtonElement>('[data-filtre]') : null;
+    if (!bouton) return;
+    filtres.querySelectorAll('[data-filtre]').forEach((b) => b.setAttribute('aria-pressed', String(b === bouton)));
+    const valeur = bouton.dataset.filtre ?? '';
+    let visibles = 0;
+    cartes.forEach((carte) => {
+      carte.hidden = Boolean(valeur) && carte.dataset.categorie !== valeur;
+      if (!carte.hidden) visibles += 1;
+    });
+    if (compte) compte.textContent = `${visibles} article${visibles > 1 ? 's' : ''} affiché${visibles > 1 ? 's' : ''}`;
+  });
+</script>
+
+<style>
+  .hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding-top: 40px;
+    padding-bottom: 64px;
+  }
+  .hero-titre :global(.hero-accent) { font-size: 30px; }
+  h1 { font-size: clamp(64px, 10vw, 160px); }
+  .hero-texte { max-width: 440px; }
+
+  .une-zone { padding-bottom: 72px; }
+  .une {
+    --min: 460px;
+    --gap: 0;
+    border: var(--line);
+    border-radius: 36px;
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--ink);
+    background: var(--peach);
+    box-shadow: var(--shadow-hero);
+  }
+  .une img { width: 100%; height: 100%; min-height: 380px; object-fit: cover; border-right: var(--line); }
+  .une-texte { display: flex; flex-direction: column; justify-content: space-between; gap: 32px; padding: 48px; }
+  .une-meta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  .une-titre { font-size: clamp(28px, 2.8vw, 42px); font-weight: 400; line-height: 1.2; }
+  .une-texte p { font-size: 16px; line-height: 1.6; }
+  .une-texte :global(.une-btn) { align-self: flex-start; }
+
+  .liste { padding-bottom: 112px; }
+  .filtres { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+  .grille { --min: 380px; }
+
+  .insta { background: var(--flower); }
+  .insta-zone { padding-block: 88px; display: flex; justify-content: space-between; align-items: center; gap: 32px; flex-wrap: wrap; }
+  .insta-texte { --gap: 18px; }
+  .insta h2 { font-size: clamp(40px, 5vw, 76px); }
+</style>

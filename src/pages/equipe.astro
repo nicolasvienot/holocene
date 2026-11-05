@@ -1,96 +1,107 @@
 ---
+import Base from '../layouts/Base.astro';
+import Accent from '../components/Accent.astro';
 import Button from '../components/Button.astro';
-import Card from '../components/Card.astro';
-import Hero from '../components/Hero.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import PersonCard from '../components/PersonCard.astro';
 import PhotoSlot from '../components/PhotoSlot.astro';
 import Pill from '../components/Pill.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import { site } from '../data/site';
-import type { UniversId } from '../data/univers';
-import Base from '../layouts/Base.astro';
+import VideoClic from '../components/VideoClic.astro';
+import infos from '../data/infos.json';
+import maison from '../data/maison.json';
 
-const founders: { firstName: string; name: string; pole: string; univers: UniversId; text: string }[] = [
-  {
-    firstName: 'Julien',
-    name: 'Julien Sanchez',
-    pole: 'Pôle cuisine',
-    univers: 'restaurant',
-    text: "Le chef. Passé par L'Allée des Vignes à Cajarc, maison étoilée, il signe toutes les cartes et met les saveurs régionales au centre de l'assiette.",
-  },
-  {
-    firstName: 'Théo',
-    name: 'Théo Constant',
-    pole: 'Pôle organisation',
-    univers: 'traiteur',
-    text: "L'homme du jour J. Après avoir dirigé des restaurants à Toulouse, il orchestre la salle, le service et la logistique de chaque événement.",
-  },
-  {
-    firstName: 'Stéphane',
-    name: 'Stéphane Suarez',
-    pole: 'Pôle commercial',
-    univers: 'food-truck',
-    text: "Votre premier contact. Il a roulé sa bosse sur six continents et suit chaque projet du premier appel jusqu'au jour J.",
-  },
+// La couleur d'une carte dit le pôle : cuisine = restaurant, organisation = traiteur, commercial = food truck.
+const habillages = [
+  { icone: '/brand/icon-restaurant.svg', fondPhoto: 'var(--yellow)', fondPastille: 'var(--yellow)' },
+  { icone: '/brand/icon-traiteur.svg', fondPhoto: 'var(--peach)', fondPastille: 'var(--peach-light)' },
+  { icone: '/brand/icon-food-truck.svg', fondPhoto: 'var(--cyan)', fondPastille: 'var(--cyan)' },
 ];
 ---
-
 <Base
-  title="L'équipe"
-  description="Théo, Stéphane et Julien se sont rencontrés à l'école hôtelière. Aujourd'hui, une équipe de 24 personnes entre Balma, Toulouse et l'Occitanie."
+  capsule="equipe"
+  actif="L'équipe"
+  title="L'équipe - Holocene, restaurant, traiteur et food truck à Toulouse"
+  description="Julien Sanchez, Théo Constant et Stéphane Suarez, trois amis d'école hôtelière, et une équipe de 24 personnes : cuisine, organisation et commercial."
 >
-  <Hero
-    accent="Trois potes"
-    size="xl"
-    layout="stacked"
-    title={['24 personnes,', 'une seule envie.']}
-    text="Théo, Stéphane et Julien se sont rencontrés à l'école hôtelière. Chacun est parti apprendre de son côté (maisons étoilées, voyages, salles toulousaines) avant de revenir avec la même idée : ouvrir l'endroit où ils auraient aimé manger."
-  >
-    <Fragment slot="actions">
-      <Button href="/contact" variant="primary">Demander un devis</Button>
-      <Button href={site.zenchef.table} external>Réserver une table</Button>
-    </Fragment>
-    <PhotoSlot slot="visual" label="Les 3 associés au comptoir" highlight />
-  </Hero>
-
-  <section class="founders">
-    <div class="wrap section">
-      <SectionHeader title="Les fondateurs" />
-      <div class="cards">
-        {
-          founders.map((founder) => (
-            <Card flush>
-              <PhotoSlot label={founder.firstName} ratio="1/1" univers={founder.univers} tone="bg" flush />
-              <div class="founder" data-univers={founder.univers}>
-                <Pill tone="flower">{founder.pole}</Pill>
-                <h3 class="display founder__name">{founder.name}</h3>
-                <p class="founder__text">{founder.text}</p>
-              </div>
-            </Card>
-          ))
-        }
+  <section class="wrap hero">
+    <Accent texte="Trois potes" class="hero-accent" />
+    <h1 class="d hero-titre">24 personnes,<br />une seule envie.</h1>
+    <div class="ag hero-grille">
+      <PhotoSlot label="Photo — Les 3 associés au comptoir" ratio="16 / 11" ombre />
+      <div class="pile">
+        <p class="p intro">Théo, Stéphane et Julien se sont rencontrés à l'école hôtelière. Chacun est parti apprendre de son côté — maisons étoilées, voyages, salles toulousaines — avant de revenir avec la même idée : ouvrir l'endroit où ils auraient aimé manger.</p>
+        <p class="p">D'abord un food truck, puis un traiteur, puis un restaurant à Balma. Aujourd'hui, une équipe de 24 qui mélange professionnels de l'événementiel et jeunes talents, avec une règle simple : la rigueur en cuisine, la convivialité partout ailleurs.</p>
       </div>
     </div>
   </section>
+
+  <section class="fondateurs trait-haut trait-bas">
+    <div class="wrap section-112">
+      <h2 class="d t92 titre-fondateurs">Les fondateurs</h2>
+      <div class="ag cartes">
+        {maison.fondateurs.map((f, i) => {
+          const habillage = habillages[i]!;
+          return <PersonCard nom={f.nom} pole={f.pole} bio={f.bio} photo={f.photo} {...habillage} />;
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap section-112">
+    <SectionHeader titre={['Trois pôles,', 'une brigade.']} texte="Des chefs expérimentés, des jeunes apprentis, des maîtres d'hôtel : le savoir-faire se transmet tous les jours." />
+    <ul class="poles">
+      {maison.poles.map((p) => (
+        <li class="ag pole">
+          <h3 class="d">{p.nom}</h3>
+          <p>{p.texte}</p>
+          <div class="pole-pastilles">{p.pastilles.map((t) => <Pill texte={t} />)}</div>
+        </li>
+      ))}
+    </ul>
+  </section>
+
+  <section class="wrap galerie">
+    <div class="ag galerie-grille">
+      <PhotoSlot label="Photo — La brigade en cuisine" ratio="4 / 5" fond="var(--ink)" sombre hauteurIcone={100} class="noir" />
+      <PhotoSlot label="Photo — Le service en salle" ratio="4 / 5" hauteurIcone={100} />
+      <PhotoSlot label="Photo — L'équipe en terrasse" ratio="4 / 5" fond="var(--lilac-light)" icone="/brand/icon-restaurant.svg" hauteurIcone={100} />
+    </div>
+    <VideoClic url={infos.videoEquipe} titre="La vidéo de l'équipe" />
+  </section>
+
+  <CtaFinal noir titre="On cuisine pour vous, bientôt." taille="t100" largeur={1000}>
+    <Button href="/contact" label="Demander un devis" style="--btn-ombre:var(--pink)" />
+    <Button variant="flower" href="/restaurant" label="Réserver une table" style="--btn-ombre:var(--paper)" />
+  </CtaFinal>
 </Base>
 
 <style>
-  .founders {
-    background: var(--flower);
-    border-block: var(--line);
+  .hero { padding-top: 40px; padding-bottom: 96px; }
+  .hero :global(.hero-accent) { display: block; font-size: 30px; margin-bottom: 24px; }
+  .hero-titre { font-size: clamp(60px, 9vw, 144px); }
+  .hero-grille { --min: 480px; --gap: 56px; align-items: center; margin-top: 64px; }
+  .intro { font-size: 22px; line-height: 1.5; }
+  @media (max-width: 420px) {
+    .hero-titre { font-size: clamp(40px, 14.5vw, 60px); }
   }
 
-  .founder {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 28px;
-  }
+  .fondateurs { background: var(--flower); }
+  .titre-fondateurs { margin-bottom: 48px; }
+  .cartes { --min: 340px; }
 
-  .founder__name {
-    font-size: 36px;
+  .poles { display: flex; flex-direction: column; border-top: var(--line); }
+  .pole { --min: 300px; padding: 36px 0; border-bottom: var(--line); align-items: center; }
+  .pole h3 { font-size: 52px; }
+  @media (max-width: 420px) {
+    .pole h3 { font-size: clamp(36px, 12vw, 52px); }
+    .titre-fondateurs { font-size: clamp(40px, 13vw, 48px); }
   }
+  .pole p { font-size: 17px; line-height: 1.6; }
+  .pole-pastilles { display: flex; gap: 10px; flex-wrap: wrap; }
 
-  .founder__text {
-    font-size: 16px;
-  }
+  .galerie { padding-bottom: 112px; }
+  .galerie-grille { --min: 300px; }
+  .galerie-grille :global(.noir) { border-color: var(--ink); }
+  .galerie-grille :global(.slot) { gap: 14px; }
 </style>

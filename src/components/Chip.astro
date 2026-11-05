@@ -1,47 +1,30 @@
 ---
 interface Props {
-  active?: boolean;
-  /** Force l'apparence d'un état, pour le design system. */
-  state?: 'hover' | 'focus';
+  texte: string;
+  actif?: boolean;
+  valeur: string;
 }
 
-const { active = false, state } = Astro.props;
+const { texte, actif = false, valeur } = Astro.props;
 ---
-
-<button type="button" aria-pressed={active ? 'true' : 'false'} class:list={['chip', state && `is-${state}`]}>
-  <slot />
-</button>
+<button type="button" class="chip" aria-pressed={actif ? 'true' : 'false'} data-filtre={valeur}>{texte}</button>
 
 <style>
   .chip {
     display: inline-flex;
     align-items: center;
     min-height: 46px;
-    padding: 0 20px 0 calc(20px + 0.14em);
+    padding: 0 20px;
     border: var(--line);
     border-radius: var(--radius-pill);
     background: var(--paper);
     color: var(--ink);
     font-family: var(--font-display);
     font-weight: 700;
-    font-size: 12px;
-    letter-spacing: 0.14em;
     text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 12px;
     cursor: pointer;
   }
-
-  .chip:hover,
-  .chip.is-hover {
-    background: var(--flower);
-  }
-
-  .chip[aria-pressed='true'] {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .chip.is-focus {
-    outline: 3px solid var(--focus-color, var(--ink));
-    outline-offset: 3px;
-  }
+  .chip[aria-pressed='true'] { background: var(--ink); color: var(--paper); }
 </style>

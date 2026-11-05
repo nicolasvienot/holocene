@@ -1,0 +1,45 @@
+---
+import Accent from './Accent.astro';
+
+interface Props {
+  titre: string;
+  /** Classe de taille du titre */
+  taille?: string;
+  largeur?: number;
+  noir?: boolean;
+}
+
+const { titre, taille = 't112', largeur = 1100, noir = false } = Astro.props;
+---
+{noir ? (
+  <section class="sur-noir">
+    <div class="wrap cta cta--noir">
+      <Accent texte="Great food inside" class="accent" />
+      <h2 class:list={['d', taille]} style={`max-width:${largeur}px`}>{titre}</h2>
+      <div class="boutons"><slot /></div>
+    </div>
+  </section>
+) : (
+  <section class="wrap cta">
+    <Accent texte="Great food inside" class="accent" />
+    <h2 class:list={['d', taille]} style={`max-width:${largeur}px`}>{titre}</h2>
+    <div class="boutons"><slot /></div>
+  </section>
+)}
+
+<style>
+  .cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 32px;
+    text-align: center;
+    padding-top: 128px;
+    padding-bottom: 72px;
+  }
+  .cta :global(.accent) { font-size: 34px; }
+  .boutons { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; }
+
+  .cta--noir { gap: 30px; padding-block: 112px; }
+  .cta--noir :global(.accent) { font-size: 32px; color: var(--pink); }
+</style>

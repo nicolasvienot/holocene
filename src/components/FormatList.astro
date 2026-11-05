@@ -1,0 +1,63 @@
+---
+import Button from './Button.astro';
+
+interface Format {
+  num: string;
+  nom: string;
+  texte: string;
+  bouton: string;
+  pdf?: string;
+  lien?: string;
+}
+
+interface Props {
+  formats: Format[];
+}
+
+const { formats } = Astro.props;
+---
+<ul class="fmts">
+  {formats.map((f) => (
+    <li class="fmt">
+      <span class="k">{f.num}</span>
+      <h3 class="d nom">{f.nom}</h3>
+      <p>{f.texte}</p>
+      {f.pdf ? (
+        <Button variant="flower" href={f.pdf} target="_blank" rel="noopener" label={f.bouton} icon="download" class="fmt-btn" />
+      ) : (
+        <Button variant="flower" href={f.lien} label={f.bouton} class="fmt-btn" />
+      )}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .fmts { padding: 0 32px; background: var(--paper); border: var(--line); border-radius: var(--radius-card); }
+  .fmt {
+    display: grid;
+    grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1.25fr) 190px;
+    align-items: center;
+    gap: 20px 28px;
+    padding: 28px 0;
+    border-bottom: var(--line);
+  }
+  .fmt:last-child { border-bottom: 0; }
+  .nom { font-size: 30px; line-height: 0.95; }
+  p { font-size: 16px; line-height: 1.55; }
+  .fmt :global(.fmt-btn) { justify-self: stretch; min-height: 48px; font-size: 12px; }
+
+  @media (max-width: 980px) {
+    .fmt { grid-template-columns: 44px minmax(0, 1fr); }
+    p,
+    .fmt :global(.fmt-btn) { grid-column: 2; }
+    .fmt :global(.fmt-btn) { justify-self: start; width: auto; }
+  }
+
+  @media (max-width: 760px) {
+    .fmts { padding: 0 20px; }
+  }
+
+  @media (max-width: 360px) {
+    .nom { font-size: 24px; overflow-wrap: anywhere; }
+  }
+</style>

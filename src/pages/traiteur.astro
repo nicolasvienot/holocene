@@ -1,121 +1,176 @@
 ---
-import Button from '../components/Button.astro';
-import Card from '../components/Card.astro';
-import Hero from '../components/Hero.astro';
-import PhotoSlot from '../components/PhotoSlot.astro';
-import Pill from '../components/Pill.astro';
-import SectionHeader from '../components/SectionHeader.astro';
-import SectionStub from '../components/SectionStub.astro';
 import Base from '../layouts/Base.astro';
+import Accent from '../components/Accent.astro';
+import Button from '../components/Button.astro';
+import Faq from '../components/Faq.astro';
+import FormatList from '../components/FormatList.astro';
+import HeroFacts from '../components/HeroFacts.astro';
+import IncludedGrid from '../components/IncludedGrid.astro';
+import Kicker from '../components/Kicker.astro';
+import PhoneCard from '../components/PhoneCard.astro';
+import Pill from '../components/Pill.astro';
+import References from '../components/References.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import Steps from '../components/Steps.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import DemandeForm from '../components/forms/DemandeForm.astro';
+import infos from '../data/infos.json';
+import data from '../data/traiteur.json';
+import { faqJsonLd, traiteurJsonLd } from '../lib/seo';
 
-const audiences = [
-  {
-    name: 'Entreprises',
-    area: 'Toulouse & métropole',
-    items: [
-      "Déjeuners d'affaires et plateaux-repas",
-      'Cocktails déjeunatoires et dînatoires',
-      'Séminaires, conventions, lancements de produit',
-      'Soirées clients et réceptions privées',
-    ],
-    places: "Toulouse, Balma, Blagnac, Colomiers, Cornebarrieu, Cugnaux, L'Union…",
-  },
-  {
-    name: 'Particuliers',
-    area: "Toute l'Occitanie",
-    items: [
-      'Mariages : plus de 150 déjà servis',
-      'Anniversaires et baptêmes',
-      'Brunch du lendemain, avec le food truck',
-      'Fêtes de famille et grandes tablées',
-    ],
-    places: 'Haute-Garonne, Tarn, Tarn-et-Garonne, Aude, Ariège, Gers…',
-  },
-];
+const { heroFacts, pourQui, formats, avantGout, cleEnMain, etapes, temoignage, formulaireDevis, faq } = data;
 ---
-
 <Base
-  title="Traiteur à Toulouse et en Occitanie"
-  description="Traiteur à Toulouse et partout en Occitanie : des produits frais achetés en direct, des menus de saison et une équipe qui s'occupe de tout, de 40 à 1500 invités."
-  univers="traiteur"
+  capsule="traiteur"
+  title="Traiteur à Toulouse pour mariages et entreprises - Holocene"
+  description="Traiteur à Toulouse et en Occitanie : cocktails, repas assis, mariages et plateaux-repas, de 40 à 1500 invités. Produits frais en direct, service clé en main."
+  jsonLd={[traiteurJsonLd('Holocene Traiteur', '/traiteur'), faqJsonLd(faq)]}
 >
-  <Hero
-    accent="Sur mesure"
-    size="md"
-    title={['Votre', 'événement.', 'Notre', 'cuisine.']}
-    text="Traiteur à Toulouse et partout en Occitanie. Des produits frais achetés en direct aux producteurs, des menus qui suivent les saisons, et une équipe qui s'occupe de tout, de 40 à 1500 invités."
-  >
-    <Fragment slot="actions">
-      <Button href="/contact" variant="primary">Demander un devis</Button>
-      <Button href="#formats" variant="flower">Voir les menus</Button>
-    </Fragment>
-    <PhotoSlot
-      slot="visual"
-      src="/images/verrines-peas.jpg"
-      alt="Bouchées petits pois, tuiles croustillantes et foie gras sur pain de campagne, en buffet cocktail"
-      ratio="1/1"
-      highlight
-    >
-      <Pill tone="flower" sticker={-8}>40 - 1500 invités</Pill>
-      <Pill tone="white" sticker={6}>Végé - halal - sans gluten</Pill>
-    </PhotoSlot>
-  </Hero>
-
-  <section id="pourqui" class="audiences">
-    <div class="wrap section">
-      <SectionHeader title="Pour qui on cuisine" />
-      <div class="cards" style="--min: 460px">
-        {
-          audiences.map((audience, index) => (
-            <Card tone={index === 1 ? 'flower' : 'light'} highlight={index === 1}>
-              <div class="audience__top">
-                <h3 class="display audience__name">{audience.name}</h3>
-                <Pill tone="white">{audience.area}</Pill>
-              </div>
-              <ul class="audience__list">
-                {audience.items.map((item) => <li>{item}</li>)}
-              </ul>
-              <p class="audience__places">{audience.places}</p>
-            </Card>
-          ))
-        }
+  <section class="wrap hero">
+    <div class="ag hero-grille">
+      <div class="pile pile-start hero-texte">
+        <Accent texte="Sur mesure" class="hero-accent" />
+        <h1 class="d hero-titre">Votre<br />événement.<br />Notre<br />cuisine.</h1>
+        <p class="p t20">Traiteur à Toulouse et partout en Occitanie. Des produits frais achetés en direct aux producteurs, des menus qui suivent les saisons, et une équipe qui s'occupe de tout — de 40 à 1500 invités.</p>
+        <div class="rang">
+          <Button variant="dark" href="#devis" label="Demander un devis" />
+          <Button variant="flower" href="#formats" label="Voir les menus" />
+        </div>
+        <HeroFacts faits={heroFacts} />
+      </div>
+      <div class="hero-visuel">
+        <img
+          src="/images/verrines-peas.jpg"
+          alt="Bouchées petits pois, tuiles croustillantes et foie gras sur pain de campagne, en buffet cocktail"
+          width="960"
+          height="980"
+          fetchpriority="high"
+        />
       </div>
     </div>
   </section>
 
-  <SectionStub id="formats" name="Formats et menus" />
-  <SectionStub id="etapes" name="Les étapes" />
-  <SectionStub id="references" name="Références" />
+  <section id="pourqui" class="fond-blanc trait-haut trait-bas">
+    <div class="wrap section-112">
+      <SectionHeader titre={['Pour qui on cuisine']} texte="Deux savoir-faire, une même exigence : la cuisine d'un chef formé en maison étoilée, servie à l'échelle de votre événement." />
+      <div class="ag pourqui">
+        {pourQui.map((p) => (
+          <div class:list={['public', { 'public--avant': p.miseEnAvant }]} style={`background:var(${p.fond})`}>
+            <div class="public-tete">
+              <h3 class="d">{p.titre}</h3>
+              <Pill texte={p.zonePill} fond="var(--paper)" />
+            </div>
+            <ul>
+              {p.items.map((item) => <li>{item}</li>)}
+            </ul>
+            <p>{p.zone}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="formats" class="wrap section-112">
+    <SectionHeader titre={['Formats', '& menus']} texte="Nos menus changent avec les saisons. Téléchargez celui qui correspond à votre format : on l'adapte ensuite à votre thème, votre budget et vos invités." largeur={440} />
+    <FormatList formats={formats} />
+    <p class="avant-gout"><Kicker texte="Un avant-goût" class="avant-gout-k" />{avantGout}</p>
+  </section>
+
+  <section id="service" class="sur-noir">
+    <div class="wrap section-112 service">
+      <SectionHeader kicker="Clé en main" titre={["On s'occupe", 'de tout.']} texte="Un seul interlocuteur, du premier appel au dernier verre. Tout ce qui suit est compris dans nos prestations, ajusté à votre format." marge={56} />
+      <IncludedGrid elements={cleEnMain} photo="/images/verrines-jars.jpg" alt="Verrines de gaspacho surmontées de stracciatella, en buffet" />
+      <Steps etapes={etapes} />
+    </div>
+  </section>
+
+  <section id="references" class="wrap section-112">
+    <div class="ag refs-grille">
+      <div class="pile refs-gauche">
+        <h2 class="d t76">Ils nous ont fait confiance</h2>
+        <References page="traiteur" troisColonnes />
+      </div>
+      <TestimonialCard texte={temoignage.texte} auteur={temoignage.auteur} icone="/brand/icon-traiteur.svg" />
+    </div>
+  </section>
+
+  <section id="devis" class="fond-blanc trait-haut">
+    <div class="wrap section-112 devg">
+      <div class="pile dintro">
+        <Kicker texte="Demande de devis" />
+        <h2 class="d t76">Parlons de votre événement.</h2>
+        <p class="p">Date, lieu, nombre d'invités, envies : on vous répond avec une proposition chiffrée et un menu sur mesure.</p>
+        <PhoneCard label="Ligne traiteur & food truck" telephone={infos.telephones.traiteurFoodTruck} />
+      </div>
+      <div class="pile dfaq">
+        <h3 class="d">Questions fréquentes</h3>
+        <Faq questions={faq} compact />
+      </div>
+      <DemandeForm id="devis-form" destination="traiteur" champs={formulaireDevis.champs} bouton={formulaireDevis.bouton} colonne={220} class="dform" />
+    </div>
+  </section>
 </Base>
 
 <style>
-  .audiences {
-    background: var(--paper);
-    border-block: var(--line);
+  .hero { padding-top: 40px; padding-bottom: 112px; }
+  .hero-grille { --min: 540px; --gap: 56px; align-items: center; }
+  .hero-texte { --gap: 30px; }
+  .hero-texte :global(.hero-accent) { font-size: 30px; }
+  .hero-titre { font-size: clamp(52px, 5.8vw, 84px); }
+  .hero-texte .p { max-width: 540px; }
+  .hero-visuel { padding: 0 10px 10px 0; }
+  .hero-visuel img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    border: var(--line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-hero);
+  }
+  @media (max-width: 420px) {
+    .hero-titre { font-size: clamp(40px, 14.5vw, 60px); }
   }
 
-  .audience__top {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+  .pourqui { --min: 460px; }
+  .public { display: flex; flex-direction: column; gap: 24px; padding: 40px; border: var(--line); border-radius: 36px; }
+  .public--avant { box-shadow: var(--shadow-hero); }
+  .public-tete { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; }
+  .public-tete h3 { font-size: 52px; }
+  .public li { padding: 12px 0; border-bottom: var(--line-dashed); font-size: 16px; line-height: 1.45; }
+  .public li:last-child { border-bottom: 0; }
+  .public > p { font-size: 14px; line-height: 1.6; }
+
+  @media (max-width: 480px) {
+    .public-tete h3 { font-size: clamp(30px, calc(18.5vw - 29px), 43px); }
   }
 
-  .audience__name {
-    font-size: clamp(38px, 3.8vw, 52px);
-  }
+  .avant-gout { margin-top: 24px; font-size: 15px; line-height: 1.6; }
+  .avant-gout :global(.avant-gout-k) { font-size: 10px; margin-right: 12px; }
 
-  .audience__list li {
-    padding-block: 12px;
-    border-bottom: var(--line-dashed);
-  }
+  .service { --sh-k: var(--flower); }
 
-  .audience__list li:last-child {
-    border-bottom: 0;
-  }
+  .refs-grille { --min: 460px; --gap: 56px; align-items: start; }
+  .refs-gauche { --gap: 28px; }
 
-  .audience__places {
-    font-size: 14px;
+  .devg {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    grid-template-rows: auto 1fr;
+    grid-template-areas: 'intro form' 'faq form';
+    gap: 48px 64px;
+    align-items: start;
+  }
+  .dintro { grid-area: intro; --gap: 26px; }
+  .dfaq { grid-area: faq; --gap: 20px; }
+  .dfaq h3 { font-size: 32px; }
+  .devg :global(.dform) { grid-area: form; }
+
+  @media (max-width: 980px) {
+    .devg {
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto;
+      grid-template-areas: 'intro' 'form' 'faq';
+    }
   }
 </style>

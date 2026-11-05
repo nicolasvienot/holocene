@@ -1,0 +1,140 @@
+{
+  "_note": "La carte change chaque mois : une entrée par mois. Celle-ci est celle de la maquette. Le site actuel affiche une autre carte (fish ball de lieu noir, pastrami de bœuf, colombo de poulet…, voir reference/site-actuel.md § 2) : prendre la plus récente fournie par Holocene. Tags : 'sg' = sans gluten, 'vege' = végétarien. supplement en euros.",
+  "formules": [
+    {
+      "nom": "Plat",
+      "prix": 17
+    },
+    {
+      "nom": "Entrée - plat ou plat - dessert",
+      "prix": 20.5
+    },
+    {
+      "nom": "Entrée - plat - dessert",
+      "prix": 24,
+      "miseEnAvant": true,
+      "badge": "Le plus pris"
+    }
+  ],
+  "formulesNote": "Prix TTC, service compris. Suggestion du jour à l'ardoise pour l'entrée, le plat et le dessert.",
+  "carte": {
+    "mois": "[MOIS ANNÉE]",
+    "entrees": [
+      {
+        "nom": "Paella stick",
+        "description": "gambas et jus iodé"
+      },
+      {
+        "nom": "Porchetta au romarin",
+        "description": "condiment au citron confit, toast brioché",
+        "supplement": 1
+      },
+      {
+        "nom": "Mille-feuille de taquitos",
+        "description": "mousse d'avocat, gel de tomate cajun et maïs grillé",
+        "tags": [
+          "sg",
+          "vege"
+        ]
+      },
+      {
+        "nom": "Suggestion du jour",
+        "description": "à découvrir sur l'ardoise"
+      }
+    ],
+    "plats": [
+      {
+        "nom": "Tartare de poisson",
+        "description": "pomme Granny, aneth, concombre, jus vert et moutarde nori",
+        "tags": [
+          "sg"
+        ],
+        "supplement": 1
+      },
+      {
+        "nom": "Cromesquis de poulet",
+        "description": "sauce spicy et salade fraîcheur",
+        "tags": [
+          "sg"
+        ]
+      },
+      {
+        "nom": "Salade de patates douces",
+        "description": "rôties au miel, nectarine fraîche et fromage frais",
+        "tags": [
+          "sg",
+          "vege"
+        ]
+      },
+      {
+        "nom": "Suggestion du jour",
+        "description": "à découvrir sur l'ardoise"
+      }
+    ],
+    "desserts": [
+      {
+        "nom": "Entremets coco-fraise",
+        "description": "glaçage rocher coco, chocolat blanc"
+      },
+      {
+        "nom": "Financier au thym",
+        "description": "panna cotta au miel et gel au citron vert"
+      },
+      {
+        "nom": "Suggestion du jour",
+        "description": "à découvrir sur l'ardoise"
+      }
+    ],
+    "garniture": {
+      "nom": "Yaourt petit pois et herbes fraîches",
+      "tags": [
+        "sg",
+        "vege"
+      ],
+      "note": "Elle accompagne automatiquement les plats de la carte."
+    },
+    "allergenes": "Une carte des allergènes est disponible sur demande auprès de l'équipe.",
+    "pdf": "[URL du PDF de la carte du mois, à fournir]"
+  },
+  "bar": [
+    {
+      "titre": "Nature",
+      "prix": "Dès 4,5€",
+      "texte": "Au verre ou en bouteille. Pic-Saint-Loup, Madiran, Saint-Chinian, Gaillac — la plupart en biodynamie."
+    },
+    {
+      "titre": "La biere",
+      "prix": "Dès 5€",
+      "texte": "Brasserie du Midi, Brasserie Aviateur — et notre bière collab Holocene x Aviateur, à goûter nulle part ailleurs."
+    },
+    {
+      "titre": "Apero et digeo",
+      "prix": "Dès 5€",
+      "texte": "Cocktails du moment à 9 €, gin Hexagone, ratafia Castan, armagnac Séailles. Le gin, en tonic, c'est cool."
+    }
+  ],
+  "lieu": {
+    "salleAssis": 75,
+    "terrasseAssis": 90,
+    "terrasseCouverts": 70,
+    "accessiblePMR": true
+  },
+  "faq": [
+    {
+      "q": "Faut-il réserver ?",
+      "r": "C'est conseillé, surtout en fin de semaine. Réservez en ligne, au 05 32 74 08 34 ou en passant au restaurant."
+    },
+    {
+      "q": "Ouvrez-vous le soir et le week-end ?",
+      "r": "Toute l'année, du lundi au vendredi midi. De mai à septembre, aussi le jeudi et le vendredi soir, de 19h à 22h30. Les autres soirs et le week-end, le lieu se privatise pour vos événements."
+    },
+    {
+      "q": "Avez-vous des plats végétariens et sans gluten ?",
+      "r": "Oui, ils sont signalés sur la carte, et une carte des allergènes est disponible sur demande."
+    },
+    {
+      "q": "D'où viennent vos produits ?",
+      "r": "En grande majorité d'Occitanie, en circuit court et sans intermédiaire, au rythme des saisons."
+    }
+  ]
+}

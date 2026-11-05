@@ -1,0 +1,54 @@
+---
+import { nimbus } from '../lib/texte';
+import type { Etape } from '../types';
+
+interface Props {
+  etapes: Etape[];
+  /** cadre : un seul cadre blanc (traiteur). cartes : trois cartes, celle du milieu en fleur (food truck). */
+  variante?: 'cadre' | 'cartes';
+}
+
+const { etapes, variante = 'cadre' } = Astro.props;
+---
+{variante === 'cadre' ? (
+  <div class="steps">
+    {etapes.map((e) => (
+      <div class="step">
+        <h3 class="k fleur">{nimbus(e.label ?? '')}</h3>
+        <p>{e.texte}</p>
+      </div>
+    ))}
+  </div>
+) : (
+  <div class="ag cartes">
+    {etapes.map((e, i) => (
+      <div class:list={['carte', { 'carte--fleur': i === 1 }]}>
+        <span class="d num">{e.num}</span>
+        <h3 class="d titre">{e.titre}</h3>
+        <p>{e.texte}</p>
+      </div>
+    ))}
+  </div>
+)}
+
+<style>
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border: 2px solid var(--paper); border-radius: 28px; }
+  .step { display: flex; flex-direction: column; gap: 12px; padding: 28px 30px; }
+  .step + .step { border-left: 2px solid var(--paper); }
+  .step p { font-size: 15px; line-height: 1.55; color: var(--on-dark); }
+  .fleur { color: var(--flower); }
+
+  @media (max-width: 760px) {
+    .steps { grid-template-columns: 1fr; }
+    .step + .step { border-left: 0; border-top: 2px solid var(--paper); }
+  }
+
+  .cartes { --min: 320px; }
+  .carte { display: flex; flex-direction: column; gap: 20px; padding: 36px; border: 2px solid var(--paper); border-radius: var(--radius-card); }
+  .num { font-size: 96px; color: var(--flower); }
+  .titre { font-size: 30px; }
+  .carte p { font-size: 16px; line-height: 1.6; color: var(--on-dark); }
+  .carte--fleur { background: var(--flower); color: var(--ink); }
+  .carte--fleur .num,
+  .carte--fleur p { color: var(--ink); }
+</style>

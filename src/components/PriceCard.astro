@@ -1,58 +1,39 @@
 ---
-import Card from './Card.astro';
+import Kicker from './Kicker.astro';
 import Tag from './Tag.astro';
+import { prix } from '../lib/texte';
 
 interface Props {
-  /** Le prix est le titre de la carte : 60 px maximum. */
-  price: string;
-  label: string;
-  note?: string;
-  /** Fond fleur et ombre 10 px : une seule carte par rangée. */
-  highlight?: boolean;
-  /** Étiquette en haut à droite, ex. « Le plus pris ». */
+  nom: string;
+  valeur: number;
+  fond: string;
   badge?: string;
+  miseEnAvant?: boolean;
 }
 
-const { price, label, note, highlight = false, badge } = Astro.props;
+const { nom, valeur, fond, badge, miseEnAvant = false } = Astro.props;
 ---
-
-<Card tone={highlight ? 'flower' : 'paper'} highlight={highlight} class="price">
-  <div class="price__top">
-    <span class="label">{label}</span>
-    {badge && <Tag tone="white">{badge}</Tag>}
-  </div>
-  <div class="price__bottom">
-    <p class="display price__value">{price}</p>
-    {note && <p class="price__note">{note}</p>}
-  </div>
-</Card>
+<div class:list={['prix', { 'prix--avant': miseEnAvant }]} style={`background:${fond}`}>
+  {badge ? (
+    <div class="tete"><Kicker texte={nom} /><Tag fond="var(--paper)">{badge}</Tag></div>
+  ) : (
+    <Kicker texte={nom} />
+  )}
+  <span class="d montant">{prix(valeur)}</span>
+</div>
 
 <style>
-  :global(.card).price {
-    justify-content: space-between;
-    gap: 32px;
-    min-height: 230px;
-  }
-
-  .price__top {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 10px;
-  }
-
-  .price__bottom {
+  .prix {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
+    gap: 32px;
+    padding: 32px;
+    min-height: 220px;
+    border: var(--line);
+    border-radius: var(--radius-card);
   }
-
-  .price__value {
-    font-size: clamp(56px, 5vw, 60px);
-  }
-
-  .price__note {
-    font-size: 15px;
-  }
+  .prix--avant { box-shadow: 8px 8px 0 var(--ink); }
+  .tete { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+  .montant { font-size: 60px; }
 </style>

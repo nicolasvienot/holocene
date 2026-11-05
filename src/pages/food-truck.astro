@@ -1,88 +1,173 @@
 ---
+import Base from '../layouts/Base.astro';
+import Accent from '../components/Accent.astro';
 import Button from '../components/Button.astro';
-import Card from '../components/Card.astro';
-import Hero from '../components/Hero.astro';
+import Dish from '../components/Dish.astro';
+import Faq from '../components/Faq.astro';
+import HeroFacts from '../components/HeroFacts.astro';
+import Kicker from '../components/Kicker.astro';
+import Marquee from '../components/Marquee.astro';
 import PhotoSlot from '../components/PhotoSlot.astro';
 import Pill from '../components/Pill.astro';
+import References from '../components/References.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import SectionStub from '../components/SectionStub.astro';
-import Base from '../layouts/Base.astro';
+import Steps from '../components/Steps.astro';
+import DemandeForm from '../components/forms/DemandeForm.astro';
+import data from '../data/food-truck.json';
+import { faqJsonLd, traiteurJsonLd } from '../lib/seo';
+import { enNimbus } from '../lib/texte';
+import type { Plat } from '../types';
 
-const breads = [
-  {
-    number: '01',
-    name: 'Le Rustico',
-    pill: 'Le classique',
-    text: 'Pain ciabatta, mortadelle IGP, stracciatella, amandes torréfiées, tomates confites, oignons rouges pickles et roquette.',
-  },
-  {
-    number: '02',
-    name: 'Le Prima',
-    pill: 'Maison Garcia',
-    text: 'Pain ciabatta, jambon cru affiné de la Maison Garcia, stracciatella, sauce tomate ancienne maison, huile de basilic, oignons rouges pickles et roquette.',
-  },
-  {
-    number: '03',
-    name: 'Le Merinjana',
-    pill: 'Végétarien',
-    text: 'Pain ciabatta maison, aubergines marinées, stracciatella, sauce tomates anciennes maison, roquette, amandes torréfiées, oignons pickles.',
-  },
+const { heroFacts, bandeau, pains, desserts, boissons, accompagnement, allergies, pdf, evenements, etapes, formulaire, faq } = data;
+const fondsPains = ['var(--peach-light)', 'var(--paper)', 'var(--cyan)'];
+const fondsEvenements = ['var(--peach-light)', 'var(--cyan)'];
+const rubriques: { titre: string; plats: Plat[] }[] = [
+  { titre: 'Desserts', plats: desserts },
+  { titre: 'Boissons', plats: boissons },
 ];
 ---
-
 <Base
-  title="Food truck pour vos événements"
-  description="Des pains gourmands sur ciabatta, garnis de produits d'Occitanie achetés en direct, cuisinés en live sur vos mariages, festivals et soirées."
-  univers="food-truck"
+  capsule="food-truck"
+  title="Location de food truck à Toulouse - Holocene"
+  description="Louez le food truck Holocene à Toulouse pour vos mariages, festivals et événements d'entreprise : pains gourmands sur ciabatta et produits d'Occitanie, cuisinés en live."
+  jsonLd={[traiteurJsonLd('Holocene Food Truck', '/food-truck'), faqJsonLd(faq)]}
 >
-  <Hero
-    accent="Le tout premier"
-    size="md"
-    layout="stacked"
-    title={['Du bon pain.', 'Des bons produits.', 'Du monde autour.']}
-    text="C'est avec ce camion que l'aventure Holocene a commencé. Des pains gourmands sur ciabatta, garnis de produits d'Occitanie achetés en direct, cuisinés en live sur vos mariages, festivals et soirées."
-  >
-    <Fragment slot="actions">
-      <Button href="/contact" variant="primary">Réserver le truck</Button>
-      <Button href="#carte" variant="flower">Voir la carte</Button>
-    </Fragment>
-    <PhotoSlot slot="visual" label="Le Merinjana tenu en main" univers="food-truck" highlight>
-      <Pill tone="white" sticker={-8}>Zéro intermédiaire</Pill>
-      <Pill tone="white" sticker={6}>Cuisiné en live</Pill>
-    </PhotoSlot>
-  </Hero>
-
-  <section id="carte" class="wrap section">
-    <SectionHeader title={['Nos pains', 'gourmands']}>
-      Pain ciabatta, garnitures maison, viandes cuites à basse température. Pas de burger, pas de pizza : notre truc,
-      c'est le pain.
-    </SectionHeader>
-    <div class="cards">
-      {
-        breads.map((bread, index) => (
-          <Card tone={index === 1 ? 'flower' : 'paper'} highlight={index === 1}>
-            <span class="label">{bread.number}</span>
-            <h3 class="display bread__name">{bread.name}</h3>
-            <p class="bread__text">{bread.text}</p>
-            <Pill tone={index === 1 ? 'white' : 'flower'}>{bread.pill}</Pill>
-          </Card>
-        ))
-      }
+  <section class="wrap hero">
+    <div class="ag hero-grille">
+      <div class="pile pile-start hero-texte">
+        <Accent texte="Le tout premier" class="hero-accent" />
+        <h1 class="d hero-titre">Du bon pain.<br />Des bons produits.<br />Du monde autour.</h1>
+        <p class="p t20">C'est avec ce camion que l'aventure Holocene a commencé. Des pains gourmands sur ciabatta, garnis de produits d'Occitanie achetés en direct, cuisinés en live sur vos mariages, festivals et soirées.</p>
+        <div class="rang">
+          <Button variant="dark" href="#reserver" label="Réserver le truck" />
+          <Button variant="flower" href="#carte" label="Voir la carte" />
+        </div>
+        <HeroFacts faits={heroFacts} />
+      </div>
+      <div class="hero-visuel">
+        <PhotoSlot label="Photo — Le Merinjana tenu en main" ratio="1 / 1" ombre icone="/brand/icon-food-truck.svg" hauteurIcone={170} />
+      </div>
     </div>
   </section>
 
-  <SectionStub id="evenements" name="Événements" />
-  <SectionStub id="invites" name="Ils nous ont invités" />
-  <SectionStub id="reserver" name="Comment réserver" />
+  <Marquee mots={bandeau} variante="fleur" />
+
+  <section id="carte" class="wrap section-112">
+    <SectionHeader titre={['Nos pains', 'gourmands']} texte="Pain ciabatta, garnitures maison, viandes cuites à basse température. Pas de burger, pas de pizza : notre truc, c'est le pain." />
+    <div class="ag pains">
+      {pains.map((p, i) => (
+        <div class:list={['pain', { 'pain--avant': i === 1 }]}>
+          <span class="k">{p.num}</span>
+          <h3 class="d">{p.nom}</h3>
+          <p>{p.description}</p>
+          <Pill texte={p.pastille} fond={fondsPains[i]} class="pain-pastille" />
+        </div>
+      ))}
+    </div>
+    <div class="ag carte-suite">
+      {rubriques.map((r) => (
+        <div>
+          <h3 class="d rubrique">{r.titre}</h3>
+          {r.plats.map((plat, i) => <Dish plat={plat} compact dernier={i === r.plats.length - 1} />)}
+        </div>
+      ))}
+      <div>
+        <h3 class="d rubrique">Accompagnement</h3>
+        {accompagnement.map((plat) => <Dish plat={plat} compact dernier />)}
+        <div class="pile pile-start carte-pied">
+          <p class="allergies">{allergies}</p>
+          <Button href={pdf} target="_blank" rel="noopener" label="La carte — PDF" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="evenements" class="fond-blanc trait-haut trait-bas">
+    <div class="wrap section-112 ag evenements">
+      <div class="pile evenements-intro">
+        <Kicker texte="Pour quels événements" />
+        <h2 class="d t80" set:html={enNimbus('Pas de cuisine sur place ? Le truck en est une.')} />
+        <p class="p">Une vraie cuisine embarquée, un comptoir pour servir, et un camion qu'on habille selon votre thème : rustique, chic, vintage ou complètement fou.</p>
+        <img src="/brand/icon-food-truck.svg" alt="" aria-hidden="true" width="70" height="140" loading="lazy" />
+      </div>
+      <ul class="liste-evenements">
+        {evenements.map((e, i) => (
+          <li>
+            <h3 class="d">{e.titre}</h3>
+            <Pill texte={e.sous} fond={fondsEvenements[i % 2]} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="references" class="wrap section-112">
+    <SectionHeader titre={['On a garé le', 'camion chez eux']} taille="t72" texte="Festivals, concerts, matchs, campus : le camion se déplace partout où ça bouge." largeur={400} marge={44} />
+    <References page="food-truck" />
+  </section>
+
+  <section id="reserver" class="sur-noir">
+    <div class="wrap section-112 reserver">
+      <SectionHeader kicker="Comment réserver" titre={['Trois étapes,', 'zéro prise de tête.']} texte="Le tarif dépend du nombre de convives, du lieu et du menu : on vous fait un devis précis, sans surprise." marge={56} />
+      <Steps etapes={etapes} variante="cartes" />
+    </div>
+  </section>
+
+  <section class="fond-blanc">
+    <div class="wrap section-112 ag form-faq">
+      <DemandeForm id="food-truck" destination="food-truck" champs={formulaire.champs} bouton={formulaire.bouton} fond="var(--cyan)">
+        <div class="pile form-tete" slot="entete">
+          <Kicker texte="Réserver le food truck" />
+          <h2 class="d">Votre date</h2>
+        </div>
+      </DemandeForm>
+      <div class="pile faq-bloc">
+        <h2 class="d t64">Questions fréquentes</h2>
+        <Faq questions={faq} />
+      </div>
+    </div>
+  </section>
 </Base>
 
 <style>
-  .bread__name {
-    font-size: clamp(42px, 3.9vw, 56px);
-  }
+  .hero { padding-top: 40px; padding-bottom: 96px; }
+  .hero-grille { --min: 560px; --gap: 56px; align-items: center; }
+  .hero-texte { --gap: 30px; }
+  .hero-texte :global(.hero-accent) { font-size: 30px; }
+  .hero-titre { font-size: clamp(48px, 4.8vw, 68px); }
+  .hero-texte .p { max-width: 540px; }
+  .hero-visuel { padding: 0 10px 10px 0; }
 
-  .bread__text {
-    flex: 1;
-    font-size: 17px;
+  .pains { --min: 340px; }
+  .pain { display: flex; flex-direction: column; gap: 22px; padding: 34px; min-height: 420px; border: var(--line); border-radius: 36px; background: var(--paper); }
+  .pain--avant { background: var(--flower); box-shadow: var(--shadow-hero); }
+  .pain h3 { font-size: 56px; }
+  @media (max-width: 480px) {
+    .pain h3 { font-size: clamp(36px, calc(17vw - 18px), 56px); }
   }
+  .pain p { font-size: 17px; line-height: 1.6; }
+  .pain :global(.pain-pastille) { align-self: flex-start; margin-top: auto; }
+
+  .carte-suite { --min: 300px; gap: 24px 56px; margin-top: 56px; padding: 40px; border: var(--line); border-radius: 36px; background: var(--light); }
+  .rubrique { font-size: 32px; margin-bottom: 6px; }
+  @media (max-width: 380px) {
+    .carte-suite { padding: 24px 20px; }
+    .rubrique { font-size: clamp(24px, 7.4vw, 28px); }
+  }
+  .carte-pied { --gap: 14px; margin-top: 18px; }
+  .allergies { font-size: 13px; line-height: 1.5; }
+
+  .evenements { --min: 460px; --gap: 56px; align-items: start; }
+  .evenements-intro { --gap: 26px; }
+  .evenements-intro img { height: 140px; width: auto; align-self: flex-start; }
+  .liste-evenements { display: flex; flex-direction: column; border-top: var(--line); }
+  .liste-evenements li { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 26px 0; border-bottom: var(--line); flex-wrap: wrap; }
+  .liste-evenements h3 { font-size: 36px; }
+
+  .reserver { --sh-k: var(--flower); }
+
+  .form-faq { --min: 420px; --gap: 64px; align-items: start; --zone: 130px; }
+  .form-tete { grid-column: 1 / -1; --gap: 10px; }
+  .form-tete h2 { font-size: 40px; }
+  .faq-bloc { --gap: 28px; }
 </style>

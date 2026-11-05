@@ -1,102 +1,64 @@
-/* Reset, body, focus et quelques utilitaires. Le reste vit dans le CSS scopé des composants. */
+/* Reset, gabarit et typographie de base. Les couleurs et polices viennent de tokens.css. */
+@import './tokens.css';
+
+:root {
+  --on-dark: #e6e6e6;
+  --on-dark-soft: #cfcfcf;
+  --rule-dark: #333333;
+  --rule-dark-soft: #3a3a3a;
+  --slot-dark: #1a1a1a;
+  --muted: #4a4a4a;
+  --disabled-bg: #f2f2f2;
+  --disabled-fg: #5c5c5c;
+  --disabled-line: #8a8a8a;
+}
 
 *,
 *::before,
-*::after {
-  box-sizing: border-box;
-}
+*::after { box-sizing: border-box; }
 
-html {
-  -webkit-text-size-adjust: 100%;
-  scroll-behavior: smooth;
-}
+html { background: var(--ink); scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
   background: var(--bg);
   color: var(--ink);
   font-family: var(--font-body);
-  font-size: 18px;
-  line-height: 1.6;
-}
-
-body[data-background='light'] {
-  background: var(--light);
-}
-
-main {
-  display: block;
   overflow-x: clip;
 }
 
-h1,
-h2,
-h3,
-h4,
-p,
-ul,
-ol,
-dl,
-dd,
-figure,
-blockquote {
-  margin: 0;
-}
+h1, h2, h3, p, figure, blockquote { margin: 0; }
+img, svg { display: block; }
+a { color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
+ul, ol { margin: 0; padding: 0; list-style: none; }
+[id] { scroll-margin-top: 24px; }
 
-ul,
-ol {
-  padding: 0;
-  list-style: none;
-}
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible { outline: 3px solid var(--focus, var(--ink)); outline-offset: 3px; }
 
-img,
-svg {
-  display: block;
-  max-width: 100%;
-  height: auto;
-}
+.sur-noir { --focus: var(--paper); background: var(--ink); color: var(--paper); }
 
-a {
-  color: inherit;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-  color: inherit;
-}
-
-/* Focus : noir, blanc dans une zone noire. */
-[data-on-dark] {
-  --focus-color: var(--paper);
-}
-
-:focus-visible {
-  outline: 3px solid var(--focus-color, var(--ink));
-  outline-offset: 3px;
-}
-
-/* Conteneur : 1264 px de contenu + marges. */
 .wrap {
   width: 100%;
-  max-width: calc(var(--content-max) + 2 * var(--gutter));
+  max-width: 1360px;
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
 
-/* Titres : Nimbus, toujours en capitales. */
-.display {
+/* Titres : Nimbus, toujours en capitales */
+.d {
   font-family: var(--font-display);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: -0.025em;
   line-height: 0.9;
+  margin: 0;
 }
 
-/* Labels : Nimbus 12 px espacé. */
-.label {
+/* Label Nimbus */
+.k {
   font-family: var(--font-display);
   font-weight: 700;
   text-transform: uppercase;
@@ -105,56 +67,89 @@ textarea {
   line-height: 1.3;
 }
 
-.section {
-  padding-block: var(--section-y);
+/* Accent Vividly */
+.v {
+  font-family: var(--font-accent);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  line-height: 1;
 }
 
-/* Grille de cartes : --min règle la largeur minimale d'une colonne. */
-.cards {
+/* Nom de plat */
+.dn {
+  font-family: var(--font-display);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  font-size: 18px;
+  display: block;
+}
+
+/* Glyphe absent des polices fournies : même rendu de secours que la maquette, à retirer avec la licence. */
+.secours { font-family: 'Arial Rounded MT Bold', 'Varela Round', sans-serif; line-height: 0; }
+
+/* Texte courant */
+.p { font-size: 18px; line-height: 1.6; margin: 0; text-wrap: pretty; }
+
+@media (max-width: 760px) {
+  .p { font-size: 16px; }
+}
+.p.t20 { font-size: 20px; }
+.p.t16 { font-size: 16px; }
+.p.t15 { font-size: 15px; }
+
+/* Échelle des titres fluides (valeurs de la maquette) */
+.t112 { font-size: clamp(48px, 7vw, 112px); }
+.t100 { font-size: clamp(48px, 6.4vw, 100px); }
+.t92 { font-size: clamp(48px, 6vw, 92px); }
+.t84 { font-size: clamp(44px, 5.6vw, 84px); }
+.t80 { font-size: clamp(44px, 5.2vw, 80px); }
+.t78 { font-size: clamp(44px, 5.2vw, 78px); }
+.t76 { font-size: clamp(44px, 5vw, 76px); }
+.t72 { font-size: clamp(40px, 4.8vw, 72px); }
+.t68 { font-size: clamp(40px, 4.6vw, 68px); }
+.t64 { font-size: clamp(40px, 4.4vw, 64px); }
+
+/* Ces réglages ne valent que pour l'élément qui les pose : pas d'héritage vers les grilles imbriquées. */
+@property --gap { syntax: '*'; inherits: false; }
+@property --min { syntax: '*'; inherits: false; }
+
+/* Grille fluide de la maquette : repeat(auto-fit, minmax(min(X, 100%), 1fr)) */
+.ag {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 340px), 100%), 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--min, 300px), 100%), 1fr));
+  gap: var(--gap, 24px);
 }
 
-.actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-}
+.pile { display: flex; flex-direction: column; gap: var(--gap, 24px); }
+.pile-start { align-items: flex-start; }
+.rang { display: flex; flex-wrap: wrap; gap: var(--gap, 14px); }
+
+/* Séparateurs de section */
+.trait-haut { border-top: var(--line); }
+.trait-bas { border-bottom: var(--line); }
+.section-112 { padding-block: 112px; }
+.fond-blanc { background: var(--paper); }
 
 .sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
+  padding: 0;
+  margin: -1px;
   overflow: hidden;
   clip-path: inset(50%);
   white-space: nowrap;
-}
-
-.skip-link {
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  z-index: 50;
-  padding: 12px 20px;
-  background: var(--paper);
-  border: var(--line);
-  border-radius: var(--radius-pill);
-  transform: translateY(-200%);
-}
-
-.skip-link:focus {
-  transform: none;
-}
-
-@media (max-width: 760px) {
-  body {
-    font-size: 16px;
-  }
+  border: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
   }
 }

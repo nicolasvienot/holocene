@@ -1,0 +1,18 @@
+---
+interface Props {
+  titre: string;
+  texte: string;
+  noire?: boolean;
+}
+
+const { titre, texte, noire = false } = Astro.props;
+---
+<div class:list={['valeur', { 'sur-noir': noire }]}>
+  <h3 class="v">{titre}</h3>
+  <p class="p t16">{texte}</p>
+</div>
+
+<style>
+  .valeur { display: flex; flex-direction: column; gap: 18px; padding: 30px; border: var(--line); border-radius: 28px; }
+  .v { font-size: 40px; }
+</style>

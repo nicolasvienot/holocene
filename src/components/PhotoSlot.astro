@@ -1,112 +1,44 @@
 ---
-import { univers as allUnivers, type UniversId } from '../data/univers';
+import { enNimbus } from '../lib/texte';
 
 interface Props {
-  /** Ce que montrera la photo : affiché après « Photo - ». */
-  label?: string;
-  /** Vraie photo : remplace l'emplacement. `alt` devient obligatoire. */
-  src?: string;
-  alt?: string;
-  ratio?: '5/4' | '4/5' | '1/1';
-  /** Donne l'icône et les couleurs de l'emplacement. */
-  univers?: UniversId;
-  /** flower : fleur de l'univers. bg : son fond. dark : sur héros noir. */
-  tone?: 'flower' | 'bg' | 'dark';
-  /** Ombre 10 px : la photo principale de la page. */
-  highlight?: boolean;
-  /** Sans contour ni rayon, à bord perdu dans une carte. */
-  flush?: boolean;
+  label: string;
+  /** Fond, ex. var(--flower) */
+  fond?: string;
+  icone?: string;
+  hauteurIcone?: number;
+  /** Ratio CSS, ex. 5 / 4 */
+  ratio?: string;
+  ombre?: boolean;
+  sombre?: boolean;
+  class?: string;
 }
 
-const { label, src, alt = '', ratio = '5/4', univers = 'holocene', tone = 'flower', highlight = false, flush = false } = Astro.props;
-const icon = tone === 'dark' ? '/brand/icon-white.svg' : allUnivers[univers].icon;
+const { label, fond = 'var(--flower)', icone, hauteurIcone = 150, ratio = '5 / 4', ombre = false, sombre = false, class: className } = Astro.props;
+const icon = icone ?? (sombre ? '/brand/icon-white.svg' : '/brand/icon-holocene.svg');
 ---
-
-<!-- Les autocollants passent dans le slot : ils débordent du cadre, donc pas d'overflow ici. -->
 <div
-  data-univers={univers}
-  class:list={['slot', `slot--${tone}`, { 'slot--photo': src, 'slot--highlight': highlight, 'slot--flush': flush }]}
-  style={`aspect-ratio: ${ratio.replace('/', ' / ')}`}
+  class:list={['slot', { 'slot--ombre': ombre, 'slot--sombre': sombre }, className]}
+  style={`background:${fond};aspect-ratio:${ratio};--icone:${hauteurIcone}px`}
 >
-  {
-    src ? (
-      <img class="slot__photo" src={src} alt={alt} loading="lazy" decoding="async" />
-    ) : (
-      <>
-        <img class="slot__icon" src={icon} alt="" width="75" height="150" loading="lazy" />
-        <span class="label">Photo - {label}</span>
-      </>
-    )
-  }
-  <slot />
+  <img src={icon} alt="" aria-hidden="true" loading="lazy" width={hauteurIcone / 2} height={hauteurIcone} />
+  <span class="k" set:html={enNimbus(label)} />
 </div>
 
 <style>
   .slot {
-    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 18px;
-    width: 100%;
-    padding: 16px;
+    padding: 12px;
+    text-align: center;
     border: var(--line);
     border-radius: var(--radius-card);
     color: var(--ink);
-    text-align: center;
   }
-
-  .slot__icon {
-    width: auto;
-    height: min(150px, 45%);
-  }
-
-  .slot--flower {
-    background: var(--flower);
-  }
-
-  .slot--bg {
-    background: var(--bg);
-  }
-
-  .slot--dark {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--paper);
-  }
-
-  .slot--photo {
-    padding: 0;
-  }
-
-  .slot__photo {
-    width: 100%;
-    height: 100%;
-    border-radius: calc(var(--radius-card) - 2px);
-    object-fit: cover;
-  }
-
-  .slot--highlight {
-    box-shadow: var(--shadow-hero);
-  }
-
-  .slot--dark.slot--highlight {
-    box-shadow: 10px 10px 0 var(--paper);
-  }
-
-  .slot--flush {
-    border-width: 0 0 2px;
-    border-radius: 0;
-  }
-
-  @media (max-width: 760px) {
-    .slot--highlight {
-      box-shadow: var(--shadow-hover);
-    }
-
-    .slot--dark.slot--highlight {
-      box-shadow: 6px 6px 0 var(--paper);
-    }
-  }
+  .slot img { height: var(--icone); width: auto; flex: none; }
+  .slot--ombre { box-shadow: var(--shadow-hero); }
+  .slot--sombre { color: var(--paper); border-color: var(--paper); }
 </style>

@@ -1,159 +1,217 @@
 ---
+import Base from '../layouts/Base.astro';
 import Accent from '../components/Accent.astro';
 import Button from '../components/Button.astro';
-import Card from '../components/Card.astro';
-import Hero from '../components/Hero.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+import Kicker from '../components/Kicker.astro';
 import Marquee from '../components/Marquee.astro';
+import MobileBar from '../components/MobileBar.astro';
 import PhotoSlot from '../components/PhotoSlot.astro';
 import Pill from '../components/Pill.astro';
+import References from '../components/References.astro';
 import SectionHeader from '../components/SectionHeader.astro';
-import { site } from '../data/site';
-import { chronology, univers } from '../data/univers';
-import Base from '../layouts/Base.astro';
+import UniversCard from '../components/UniversCard.astro';
+import ValueCard from '../components/ValueCard.astro';
+import accueil from '../data/accueil.json';
+import infos from '../data/infos.json';
+import maison from '../data/maison.json';
+import { capsules, type UniversId } from '../data/navigation';
+import { enNimbus } from '../lib/texte';
 
-const cardContent = {
-  'food-truck': {
-    pill: 'Le tout premier',
-    text: "Pains gourmands sur ciabatta, produits d'Occitanie, cuisinés en live sur vos festivals, mariages et soirées.",
-  },
-  traiteur: {
-    pill: 'Sur mesure',
-    text: 'Cocktails, repas assis, mariages, box : une cuisine de chef pour vos événements, de 40 à 1500 invités.',
-  },
-  restaurant: {
-    pill: 'Lun - Ven midi',
-    text: 'Notre cantine bistronomique à Balma : carte du mois, vins nature, bières craft et une grande terrasse.',
-  },
-};
-
-const values = [
-  { accent: 'Local', text: "En direct avec les producteurs d'Occitanie, sans intermédiaire. On connaît le nom de celui qui a fait le jambon." },
-  { accent: 'De saison', text: 'Des cartes qui bougent avec le marché : nouvelle carte chaque mois au restaurant, suggestions chaque semaine.' },
-  { accent: 'Fait maison', text: 'Tout sort de nos cuisines, des sauces aux desserts. Même le thé glacé et la citronnade.' },
-  { accent: 'Sur mesure', text: "Thème, budget, régimes : végétarien, halal, sans gluten. On s'adapte à votre événement, pas l'inverse." },
-];
+const telTraiteur = infos.telephones.traiteurFoodTruck;
+const jalon = (f: (typeof maison.fondateurs)[number]) =>
+  'role' in f && f.role ? `${f.role} - ${f.pole.toLowerCase()}` : f.pole;
+const dernier = maison.valeurs.length - 1;
 ---
-
 <Base
-  title="Restaurant, traiteur et food truck à Balma"
-  description="Un restaurant, un traiteur, un food truck : trois façons de manger local, de saison et fait maison, à Balma, Toulouse et partout en Occitanie."
+  capsule="accueil"
+  title="Holocene - Restaurant, traiteur et food truck à Balma, Toulouse"
+  description="Un restaurant à Balma, un traiteur et un food truck à Toulouse : une cuisine locale, de saison et faite maison, de 40 à 1500 invités."
 >
-  <Hero
-    accent="Des produits frais"
-    size="xl"
-    title={['On cuisine', 'le vivant.']}
-    text="Un restaurant, un traiteur, un food truck. Trois façons de manger local, de saison et 100 % fait maison, imaginées par trois potes d'école hôtelière et une équipe de 24 passionnés."
-  >
-    <Fragment slot="actions">
-      <Button href="/contact" variant="primary" icon="arrow">Demander un devis</Button>
-      <Button href={site.zenchef.table} external>Réserver une table</Button>
-    </Fragment>
-    <PhotoSlot
-      slot="visual"
-      src="/images/verrines-full.jpg"
-      alt="Verrines de gaspacho et bouchées petits pois et foie gras dressées par Holocene Traiteur"
-      highlight
-    >
-      <Pill tone="white" sticker={-8}>Frais</Pill>
-      <Pill tone="flower" sticker={6}>Local</Pill>
-    </PhotoSlot>
-  </Hero>
-
-  <Marquee items={['Fait maison', 'De saison', 'Local', 'Frais', 'Sur mesure']} />
-
-  <section class="wrap section">
-    <SectionHeader label="Food truck - Traiteur - Restaurant" title={['Une maison.', 'Trois univers.']}>
-      Tout a commencé avec le food truck. Sa fleur pêche est devenue la couleur du traiteur, dont la fleur jaune colore
-      aujourd'hui le restaurant. Une même famille, trois personnalités.
-    </SectionHeader>
-    <div class="cards">
-      {
-        chronology.map((id, index) => (
-          <Card href={univers[id].home} tone="bg" data-univers={id} class="univers-card">
-            <div class="univers-card__top">
-              <span class="display univers-card__number">{String(index + 1).padStart(2, '0')}</span>
-              <Pill tone="white">{cardContent[id as keyof typeof cardContent].pill}</Pill>
-            </div>
-            <img class="univers-card__icon" src={univers[id].icon} alt="" width="75" height="150" loading="lazy" />
-            <div class="univers-card__body">
-              <img class="univers-card__logo" src={univers[id].logo} alt={univers[id].fullName} width="1470" height="378" loading="lazy" />
-              <p>{cardContent[id as keyof typeof cardContent].text}</p>
-              <Button decorative>Découvrir</Button>
-            </div>
-          </Card>
-        ))
-      }
+  <section class="wrap hero">
+    <div class="ag hero-grille">
+      <div class="hero-texte">
+        <Accent texte="Des produits frais" class="hero-accent" />
+        <h1 class="d hero-titre">On cuisine<br />le vivant.</h1>
+        <p class="p t20 hero-phrase">Un restaurant, un traiteur, un food truck. Trois façons de manger local, de saison et 100&nbsp;% fait maison — imaginées par trois potes d'école hôtelière et une équipe de 24 passionnés.</p>
+        <div class="rang">
+          <Button variant="dark" href={capsules.accueil.cta.href} label="Demander un devis" icon="arrow" />
+          <Button href="/restaurant" label="Réserver une table" />
+        </div>
+      </div>
+      <div class="hero-visuel">
+        <img
+          src="/images/verrines-full.jpg"
+          alt="Verrines de gaspacho et bouchées petits pois–foie gras dressées par Holocene Traiteur"
+          width="1800"
+          height="1199"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+    <div class="ag chiffres">
+      {accueil.chiffres.map((c) => (
+        <div class="chiffre">
+          <span class="d">{c.valeur}</span>
+          <span class="p t15">{c.legende}</span>
+        </div>
+      ))}
     </div>
   </section>
 
-  <section class="wrap section values">
-    <SectionHeader title="Ce qu'on ne lâche jamais" />
-    <div class="cards" style="--min: 270px">
-      {
-        values.map((value, index) => (
-          <Card tone={index === values.length - 1 ? 'dark' : 'paper'}>
-            <Accent text={value.accent} size="lg" />
-            <p class="value__text">{value.text}</p>
-          </Card>
-        ))
-      }
+  <Marquee mots={accueil.bandeau} />
+
+  <section class="wrap univers">
+    <SectionHeader
+      kicker="Food truck — Traiteur — Restaurant"
+      titre={['Une maison.', 'Trois univers.']}
+      taille="t100"
+      texte="Tout a commencé avec le food truck. Sa fleur pêche est devenue la couleur du traiteur, dont la fleur jaune colore aujourd'hui le restaurant. Une même famille, trois personnalités."
+      largeur={460}
+      marge={56}
+      ecart={40}
+    />
+    <div class="ag univers-grille">
+      {accueil.univers.map((u) => <UniversCard id={u.id as UniversId} num={u.num} pastille={u.pastille} texte={u.texte} />)}
     </div>
   </section>
+
+  <section class="manifeste trait-haut trait-bas">
+    <div class="wrap ag manifeste-grille">
+      <img src="/brand/logo-holocene-stack.svg" alt="Logo Holocene en version empilée, avec la pierre et la fleur" width="560" height="279" loading="lazy" />
+      <div class="pile manifeste-texte">
+        <Kicker texte="Pourquoi Holocene" />
+        <h2 class="d t68">Une pierre pour l'ancrage. Une fleur pour la suite.</h2>
+        <p class="p">L'Holocène, c'est l'époque géologique dans laquelle on vit : celle de l'essor du vivant, des paysages qu'on connaît et des premières tables partagées. On en a fait notre nom et notre promesse : célébrer les produits de la terre et les moments où l'on se retrouve autour.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="wrap engagements">
+    <h2 class="d t84" set:html={enNimbus("Ce qu'on ne lâche jamais")} />
+        <div class="ag engagements-grille">
+      {maison.valeurs.map((v, i) => <ValueCard titre={v.titre} texte={v.texte} noire={i === dernier} />)}
+    </div>
+  </section>
+
+  <section class="sur-noir">
+    <div class="wrap section-112 ag producteurs">
+      <div class="pile pile-start producteurs-intro">
+        <Kicker texte="Nos producteurs" class="fleur" />
+        <h2 class="d t78">Ils remplissent nos assiettes. Et nos verres.</h2>
+        <p class="p">Une cuisine locale, ça commence par des noms et des départements. Voici quelques-uns de ceux qu'on retrouve sur nos cartes.</p>
+        <img src="/brand/icon-white.svg" alt="" aria-hidden="true" width="75" height="150" loading="lazy" />
+      </div>
+      <ul class="liste-producteurs">
+        {maison.producteurs.map((p) => (
+          <li>
+            <div class="producteur">
+              <h3 class="d">{p.nom}</h3>
+              <span>{p.produit}</span>
+            </div>
+            <Pill texte={p.pastille} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="wrap section-112">
+    <SectionHeader titre={['Ils nous ont', 'fait confiance']} taille="t72" texte="Des séminaires d'industriels aux concerts, en passant par plus de 150 mariages." />
+    <References page="accueil" />
+  </section>
+
+  <section class="trait-haut">
+    <div class="wrap ag equipe">
+      <PhotoSlot label="Photo — Les 3 associés au comptoir" />
+      <div class="pile pile-start equipe-texte">
+        <Kicker texte="L'équipe" />
+        <h2 class="d t78">Trois potes. Une brigade de 24.</h2>
+        <p class="p">Ils se sont rencontrés à l'école hôtelière, sont partis se former dans des maisons étoilées, puis sont revenus à Toulouse pour ouvrir l'endroit où ils auraient aimé manger.</p>
+        <ul class="associes">
+          {maison.fondateurs.map((f) => (
+            <li><span class="d">{f.nom}</span><Kicker texte={jalon(f)} class="associe-role" /></li>
+          ))}
+        </ul>
+        <Button href="/equipe" label="Rencontrer l'équipe" />
+      </div>
+    </div>
+  </section>
+
+  <CtaFinal titre="Parlons de votre prochain événement.">
+    <Button variant="dark" href="/contact" label="Demander un devis" />
+    <Button href={`tel:${telTraiteur.tel}`} label={telTraiteur.affiche} />
+  </CtaFinal>
+
+  <MobileBar />
 </Base>
 
 <style>
-  .cards :global(.univers-card) {
-    justify-content: space-between;
-    gap: 32px;
-    min-height: 560px;
-  }
-
-  .univers-card__top {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-  }
-
-  .univers-card__number {
-    font-size: 44px;
-  }
-
-  .univers-card__icon {
-    align-self: center;
-    width: auto;
-    height: 170px;
-  }
-
-  .univers-card__body {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 18px;
-    font-size: 16px;
-  }
-
-  .univers-card__logo {
+  .hero { padding-top: 36px; padding-bottom: 64px; }
+  .hero-grille { --min: 540px; --gap: 56px; align-items: center; }
+  .hero-texte { display: flex; flex-direction: column; gap: 30px; align-items: flex-start; }
+  .hero-texte :global(.hero-accent) { font-size: 30px; }
+  .hero-titre { font-size: clamp(52px, 5.6vw, 80px); }
+  .hero-phrase { max-width: 520px; }
+  .hero-visuel { padding: 0 10px 10px 0; }
+  .hero-visuel img {
     width: 100%;
-    max-width: 280px;
+    height: auto;
+    aspect-ratio: 5 / 4;
+    object-fit: cover;
+    border: var(--line);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-hero);
   }
 
-  .values {
-    padding-top: 0;
-  }
+  .chiffres { --min: 240px; --gap: 0; margin-top: 72px; border-top: var(--line); }
+  .chiffre { display: flex; flex-direction: column; gap: 10px; padding: 26px 24px 0 0; }
+  .chiffre .d { font-size: 64px; }
+  .chiffre .p { max-width: 220px; }
 
-  .value__text {
-    font-size: 16px;
-  }
+  .univers { padding-block: 120px; }
+  .univers-grille { --min: 360px; }
 
-  @media (max-width: 760px) {
-    .cards :global(.univers-card) {
-      min-height: 0;
-      gap: 22px;
-    }
+  .manifeste { background: var(--flower); }
+  .manifeste-grille { --min: 480px; --gap: 64px; align-items: center; padding-block: 112px; }
+  .manifeste-grille img { width: 100%; max-width: 560px; height: auto; }
+  .manifeste-texte { --gap: 26px; }
 
-    .univers-card__icon {
-      height: 120px;
-    }
+  .engagements { padding-block: 120px; }
+  .engagements h2 { margin-bottom: 56px; }
+  .engagements-grille { --min: 280px; }
+
+  .producteurs { --min: 440px; --gap: 64px; }
+  .producteurs-intro { --gap: 26px; }
+  .producteurs-intro :global(.fleur) { color: var(--flower); }
+  .producteurs-intro .p { color: var(--on-dark); max-width: 460px; }
+  .producteurs-intro img { height: 150px; width: auto; margin-top: 12px; }
+  .liste-producteurs { display: flex; flex-direction: column; }
+  .liste-producteurs li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--rule-dark-soft);
+    flex-wrap: wrap;
   }
+  .liste-producteurs li:last-child { border-bottom: 0; }
+  .producteur { display: flex; flex-direction: column; gap: 6px; }
+  .producteur h3 { font-size: 28px; }
+  .producteur span { color: var(--on-dark-soft); font-size: 15px; }
+
+  .equipe { --min: 480px; --gap: 64px; align-items: center; padding-block: 112px; }
+  .equipe-texte { --gap: 28px; }
+  .associes { display: flex; flex-direction: column; width: 100%; border-top: var(--line); }
+  .associes li {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: var(--line);
+    flex-wrap: wrap;
+  }
+  .associes .d { font-size: 24px; }
+  .associes :global(.associe-role) { align-self: center; }
 </style>

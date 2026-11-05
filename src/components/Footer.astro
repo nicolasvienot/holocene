@@ -1,141 +1,141 @@
 ---
-import SocialLinks from './SocialLinks.astro';
-import { phones, site } from '../data/site';
+import Icon from './Icon.astro';
+import infos from '../data/infos.json';
+import { piedDePage } from '../data/navigation';
 
-const links = [
-  { label: 'Privatiser le restaurant', href: '/restaurant/privatiser' },
-  { label: "L'équipe", href: '/equipe' },
-  { label: 'Journal', href: '/journal' },
-  { label: 'Contact et devis', href: '/contact' },
-  { label: 'Mentions légales', href: '/mentions-legales' },
-];
+const annee = new Date().getFullYear();
+const { adresse, telephones, reservation, horairesRestaurant, email, reseaux } = infos;
 ---
-
-<img
-  class="skyline"
-  src="/brand/illustration-toulouse.svg"
-  alt="Illustration de Toulouse : le dôme de la Grave, le Pont-Neuf, l'aérospatiale et Saint-Sernin"
-  width="607"
-  height="222"
-  loading="lazy"
-  decoding="async"
-/>
-
-<footer class="footer" data-on-dark>
-  <div class="wrap footer__grid">
-    <div class="footer__col footer__brand">
-      <img src="/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" width="226" height="58" loading="lazy" />
-      <p class="footer__muted">Restaurant, traiteur et food truck à Balma, Toulouse et partout en Occitanie.</p>
-      <SocialLinks onDark />
+<div class="fresque">
+  <img
+    src="/brand/illustration-toulouse.svg"
+    alt="Illustration de Toulouse : le dôme de la Grave, le Pont-Neuf, l'aéronautique et Saint-Sernin"
+    width="607"
+    height="222"
+    loading="lazy"
+  />
+</div>
+<footer class="ft sur-noir">
+  <div class="wrap ligne1">
+    <div class="marque">
+      <img src="/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" width="218" height="56" loading="lazy" />
+      <p>{piedDePage.baseline}</p>
     </div>
-
-    <div class="footer__col">
-      <h2 class="label footer__title--restaurant">Restaurant</h2>
-      <p>{site.address.street}<br />{site.address.city}</p>
-      <p>{site.hours.long}</p>
-      <a href={`tel:${phones.restaurant.tel}`}>{phones.restaurant.display}</a>
-    </div>
-
-    <div class="footer__col">
-      <h2 class="label footer__title--traiteur">Traiteur &amp; food truck</h2>
-      <a href={`tel:${phones.traiteur.tel}`}>{phones.traiteur.display}</a>
-      <a href={`mailto:${site.email}`}>{site.email}</a>
-      <p>{site.area}</p>
-    </div>
+    <nav aria-label="Réseaux sociaux" class="soc">
+      {reseaux.map((r) => (
+        <a href={r.url} class="fsoc" target="_blank" rel="noopener">{r.nom} <Icon name="external" size={12} /></a>
+      ))}
+    </nav>
   </div>
 
-  <div class="wrap">
-    <div class="footer__bottom">
-      <p>© 2026 {site.name}</p>
-      <nav aria-label="Pied de page">
-        <ul class="footer__links">
-          {links.map((link) => <li><a href={link.href}>{link.label}</a></li>)}
-        </ul>
-      </nav>
+  <div class="wrap colonnes">
+    <div class="fcol">
+      <span class="k t-restaurant">Restaurant</span>
+      <span>{adresse.rue}<br />{adresse.codePostal} {adresse.ville}</span>
+      <span>{horairesRestaurant.toutelannee}<br />{horairesRestaurant.ete}</span>
+      <a href={`tel:${telephones.restaurant.tel}`} class="ftl">{telephones.restaurant.affiche}</a>
+      <a href={reservation.table} class="ftl" target="_blank" rel="noopener">Réserver une table</a>
+    </div>
+    <div class="fcol">
+      <span class="k t-traiteur">Traiteur &amp; food truck</span>
+      <a href={`tel:${telephones.traiteurFoodTruck.tel}`} class="ftl">{telephones.traiteurFoodTruck.affiche}</a>
+      <a href={`mailto:${email}`} class="ftl">{email}</a>
+      <span>{piedDePage.zone}</span>
+    </div>
+    <nav class="fcol" aria-label="Nos univers">
+      <span class="k t-univers">Nos univers</span>
+      {piedDePage.nosUnivers.map((l) => <a href={l.href} class="ftl">{l.label}</a>)}
+    </nav>
+    <nav class="fcol" aria-label="La maison">
+      <span class="k t-maison">La maison</span>
+      {piedDePage.laMaison.map((l) => <a href={l.href} class="ftl">{l.label}</a>)}
+    </nav>
+  </div>
+
+  <div class="wrap bas">
+    <span>© {annee} {infos.marque}</span>
+    <div class="legal">
+      {piedDePage.legal.map((l) => <a href={l.href} class="ftl">{l.label}</a>)}
     </div>
   </div>
 </footer>
 
 <style>
-  /* Jamais recadrée : pleine largeur, hauteur proportionnelle. */
-  .skyline {
-    width: 100%;
-    max-width: none;
-    height: auto;
-    background: var(--paper);
-  }
+  .fresque { background: var(--paper); border-top: var(--line); padding-top: 40px; }
+  .fresque img { display: block; width: 100%; height: auto; }
 
-  .footer {
-    background: var(--ink);
-    color: var(--paper);
-  }
-
-  .footer__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
-    gap: 40px;
-    padding-block: 72px 40px;
-  }
-
-  .footer__col {
+  .ligne1 {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-    font-size: 15px;
-    line-height: 1.5;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 28px 40px;
+    flex-wrap: wrap;
+    padding-top: 64px;
+    padding-bottom: 48px;
   }
 
-  .footer__brand {
-    gap: 20px;
-  }
+  .marque { display: flex; flex-direction: column; gap: 18px; max-width: 440px; }
+  .marque img { height: 56px; width: auto; align-self: flex-start; }
+  .marque p { color: var(--on-dark-soft); font-size: 15px; line-height: 1.6; }
 
-  .footer__brand > img {
-    width: auto;
-    height: 58px;
-  }
+  .soc { display: flex; gap: 10px; flex-wrap: wrap; }
 
-  .footer__muted {
-    color: var(--text-on-dark-muted);
-  }
-
-  .footer__title--restaurant {
-    color: var(--yellow);
-  }
-
-  .footer__title--traiteur {
-    color: var(--peach);
-  }
-
-  .footer__col > a,
-  .footer__links a {
+  .fsoc {
     display: inline-flex;
     align-items: center;
+    gap: 8px;
     min-height: 44px;
+    padding: 0 16px 0 calc(16px + 0.12em);
+    border: 2px solid var(--paper);
+    border-radius: var(--radius-pill);
     color: var(--paper);
     text-decoration: none;
+    font-family: var(--font-display);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-size: 11px;
+    white-space: nowrap;
+    transition: background-color 0.15s, color 0.15s;
+  }
+  .fsoc:hover { background: var(--paper); color: var(--ink); }
+
+  .colonnes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr));
+    gap: 40px 32px;
+    padding-top: 48px;
+    padding-bottom: 56px;
+    position: relative;
   }
 
-  .footer__col > a:hover,
-  .footer__links a:hover {
-    color: var(--pink);
-  }
+  .colonnes,
+  .bas { border-top: 1px solid var(--rule-dark); }
 
-  .footer__bottom {
+  .fcol { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; font-size: 15px; line-height: 1.5; min-width: 0; }
+  .fcol .k { margin-bottom: 4px; }
+  .t-restaurant { color: var(--yellow); }
+  .t-traiteur { color: var(--peach); }
+  .t-univers { color: var(--cyan); }
+  .t-maison { color: var(--pink); }
+
+  .ftl { color: var(--paper); text-decoration: none; overflow-wrap: anywhere; transition: color 0.15s; }
+  .ftl:hover { color: var(--pink); text-decoration: underline; text-underline-offset: 4px; }
+
+  .bas {
     display: flex;
-    flex-wrap: wrap;
-    align-items: center;
     justify-content: space-between;
-    gap: 8px 32px;
-    padding-block: 16px 20px;
-    border-top: 1px solid var(--line-on-dark);
-    color: var(--text-on-dark-muted);
+    align-items: center;
+    gap: 12px 24px;
+    flex-wrap: wrap;
+    padding-top: 22px;
+    padding-bottom: 28px;
     font-size: 13px;
+    color: var(--on-dark-soft);
   }
 
-  .footer__links {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0 24px;
-  }
+  .legal { display: flex; gap: 20px; flex-wrap: wrap; }
+  .legal .ftl { position: relative; }
+  /* Cible de 24 px sans changer la hauteur de la ligne */
+  .legal .ftl::after { content: ''; position: absolute; inset: -5px 0; }
 </style>

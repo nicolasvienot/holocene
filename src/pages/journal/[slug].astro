@@ -1,0 +1,55 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import Button from '../../components/Button.astro';
+import CtaFinal from '../../components/CtaFinal.astro';
+import Icon from '../../components/Icon.astro';
+import Pill from '../../components/Pill.astro';
+import Prose from '../../components/Prose.astro';
+import infos from '../../data/infos.json';
+import { articleJsonLd } from '../../lib/seo';
+import { dateCourte } from '../../lib/journal';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('journal');
+  return articles.map((article) => ({ params: { slug: article.id }, props: { article } }));
+}
+
+const { article } = Astro.props;
+const { Content } = await render(article);
+const { title, category, date, excerpt } = article.data;
+const tel = infos.telephones.traiteurFoodTruck;
+---
+<Base
+  capsule="journal"
+  actif="Journal"
+  type="article"
+  title={`${title} - Holocene`}
+  description={excerpt}
+  jsonLd={[articleJsonLd({ titre: title, description: excerpt, date, chemin: `/journal/${article.id}` })]}
+>
+  <article class="wrap article">
+    <a href="/journal" class="retour k"><Icon name="arrow" size={16} class="fleche" /> Le journal</a>
+    <div class="meta">
+      <Pill texte={category} fond="var(--flower)" />
+      <time class="k" datetime={date.toISOString().slice(0, 10)}>{dateCourte(date)}</time>
+    </div>
+    <h1>{title}</h1>
+    <p class="chapo">{excerpt}</p>
+    <Prose><Content /></Prose>
+  </article>
+
+  <CtaFinal titre="Parlons de votre prochain événement.">
+    <Button variant="dark" href="/contact" label="Demander un devis" />
+    <Button href={`tel:${tel.tel}`} label={tel.affiche} />
+  </CtaFinal>
+</Base>
+
+<style>
+  .article { padding-top: 40px; display: flex; flex-direction: column; align-items: flex-start; gap: 24px; }
+  .retour { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; text-decoration: none; }
+  .retour :global(.fleche) { transform: rotate(180deg); }
+  .meta { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+  h1 { font-size: clamp(32px, 4.4vw, 60px); font-weight: 400; line-height: 1.12; max-width: 22ch; text-wrap: balance; }
+  .chapo { font-size: 20px; line-height: 1.5; max-width: 60ch; margin-bottom: 24px; }
+</style>

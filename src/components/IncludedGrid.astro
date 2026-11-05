@@ -1,0 +1,36 @@
+---
+interface Props {
+  elements: { titre: string; texte: string }[];
+  photo: string;
+  alt: string;
+}
+
+const { elements, photo, alt } = Astro.props;
+---
+<div class="ag cle">
+  <img src={photo} {alt} width="900" height="1333" loading="lazy" />
+  <div class="incl">
+    {elements.map((e) => (
+      <div class="inc">
+        <h3 class="d">{e.titre}</h3>
+        <p>{e.texte}</p>
+      </div>
+    ))}
+  </div>
+</div>
+
+<style>
+  .cle { --min: 420px; --gap: 48px; align-items: start; margin-bottom: 56px; }
+  img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; border: 2px solid var(--paper); border-radius: var(--radius-card); }
+  .incl { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--paper); }
+  .inc { display: flex; flex-direction: column; gap: 12px; padding: 26px 26px 28px 0; border-bottom: 2px solid var(--paper); }
+  .inc:nth-child(2n) { padding-left: 26px; padding-right: 0; border-left: 2px solid var(--paper); }
+  h3 { font-size: 24px; }
+  p { font-size: 15px; line-height: 1.55; color: var(--on-dark); }
+
+  @media (max-width: 760px) {
+    .incl { grid-template-columns: 1fr; }
+    .inc,
+    .inc:nth-child(2n) { padding: 22px 0; border-left: 0; }
+  }
+</style>

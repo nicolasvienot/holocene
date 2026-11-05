@@ -1,0 +1,23 @@
+---
+import { estPlaceholder, nimbus } from '../lib/texte';
+
+interface Props {
+  texte: string;
+  auteur: string;
+  icone: string;
+}
+
+const { texte, auteur, icone } = Astro.props;
+const auteurTemp = estPlaceholder(auteur);
+---
+<figure>
+  <img src={icone} alt="" aria-hidden="true" width="40" height="80" loading="lazy" />
+  <blockquote>« {texte} »</blockquote>
+  <figcaption class="k">{auteurTemp ? <span class="secours">{nimbus(auteur)}</span> : auteur}</figcaption>
+</figure>
+
+<style>
+  figure { display: flex; flex-direction: column; gap: 28px; padding: 44px; border: var(--line); border-radius: 36px; background: var(--paper); box-shadow: var(--shadow-hero); }
+  img { height: 80px; width: auto; align-self: flex-start; }
+  blockquote { font-size: clamp(22px, 2.2vw, 28px); line-height: 1.35; }
+</style>

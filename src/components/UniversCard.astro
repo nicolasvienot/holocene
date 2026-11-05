@@ -1,0 +1,48 @@
+---
+import Button from './Button.astro';
+import Pill from './Pill.astro';
+import { universParId, type UniversId } from '../data/navigation';
+
+interface Props {
+  id: UniversId;
+  num: string;
+  pastille: string;
+  texte: string;
+}
+
+const { id, num, pastille, texte } = Astro.props;
+const u = universParId(id);
+---
+<a href={u.href} class="carte" style={`background:${u.fond}`}>
+  <div class="tete">
+    <h3 class="d num">{num}<span class="sr-only"> {u.label}</span></h3>
+    <Pill texte={pastille} fond="var(--paper)" />
+  </div>
+  <img class="icone" src={u.icone} alt="" aria-hidden="true" width="105" height="210" loading="lazy" />
+  <div class="pied">
+    <img class="logo" src={u.logo} alt={u.logoAlt} width="300" height="77" loading="lazy" />
+    <p class="p t16">{texte}</p>
+    <Button label="Découvrir" class="decouvrir" />
+  </div>
+</a>
+
+<style>
+  .carte {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 32px;
+    min-height: 620px;
+    padding: 32px;
+    border: var(--line);
+    border-radius: var(--radius-card);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .tete { display: flex; justify-content: space-between; align-items: center; }
+  .num { font-size: 44px; }
+  .icone { height: 210px; width: auto; align-self: center; }
+  .pied { display: flex; flex-direction: column; gap: 18px; }
+  .logo { width: 100%; max-width: 300px; height: auto; }
+  .pied :global(.decouvrir) { align-self: flex-start; }
+</style>

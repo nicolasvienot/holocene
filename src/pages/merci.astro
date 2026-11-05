@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Accent from '../components/Accent.astro';
+import Button from '../components/Button.astro';
+import formulaires from '../data/formulaires.json';
+import { univers } from '../data/navigation';
+
+const troisUnivers = univers.filter((u) => u.id !== 'holocene');
+---
+<Base capsule="contact" title="Merci - Holocene" description="Votre demande est bien partie." noindex>
+  <section class="wrap merci">
+    <Accent texte="Great food inside" class="merci-accent" />
+    <h1 class="d">Merci.</h1>
+    <p class="p t20">{formulaires.succes}</p>
+    <div class="rang">
+      {troisUnivers.map((u) => <Button href={u.href} label={u.label} style={`background:${u.fond}`} />)}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .merci { display: flex; flex-direction: column; align-items: flex-start; gap: 30px; padding-top: 64px; padding-bottom: 112px; }
+  .merci :global(.merci-accent) { font-size: 30px; }
+  h1 { font-size: clamp(64px, 10vw, 160px); }
+  .p { max-width: 540px; }
+</style>

@@ -1,66 +1,41 @@
 ---
-import Hero from '../components/Hero.astro';
-import { phones, site } from '../data/site';
 import Base from '../layouts/Base.astro';
+import Prose from '../components/Prose.astro';
+import infos from '../data/infos.json';
+
+const m = infos.mentionsLegales;
 ---
-
-<Base title="Mentions légales" description="Mentions légales du site Holocene Food Event.">
-  <Hero size="md" title="Mentions légales" />
-
-  <section class="wrap legal">
-    <div>
-      <h2 class="display">Éditeur du site</h2>
-      <p>Holocene Food Event - [Forme juridique et capital social]</p>
-      <p>{site.address.street}, {site.address.city}</p>
-      <p>[SIRET] - [RCS] - [Numéro de TVA]</p>
+<Base
+  capsule="contact"
+  title="Mentions légales - Holocene"
+  description="Éditeur, hébergeur et propriété intellectuelle du site Holocene Food Event."
+>
+  <article class="wrap page">
+    <h1 class="d t92">Mentions légales</h1>
+    <Prose>
+      <h2>Éditeur du site</h2>
       <p>
-        Téléphone : <a href={`tel:${phones.restaurant.tel}`}>{phones.restaurant.display}</a> (restaurant),
-        <a href={`tel:${phones.traiteur.tel}`}>{phones.traiteur.display}</a> (traiteur et food truck)
+        {m.editeur}<br />
+        Siège social : {m.siegeSocial}<br />
+        SIRET : {m.siret}<br />
+        Responsable de la publication : {m.responsablePublication}<br />
+        Contact : <a href={`mailto:${m.contactPublication}`}>{m.contactPublication}</a>
       </p>
-      <p>E-mail : <a href={`mailto:${site.email}`}>{site.email}</a></p>
-    </div>
-    <div>
-      <h2 class="display">Publication</h2>
-      <p>Directeur de la publication : [Nom]</p>
-    </div>
-    <div>
-      <h2 class="display">Hébergement</h2>
-      <p>[Nom, adresse et téléphone de l'hébergeur]</p>
-    </div>
-    <div>
-      <h2 class="display">Données personnelles</h2>
-      <p>[Politique de confidentialité à fournir : responsable du traitement, durée de conservation, droits des personnes]</p>
-    </div>
-    <div>
-      <h2 class="display">Cookies</h2>
-      <p>[À compléter selon les services intégrés au site]</p>
-    </div>
-    <div>
-      <h2 class="display">Crédits</h2>
-      <p>[Crédits photo à compléter]</p>
-      <p>Charte graphique by MOM'S.</p>
-    </div>
-  </section>
+      <p>[{m.aCompleter}]</p>
+
+      <h2>Hébergement</h2>
+      <p>{m.hebergeur}</p>
+
+      <h2>Propriété intellectuelle</h2>
+      <p>Les textes, photos, logos et illustrations de ce site sont la propriété exclusive de Holocene. Toute reproduction demande son accord préalable.</p>
+
+      <h2>Données personnelles et cookies</h2>
+      <p>Tout est expliqué sur la page <a href="/confidentialite">Confidentialité</a>.</p>
+    </Prose>
+  </article>
 </Base>
 
 <style>
-  .legal {
-    display: flex;
-    flex-direction: column;
-    gap: 48px;
-    padding-bottom: var(--section-y);
-  }
-
-  .legal > div {
-    max-width: 760px;
-  }
-
-  .legal h2 {
-    margin-bottom: 18px;
-    font-size: clamp(28px, 3vw, 40px);
-  }
-
-  .legal p + p {
-    margin-top: 6px;
-  }
+  .page { padding-top: 40px; padding-bottom: 112px; }
+  h1 { margin-bottom: 56px; }
 </style>

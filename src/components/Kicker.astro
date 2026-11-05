@@ -1,0 +1,11 @@
+---
+import { enNimbus } from '../lib/texte';
+
+interface Props {
+  texte: string;
+  class?: string;
+}
+
+const { texte, class: className } = Astro.props;
+---
+<span class:list={['k', className]} set:html={enNimbus(texte)} />

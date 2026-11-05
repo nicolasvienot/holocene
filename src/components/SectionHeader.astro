@@ -1,54 +1,44 @@
 ---
-import Accent from './Accent.astro';
+import Kicker from './Kicker.astro';
+import { enNimbus } from '../lib/texte';
 
 interface Props {
-  /** Une entrée par ligne. */
-  title: string | string[];
-  level?: 1 | 2 | 3;
-  /** Une ligne en Vividly au-dessus du titre. */
-  accent?: string;
-  /** Un label Nimbus au-dessus du titre. */
-  label?: string;
+  kicker?: string;
+  /** Lignes du titre */
+  titre: string[];
+  /** Classe de taille, ex. t92 */
+  taille?: string;
+  texte?: string;
+  /** Largeur max du texte de droite, en px */
+  largeur?: number;
+  /** Espace sous l'en-tête, en px */
+  marge?: number;
+  /** Écart entre titre et texte, en px */
+  ecart?: number;
+  niveau?: 'h1' | 'h2';
 }
 
-const { title, level = 2, accent, label } = Astro.props;
-const lines = Array.isArray(title) ? title : [title];
-const Heading = `h${level}` as 'h1' | 'h2' | 'h3';
+const { kicker, titre, taille = 't92', texte, largeur = 420, marge = 48, ecart = 32, niveau: Niveau = 'h2' } = Astro.props;
 ---
-
-<div class="section-header">
-  <div class="section-header__title">
-    {accent && <Accent text={accent} />}
-    {label && <span class="label">{label}</span>}
-    <Heading class="display section-header__heading">
-      {lines.map((line, index) => (index === 0 ? line : <><br />{line}</>))}
-    </Heading>
+<div class="sh" style={`--sh-marge:${marge}px;--sh-ecart:${ecart}px;--sh-largeur:${largeur}px`}>
+  <div class="sh-titre">
+    {kicker && <Kicker texte={kicker} class="sh-k" />}
+    <Niveau class:list={['d', taille]} set:html={titre.map(enNimbus).join('<br />')} />
   </div>
-  {Astro.slots.has('default') && <p class="section-header__text"><slot /></p>}
+  {texte && <p class="p sh-texte">{texte}</p>}
 </div>
 
 <style>
-  .section-header {
+  .sh {
     display: flex;
-    flex-wrap: wrap;
-    align-items: flex-end;
     justify-content: space-between;
-    gap: 24px 64px;
-    margin-bottom: 48px;
+    align-items: flex-end;
+    gap: var(--sh-ecart);
+    flex-wrap: wrap;
+    margin-bottom: var(--sh-marge);
   }
-
-  .section-header__title {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .section-header__heading {
-    font-size: clamp(42px, 6vw, 92px);
-  }
-
-  .section-header__text {
-    flex: 0 1 420px;
-    text-wrap: pretty;
-  }
+  .sh-titre { display: flex; flex-direction: column; gap: 18px; }
+  .sh-texte { max-width: var(--sh-largeur); }
+  .sh :global(.sh-k) { color: var(--sh-k, inherit); }
+  :global(.sur-noir) .sh-texte { color: var(--on-dark); }
 </style>

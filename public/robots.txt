@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /design-system
+Disallow: /merci
+
+Sitemap: https://www.holocene-restaurant.fr/sitemap-index.xml

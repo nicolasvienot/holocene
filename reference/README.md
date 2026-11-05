@@ -1,7 +1,9 @@
-# Références de design
+# Références
 
-- `pages/` — une maquette HTML statique par page, générée depuis la maquette validée. S'ouvre directement dans le navigateur (les assets pointent vers `../../public/`). Sert de modèle visuel : ne pas copier le HTML tel quel, le reconstruire en composants Astro.
-- `holocene-site-complet.html` — tout le site en un seul fichier autonome, navigable (bouton « Pages » en bas à droite).
-- `charte/` — planches du brand book (marque mère, food truck, traiteur, restaurant), texte d'intention, cartes restaurant/food truck et box traiteur.
-
-Pages interactives (Journal, Contact, Design system) : les fichiers de `pages/` montrent l'état par défaut ; `holocene-site-complet.html` montre les interactions.
+- `pages/` — la maquette validée, une page par fichier (HTML statique, s'ouvre dans le navigateur ; les assets pointent vers `../../public/`). Fait foi pour le visuel et les textes. Ne pas copier le HTML : le reconstruire en composants Astro.
+  - `01` à `08` : les pages du site (largeur fluide : redimensionner la fenêtre pour voir le mobile).
+  - `10-design-system-1/2/3.html` : tous les composants avec leurs règles (sélecteur d'univers en haut de chaque partie).
+  - `11-accueil-mobile.html` : l'accueil à 390 px, avec la barre d'action collante « Devis / Appeler ».
+  - Les pages interactives (journal, contact) montrent l'état par défaut.
+- `site-actuel.md` — inventaire complet du site actuel (holocene-restaurant.fr) : infos, menus, FAQ, articles, mentions légales, incohérences à faire trancher.
+- `charte/` — planches du brand book (marque mère, food truck, traiteur, restaurant), texte d'intention, cartes et box traiteur.

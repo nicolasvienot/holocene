@@ -1,0 +1,270 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Maquette — 10-design-system-3</title>
+<!-- Maquette de référence (HTML statique généré depuis la maquette Claude Design). Ne pas copier tel quel : à reconstruire en composants Astro. -->
+<style>
+@font-face{font-family:'Varela Round';src:url(../../public/fonts/varela-round-400.woff2) format('woff2');font-weight:400}
+
+@font-face{font-family:'Holo Nimbus Round';src:url(../../public/fonts/nimbus-sans-round-bold-subset.woff2) format('woff2');font-weight:700;font-style:normal;font-display:swap}
+@font-face{font-family:'Holo Vividly';src:url(../../public/fonts/vividly-subset.woff2) format('woff2');font-weight:400;font-style:normal;font-display:swap}
+body{margin:0}
+html,body{background:#000}
+*{box-sizing:border-box}
+a{color:#000}
+a:hover{color:#000}
+.d{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:-0.025em;line-height:.9;margin:0}
+.k{font-family:'Holo Nimbus Round','Arial Rounded MT Bold','Varela Round',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.2em;font-size:12px;line-height:1.3}
+.v{font-family:'Holo Vividly','Varela Round',cursive;text-transform:uppercase;letter-spacing:.05em;line-height:1}
+.p{font-size:18px;line-height:1.6;margin:0;text-wrap:pretty}
+.wrap{width:100%;max-width:1360px;margin:0 auto;padding-left:48px;padding-right:48px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px 0 calc(26px + .12em);border:2px solid #000;border-radius:999px;background:#fff;color:#000;text-decoration:none;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:13px;box-shadow:4px 4px 0 #000;transition:transform .15s,box-shadow .15s;white-space:nowrap;cursor:pointer}
+.btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 #000;color:#000}
+.btn.dk{background:#000;color:#fff;box-shadow:none}
+.btn.dk:hover{background:#fff;color:#000;box-shadow:none;transform:none}
+.btn.dk:active{transform:scale(.96)}
+.btn.ondk{border-color:#fff;box-shadow:4px 4px 0 #fff}
+.btn.ondk:hover{box-shadow:2px 2px 0 #fff}
+.btn.sm{min-height:44px;padding:0 18px 0 calc(18px + .12em);font-size:12px;box-shadow:3px 3px 0 #000}
+.btn:disabled{background:#f2f2f2;color:#5c5c5c;border-color:#8a8a8a;box-shadow:none;transform:none;cursor:not-allowed}
+.pill{display:inline-flex;align-items:center;gap:8px;border:2px solid #000;border-radius:999px;padding:8px 16px 8px calc(16px + .14em);font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:12px;line-height:1;white-space:nowrap}
+.chip{display:inline-flex;align-items:center;min-height:46px;padding:0 20px 0 calc(20px + .14em);border:2px solid #000;border-radius:999px;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:12px;cursor:pointer;background:#fff;color:#000}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block}
+.fld{display:flex;flex-direction:column;gap:8px}
+.fld label{font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.14em;font-size:11px}
+.fld input,.fld select,.fld textarea{font-family:'Varela Round',system-ui,sans-serif;font-size:17px;min-height:54px;padding:14px 18px;border:2px solid #000;border-radius:18px;background:#fff;color:#000;width:100%}
+.fld textarea{min-height:120px;resize:vertical}
+.fld input:focus,.fld .is-foc-in{outline:none;box-shadow:4px 4px 0 #000}
+.fld .is-err{border-width:3px}
+.fld input:disabled{background:#f2f2f2;border-color:#8a8a8a;color:#5c5c5c}
+.tile{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;gap:16px;min-height:170px;padding:22px;border:2px solid #000;border-radius:28px;cursor:pointer;text-align:left;font-family:inherit;background:#fff}
+details.faq{border-bottom:2px solid #000}
+details.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:72px;font-size:22px}
+details.faq summary::-webkit-details-marker{display:none}
+.sec{display:flex;flex-direction:column;gap:40px;padding-top:112px;padding-bottom:40px;border-top:2px solid #000}
+.sh{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:24px 64px;align-items:end}
+.box{border:2px solid #000;border-radius:28px;padding:32px;display:flex;flex-direction:column;gap:22px;background:#fff}
+.lbl{font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.16em;font-size:10px;color:#4a4a4a}
+.spec{font-size:13px;line-height:1.6;color:#2b2b2b;margin:0}
+.row{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+.st{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.g2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(520px,100%),1fr));gap:24px}
+.g3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:24px}
+@keyframes mq{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.mq{display:flex;width:max-content;animation:mq 45s linear infinite}
+.toc{display:inline-flex;align-items:center;min-height:40px;padding:0 14px 0 calc(14px + .12em);border:2px solid #000;border-radius:999px;text-decoration:none;font-family:'Holo Nimbus Round','Arial Rounded MT Bold',sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:11px;background:#fff}
+.toc:hover{background:#000;color:#fff}
+/* ---- Capsule ---- */
+/* ---- Traiteur pro ---- */
+.fmts{list-style:none;margin:0;padding:0 32px;background:#fff;border:2px solid #000;border-radius:32px}
+.fmt{display:grid;grid-template-columns:56px minmax(0,1fr) minmax(0,1.25fr) 190px;align-items:center;gap:20px 28px;padding:28px 0;border-bottom:2px solid #000}
+.fmt:last-child{border-bottom:0}
+.fmt .btn{justify-self:stretch;min-height:48px;font-size:12px}
+.fmt p{margin:0;font-size:16px;line-height:1.55}
+.incl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border-top:2px solid #fff}
+.inc{display:flex;flex-direction:column;gap:12px;padding:26px 26px 28px 0;border-bottom:2px solid #fff}
+.inc:nth-child(2n){padding-left:26px;padding-right:0;border-left:2px solid #fff}
+.inc p{margin:0;font-size:15px;line-height:1.55;color:#e6e6e6}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:2px solid #fff;border-radius:28px}
+.step{display:flex;flex-direction:column;gap:12px;padding:28px 30px}
+.step+.step{border-left:2px solid #fff}
+.step p{margin:0;font-size:15px;line-height:1.55;color:#e6e6e6}
+@media (max-width:980px){.fmt{grid-template-columns:44px minmax(0,1fr)}
+.fmt p,.fmt .btn{grid-column:2}
+.fmt .btn{justify-self:start;width:auto}}
+@media (max-width:760px){.fmts{padding:0 20px}
+.incl{grid-template-columns:1fr}
+.inc,.inc:nth-child(2n){padding:22px 0;border-left:0}
+.steps{grid-template-columns:1fr}
+.step+.step{border-left:0;border-top:2px solid #fff}}
+@media (max-width:760px){.wrap{padding-left:20px;padding-right:20px}
+.p{font-size:16px}
+.box{padding:22px}}
+
+</style>
+</head>
+<body>
+
+<div style="background: #ffffff; color: #000000; font-family: 'Varela Round', 'Arial Rounded MT Bold', system-ui, sans-serif; overflow-x: hidden">
+
+<!-- EN-TETE DOC -->
+<div style="background: #000000; color: #ffffff">
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 24px; flex-wrap: wrap; padding-top: 24px; padding-bottom: 24px">
+<div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap">
+<img src="../../public/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" style="height: 48px; width: auto">
+<span class="pill" style="border-color: #ffffff">Design system — partie 3 sur 3</span>
+</div>
+<a href="01-accueil.html" class="btn ondk" style="background: #000000; color: #ffffff">Voir le site</a>
+</div>
+</div>
+
+<section class="wrap" style="padding-top: 72px; padding-bottom: 72px">
+<div class="sh">
+<div style="display: flex; flex-direction: column; gap: 24px">
+<span class="v" style="font-size: 30px">Mode d'emploi</span>
+<h1 class="d" style="font-size: clamp(64px, 9vw, 140px)">Design<br>system</h1>
+</div>
+<div style="display: flex; flex-direction: column; gap: 20px">
+<p class="p">Tous les composants du site Holocene, avec leurs règles et leurs états. Rien n'est inventé : couleurs, logos et typos viennent du brand book. Ce document dit comment les assembler pour que chaque page — et demain chaque nouvelle adresse — reste cohérente.</p>
+<p class="p" style="font-size: 15px">Les exemples suivent l'univers choisi ci-dessous : changez-le pour voir chaque composant dans ses quatre couleurs.</p>
+</div>
+</div>
+
+<!-- Sélecteur d'univers -->
+<div style="margin-top: 48px; padding: 24px; border: 2px solid #000000; border-radius: 28px; background: #f7ba94; display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 6px"><span class="k">Univers des exemples</span><span style="font-size: 15px">Fond pêche, fleur jaune.</span></div>
+<div role="group" aria-label="Choisir l'univers" style="display: flex; gap: 10px; flex-wrap: wrap">
+
+<button type="button" class="chip" aria-pressed="false" style="background: #ffffff; color: #000000"><span class="dot" style="background: #ffc7cd; box-shadow: 0 0 0 1.5px #000000; margin-right: 10px"></span>Holocene</button>
+
+<button type="button" class="chip" aria-pressed="false" style="background: #ffffff; color: #000000"><span class="dot" style="background: #f7ba94; box-shadow: 0 0 0 1.5px #000000; margin-right: 10px"></span>Food truck</button>
+
+<button type="button" class="chip" aria-pressed="true" style="background: #000000; color: #ffffff"><span class="dot" style="background: #fffaaf; box-shadow: 0 0 0 1.5px #000000; margin-right: 10px"></span>Traiteur</button>
+
+<button type="button" class="chip" aria-pressed="false" style="background: #ffffff; color: #000000"><span class="dot" style="background: #e0cfe6; box-shadow: 0 0 0 1.5px #000000; margin-right: 10px"></span>Restaurant</button>
+
+</div>
+</div>
+
+<nav aria-label="Sommaire" style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 32px">
+<a href="10-design-system-1.html#couleurs" class="toc">01 Couleurs</a>
+<a href="10-design-system-1.html#typo" class="toc">02 Typographie</a>
+<a href="10-design-system-1.html#formes" class="toc">03 Espaces &amp; formes</a>
+<a href="10-design-system-1.html#logos" class="toc">04 Logos &amp; icônes</a>
+<a href="10-design-system-1.html#boutons" class="toc">05 Boutons</a>
+<a href="10-design-system-2.html#nav" class="toc">06 Navigation</a>
+<a href="10-design-system-2.html#pastilles" class="toc">07 Pastilles</a>
+<a href="10-design-system-2.html#cartes" class="toc">08 Cartes</a>
+<a href="10-design-system-2.html#listes" class="toc">09 Listes</a>
+<a href="#formulaires" class="toc">10 Formulaires</a>
+<a href="#sections" class="toc">11 Sections</a>
+<a href="#regles" class="toc">12 Règles</a>
+</nav>
+</section>
+
+<div class="wrap">
+
+<!-- 10 FORMULAIRES -->
+<section id="formulaires" class="sec">
+<div class="sh"><h2 class="d" style="font-size: clamp(48px, 6vw, 88px)">10. Formulaires</h2><p class="p">Grands champs, labels toujours visibles, une seule page plutôt qu'un formulaire en étapes. Les erreurs n'utilisent pas de rouge : trait épaissi, icône et message.</p></div>
+<div class="g2">
+<div class="box" style="background: #fcdbbf">
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(220px, 100%), 1fr)); gap: 20px">
+<div class="fld"><label for="ds1">Repos</label><input id="ds1" type="text" placeholder="Camille Durand"></div>
+<div class="fld"><label for="ds2">Focus</label><input id="ds2" type="text" class="is-foc-in" value="camille@exemple.fr"></div>
+<div class="fld"><label for="ds3">Erreur</label><input id="ds3" type="email" class="is-err" value="camille@" aria-invalid="true" aria-describedby="ds3e"><span id="ds3e" style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; padding: 6px 12px; background: #ffc7cd; border: 1.5px solid #000000; border-radius: 999px; align-self: flex-start"><svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6M12 17h.01"></path></svg>Adresse e-mail incomplète</span></div>
+<div class="fld"><label for="ds4">Désactivé</label><input id="ds4" type="text" value="Non modifiable" disabled></div>
+<div class="fld"><label for="ds5">Liste</label><select id="ds5"><option>Salle + terrasse</option><option>La salle</option></select></div>
+<div class="fld"><label for="ds6">Date</label><input id="ds6" type="date"></div>
+<div class="fld" style="grid-column: 1 / -1"><label for="ds7">Zone de texte</label><textarea id="ds7" placeholder="Type d'événement, horaires, ambiance…"></textarea></div>
+</div></div>
+<div style="display: flex; flex-direction: column; gap: 24px">
+<div class="box"><span class="k">Specs champ</span><p class="spec">Hauteur 54 px · padding 14 × 18 · rayon 18 · trait 2 px · texte 17 px · label Nimbus 11 px espacé au-dessus · focus : ombre noire 4 px · erreur : trait 3 px + message pastille rose avec icône · aide : 13 px sous le champ.</p></div>
+<div class="box"><span class="k">Carte formulaire</span>
+<div style="padding: 24px; border: 2px solid #000000; border-radius: 30px; background: #fcdbbf; box-shadow: 8px 8px 0 #000000; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap"><span style="font-size: 13px">Vos données servent uniquement à vous répondre.</span><span class="btn dk">Envoyer ma demande</span></div>
+<p class="spec">Le formulaire vit dans une carte « Clair » de l'univers, ombre 10 px, mention RGPD à gauche du bouton.</p></div>
+</div>
+</div>
+<div class="box"><span class="k">Tuiles de choix — « Votre demande concerne »</span>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(200px, 100%), 1fr)); gap: 16px">
+<div class="tile"><img src="../../public/brand/icon-restaurant.svg" alt="" aria-hidden="true" style="height: 56px"><span style="display: flex; flex-direction: column; gap: 6px"><span class="d" style="font-size: 22px">Une table</span><span style="font-size: 13px">Repos</span></span></div>
+<div class="tile" style="transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #000000"><img src="../../public/brand/icon-traiteur.svg" alt="" aria-hidden="true" style="height: 56px"><span style="display: flex; flex-direction: column; gap: 6px"><span class="d" style="font-size: 22px">Traiteur</span><span style="font-size: 13px">Survol</span></span></div>
+<div class="tile" style="background: #fffaaf; box-shadow: 6px 6px 0 #000000"><img src="../../public/brand/icon-traiteur.svg" alt="" aria-hidden="true" style="height: 56px"><span style="display: flex; flex-direction: column; gap: 6px"><span class="d" style="font-size: 22px">Sélectionné</span><span style="font-size: 13px">Fond fleur + ombre</span></span></div>
+</div>
+<span class="spec">Boutons réels avec aria-pressed. Le choix recolore le formulaire et change le numéro de téléphone affiché.</span></div>
+</section>
+
+<!-- 11 SECTIONS -->
+<section id="sections" class="sec">
+<div class="sh"><h2 class="d" style="font-size: clamp(48px, 6vw, 88px)">11. Sections</h2><p class="p">Les blocs qui composent une page, du haut vers le bas.</p></div>
+<div class="g2">
+<div class="st" style="gap: 14px"><span class="lbl">11.1 Héros</span>
+<div style="width: 100%; padding: 32px; border: 2px solid #000000; border-radius: 32px; background: #f7ba94; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="v" style="font-size: 18px">Accent</span><span class="d" style="font-size: 44px">Titre en deux lignes.</span><span style="font-size: 13px; line-height: 1.5">Une phrase de promesse, factuelle.</span><span class="btn dk sm" style="align-self: flex-start">Action</span></div>
+<div style="aspect-ratio: 1 / 1; border: 2px solid #000000; border-radius: 22px; background: #fffaaf; box-shadow: 6px 6px 0 #000000"></div>
+</div><span class="spec">Accent Vividly → titre → phrase → 1 à 2 boutons. Visuel à droite, nu, avec ombre 10 px. Les infos clés vont sous le bouton.</span></div>
+<div class="st" style="gap: 14px"><span class="lbl">11.2 En-tête de section</span>
+<div style="width: 100%; padding: 32px; border: 2px solid #000000; border-radius: 32px; display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap">
+<div style="display: flex; flex-direction: column; gap: 10px"><span class="k">Label</span><span class="d" style="font-size: 48px">Titre de section</span></div>
+<span style="max-width: 220px; font-size: 13px; line-height: 1.5">Un paragraphe court, aligné en bas à droite.</span>
+</div><span class="spec">Titre à gauche, contexte à droite, 48–56 px avant le contenu.</span></div>
+</div>
+<div class="st" style="gap: 14px"><span class="lbl">11.3 Bandeau défilant</span>
+<div aria-hidden="true" style="width: 100%; background: #000000; color: #ffffff; border-radius: 24px; overflow: hidden; padding: 20px 0">
+<div class="mq"><div style="display: flex; align-items: center; gap: 36px; padding-right: 36px"><span class="v" style="font-size: 34px">Fait maison</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 34px"><span class="v" style="font-size: 34px">De saison</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 34px"><span class="v" style="font-size: 34px">Local</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 34px"><span class="v" style="font-size: 34px">Frais</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 34px"></div><div style="display: flex; align-items: center; gap: 36px; padding-right: 36px"><span class="v" style="font-size: 34px">Fait maison</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 34px"><span class="v" style="font-size: 34px">De saison</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 34px"><span class="v" style="font-size: 34px">Local</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 34px"><span class="v" style="font-size: 34px">Frais</span><img src="../../public/brand/icon-white.svg" alt="" style="height: 34px"></div></div>
+</div>
+<div aria-hidden="true" style="width: 100%; background: #fffaaf; border: 2px solid #000000; border-radius: 24px; overflow: hidden; padding: 18px 0">
+<div class="mq"><div style="display: flex; align-items: center; gap: 30px; padding-right: 30px"><span class="v" style="font-size: 32px">Pain ciabatta</span><span class="dot" style="width: 12px; height: 12px; background: #000000"></span><span class="v" style="font-size: 32px">Produits locaux</span><span class="dot" style="width: 12px; height: 12px; background: #000000"></span><span class="v" style="font-size: 32px">En direct</span><span class="dot" style="width: 12px; height: 12px; background: #000000"></span></div><div style="display: flex; align-items: center; gap: 30px; padding-right: 30px"><span class="v" style="font-size: 32px">Pain ciabatta</span><span class="dot" style="width: 12px; height: 12px; background: #000000"></span><span class="v" style="font-size: 32px">Produits locaux</span><span class="dot" style="width: 12px; height: 12px; background: #000000"></span><span class="v" style="font-size: 32px">En direct</span><span class="dot" style="width: 12px; height: 12px; background: #000000"></span></div></div>
+</div>
+<span class="spec">Noir + icône blanche (marque) ou fleur + point noir (univers). Mots en Vividly, 45 s par boucle, masqué aux lecteurs d'écran. Un seul bandeau par page.</span></div>
+<div class="g2">
+<div class="st" style="gap: 14px"><span class="lbl">11.4 Questions fréquentes</span>
+<div style="width: 100%; border-top: 2px solid #000000">
+<details class="faq" open><summary>Faut-il réserver ? <span class="d" aria-hidden="true" style="font-size: 28px">-</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">C'est conseillé. Réponse courte, deux phrases maximum.</p></details>
+<details class="faq"><summary>Ouvrez-vous le soir ? <span class="d" aria-hidden="true" style="font-size: 28px">+</span></summary><p class="p" style="padding-bottom: 24px; font-size: 16px">Réponse.</p></details>
+</div><span class="spec">Vraies questions, en texte courant. Élément natif details : accessible au clavier sans script.</span></div>
+<div class="st" style="gap: 14px"><span class="lbl">11.5 Appel final</span>
+<div style="width: 100%; padding: 40px; border: 2px solid #000000; border-radius: 32px; display: flex; flex-direction: column; align-items: center; gap: 18px; text-align: center">
+<span class="v" style="font-size: 24px">Great food inside</span><span class="d" style="font-size: 48px">Parlons de votre prochain événement.</span>
+<div class="row" style="justify-content: center; gap: 12px"><span class="btn dk">Demander un devis</span><span class="btn">05 32 74 08 33</span></div>
+</div><span class="spec">Avant l'illustration de Toulouse. Toujours le téléphone en second bouton.</span></div>
+</div>
+<div class="st" style="gap: 14px"><span class="lbl">11.6 Signature de page</span>
+<img src="../../public/brand/illustration-toulouse.svg" alt="Illustration de Toulouse" style="width: 100%; height: auto; display: block; border: 2px solid #000000; border-radius: 24px 24px 0 0; border-bottom: 0">
+</div>
+<div class="st" style="gap: 14px"><span class="lbl">11.7 Liste de formats — menus à télécharger</span>
+<ul class="fmts" style="width: 100%">
+<li class="fmt"><span class="k">01</span><span class="d" style="font-size: 30px; line-height: .95">Cocktail</span><p>Une ligne de description : ce qu'on y mange, comment c'est servi.</p><a href="#sections" class="btn" style="background: #fffaaf">Menu PDF<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a></li>
+<li class="fmt"><span class="k">02</span><span class="d" style="font-size: 30px; line-height: .95">Repas assis</span><p>Le bouton ouvre le PDF du menu dans un nouvel onglet.</p><a href="#sections" class="btn" style="background: #fffaaf">Menu PDF<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg></a></li>
+</ul>
+<span class="spec">Carte blanche, rayon 32, lignes séparées par un trait 2 px. Colonnes : numéro, nom (Nimbus 30), description, bouton pleine largeur de 190 px. Sous 980 px : le nom, la description et le bouton s'empilent à droite du numéro. Le PDF s'ouvre dans un nouvel onglet avec l'icône de téléchargement.</span></div>
+<div class="st" style="gap: 14px"><span class="lbl">11.8 Clé en main — ce qui est compris, puis les étapes</span>
+<div style="width: 100%; padding: 32px; border-radius: 32px; background: #000000; color: #ffffff; display: flex; flex-direction: column; gap: 32px">
+<div class="incl">
+<div class="inc"><span class="d" style="font-size: 24px">Un chef de projet</span><p>Votre contact unique, du devis au jour J.</p></div>
+<div class="inc"><span class="d" style="font-size: 24px">Le service</span><p>Maîtres d'hôtel et serveurs en tenue.</p></div>
+</div>
+<div class="steps">
+<div class="step"><span class="k" style="color: #fffaaf">01 — Avant</span><p>Appel, devis, dégustation.</p></div>
+<div class="step"><span class="k" style="color: #fffaaf">02 — Le jour J</span><p>Installation, cuisine, service.</p></div>
+<div class="step"><span class="k" style="color: #fffaaf">03 — Après</span><p>Remise en état, avis.</p></div>
+</div>
+</div>
+<span class="spec">Section noire. Grille de 6 éléments sur 2 colonnes séparées par des traits blancs 2 px (titre Nimbus 24 + phrase), à côté d'une photo 4/3. Puis les 3 étapes dans un cadre blanc arrondi 28, labels en couleur fleur. Une colonne sous 760 px.</span></div>
+<div class="st" style="gap: 14px"><span class="lbl">11.9 Demande de devis + questions fréquentes</span>
+<div style="width: 100%; padding: 32px; border: 2px solid #000000; border-radius: 32px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 24px">
+<div style="display: flex; flex-direction: column; gap: 14px"><span class="d" style="font-size: 32px">Intro + téléphone</span><div style="height: 120px; border: 2px dashed #000000; border-radius: 18px"></div><span class="d" style="font-size: 22px">Questions fréquentes</span><div style="height: 120px; border-top: 2px solid #000000; border-bottom: 2px solid #000000"></div></div>
+<div style="border: 2px solid #000000; border-radius: 24px; background: #fcdbbf; box-shadow: 6px 6px 0 #000000; min-height: 300px; display: flex; align-items: center; justify-content: center"><span class="k">Formulaire</span></div>
+</div>
+<span class="spec">Grille « intro / formulaire » puis « FAQ / formulaire » : le formulaire occupe toute la hauteur à droite. Sous 980 px l'ordre devient intro → formulaire → FAQ, pour ne pas repousser le formulaire.</span></div>
+</section>
+
+<!-- 12 REGLES -->
+<section id="regles" class="sec" style="padding-bottom: 112px">
+<div class="sh"><h2 class="d" style="font-size: clamp(48px, 6vw, 88px)">12. Règles</h2><p class="p">Ce qu'il faut savoir avant d'écrire ou de produire une nouvelle page.</p></div>
+<div class="g3">
+<div class="box" style="background: #ffc7cd"><span class="k">Caractères Vividly</span><span class="v" style="font-size: 30px; letter-spacing: .12em">A B C D E F G I L M N O P R S T U X</span><p class="spec">Le fichier extrait des PDF ne contient que ces lettres. Pas d'accents, pas de H, K, V, W, Y, Z, ni ponctuation. Exemples valides : « Fait maison », « De saison », « Great food inside ». Avec la licence complète, cette limite disparaît.</p></div>
+<div class="box"><span class="k">Caractères Nimbus Bold</span><span class="d" style="font-size: 28px">A-Z 0-9 É È Î Ô € &amp; ' . , - ( )</span><p class="spec">Absents : À Ç Ê Ù, ? ! : / + %. Écrire « 40 - 1500 », « Lun - Ven », et mettre les questions dans le texte courant.</p></div>
+<div class="box" style="background: #000000; color: #ffffff"><span class="k" style="color: #ffc7cd">Ton</span><p class="spec" style="color: #e6e6e6">Jeune et direct, mais on vouvoie le client. Phrases courtes, concrètes, chiffres vrais. Les noms des producteurs plutôt que « produits de qualité ». Jamais de « meilleur traiteur de Toulouse » sans preuve.</p></div>
+</div>
+<div class="g2">
+<div class="box" style="background: #fcdbbf"><span class="k">Oui</span><p class="spec">Une action principale par écran · un fond d'univers par page · photos réelles, cadrées avec contour · étiquettes texte pour les régimes · textes alternatifs sur toutes les images utiles · cibles tactiles de 44 px minimum.</p></div>
+<div class="box"><span class="k">Non</span><p class="spec">Couleurs hors charte · dégradés · émojis · texte blanc sur pastel · étiquettes inclinées posées sur les photos · titres en minuscules · formulaires en plusieurs étapes · PDF comme seule source d'une info (carte, menu).</p></div>
+</div>
+</section>
+
+</div>
+
+<footer style="background: #000000; color: #ffffff">
+<div class="wrap" style="display: flex; justify-content: space-between; align-items: center; gap: 20px; flex-wrap: wrap; padding-top: 40px; padding-bottom: 40px">
+<img src="../../public/brand/logo-holocene-food-event-white.svg" alt="Holocene Food.Event" style="height: 44px; width: auto">
+<span style="font-size: 13px; color: #cfcfcf">Design system Holocene — basé sur le brand book Holocene Food Event by MOM'S</span>
+</div>
+</footer>
+
+</div>
+
+</body>
+</html>

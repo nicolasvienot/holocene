@@ -1,0 +1,38 @@
+---
+import Pill from './Pill.astro';
+import Kicker from './Kicker.astro';
+
+interface Props {
+  nom: string;
+  pole: string;
+  bio: string;
+  /** Texte de l'emplacement photo, ex. Photo - Julien */
+  photo: string;
+  icone: string;
+  fondPhoto: string;
+  fondPastille: string;
+}
+
+const { nom, pole, bio, photo, icone, fondPhoto, fondPastille } = Astro.props;
+---
+<article class="personne">
+  <div class="photo" style={`background:${fondPhoto}`}>
+    <img src={icone} alt="" aria-hidden="true" width="55" height="110" loading="lazy" />
+    <Kicker texte={photo.replace(/^\[|\]$/g, '')} />
+  </div>
+  <div class="corps">
+    <Pill texte={pole} fond={fondPastille} class="pole" />
+    <h3 class="d">{nom}</h3>
+    <p>{bio}</p>
+  </div>
+</article>
+
+<style>
+  .personne { display: flex; flex-direction: column; border: var(--line); border-radius: var(--radius-card); background: var(--paper); overflow: hidden; }
+  .photo { aspect-ratio: 1 / 1; border-bottom: var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+  .photo img { height: 110px; width: auto; }
+  .corps { padding: 28px; display: flex; flex-direction: column; gap: 14px; }
+  .corps :global(.pole) { align-self: flex-start; }
+  h3 { font-size: 36px; }
+  p { font-size: 16px; line-height: 1.6; }
+</style>

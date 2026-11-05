@@ -1,114 +1,45 @@
 ---
-import Accent from './Accent.astro';
-
 interface Props {
-  /** Mots en Vividly : uniquement les lettres autorisées. */
-  items: string[];
-  /** dark : bandeau noir, séparateur icône. flower : bandeau fleur, séparateur point. */
-  tone?: 'dark' | 'flower';
+  mots: string[];
+  /** noir : fond noir + icône blanche (marque). fleur : fond fleur + point noir (univers). */
+  variante?: 'noir' | 'fleur';
 }
 
-const { items, tone = 'dark' } = Astro.props;
-// Deux copies identiques : la boucle se raccorde à -50 %.
-const copies = [0, 1];
+const { mots, variante = 'noir' } = Astro.props;
+const gap = variante === 'noir' ? 40 : 36;
 ---
-
-<div aria-hidden="true" class:list={['marquee', `marquee--${tone}`]}>
-  <div class="marquee__track">
-    {
-      copies.map(() => (
-        <div class="marquee__group">
-          {items.map((item) => (
-            <>
-              <Accent text={item} size="lg" />
-              {tone === 'dark' ? (
-                <img src="/brand/icon-white.svg" alt="" width="20" height="40" loading="lazy" />
-              ) : (
-                <span class="marquee__dot" />
-              )}
-            </>
-          ))}
-        </div>
-      ))
-    }
+<div class:list={['mq-zone', `mq-zone--${variante}`]} aria-hidden="true" style={`--mq-gap:${gap}px`}>
+  <div class="mq">
+    {[0, 1].map(() => (
+      <div class="mq-serie">
+        {mots.map((mot) => (
+          <>
+            <span class="v mq-mot">{mot}</span>
+            {variante === 'noir' ? <img src="/brand/icon-white.svg" alt="" width="20" height="40" /> : <span class="mq-point"></span>}
+          </>
+        ))}
+      </div>
+    ))}
   </div>
 </div>
 
 <style>
-  .marquee {
-    overflow: hidden;
-    padding-block: 22px;
+  .mq-zone {
     border-block: var(--line);
+    overflow: hidden;
+    padding: 22px 0;
   }
+  .mq-zone--noir { background: var(--ink); color: var(--paper); }
+  .mq-zone--fleur { background: var(--flower); }
 
-  .marquee--dark {
-    background: var(--ink);
-    color: var(--paper);
-  }
+  .mq { display: flex; width: max-content; animation: mq 45s linear infinite; }
+  .mq-serie { display: flex; align-items: center; gap: var(--mq-gap); padding-right: var(--mq-gap); }
+  .mq-mot { font-size: 38px; }
+  .mq-serie img { height: 40px; width: auto; }
+  .mq-point { width: 14px; height: 14px; border-radius: 50%; background: var(--ink); }
 
-  .marquee--flower {
-    background: var(--flower);
-    color: var(--ink);
-  }
-
-  .marquee__track {
-    display: flex;
-    width: max-content;
-    animation: marquee 45s linear infinite;
-  }
-
-  .marquee__group {
-    display: flex;
-    align-items: center;
-    gap: 40px;
-    padding-right: 40px;
-  }
-
-  .marquee__group img {
-    width: auto;
-    height: 40px;
-  }
-
-  .marquee__group :global(.accent) {
-    white-space: nowrap;
-  }
-
-  .marquee__dot {
-    flex-shrink: 0;
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-    background: var(--ink);
-  }
-
-  @keyframes marquee {
-    from {
-      transform: translateX(0);
-    }
-
-    to {
-      transform: translateX(-50%);
-    }
-  }
-
-  @media (max-width: 760px) {
-    .marquee {
-      padding-block: 16px;
-    }
-
-    .marquee__group {
-      gap: 22px;
-      padding-right: 22px;
-    }
-
-    .marquee__group img {
-      height: 28px;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .marquee__track {
-      animation: none;
-    }
+  @keyframes mq {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 </style>
