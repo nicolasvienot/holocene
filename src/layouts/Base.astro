@@ -10,7 +10,6 @@ interface Props {
   description: string;
   /** Lien de la capsule marqué comme page active */
   actif?: string;
-  /** Page d'univers différent de celui de sa capsule, ex. la recette visuelle */
   noindex?: boolean;
   /** Capsule posée sur un héros noir, fond de page clair (page Privatiser) */
   heroNoir?: boolean;
@@ -36,7 +35,7 @@ const imageOg = new URL(image ?? `/og/${univers}.png`, Astro.site);
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex" />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/favicon.ico" sizes="64x64" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="preload" href="/fonts/nimbus-sans-round-bold-subset.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="preload" href="/fonts/varela-round-400.woff2" as="font" type="font/woff2" crossorigin />
